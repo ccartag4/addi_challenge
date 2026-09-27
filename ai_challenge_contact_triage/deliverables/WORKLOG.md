@@ -78,4 +78,53 @@ both files, so it cannot reach the pipeline unnoticed. Logged in `HOW_I_WORKED.m
   outcome with the gap named.
 - Priority is computed by code from reason and flags; the model never sets it.
 
+**Commit:** `9b886da` feat(ai): add taxonomy v2, routing policy, output schema, consistency
+tests and message profiling evidence
+
+---
+
+## Step 02 — Deterministic layer  (2026-09-27)
+
+**Goal:** everything that does not need a model, as tested code: normalisation, exact and
+near deduplication, verbatim entity extraction, tier-0 rules for content-free messages and
+high-precision flag detectors.
+
+**Files:** `lumo_triage/normalize.py`, `lumo_triage/extract.py`, `lumo_triage/rules.py`,
+`tests/test_deterministic.py` (69 tests); `scripts/profile_messages.py` normaliser fixed;
+`requirements.txt` and the lock without `rapidfuzz`.
+
+**Command(s):**
+```powershell
+python -m pytest
+python scripts/profile_messages.py
+```
+
+**Result:** 78 tests pass (9 policy + 69 deterministic), all on real messages plus adversarial
+fixtures; 14 messages resolved by tier-0 without a model call; 2 exact-duplicate pairs and 55
+near-duplicate messages, identical in code and evidence.
+
+**Incidents (four, all caught by the tests):**
+1. `rapidfuzz.distance.Jaccard` does not exist in the installed RapidFuzz 3.14.6; the assistant
+   wrote it from memory. Replaced by a pure-Python Jaccard with union-find (the same definition
+   as the evidence) and `rapidfuzz` removed from the dependencies. HOW_I_WORKED 3.3.
+2. The document regex captured a trailing period (`9000000003.`); the pattern now must end on a
+   digit.
+3. Punctuation-only messages (`...`, `?????`) hashed to the same empty content and were linked
+   as duplicates; messages without tokens are now excluded from exact deduplication, in code
+   and in the profiling script.
+4. The profiling script's normaliser left double spaces where punctuation had been, hiding one
+   real duplicate pair ("este mes no voy a poder pagar…", MSG-155 / MSG-207) and reporting
+   3 duplicates instead of 2. Fixed to the same canonical form as the code; the figure in the
+   plan was corrected. HOW_I_WORKED 3.4.
+
+**Key decisions:**
+- Naive timestamps are Bogotá local time (40 of 340), converted to UTC; documented in the
+  module and in DESIGN.md.
+- Entities are verified verbatim against the normalised text, ours and later the model's; a
+  masked identifier is never completed; the model may fill empty fields but never overwrite
+  a rule-extracted one.
+- Tier-0 is deliberately narrow: MSG-346 ("ggg asdkjf no se q paso aqui jajaja") mixes gibberish
+  with words and is left to the model rather than force-closed by a rule.
+- Flag detectors are high-precision patterns; the model can add flags, the routing trusts both.
+
 **Commit:** *(filled after commit)*

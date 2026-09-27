@@ -67,6 +67,6 @@ it; the model never sets it directly.
 ## 6. What the sample looks like under v2 (rough keyword pass, for orientation only)
 
 The bucketing in `evidence/message_profiling.md` spreads the 340 messages over ~20 buckets with
-no bucket above 10 % and 28 messages matching no keyword at all. That flat distribution is the
+no bucket above 10 % and 24 messages matching no keyword at all. That flat distribution is the
 argument for a model-based classifier with a deterministic layer around it, rather than rules.
 The measured distribution, from the pipeline itself, is in `output/batch_summary.md`.

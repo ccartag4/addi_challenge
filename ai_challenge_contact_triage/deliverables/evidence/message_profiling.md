@@ -1,6 +1,6 @@
 # Message profiling — data/messages.jsonl
 
-Generated 2026-09-27 14:45 by `scripts/profile_messages.py`. 340 messages.
+Generated 2026-09-27 15:00 by `scripts/profile_messages.py`. 340 messages.
 
 ## Shape
 
@@ -11,7 +11,7 @@ Generated 2026-09-27 14:45 by `scripts/profile_messages.py`. 340 messages.
 | Date range | 2026-05-04 .. 2026-05-15 |
 | Sender shapes | {'phone': 115, 'client_id': 119, 'email': 106} |
 | Text length min / median / p90 / max | 3 / 88 / 140 / 247 |
-| Exact duplicate texts (normalised) | 3 in 2 groups |
+| Exact duplicate texts (normalised, non-empty) | 2 in 2 groups |
 | Near-duplicate pairs (token Jaccard >= 0.6) | 40 pairs, 55 (16 %) messages involved |
 
 ## Signals (regex over the raw text; a message can hit several)

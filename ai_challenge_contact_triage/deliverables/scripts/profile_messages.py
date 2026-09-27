@@ -71,9 +71,12 @@ BUCKETS = [
 
 
 def norm(t: str) -> str:
+    """Same canonical form as lumo_triage.normalize.canonical_tokens: lower-case, accents
+    removed, alphanumeric tokens joined by single spaces (an earlier version left double spaces
+    where punctuation had been, which hid one duplicate pair)."""
     t = unicodedata.normalize("NFKD", t.lower())
     t = "".join(c for c in t if not unicodedata.combining(c))
-    return re.sub(r"[^a-z0-9 ]+", " ", t).strip()
+    return " ".join(re.findall(r"[a-z0-9]+", t))
 
 
 def main() -> int:
@@ -102,8 +105,8 @@ def main() -> int:
     lens = sorted(len(m["text"]) for m in msgs)
     lines.append(f"| Text length min / median / p90 / max | {lens[0]} / {lens[n // 2]} / {lens[int(n * .9)]} / {lens[-1]} |")
     texts = [norm(m["text"]) for m in msgs]
-    exact = collections.Counter(texts)
-    lines.append(f"| Exact duplicate texts (normalised) | {sum(c - 1 for c in exact.values() if c > 1)} in {sum(1 for c in exact.values() if c > 1)} groups |")
+    exact = collections.Counter(t for t in texts if t)   # punctuation-only texts have no content to duplicate
+    lines.append(f"| Exact duplicate texts (normalised, non-empty) | {sum(c - 1 for c in exact.values() if c > 1)} in {sum(1 for c in exact.values() if c > 1)} groups |")
     toks = [set(t.split()) for t in texts]
     pairs, near = 0, set()
     for i in range(n):

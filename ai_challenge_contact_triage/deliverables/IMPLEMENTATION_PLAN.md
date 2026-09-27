@@ -73,7 +73,7 @@ Evidence file: `evidence/message_profiling.md` (regenerated in step 1).
 |---|---|---|
 | Channels | chat 119, WhatsApp 115, email 106 | sender formats differ by channel (phone, `cliente_NNNN`, email); channel is an input to the reply register |
 | Timestamps | 40 without offset, 300 with `-05:00`, 2026-05-04 to 05-15 | normalise to UTC-5 (Bogotá) |
-| Duplicates | 3 exact (2 groups); 55 messages (16 %) in 40 near-duplicate pairs (token Jaccard ≥ 0.6) | content-hash cache; near-duplicate grouping reported in the batch summary; at 10k/day this is real money |
+| Duplicates | 2 exact pairs once punctuation-only texts are excluded (the first profiling pass said 3, see step 02 in the worklog); 55 messages (16 %) in 40 near-duplicate pairs (token Jaccard ≥ 0.6) | content-hash cache; near-duplicate grouping reported in the batch summary; at 10k/day this is real money |
 | Length | median 88 characters, max 247 | the system prompt dominates cost, so prompt caching matters more than model choice per message |
 | Sensitive data | credit numbers 4 %, document numbers 2 %, amounts 2 %, transaction references 1 %, explicit dates 8 %, banks or payment rails 8 %, 2 deliberately masked identifiers (`1.0xx.xxx.xxx`) | deterministic extraction verified verbatim against the text; never complete a masked value; never echo a document number in a reply |
 | Multi-intent | 16 messages (5 %) with explicit markers ("y de paso", "además", "1) … 2)") | primary reason plus secondary reasons |
@@ -83,7 +83,7 @@ Evidence file: `evidence/message_profiling.md` (regenerated in step 1).
 | Noise | 17 greetings-only, thanks-only or gibberish | tier-0 rules, no model call |
 | Taxonomy gaps | interest and fee disputes 7, application status 1, address change 4, habeas data 2, prepayment/settlement quotes 5 | new reasons or sub-reasons, each justified in `TAXONOMY.md` |
 | Knowledge-base trap | 12 messages talk about a "contraseña"; the policy says login is document + OTP, no password | the draft must not invent a password-reset flow: policy gap, route to support |
-| Rules alone are not enough | 28 messages match no keyword; the rest spread flatly over 17 reasons | rules handle noise and extraction; classification needs the model |
+| Rules alone are not enough | 24 messages match no keyword even with the v2 buckets (28 with the v1 list); the rest spread flatly over ~20 buckets | rules handle noise and extraction; classification needs the model |
 | Encoding | 0 mojibake in the file | an earlier "mojibake" observation was a PowerShell console artefact, corrected here |
 
 ---

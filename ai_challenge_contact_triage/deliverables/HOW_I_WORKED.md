@@ -35,6 +35,33 @@ LLM-judge calibration, offline determinism, adversarial fixtures)*
 - **Lesson:** free text inside YAML must be quoted by default; an assistant that writes prose
   into config files will trip on this again unless a test parses the file.
 
+### 3.3 A library function that does not exist
+
+- **What it produced:** near-duplicate detection built on `rapidfuzz.distance.Jaccard` with
+  `process.cdist`, presented as the scale-aware choice for a 10,000-message day.
+- **How I caught it:** the very first import in the test run failed: `cannot import name
+  'Jaccard' from 'rapidfuzz.distance'`. The installed 3.14.6 ships Levenshtein, Jaro, Indel and
+  friends, not Jaccard; the assistant wrote the call from memory of an older API.
+- **What I did:** kept the definition that the evidence already used (token Jaccard ≥ 0.6) in
+  plain Python with union-find, noted MinHash/LSH as the path beyond tens of thousands of
+  messages, and removed the now-unused dependency from `requirements.txt` and the lock.
+- **Lesson:** the same failure class as the dbt deprecations in the data challenge: library
+  surfaces drift and the assistant's memory lags them. An import test on day one costs nothing.
+
+### 3.4 Evidence and code that disagreed by one duplicate
+
+- **What it produced:** the profiling script reported 3 exact duplicates; the pipeline code found
+  4, then 2, depending on how punctuation-only messages were treated.
+- **How I caught it:** a test pins the code's duplicate count to the evidence file; it failed
+  twice, each time for a different reason: first because `...` and `?????` hashed to the same
+  empty content, then because the profiling normaliser left double spaces where commas had been
+  and missed the pair MSG-155 / MSG-207.
+- **What I did:** excluded content-free messages from deduplication in both places, gave the
+  profiling script the exact same canonical form as the code, regenerated the evidence and
+  corrected the figure in the plan. The test now names the two pairs instead of a count.
+- **Lesson:** a number in an evidence file is only trustworthy if the code that produces the
+  pipeline is tested against it; the disagreement was small, the habit it enforces is not.
+
 *(more cases added as they happen)*
 
 ## 4. What I would improve with more time
