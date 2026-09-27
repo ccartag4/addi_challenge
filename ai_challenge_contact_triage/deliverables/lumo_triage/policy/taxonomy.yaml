@@ -237,6 +237,7 @@ reasons:
     base_priority: P2
     reply_source: none
     examples: [MSG-026, MSG-117, MSG-137, MSG-184, MSG-243, MSG-267, MSG-287, MSG-351]
+    policy_gap: null   # not a knowledge-base gap: the customer wants a person, no policy is expected
     notes: Only the primary reason when nothing else is asked; otherwise the request is the flag requests_human on the real reason.
 
   - id: fuera_de_alcance
@@ -250,6 +251,7 @@ reasons:
     base_priority: P4
     reply_source: template
     examples: [MSG-037, MSG-118, MSG-138, MSG-147, MSG-187, MSG-188, MSG-246, MSG-299, MSG-334, MSG-393]
+    policy_gap: null   # not a knowledge-base gap: nothing about Lumo's credit is being asked
     notes: out_of_scope_kind distinguishes "unrelated" (fixed courtesy reply) from "other_business_inquiry" (routed to comercial, priority P3, no draft).
 
   # ---- added in v2 ---------------------------------------------------------------------------
@@ -264,6 +266,7 @@ reasons:
     base_priority: P2
     reply_source: none
     examples: [MSG-007, MSG-029, MSG-281, MSG-296, MSG-341, MSG-387, MSG-388]
+    policy_gap: "The knowledge base has no policy on regular interest rates, fees or insurance charges."
     notes: The KB has no policy on rates or fees, so any draft would invent one. Distinct from mora_intereses, which is about late interest and is covered.
 
   - id: pago_anticipado
@@ -290,6 +293,7 @@ reasons:
     base_priority: P3
     reply_source: none
     examples: [MSG-014]
+    policy_gap: "The knowledge base says nothing about credit applications or their status."
     notes: Not a CX post-sale reason and not in the KB; routed to the origination team.
 
   - id: informacion_general
@@ -303,6 +307,7 @@ reasons:
     base_priority: P3
     reply_source: none
     examples: [MSG-010, MSG-031, MSG-186, MSG-189, MSG-289, MSG-360]
+    policy_gap: "The knowledge base has no opening hours, phone lines or office addresses."
     notes: Lumo-related, so not fuera_de_alcance, but the KB has no hours or phone numbers; a draft would invent them.
 
   - id: privacidad_habeas_data
@@ -316,6 +321,7 @@ reasons:
     base_priority: P2
     reply_source: none
     examples: [MSG-182, MSG-344, MSG-367]
+    policy_gap: "The knowledge base has no habeas-data procedure (data access, deletion, marketing opt-out)."
     notes: Legal obligation (Ley 1581 de 2012); handled by the privacy/legal owner, never by a template.
 
   - id: saludo_incompleto

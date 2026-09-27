@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.013763,
+ "effort": "medium",
+ "fingerprint": "08062c90a1b0d983",
+ "item_id": "MSG-288",
+ "label": "draft",
+ "latency_ms": 5380,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T21:02:41Z",
+ "request_id": "req_011CfUcvr8WEQoY7umJwd4c5",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"Hola, gracias por escribirnos y lamentamos la molestia por este doble débito de la cuota de mayo. Ya registramos tu solicitud como PQR, con su número de radicado, y estamos escalando tu caso al equipo de Pagos para la verificación correspondiente. Por este canal no podemos confirmar una devolución sin esa verificación; el tiempo de respuesta para cobros dobles es de hasta 5 días hábiles y el plazo legal de respuesta a una PQR es de hasta 15 días hábiles. Para agilizar la revisión, envíanos el comprobante del débito realizado desde tu cuenta Bancolombia. Quedamos atentos a cualquier duda.\",\"citations\":[\"pagos_y_cuotas.pagos_no_aplicados\",\"datos_certificados_pqr.pqr\"],\"uncovered_points\":[],\"reasoning_brief\":\"pagos_no_aplicados cubre el escalamiento por cobro doble, comprobante y tiempos; pqr cubre el registro del reclamo formal y su plazo.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 691,
+   "output_tokens": 378
+  }
+ }
+}

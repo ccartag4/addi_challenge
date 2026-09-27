@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.009113,
+ "effort": "medium",
+ "fingerprint": "948e1abb99e8689d",
+ "item_id": "MSG-271",
+ "label": "draft",
+ "latency_ms": 4512,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T21:02:25Z",
+ "request_id": "req_011CfUcuhYYM3ECyanety6YL",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"¡Hola! Claro, entendemos que el 5 no te quede cómodo. El cambio de fecha de pago se puede solicitar una vez por año, siempre que estés al día con tu crédito. Puedes gestionarlo directamente desde la app o con un asesor, quien validará tu identidad antes de continuar. Si quieres, escríbenos por este medio y te ayudamos con la solicitud. ¡Quedamos atentos!\",\"citations\":[\"pagos_y_cuotas.fechas_de_pago\"],\"uncovered_points\":[],\"reasoning_brief\":\"La sección de fechas de pago cubre la solicitud de cambio de fecha (una vez al año, estando al día, vía app o asesor).\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 351,
+   "output_tokens": 260
+  }
+ }
+}

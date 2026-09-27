@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.011057,
+ "effort": "medium",
+ "fingerprint": "4c38f10be93054ef",
+ "item_id": "MSG-217",
+ "label": "draft",
+ "latency_ms": 4963,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T21:01:34Z",
+ "request_id": "req_011CfUcqvt7jPqVkeX91qyRc",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"¡Hola! Claro que sí, te cuento las opciones. Puedes pagar tu cuota por PSE, con tarjeta débito o crédito, o en efectivo en Efecty y corresponsales bancarios, usando el código de pago que aparece en la app. Sobre Baloto, no está dentro de los puntos habilitados, así que un agente te confirmará si hay alguna alternativa adicional. Un tip: si pagas en efectivo y el pago no se refleja en 24 horas, envía tu comprobante a pagos@lumo.example y lo revisamos. ¡Quedamos atentos!\",\"citations\":[\"pagos_y_cuotas.metodos_de_pago\"],\"uncovered_points\":[\"Si es posible pagar en Baloto\"],\"reasoning_brief\":\"La sección de métodos de pago cubre canales aceptados y Efecty; Baloto no aparece y queda como punto no cubierto.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 395,
+   "output_tokens": 329
+  }
+ }
+}

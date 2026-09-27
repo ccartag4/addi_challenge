@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.011177,
+ "effort": "medium",
+ "fingerprint": "01d50740f9e0118b",
+ "item_id": "MSG-361",
+ "label": "draft",
+ "latency_ms": 4696,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T21:03:51Z",
+ "request_id": "req_011CfUd239BF4GVpjFtDu3oB",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"¡Hola! Felicitaciones por terminar de pagar tu crédito. Puedes solicitar tu paz y salvo directamente en la app, en la sección \\\"Documentos\\\", o pedírselo a un asesor; la generación toma hasta 2 días hábiles. Ten en cuenta que, al terminar de pagar, también recibes el paz y salvo y la actualización del reporte en el siguiente ciclo. Si necesitas algo más, escríbenos con gusto. ¡Que tengas un buen día!\",\"citations\":[\"datos_certificados_pqr.certificados_extractos\",\"mora_y_centrales.paz_y_salvo\"],\"uncovered_points\":[],\"reasoning_brief\":\"La sección de certificados indica cómo solicitar el paz y salvo y el tiempo; la de paz y salvo confirma la entrega y actualización del reporte.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 514,
+   "output_tokens": 310
+  }
+ }
+}

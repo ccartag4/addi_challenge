@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.015622,
+ "effort": "medium",
+ "fingerprint": "f0f0900c0f4afbb0",
+ "item_id": "MSG-389",
+ "label": "draft",
+ "latency_ms": 7738,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T21:04:22Z",
+ "request_id": "req_011CfUd48s2BjEbWhtnqTCT2",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\": true, \"reply_text\": \"Hola, lamento que hayas tenido que escribirnos tres veces por lo mismo; entiendo tu molestia. Ya registramos tu caso como PQR y lo estamos escalando al equipo de PQR, que le dará seguimiento. Tu queja queda con un número de radicado y el tiempo legal de respuesta es de hasta 15 días hábiles. Para avanzar más rápido, cuéntanos en este mismo chat cuál es el problema puntual (por ejemplo, un cobro o un reporte), así lo enrutamos también al equipo que corresponde. Gracias por tu paciencia; quedamos atentos.\", \"citations\": [\"datos_certificados_pqr.pqr\"], \"uncovered_points\": [\"El cliente no indica cuál es el problema de fondo, por lo que no se puede dar una solución concreta.\"], \"reasoning_brief\": \"La sección de PQR cubre el registro del caso, el radicado, el plazo de 15 días hábiles y el enrutamiento; el problema concreto no se describe.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 418,
+   "output_tokens": 507
+  }
+ }
+}

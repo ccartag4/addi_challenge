@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.021933,
+ "effort": "medium",
+ "fingerprint": "e5497352d0ed6959",
+ "item_id": "MSG-130",
+ "label": "draft",
+ "latency_ms": 9036,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T21:00:06Z",
+ "request_id": "req_011CfUcj8JkwjVk4asiiM2dA",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"Hola, gracias por escribirnos. Te explico: cuando una cuota se paga después de la fecha de vencimiento, se cobra interés de mora sobre el saldo vencido, calculado a la tasa máxima legal vigente, y empieza a correr desde el día siguiente al vencimiento. Ten en cuenta que los 5 días calendario de gracia aplican solo para el reporte a centrales, no para el interés. Sobre tu reclamo, lo radicamos como PQR: un agente lo registrará y te entregará el número de radicado. El tiempo legal de respuesta es de hasta 15 días hábiles. Puedes ver el detalle de tu crédito en la sección \\\"Mi crédito\\\" de la app. Quedamos atentos.\",\"citations\":[\"mora_y_centrales.mora_e_intereses\",\"datos_certificados_pqr.pqr\"],\"uncovered_points\":[],\"reasoning_brief\":\"mora_e_intereses explicó el cobro y la tasa de mora; pqr cubrió el radicado del reclamo formal y el plazo de respuesta.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 905,
+   "output_tokens": 662
+  }
+ }
+}

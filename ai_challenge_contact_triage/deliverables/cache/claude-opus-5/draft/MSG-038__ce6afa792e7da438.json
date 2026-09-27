@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.017257,
+ "effort": "medium",
+ "fingerprint": "ce6afa792e7da438",
+ "item_id": "MSG-038",
+ "label": "draft",
+ "latency_ms": 7252,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:59:30Z",
+ "request_id": "req_011CfUcgcHvEzNWbHBEEhKDi",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"¡Hola! Gracias por contarnos. El correo y el celular se actualizan desde la app en \\\"Mi perfil\\\", y el cambio aplica para las notificaciones futuras. Te sugiero revisar ahí que el correo nuevo haya quedado guardado bien. Si ya está correcto y aun así te siguen llegando los mensajes al correo viejo, soporte debe revisar la sincronización de tus datos, así que un asesor va a retomar tu caso para validarlo. Cualquier cosa, escríbenos por acá y seguimos contigo. ¡Gracias por tu paciencia!\",\"citations\":[\"datos_certificados_pqr.actualizacion_datos\"],\"uncovered_points\":[],\"reasoning_brief\":\"La sección de actualización de datos cubre el cambio de correo en \\\"Mi perfil\\\" y la revisión de sincronización por soporte.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 850,
+   "output_tokens": 486
+  }
+ }
+}

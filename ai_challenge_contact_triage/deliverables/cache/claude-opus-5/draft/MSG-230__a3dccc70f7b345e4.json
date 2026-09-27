@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.011968,
+ "effort": "medium",
+ "fingerprint": "a3dccc70f7b345e4",
+ "item_id": "MSG-230",
+ "label": "draft",
+ "latency_ms": 5054,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T21:01:50Z",
+ "request_id": "req_011CfUcs88pC5bC8u8mpL4BP",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"¡Hola! Claro que sí, te ayudo con eso. El certificado de estar al día (paz y salvo) lo puedes solicitar directamente en la app, en la sección \\\"Documentos\\\", o pedírselo a un asesor. La generación toma hasta 2 días hábiles, así que tenlo en cuenta para los tiempos de tu trámite. Si ya terminaste de pagar tu crédito, el paz y salvo se emite junto con la actualización del reporte en el siguiente ciclo. Cualquier cosa, aquí estamos para acompañarte. ¡Que te vaya muy bien con el trámite!\",\"citations\":[\"datos_certificados_pqr.certificados_extractos\",\"mora_y_centrales.paz_y_salvo\"],\"uncovered_points\":[],\"reasoning_brief\":\"La sección de certificados explica el canal y el tiempo de generación; la de paz y salvo confirma su emisión al terminar el crédito.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 527,
+   "output_tokens": 339
+  }
+ }
+}

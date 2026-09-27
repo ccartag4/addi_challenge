@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.013773,
+ "effort": "medium",
+ "fingerprint": "f5c9e3e1233c382a",
+ "item_id": "MSG-134",
+ "label": "draft",
+ "latency_ms": 6143,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T21:00:09Z",
+ "request_id": "req_011CfUcjZBUb3U4AJ3KJtrST",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"Hola, lamento la espera y la molestia que esto te ha causado. Ya estamos escalando tu caso al equipo de PQR para que revisen el estado de tu solicitud. Ten en cuenta que el tiempo legal de respuesta a una PQR es de hasta 15 días hábiles, que no son lo mismo que días calendario. Tu reclamo queda registrado con su número de radicado, y con ese número puedes hacer seguimiento cuando lo necesites. Gracias por tu paciencia; te contactaremos apenas tengamos una respuesta.\",\"citations\":[\"datos_certificados_pqr.pqr\"],\"uncovered_points\":[],\"reasoning_brief\":\"La sección de PQR cubre el plazo legal (hasta 15 días hábiles), el radicado y el enrutamiento; el triage confirma la escalación al equipo de PQR.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 453,
+   "output_tokens": 426
+  }
+ }
+}

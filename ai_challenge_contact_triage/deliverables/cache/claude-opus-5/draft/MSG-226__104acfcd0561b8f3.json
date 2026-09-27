@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.015522,
+ "effort": "medium",
+ "fingerprint": "104acfcd0561b8f3",
+ "item_id": "MSG-226",
+ "label": "draft",
+ "latency_ms": 5541,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T21:01:46Z",
+ "request_id": "req_011CfUcrma4DYrqWBxLf8naY",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"¡Hola! Buenas tardes. Lamento el inconveniente al entrar a la app. Te sugiero estos pasos: actualiza la app a la última versión, ciérrala y vuelve a abrirla, y revisa tu conexión. Recuerda que el ingreso es con tu documento y un código de verificación (OTP) que llega por SMS al celular registrado; si no llega, confirma que el número sea el correcto, espera 1 minuto y reintenta. Si hubo varios intentos fallidos, la cuenta se bloquea por seguridad por 30 minutos y luego puedes intentar de nuevo. Si el error continúa, cuéntanos el detalle del mensaje y el modelo de tu celular para llevarlo a soporte técnico. ¡Quedamos atentos!\",\"citations\":[\"cuenta_app_seguridad.app_no_funciona\",\"cuenta_app_seguridad.acceso_otp\",\"cuenta_app_seguridad.cuenta_bloqueada\"],\"uncovered_points\":[],\"reasoning_brief\":\"app_no_funciona dio los pasos técnicos, acceso_otp el ingreso con OTP y cuenta_bloqueada el bloqueo por intentos fallidos.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 698,
+   "output_tokens": 447
+  }
+ }
+}

@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.008873,
+ "effort": "medium",
+ "fingerprint": "4e0d5bbf01b357a2",
+ "item_id": "MSG-227",
+ "label": "draft",
+ "latency_ms": 3797,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T21:01:45Z",
+ "request_id": "req_011CfUcrpPiVKrqKcmCba586",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"¡Hola! Claro que sí, puedes actualizar tu celular y tu correo directamente desde la app, en la sección \\\"Mi perfil\\\". El cambio aplica para tus futuras notificaciones. Si después de actualizarlos sigues recibiendo mensajes en el correo anterior, escríbenos y lo revisamos con el equipo de soporte. ¡Quedamos atentos a cualquier cosa que necesites!\",\"citations\":[\"datos_certificados_pqr.actualizacion_datos\"],\"uncovered_points\":[],\"reasoning_brief\":\"La sección de actualización de datos cubre cómo cambiar celular y correo desde \\\"Mi perfil\\\".\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 358,
+   "output_tokens": 249
+  }
+ }
+}

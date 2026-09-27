@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.014833,
+ "effort": "medium",
+ "fingerprint": "f564bf18652136e0",
+ "item_id": "MSG-199",
+ "label": "draft",
+ "latency_ms": 6242,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T21:01:12Z",
+ "request_id": "req_011CfUcpBk25NgpxLqR6dKup",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\": true, \"reply_text\": \"Hola, gracias por escribirnos y lamentamos la molestia que esto te ha causado. Registramos tu inconformidad sobre el crédito 8941 como una queja formal (PQR) y estamos escalando tu caso al equipo de PQR. Quedará con un número de radicado que te compartiremos, y el tiempo legal de respuesta es de hasta 15 días hábiles. Los reclamos por cobros también se enrutan al equipo correspondiente para su revisión. Sobre el detalle de cómo se calcularon los intereses, un agente te dará respuesta como parte de la gestión de tu caso. Quedamos atentos a acompañarte en el proceso.\", \"citations\": [\"datos_certificados_pqr.pqr\"], \"uncovered_points\": [\"El detalle de cómo se calcularon los intereses del crédito 8941.\"], \"reasoning_brief\": \"La sección de PQR cubre el registro de la queja, el radicado, los 15 días hábiles y el enrutamiento; no cubre el detalle del cálculo de intereses.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 505,
+   "output_tokens": 458
+  }
+ }
+}

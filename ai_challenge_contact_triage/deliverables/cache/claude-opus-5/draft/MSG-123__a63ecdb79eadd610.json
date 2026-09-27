@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.015633,
+ "effort": "medium",
+ "fingerprint": "a63ecdb79eadd610",
+ "item_id": "MSG-123",
+ "label": "draft",
+ "latency_ms": 7525,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:59:55Z",
+ "request_id": "req_011CfUciU4sa9KiS9AgvNpa7",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"Hola, entiendo tu molestia y lamento la demora. Cuando un pago por PSE no se refleja después de 24 horas, necesitamos que nos envíes el comprobante para abrir el caso de conciliación. Ya estamos escalando tu caso al equipo de Pagos, que lo revisará en un tiempo de respuesta de hasta 5 días hábiles. Por este canal no podemos confirmar devoluciones sin verificación previa. Sobre el cobro de mora, un agente te dará seguimiento apenas se revise tu caso. Si nos compartes el comprobante del pago, avanzamos más rápido. Gracias por tu paciencia.\",\"citations\":[\"pagos_y_cuotas.pagos_no_aplicados\"],\"uncovered_points\":[\"El cliente pide que se revise o retire el cobro de intereses de mora, algo que las secciones no contemplan.\"],\"reasoning_brief\":\"La sección de pagos no aplicados cubre el envío del comprobante, la conciliación y el escalamiento; el cobro de mora no está cubierto.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 460,
+   "output_tokens": 499
+  }
+ }
+}

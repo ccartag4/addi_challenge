@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.017573,
+ "effort": "medium",
+ "fingerprint": "6ced307e658fb00e",
+ "item_id": "MSG-219",
+ "label": "draft",
+ "latency_ms": 8035,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T21:01:40Z",
+ "request_id": "req_011CfUcrBAMGYyG4S9quPQoi",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\": true, \"reply_text\": \"Hola, entiendo tu inquietud con el cobro. Te explico: cuando una cuota se paga después de la fecha de vencimiento, se cobra interés de mora sobre el saldo vencido a la tasa máxima legal vigente, y ese interés corre desde el día siguiente al vencimiento. Ten en cuenta también que hay 5 días calendario de gracia antes de que se genere un reporte negativo, aunque el interés sí se causa desde el primer día. Sobre el valor diario exacto aplicado a tu caso, un asesor te contactará para darte el detalle. Quedamos atentos a cualquier otra duda.\", \"citations\": [\"mora_y_centrales.mora_e_intereses\"], \"uncovered_points\": [\"El valor o porcentaje exacto del interés diario de mora.\"], \"reasoning_brief\": \"La sección de mora e intereses explica el cobro sobre saldo vencido a tasa máxima legal y los 5 días de gracia; ninguna sección da la cifra diaria.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 648,
+   "output_tokens": 539
+  }
+ }
+}

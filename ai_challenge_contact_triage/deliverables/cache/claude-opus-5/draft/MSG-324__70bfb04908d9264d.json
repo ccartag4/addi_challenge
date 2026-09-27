@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.014172,
+ "effort": "medium",
+ "fingerprint": "70bfb04908d9264d",
+ "item_id": "MSG-324",
+ "label": "draft",
+ "latency_ms": 6093,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T21:03:19Z",
+ "request_id": "req_011CfUcyabwtqEaBw1y4oP26",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"¡Hola! Gracias por escribirnos y por ponerte al día. Te cuento con claridad: los intereses de mora sí se cobran. Cuando una cuota se paga después de la fecha de vencimiento, se genera interés de mora sobre el saldo vencido a la tasa máxima legal vigente, y ese interés corre desde el día siguiente al vencimiento, así pagues hoy. Ten en cuenta que hay 5 días calendario de gracia antes de que se genere reporte negativo, pero el interés corre igual. Para ver el valor exacto que debes pagar hoy, entra a la app en la sección \\\"Mi crédito\\\". ¡Quedamos atentos a cualquier duda!\",\"citations\":[\"mora_y_centrales.mora_e_intereses\"],\"uncovered_points\":[],\"reasoning_brief\":\"La sección de mora e intereses confirma que el interés de mora se cobra desde el día siguiente al vencimiento y menciona los 5 días de gracia para reporte.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 673,
+   "output_tokens": 398
+  }
+ }
+}

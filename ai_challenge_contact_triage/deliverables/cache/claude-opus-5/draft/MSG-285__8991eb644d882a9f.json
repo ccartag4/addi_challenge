@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.010613,
+ "effort": "medium",
+ "fingerprint": "8991eb644d882a9f",
+ "item_id": "MSG-285",
+ "label": "draft",
+ "latency_ms": 4629,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T21:02:39Z",
+ "request_id": "req_011CfUcvm7PKP3jFr1W9JpFN",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\": false, \"reply_text\": null, \"citations\": [], \"uncovered_points\": [\"Cómo actualizar la dirección de residencia en el sistema de Lumo.\", \"Cómo actualizar la ciudad de residencia en el sistema de Lumo.\"], \"reasoning_brief\": \"La única sección disponible cubre la actualización de celular y correo en 'Mi perfil', pero no dirección ni ciudad, que es lo que pide el cliente.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 376,
+   "output_tokens": 315
+  }
+ }
+}

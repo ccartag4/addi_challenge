@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.012148,
+ "effort": "medium",
+ "fingerprint": "ce09cb824b44f408",
+ "item_id": "MSG-132",
+ "label": "draft",
+ "latency_ms": 4319,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T21:00:05Z",
+ "request_id": "req_011CfUcjQJSG2so837giuuWa",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":false,\"reply_text\":null,\"citations\":[],\"uncovered_points\":[\"No hay información sobre la emisión del certificado de retención en la fuente ni sobre si Lumo lo expide.\",\"No se indica cómo ni cuándo el cliente podría obtener ese certificado del año anterior.\"],\"reasoning_brief\":\"Las secciones solo listan paz y salvo, extracto de pagos y certificado de intereses pagados; ninguna cubre el certificado de retención en la fuente solicitado.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 508,
+   "output_tokens": 350
+  }
+ }
+}

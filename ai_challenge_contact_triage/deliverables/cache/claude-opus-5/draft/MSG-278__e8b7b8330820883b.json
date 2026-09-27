@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.012223,
+ "effort": "medium",
+ "fingerprint": "e8b7b8330820883b",
+ "item_id": "MSG-278",
+ "label": "draft",
+ "latency_ms": 4296,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T21:02:33Z",
+ "request_id": "req_011CfUcvLtMqfh7vf46CRWQJ",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"Hola, lamentamos la molestia que esto te ha causado. Ya estamos escalando tu caso al equipo de Pagos para la conciliación y también quedó registrada tu queja como PQR con su número de radicado. Para agilizar la revisión, por favor envíanos el comprobante del pago que realizaste. El tiempo de respuesta para la revisión del pago es de hasta 5 días hábiles, y para la PQR, hasta 15 días hábiles. Te avisaremos apenas tengamos el resultado. Gracias por tu paciencia.\",\"citations\":[\"pagos_y_cuotas.pagos_no_aplicados\",\"datos_certificados_pqr.pqr\"],\"uncovered_points\":[],\"reasoning_brief\":\"La sección de pagos no aplicados cubre el comprobante y la escalación a Pagos; la de PQR cubre el registro de la queja y los tiempos.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 658,
+   "output_tokens": 323
+  }
+ }
+}

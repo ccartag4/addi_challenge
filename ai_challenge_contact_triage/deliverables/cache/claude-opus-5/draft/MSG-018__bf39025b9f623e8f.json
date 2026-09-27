@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.013902,
+ "effort": "medium",
+ "fingerprint": "bf39025b9f623e8f",
+ "item_id": "MSG-018",
+ "label": "draft",
+ "latency_ms": 6244,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:57:24Z",
+ "request_id": "req_011CfUcXQaiKgPFyQyK7YkQX",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"Hola, lamento que hayas tenido que comunicarte tres veces sin una solución; entiendo tu molestia.\\n\\nYa radicamos tu queja formal como PQR y estamos escalando tu caso al equipo de PQR. Te compartiremos el número de radicado para que puedas hacerle seguimiento. El tiempo legal de respuesta a una PQR es de hasta 15 días hábiles.\\n\\nAdemás, tu reclamo por el cobro se enruta al equipo correspondiente para su revisión, junto con la PQR radicada.\\n\\nGracias por tomarte el tiempo de escribirnos. Quedamos atentos a darte una respuesta.\",\"citations\":[\"datos_certificados_pqr.pqr\"],\"uncovered_points\":[],\"reasoning_brief\":\"La sección de PQR cubrió el registro de la queja, el radicado, los 15 días hábiles y el enrutamiento del reclamo por cobro.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 454,
+   "output_tokens": 431
+  }
+ }
+}

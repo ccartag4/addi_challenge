@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.009843,
+ "effort": "medium",
+ "fingerprint": "cff0f47fb97af256",
+ "item_id": "MSG-357",
+ "label": "draft",
+ "latency_ms": 4173,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T21:03:47Z",
+ "request_id": "req_011CfUd1osDiDCd1ymBR4PPD",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"¡Hola! Claro que sí, puedes actualizar tu número de celular tú mismo desde la app, en la sección \\\"Mi perfil\\\". Ahí también puedes cambiar tu correo si lo necesitas. Ten en cuenta que el cambio aplica para las notificaciones que enviemos de ahora en adelante. Si después de actualizarlo notas que las notificaciones siguen llegando al dato anterior, escríbenos y lo revisamos con el equipo de soporte. ¡Quedamos atentos!\",\"citations\":[\"datos_certificados_pqr.actualizacion_datos\"],\"uncovered_points\":[],\"reasoning_brief\":\"La sección de actualización de datos cubre el cambio de celular desde \\\"Mi perfil\\\" y el caso de notificaciones al dato viejo.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 342,
+   "output_tokens": 291
+  }
+ }
+}

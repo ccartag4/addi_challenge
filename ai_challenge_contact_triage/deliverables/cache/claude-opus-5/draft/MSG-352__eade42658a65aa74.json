@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.020143,
+ "effort": "medium",
+ "fingerprint": "eade42658a65aa74",
+ "item_id": "MSG-352",
+ "label": "draft",
+ "latency_ms": 8422,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T21:03:46Z",
+ "request_id": "req_011CfUd1NxGJumu5yb21MpnR",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"¡Hola! Claro que sí: en Lumo puedes pagar por PSE, además de tarjeta débito/crédito y en efectivo en Efecty y corresponsales bancarios con el código de pago que aparece en la app.\\n\\nSi la opción de PSE no te aparece, prueba estos pasos: actualiza la app a la última versión, ciérrala y vuelve a abrirla, y revisa tu conexión a internet. Si después de eso sigue sin aparecer, escríbenos contándonos el error que ves y el modelo de tu celular para pasarlo a soporte técnico.\\n\\nQuedamos atentos para ayudarte. ¡Gracias por tu paciencia!\",\"citations\":[\"pagos_y_cuotas.metodos_de_pago\",\"cuenta_app_seguridad.app_no_funciona\"],\"uncovered_points\":[\"La ruta exacta dentro de la app para llegar a la opción de pago con PSE.\"],\"reasoning_brief\":\"metodos_de_pago confirma PSE y alternativas; app_no_funciona da los pasos cuando la opción no carga; la ruta exacta en la app no está en las secciones.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 847,
+   "output_tokens": 602
+  }
+ }
+}

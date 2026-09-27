@@ -122,10 +122,11 @@ class VerifierResult(BaseModel):
 class DraftReply(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
-    text: Optional[str] = None
+    text: Optional[str] = Field(None, description="The reply to send; None when nothing may be sent automatically.")
     source: ReplySource = "none"
     kb_citations: list[str] = Field(default_factory=list, description="Section ids from taxonomy.yaml kb_sections.")
     verifier: Optional[VerifierResult] = None
+    rejected_text: Optional[str] = Field(None, description="A model draft that failed the verifier or could not be sent; kept for audit, never sent.")
 
 
 class Processing(BaseModel):

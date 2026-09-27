@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.009562,
+ "effort": "medium",
+ "fingerprint": "99859cb4c7996cbf",
+ "item_id": "MSG-261",
+ "label": "draft",
+ "latency_ms": 4029,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T21:02:18Z",
+ "request_id": "req_011CfUcuCz5F4XtijxyeLGyy",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"¡Hola! Con gusto te ayudo. Puedes actualizar tu número de celular y tu correo electrónico directamente en la app de Lumo, en la sección \\\"Mi perfil\\\". El cambio aplica para tus futuras notificaciones. Si después de actualizarlo sigues recibiendo mensajes en el correo anterior, escríbenos y escalamos tu caso a soporte para revisar la sincronización. ¡Quedamos atentos a cualquier otra duda!\",\"citations\":[\"datos_certificados_pqr.actualizacion_datos\"],\"uncovered_points\":[],\"reasoning_brief\":\"La sección de actualización de datos personales explica cómo cambiar celular y correo desde \\\"Mi perfil\\\" en la app.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 386,
+   "output_tokens": 271
+  }
+ }
+}

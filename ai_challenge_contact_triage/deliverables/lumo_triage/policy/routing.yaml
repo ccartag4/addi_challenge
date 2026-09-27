@@ -58,7 +58,15 @@ overrides:
     action: auto_reply_and_route
     queue: pqr_legal
     min_priority: P1
-    why: Legal exposure is handled by PQR/Legal; the PQR acknowledgement can still be sent.
+    extra_sections: [datos_certificados_pqr.pqr]
+    why: Legal exposure is handled by PQR/Legal; the PQR acknowledgement can still be sent, so the PQR section is added to the sections the draft may cite.
+
+  - code: OVR_HABEAS
+    when: {any_reason: privacidad_habeas_data}
+    action: auto_reply_and_route
+    queue: datos_privacidad
+    min_priority: P2
+    why: A data-deletion, data-access or marketing opt-out request is a legal obligation (Ley 1581 de 2012) whether it is the first or the second request in the message; the privacy owner gets the case and a draft may still answer the covered part (for example the cancellation steps).
 
   - code: OVR_LOW_CONFIDENCE
     when: {confidence_below_threshold: true}
@@ -69,12 +77,12 @@ overrides:
     why: The classifier is not sure; a person decides.
 
   - code: OVR_NO_POLICY
-    when: {policy_coverage: none}
+    when: {policy_coverage: none, reply_source: none}
     action: route_to_human
     queue: reason_default_or_cx_general
     min_priority: P3
     no_draft: true
-    why: No policy means no grounded draft is possible; the gap itself is reported.
+    why: No policy means no grounded draft is possible; the gap itself is reported. Reasons that answer with a fixed template (fuera_de_alcance) are not affected.
 
   - code: OVR_OOS_SALES
     when: {reason: fuera_de_alcance, out_of_scope_kind: other_business_inquiry}
@@ -84,12 +92,14 @@ overrides:
     no_draft: true
     why: Product questions are for sales, not for a courtesy template.
 
-# Priority bumps applied after the base/min priority (one level each, never past P0).
+# Priority bumps applied after the base/min priority. `levels`: move that many levels towards
+# P0 (never past it). `floor`: the least urgent level allowed once the flag is present, i.e. the
+# result is at least this urgent. The highest base priority among primary and secondary reasons
+# is used before any bump (code PRIO_SECONDARY_<reason>).
 priority_bumps:
   vulnerable_customer: {levels: 1, floor: P1}
   imminent_deadline:   {levels: 1}
   repeat_contact:      {levels: 1}
-  secondary_reason_higher: {levels: 0, note: "the highest base priority among primary and secondary reasons is used"}
 
 # Verifier rules for LLM drafts (code, not prompt). A failed check downgrades the action to
 # route_to_human with reason code VERIFIER_<check>.
@@ -106,11 +116,40 @@ verifier:
     - "quitamos el reporte"
     - "no te reportaremos"
     - "no lo reportaremos"
+    - "envianos tu contrase"
+    - "compartenos tu contrase"
+    - "envianos tu clave"
+    - "dinos tu codigo"
+    - "envianos el codigo"
+    - "numero de tu tarjeta"
   never_echo_entities: [document_number]
   max_words: 160
+  min_words: 8
   language: es
 
-# Fixed Spanish replies for tier-0 cases (no model call, so nothing to verify).
+# Which fixed reply a reason with reply_source == template uses (overrides may name their own).
+reason_templates:
+  saludo_incompleto: greeting_prompt
+  felicitacion_feedback: feedback_thanks
+  fuera_de_alcance: unrelated
+
+# Sections a fixed reply is grounded in (for the output's kb_citations).
+template_citations:
+  security_ack: [cuenta_app_seguridad.fraude_seguridad]
+
+# How a draft may name the team that receives the case (Spanish, customer-facing).
+queue_labels_es:
+  fraude: el equipo de seguridad
+  cartera: el equipo de Cartera
+  pagos_conciliacion: el equipo de Pagos
+  soporte_tecnico: soporte técnico
+  pqr_legal: el equipo de PQR
+  datos_privacidad: el equipo de protección de datos
+  onboarding: el equipo de solicitudes
+  comercial: el equipo comercial
+  cx_general: un asesor
+
+# Fixed Spanish replies (no model call; the verifier still checks phrases, length and echoes).
 templates:
   security_ack: >
     Gracias por avisarnos. Por seguridad, no compartas tu clave, tu código de verificación ni

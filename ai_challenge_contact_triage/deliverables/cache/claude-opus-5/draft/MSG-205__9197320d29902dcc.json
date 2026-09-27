@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.010828,
+ "effort": "medium",
+ "fingerprint": "9197320d29902dcc",
+ "item_id": "MSG-205",
+ "label": "draft",
+ "latency_ms": 4989,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T21:01:18Z",
+ "request_id": "req_011CfUcpiziM1mvRXEWxc2wq",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"¡Hola! Con gusto te ayudo. La fecha de pago se define al momento de desembolsar tu crédito, así que sigue siendo la misma salvo que hayas pedido un cambio. Desde este canal no tengo acceso a tu información, pero puedes consultar la fecha exacta de tu cuota en la app, en la sección \\\"Mi crédito\\\". Si quieres moverla, ten en cuenta que puedes solicitar el cambio de fecha una vez por año, siempre que estés al día; lo gestionas desde la app o con un asesor. Cualquier cosa, aquí estamos. ¡Que tengas un buen día!\",\"citations\":[\"pagos_y_cuotas.fechas_de_pago\"],\"uncovered_points\":[],\"reasoning_brief\":\"La sección de fechas de pago cubre cómo se define la fecha y el cambio una vez por año; la fecha puntual se consulta en la app.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 344,
+   "output_tokens": 330
+  }
+ }
+}

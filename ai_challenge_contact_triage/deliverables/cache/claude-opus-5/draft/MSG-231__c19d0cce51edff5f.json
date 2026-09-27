@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.010523,
+ "effort": "medium",
+ "fingerprint": "c19d0cce51edff5f",
+ "item_id": "MSG-231",
+ "label": "draft",
+ "latency_ms": 4059,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T21:01:50Z",
+ "request_id": "req_011CfUcsBAsYyBRreYAeNtwo",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"¡Hola! Claro que sí. El extracto de pagos lo puedes solicitar directamente en la app, en la sección \\\"Documentos\\\", o con un asesor; la generación toma hasta 2 días hábiles. Si lo que necesitas es para la declaración de renta, ten en cuenta que también está disponible el certificado de intereses pagados, que se genera desde marzo del año siguiente. Solicita el que necesites y te lo hacemos llegar. ¡Quedamos atentos!\",\"citations\":[\"datos_certificados_pqr.certificados_extractos\"],\"uncovered_points\":[],\"reasoning_brief\":\"La sección de certificados y extractos cubre cómo solicitar el extracto de pagos, el tiempo de generación y el certificado de intereses para renta.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 528,
+   "output_tokens": 281
+  }
+ }
+}

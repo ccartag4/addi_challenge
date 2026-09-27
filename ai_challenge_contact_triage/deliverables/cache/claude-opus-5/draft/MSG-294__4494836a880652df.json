@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.013222,
+ "effort": "medium",
+ "fingerprint": "4494836a880652df",
+ "item_id": "MSG-294",
+ "label": "draft",
+ "latency_ms": 5648,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T21:02:47Z",
+ "request_id": "req_011CfUcwF7sFDUayURp6PRVV",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"¡Hola! Con gusto te ayudamos con tu extracto. Para obtenerlo, puedes solicitar el extracto de pagos directamente en la app, en la sección \\\"Documentos\\\", o pedírselo a un asesor después de validar tu identidad. La generación del documento toma hasta 2 días hábiles. Apenas esté listo lo podrás descargar y usarlo para tu trámite. Si necesitas algo más, escríbenos y te acompañamos. ¡Gracias por escribirnos!\",\"citations\":[\"datos_certificados_pqr.certificados_extractos\"],\"uncovered_points\":[],\"reasoning_brief\":\"La sección de certificados y extractos cubre cómo solicitar el extracto de pagos y el tiempo de generación.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 553,
+   "output_tokens": 384
+  }
+ }
+}

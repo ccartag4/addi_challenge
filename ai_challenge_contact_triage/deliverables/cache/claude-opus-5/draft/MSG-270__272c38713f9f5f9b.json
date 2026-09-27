@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.014047,
+ "effort": "medium",
+ "fingerprint": "272c38713f9f5f9b",
+ "item_id": "MSG-270",
+ "label": "draft",
+ "latency_ms": 6006,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T21:02:24Z",
+ "request_id": "req_011CfUcuWajpBPr3zwNpuw3r",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"¡Hola! Con gusto te ayudamos.\\n\\nEl detalle de tu saldo pendiente, las cuotas que te quedan y el valor de cada una lo puedes ver en la app, en la sección \\\"Mi crédito\\\". Por este canal también podemos indicártelo, pero primero necesitamos validar tu identidad con un asesor.\\n\\nPara el trámite de la visa, el extracto de pagos lo solicitas en la app, en \\\"Documentos\\\", o con un asesor. La generación toma hasta 2 días hábiles, así que tenlo en cuenta para tus tiempos.\\n\\nCualquier duda, quedamos atentos. ¡Que te vaya muy bien con tu solicitud!\",\"citations\":[\"pagos_y_cuotas.saldo_y_cuotas\",\"datos_certificados_pqr.certificados_extractos\"],\"uncovered_points\":[],\"reasoning_brief\":\"saldo_y_cuotas cubrió la consulta de saldo y certificados_extractos el extracto de pagos y su tiempo de generación.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 753,
+   "output_tokens": 377
+  }
+ }
+}

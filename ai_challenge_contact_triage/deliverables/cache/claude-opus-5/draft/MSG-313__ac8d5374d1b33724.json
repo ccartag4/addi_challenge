@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.010257,
+ "effort": "medium",
+ "fingerprint": "ac8d5374d1b33724",
+ "item_id": "MSG-313",
+ "label": "draft",
+ "latency_ms": 4661,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T21:03:07Z",
+ "request_id": "req_011CfUcxmu4bqdGdEC1M7h2o",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"Hola, lamento la demora y la molestia que esto te ha causado. Ya registramos tu caso como PQR y lo estamos escalando al equipo de PQR; quedará con un número de radicado para que puedas hacerle seguimiento. El tiempo legal de respuesta a una PQR es de hasta 15 días hábiles, y buscaremos darte una solución lo antes posible. Si tu reclamo es por un cobro o por un reporte a centrales, también lo enrutamos al equipo correspondiente. Gracias por tu paciencia; quedamos atentos.\",\"citations\":[\"datos_certificados_pqr.pqr\"],\"uncovered_points\":[],\"reasoning_brief\":\"La sección de PQR cubre el registro del caso, el radicado y el plazo de respuesta para la queja por demora.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 420,
+   "output_tokens": 292
+  }
+ }
+}

@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.013407,
+ "effort": "medium",
+ "fingerprint": "2639ee5747f86996",
+ "item_id": "MSG-373",
+ "label": "draft",
+ "latency_ms": 5329,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T21:04:03Z",
+ "request_id": "req_011CfUd2uYZBnaEd4SbNr44o",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"Hola, entiendo tu preocupación y lamento la molestia. Lumo reporta a centrales de riesgo únicamente cuando hay mora, después del periodo de gracia y luego de enviar las notificaciones previas por SMS y correo. Como nos dices que estabas al día, estamos escalando tu caso al equipo de Cartera para que validen lo ocurrido y te den una respuesta. Ten en cuenta que, cuando un crédito se pone al día, el reporte se actualiza a positivo en el siguiente ciclo, lo que puede tardar hasta 30 días calendario; el historial no se borra, solo se actualiza el estado. Te contactamos apenas tengamos el resultado. ¡Gracias por tu paciencia!\",\"citations\":[\"mora_y_centrales.reporte_centrales\"],\"uncovered_points\":[],\"reasoning_brief\":\"La sección de reporte a centrales explica cuándo se reporta, la actualización en el siguiente ciclo y la escalación a Cartera por reclamo de reporte erróneo.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 635,
+   "output_tokens": 375
+  }
+ }
+}

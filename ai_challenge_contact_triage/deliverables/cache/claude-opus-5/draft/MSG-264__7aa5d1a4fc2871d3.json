@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.009612,
+ "effort": "medium",
+ "fingerprint": "7aa5d1a4fc2871d3",
+ "item_id": "MSG-264",
+ "label": "draft",
+ "latency_ms": 3838,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T21:02:21Z",
+ "request_id": "req_011CfUcuV1Ug6DHcky3S2Xu9",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"Hola, lamento la demora en responderte y el malestar que esto te ha causado. Ya radicamos tu queja formal como PQR y estamos escalando tu caso al equipo de PQR, que le dará seguimiento. Recibirás el número de radicado para que puedas hacer seguimiento, y el tiempo legal de respuesta a una PQR es de hasta 15 días hábiles. Gracias por tomarte el tiempo de escribirnos; te contactaremos por este mismo medio.\",\"citations\":[\"datos_certificados_pqr.pqr\"],\"uncovered_points\":[],\"reasoning_brief\":\"La sección de PQR cubre el registro de la queja, el radicado y el plazo de respuesta.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 451,
+   "output_tokens": 260
+  }
+ }
+}

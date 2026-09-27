@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.012068,
+ "effort": "medium",
+ "fingerprint": "856b38ef2e7049a5",
+ "item_id": "MSG-009",
+ "label": "draft",
+ "latency_ms": 5948,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:53:25Z",
+ "request_id": "req_011CfUcDnmD2uDU8crVc5XW3",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\": true, \"reply_text\": \"¡Hola! Claro que sí, te cuento cómo solicitarlo. El certificado de estar al día (paz y salvo) lo puedes pedir directamente en la app, en la sección \\\"Documentos\\\", o con un asesor si prefieres. La generación tarda hasta 2 días hábiles, y allí mismo podrás descargarlo cuando esté listo. Si necesitas además tu extracto de pagos, lo solicitas por el mismo camino. Cualquier cosa, quedamos atentos. ¡Que te vaya muy bien con tu trámite!\", \"citations\": [\"datos_certificados_pqr.certificados_extractos\", \"mora_y_centrales.paz_y_salvo\"], \"uncovered_points\": [], \"reasoning_brief\": \"La sección de certificados indicó el canal (app \\\"Documentos\\\" o asesor) y el tiempo de 2 días hábiles; la de paz y salvo confirmó que es el certificado solicitado.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1587,
+   "input_tokens": 540,
+   "output_tokens": 343
+  }
+ }
+}

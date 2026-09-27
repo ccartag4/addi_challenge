@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.015883,
+ "effort": "medium",
+ "fingerprint": "5cb06647fc5b263b",
+ "item_id": "MSG-274",
+ "label": "draft",
+ "latency_ms": 6174,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T21:02:30Z",
+ "request_id": "req_011CfUcuxHohoCDiDiHVR2Uj",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"Hola, gracias por escribirnos y contarnos tu situación. Sí, podemos buscar un acuerdo de pago: esta opción la gestiona el equipo de Cartera, así que remitimos tu solicitud para que revisen tu caso y te contacten con las alternativas de refinanciación. Ten en cuenta que por este canal no podemos confirmar montos ni condonación de intereses.\\n\\nSobre las llamadas diarias, registramos tu queja y estamos escalando tu caso al equipo de PQR; recibirás un número de radicado y la respuesta se da en un plazo de hasta 15 días hábiles.\\n\\nQuedamos atentos a cualquier otra duda.\",\"citations\":[\"mora_y_centrales.no_puede_pagar\",\"datos_certificados_pqr.pqr\"],\"uncovered_points\":[],\"reasoning_brief\":\"La sección de no_puede_pagar cubrió el acuerdo de pago vía Cartera y la de PQR cubrió la queja por las llamadas y el plazo de respuesta.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 795,
+   "output_tokens": 442
+  }
+ }
+}

@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.015887,
+ "effort": "medium",
+ "fingerprint": "57f6cf55f85f85f1",
+ "item_id": "MSG-355",
+ "label": "draft",
+ "latency_ms": 6287,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T21:03:45Z",
+ "request_id": "req_011CfUd1UuwqP3K3ecmt2HhM",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"¡Hola! Qué bueno que quieras ponerte al día.\\n\\nPor este canal no tenemos acceso a tu cuenta, así que no podemos darte el valor exacto. El interés de mora se cobra sobre el saldo vencido a la tasa máxima legal vigente y corre desde el día siguiente al vencimiento de la cuota. Puedes ver el total actualizado para pagar hoy en la app, en la sección \\\"Mi crédito\\\"; si prefieres, un agente puede ayudarte después de validar tu identidad.\\n\\nTen en cuenta que hay 5 días calendario de gracia antes de que se genere reporte negativo.\\n\\nQuedamos atentos.\",\"citations\":[\"mora_y_centrales.mora_e_intereses\"],\"uncovered_points\":[],\"reasoning_brief\":\"La sección de mora e intereses explica cómo se calcula el interés; el monto exacto se consulta en la app por falta de acceso a la cuenta.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 661,
+   "output_tokens": 469
+  }
+ }
+}

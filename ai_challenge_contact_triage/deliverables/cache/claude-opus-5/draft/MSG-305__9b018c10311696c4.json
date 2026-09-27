@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.010217,
+ "effort": "medium",
+ "fingerprint": "9b018c10311696c4",
+ "item_id": "MSG-305",
+ "label": "draft",
+ "latency_ms": 4346,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T21:02:56Z",
+ "request_id": "req_011CfUcwzqfBdeEB7z6MNuHC",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"¡Hola! Gracias por avisarnos. Los pagos por PSE pueden tardar en reflejarse, así que si ya pasaron 24 horas desde que pagaste, por favor envíanos el comprobante de los $150.000 para abrir la conciliación. Ya estamos escalando tu caso al equipo de Pagos y el tiempo de respuesta es de hasta 5 días hábiles. Te avisamos apenas tengamos novedades. ¡Gracias por tu paciencia!\",\"citations\":[\"pagos_y_cuotas.pagos_no_aplicados\"],\"uncovered_points\":[],\"reasoning_brief\":\"La sección de pagos no aplicados cubre el envío del comprobante, la apertura del caso de conciliación y el tiempo de respuesta.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 452,
+   "output_tokens": 284
+  }
+ }
+}

@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.010178,
+ "effort": "medium",
+ "fingerprint": "802e7352a7c0fc7a",
+ "item_id": "MSG-023",
+ "label": "draft",
+ "latency_ms": 4620,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:59:17Z",
+ "request_id": "req_011CfUcfqfK5CTfK3YnRXXK7",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"¡Hola! Claro que sí, tienes varias opciones para pagar. Aceptamos PSE, tarjeta débito o crédito, y también pago en efectivo en Efecty y corresponsales bancarios. Para pagar en efectivo solo necesitas el código de pago que aparece en la app. Ten en cuenta que, si el pago en efectivo no se refleja en 24 horas, puedes enviar el comprobante a pagos@lumo.example y lo revisamos. ¡Quedamos atentos a cualquier otra duda!\",\"citations\":[\"pagos_y_cuotas.metodos_de_pago\"],\"uncovered_points\":[],\"reasoning_brief\":\"La sección de métodos de pago cubre PSE, tarjeta, Efecty y corresponsales, más el envío de comprobantes.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 399,
+   "output_tokens": 293
+  }
+ }
+}

@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.013177,
+ "effort": "medium",
+ "fingerprint": "baee2cff399b116e",
+ "item_id": "MSG-019",
+ "label": "draft",
+ "latency_ms": 5651,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:59:12Z",
+ "request_id": "req_011CfUcfQErA84U1J78MS4CP",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"¡Hola! Te cuento cómo funciona: si pagas la cuota después de la fecha de vencimiento, se cobra interés de mora sobre el saldo vencido, a la tasa máxima legal vigente, y empieza a correr desde el día siguiente al vencimiento. Además, tienes 5 días calendario de gracia antes de que se genere un reporte negativo a centrales de riesgo; el reporte solo se hace después de ese periodo y de enviarte las notificaciones previas por SMS y correo. Para ver el detalle de tu cuota y su fecha, revisa la sección \\\"Mi crédito\\\" en la app. Cualquier duda, aquí estamos para ayudarte.\",\"citations\":[\"mora_y_centrales.mora_e_intereses\",\"mora_y_centrales.reporte_centrales\"],\"uncovered_points\":[],\"reasoning_brief\":\"La sección de mora e intereses explica el cobro y el periodo de gracia; la de reporte a centrales complementa cuándo se reporta.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 654,
+   "output_tokens": 362
+  }
+ }
+}

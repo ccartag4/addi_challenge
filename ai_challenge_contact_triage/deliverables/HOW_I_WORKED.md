@@ -78,6 +78,39 @@ LLM-judge calibration, offline determinism, adversarial fixtures)*
   the model on that field. Verbatim verification is necessary, not sufficient; low-precision
   rules must either be tightened or defer to the model.
 
+### 3.6 Three routing slips in one afternoon
+
+- **What it produced:** the routing engine, written in one pass from the YAML policy, had three
+  defects: the "no policy" override also swallowed the courtesy template for out-of-scope
+  messages (order of evaluation), the out-of-scope template was still attached to sales
+  inquiries that the policy says must go to a person, and `auto_reply` decisions carried the
+  reason's default queue as if a case were open.
+- **How I caught them:** the first two by the routing tests written from the policy's intent
+  ("unrelated gets the template, sales gets a person"); the third by reading the first 18 live
+  records, where an OTP question showed `auto_reply` with queue `soporte_tecnico`.
+- **What I did:** the override now requires `reply_source: none`, a reason template applies
+  only to auto actions without `no_draft`, and a queue is set only when a person is involved.
+  Each fix has a test with the message it came from.
+- **Lesson:** a policy engine is cheap to write and expensive to trust; the tests that pay are
+  the ones phrased as the policy's sentences, not as the code's branches.
+
+### 3.7 A verifier that rejected good Spanish
+
+- **What it produced:** the first full run rejected 11 of 238 drafts. Reading them: five were
+  rejected because the placeholder check (`TODO`, case-insensitive) matched the word "todo"
+  ("queda todo actualizado"); two because the customer had written a number in words ("dos
+  veces", "tercera vez") and the reply repeated it in words while the check only credited
+  digits; and after I added ordinals, one more because "desde el primer día" became the figure 1.
+- **How I caught it:** not by a test. The rejection list was short enough to read in full, and
+  every rejected text was kept next to its failed check, which is why the pattern was obvious
+  in minutes.
+- **What I did:** word placeholders are now matched in upper case only; number words and
+  ordinals are credited on the customer's side as well; "primer" is deliberately excluded. Each
+  phrase became a test case; the run was replayed from cache at no cost and the rejections fell
+  to four, all intended (three negated mentions of "condonación", one derived year).
+- **Lesson:** a strict verifier is only credible if its false positives are counted and read.
+  Keeping the rejected text in the record turned a debugging session into a five-minute review.
+
 *(more cases added as they happen)*
 
 ## 4. What I would improve with more time

@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.010183,
+ "effort": "medium",
+ "fingerprint": "25a665c9c096cd8a",
+ "item_id": "MSG-101",
+ "label": "draft",
+ "latency_ms": 4965,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:59:31Z",
+ "request_id": "req_011CfUcgrMG83mgGe9pY7bow",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"¡Hola! Con gusto te ayudo. Puedes ver tu saldo pendiente, el número de cuotas que te faltan y el valor de cada una directamente en la app, en la sección \\\"Mi crédito\\\". Ahí queda todo actualizado en un solo lugar. Si prefieres que te lo confirmemos por este canal, uno de nuestros asesores primero valida tu identidad y luego te indica el saldo. Cuéntame si quieres que sigamos por esa vía y te ayudamos enseguida. ¡Quedo atento!\",\"citations\":[\"pagos_y_cuotas.saldo_y_cuotas\"],\"uncovered_points\":[],\"reasoning_brief\":\"La sección de saldo y cuotas cubre la consulta: se indica la app y la opción de validación de identidad con un asesor.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 390,
+   "output_tokens": 295
+  }
+ }
+}

@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.012833,
+ "effort": "medium",
+ "fingerprint": "608f860b38a4e78e",
+ "item_id": "MSG-262",
+ "label": "draft",
+ "latency_ms": 4905,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T21:02:20Z",
+ "request_id": "req_011CfUcuLXFRqcaPbJ1Wn6Tb",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"¡Hola! Claro, te ayudo con eso. El certificado de paz y salvo lo puedes solicitar directamente en la app, en la sección \\\"Documentos\\\", o con un asesor. La generación toma hasta 2 días hábiles. Sobre el envío al correo, un asesor te confirmará esa opción al gestionar tu solicitud. Si necesitas algo más, quedo atenta. ¡Que tengas un buen día!\",\"citations\":[\"datos_certificados_pqr.certificados_extractos\",\"mora_y_centrales.paz_y_salvo\"],\"uncovered_points\":[\"Si el certificado puede enviarse al correo electrónico del cliente.\"],\"reasoning_brief\":\"La sección de certificados explica canal de solicitud y tiempo; la de paz y salvo confirma que se pide como certificado; el envío por correo no está cubierto.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 530,
+   "output_tokens": 373
+  }
+ }
+}

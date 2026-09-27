@@ -80,15 +80,44 @@ def test_overrides_reference_known_values():
         assert o["min_priority"] in PRIORITIES, o["code"]
         cond = o["when"]
         for key in cond:
-            assert key in {"flag", "any_flag", "confidence_below_threshold", "policy_coverage", "reason", "out_of_scope_kind"}, o["code"]
+            assert key in {"flag", "any_flag", "confidence_below_threshold", "policy_coverage", "reply_source", "reason", "out_of_scope_kind", "any_reason"}, o["code"]
         if "flag" in cond:
             assert cond["flag"] in TAX["flags"], o["code"]
         if "any_flag" in cond:
             assert set(cond["any_flag"]) <= set(TAX["flags"]), o["code"]
         if "template" in o:
             assert o["template"] in ROUTING["templates"], o["code"]
-        if "reason" in cond:
-            assert cond["reason"] in schema.REASON_IDS, o["code"]
+        for key in ("reason", "any_reason"):
+            if key in cond:
+                assert cond[key] in schema.REASON_IDS, o["code"]
+        for sid in o.get("extra_sections", []):
+            assert sid in TAX["kb_sections"], o["code"]
+
+
+def test_reason_templates_and_template_citations_are_consistent():
+    templates = ROUTING["templates"]
+    mapping = ROUTING["reason_templates"]
+    for reason, name in mapping.items():
+        assert reason in schema.REASON_IDS and name in templates, (reason, name)
+    for r in TAX["reasons"]:
+        if r["reply_source"] == "template":
+            assert r["id"] in mapping, f"{r['id']} replies with a template but none is mapped"
+    for name, sections in ROUTING["template_citations"].items():
+        assert name in templates
+        assert set(sections) <= set(TAX["kb_sections"]), name
+    assert set(ROUTING["queue_labels_es"]) == set(ROUTING["queues"]) - {"none"}
+
+
+def test_reasons_without_policy_name_the_gap():
+    for r in TAX["reasons"]:
+        if r["policy_coverage"] == "none":
+            assert "policy_gap" in r, f"{r['id']} has no policy coverage and does not state its policy_gap (text or explicit null)"
+            if r["reply_source"] == "none" and r["id"] != "hablar_con_humano":
+                assert r["policy_gap"], f"{r['id']} is routed for lack of policy but names no gap"
+    bumps = ROUTING["priority_bumps"]
+    assert set(bumps) <= set(TAX["flags"])
+    for flag, spec in bumps.items():
+        assert int(spec["levels"]) >= 0 and spec.get("floor", "P0") in PRIORITIES, flag
 
 
 def test_example_message_ids_exist_and_are_not_reused_across_reasons():

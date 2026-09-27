@@ -227,4 +227,79 @@ one). HOW_I_WORKED 3.5.
 - Cost is reported twice: what the calls cost when made and what this run spent; a full replay
   shows the first and zero for the second.
 
+**Commit:** `5c981f5` feat(ai): add LLM classifier with structured output, prompt cache, offline
+replay cache and call trace
+
+---
+
+## Step 04 — Routing, grounded drafting and the verifier  (2026-09-27)
+
+**Goal:** code decides what to do with a classified message (priority, action, queue), the model
+writes a Spanish reply only from the policy sections it is allowed to see, and code verifies
+the reply before it can be marked sendable. One `TriageRecord` per message, end to end.
+
+**Files:** `lumo_triage/kb.py` (sections by stable id from the four policy files),
+`lumo_triage/routing.py` (overrides, defaults, priority arithmetic, reply source),
+`lumo_triage/draft.py` (drafting prompt and `DraftOutput` schema), `lumo_triage/verify.py`
+(eight checks), `lumo_triage/pipeline.py` (assembly, two-stage thread pools),
+`lumo_triage/__main__.py` (`run` command), `policy/routing.yaml` (`OVR_HABEAS`, `reply_source`
+condition, `extra_sections`, `reason_templates`, `template_citations`, `queue_labels_es`, more
+forbidden phrases, `min_words`), `policy/taxonomy.yaml` (`policy_gap` per uncovered reason),
+`schema.py` (`DraftReply.rejected_text`); tests `test_routing.py` (18), `test_draft_verifier.py`
+(15), consistency tests extended. 148 tests, 1 skipped (live).
+
+**Command(s):**
+```powershell
+python -m pytest -q
+python -m lumo_triage run --ids MSG-001,MSG-002,MSG-003,MSG-004,MSG-005,MSG-006,MSG-008,MSG-009,MSG-010,MSG-013,MSG-016,MSG-018,MSG-026,MSG-036,MSG-037,MSG-182,MSG-269,MSG-291 --workers 3
+```
+
+**Result (author's validation, 18 messages chosen to cover every path):**
+
+| Check | Evidence |
+|---|---|
+| Paths exercised | 8 `auto_reply`, 8 `auto_reply_and_route`, 2 `route_to_human`; 13 model drafts, 3 templates (fraud, greeting, off-topic), 2 no-reply |
+| Verifier | 13 of 13 drafts passed all eight checks (citations inside the allowed set, every figure traceable to a cited section or to the customer's text, no forbidden promise, no document echo, length, Spanish, no placeholders, no stray contact details) |
+| Grounding | every draft cites the sections it used; figures quoted exactly ("5 días calendario", "hasta 30 días calendario", "24 horas", "2 días hábiles", "15 días hábiles", "30 minutos") |
+| Case consistency | drafts say "estamos escalando tu caso al equipo de …" only when the decision opens a case, with the team name from the policy |
+| Policy gaps | MSG-010 (hours: no policy → person), MSG-182 (data deletion → privacy owner, cancellation steps still answered), MSG-006 (how to prepay step by step: partially covered → answered and a low-priority case) |
+| Cost and latency | 13 drafts USD 0.18 (≈ 0.028 each, output tokens dominate: 600–970 per draft including thinking), 9–14 s per draft; classification replayed from cache at no cost; the whole 18-message run replays at USD 0.00 |
+
+**Prompt iteration:** the first 13 drafts (draft-v1) were grounded and verified, but two of the
+three `uncovered_points` were not gaps (a team reviewing a charge is the prescribed process,
+not a missing policy) and some replies added policy facts nobody asked about. draft-v2 defines
+an uncovered point as something the customer asked that no allowed section addresses, and
+tells the model to answer what was asked. Same 18 messages: gaps 4 → 3, all real, no verifier
+failure, cost unchanged.
+
+**Incidents:** three routing defects, two caught by tests and one by reading the live records
+(HOW_I_WORKED 3.6): the no-policy override swallowed the off-topic courtesy template, the
+template was still attached to sales inquiries, and `auto_reply` decisions carried a queue.
+
+**Key decisions (also in the plan's decision log, D8–D12):** "tú" register aligned with the
+templates; only the allowed sections reach the drafting prompt and the verifier enforces
+citations ⊆ allowed; habeas data routes the case even as a secondary reason; `policy_gap` means
+what the knowledge base lacks, and a partially answered message opens a case so the promised
+follow-up exists; one `effort` setting for both stages, `--effort low` as the cost lever.
+
+**Full run (author, `python -m lumo_triage run --workers 4`, then replayed after the verifier fixes below):**
+
+| Item | Value |
+|---|---|
+| Messages | 340; 0 unclassified |
+| Actions | 145 `auto_reply_and_route`, 133 `auto_reply`, 50 `route_to_human`, 12 `close_no_reply` |
+| Replies ready to send | 278 = 234 model drafts that passed the verifier + 44 fixed templates (22 fraud acknowledgements, 14 thanks, 5 off-topic, 3 greetings) |
+| Verifier rejections | 4 of 238 model drafts (1.7 %): three mention "condonación" while denying it (the rule rejects any mention of debt forgiveness, even negated: a customer may anchor on the word, an agent decides) and one derived "marzo de 2026" from "2025" plus "el año siguiente" (arithmetic is not a citation). Each keeps its text as `rejected_text` and goes to a person. |
+| Policy gaps | 54 messages: 13 reasons with no policy (fees and rates 8, hours 6, application status 1, habeas data 1…) plus 31 partially answered and routed (`GAP_ROUTED`) and 5 not answerable. The uncovered points name real holes: Nequi and Baloto as payment rails, certificates by e-mail, address changes, harassment stop requests, a debt certificate with capital/interest breakdown. |
+| Queues | none 142, cx_general 56, cartera 53, pagos_conciliacion 39, fraude 22, pqr_legal 14, comercial 9, datos_privacidad 4, onboarding 1 |
+| Draft length | 52–127 words, mean 87 |
+| LLM usage | 230 live draft calls in the author's run (classifications replayed); 213,301 output tokens over the whole pipeline; recorded cost USD 7.73 for everything behind the output (USD 4.47 classification + USD 3.26 drafts, ≈ 0.014 per draft: v2 replies are shorter than the v1 sample) |
+| Replay | the full run replays from cache with 0 live calls and USD 0.00 in about a minute |
+
+**Incident (verifier false positives, found by reading the 11 rejections of the first full
+run):** the placeholder check matched the Spanish word "todo" (5 drafts), number words written by
+the customer ("dos veces", "tercera vez") were not credited to the message side (2 drafts), and
+after adding ordinals, "el primer día" was read as the figure 1 (1 draft). Fixed with tests for
+each phrase and replayed at no cost: 11 → 4 rejections, all four deliberate. HOW_I_WORKED 3.7.
+
 **Commit:** *(filled after commit)*

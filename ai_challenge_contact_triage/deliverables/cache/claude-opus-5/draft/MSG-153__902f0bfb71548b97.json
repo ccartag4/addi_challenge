@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.011718,
+ "effort": "medium",
+ "fingerprint": "902f0bfb71548b97",
+ "item_id": "MSG-153",
+ "label": "draft",
+ "latency_ms": 5423,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T21:00:28Z",
+ "request_id": "req_011CfUckzVGHNUD59QNsqAns",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":false,\"reply_text\":null,\"citations\":[],\"uncovered_points\":[\"Confirmación de la fecha exacta de vencimiento de la cuota del mes para el crédito 8902.\",\"Aclaración sobre la diferencia entre la fecha mostrada en la app y la del mensaje recibido.\"],\"reasoning_brief\":\"La única sección disponible explica cómo se define y cambia la fecha de pago, pero no permite confirmar la fecha concreta del cliente ni resolver la discrepancia.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 412,
+   "output_tokens": 352
+  }
+ }
+}

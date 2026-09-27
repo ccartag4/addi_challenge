@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.013962,
+ "effort": "medium",
+ "fingerprint": "6c0e908f197a2c51",
+ "item_id": "MSG-114",
+ "label": "draft",
+ "latency_ms": 6343,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:59:48Z",
+ "request_id": "req_011CfUchzvygujfe2Zp111E3",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"Hola, lamento la molestia que has tenido estos días; entiendo tu inconformidad y gracias por escribirnos.\\n\\nYa registramos tu queja formal como PQR y estamos escalando tu caso al equipo de PQR. Al radicarla se genera un número de radicado para que puedas hacerle seguimiento, y el tiempo legal de respuesta es de hasta 15 días hábiles.\\n\\nSi tu reclamo tiene que ver con un cobro o con un reporte a centrales, también se enruta al equipo correspondiente para revisarlo a fondo.\\n\\nQuedamos atentos y te contactaremos con la respuesta. Gracias por tu paciencia.\",\"citations\":[\"datos_certificados_pqr.pqr\"],\"uncovered_points\":[],\"reasoning_brief\":\"La sección de PQR cubre el registro de la queja, el número de radicado y el plazo de respuesta; el triage confirma el caso escalado.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 436,
+   "output_tokens": 437
+  }
+ }
+}

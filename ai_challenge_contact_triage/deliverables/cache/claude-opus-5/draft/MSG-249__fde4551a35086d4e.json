@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.013243,
+ "effort": "medium",
+ "fingerprint": "fde4551a35086d4e",
+ "item_id": "MSG-249",
+ "label": "draft",
+ "latency_ms": 4902,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T21:02:04Z",
+ "request_id": "req_011CfUct7jn4PGSwHXhVwiST",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"Hola, gracias por escribirnos.\\n\\nSobre tu extracto de pagos: puedes solicitarlo en la app, en la sección \\\"Documentos\\\", o con un asesor. La generación toma hasta 2 días hábiles.\\n\\nSobre el pago de la semana pasada, por este canal no podemos consultar el estado de tu cuenta. Si el pago no se refleja después de 24 horas, envíanos el comprobante y abrimos un caso de conciliación; el tiempo de respuesta es de hasta 5 días hábiles.\\n\\nQuedamos atentos a tu comprobante para ayudarte.\",\"citations\":[\"datos_certificados_pqr.certificados_extractos\",\"pagos_y_cuotas.pagos_no_aplicados\"],\"uncovered_points\":[],\"reasoning_brief\":\"La sección de certificados cubre la solicitud del extracto y la de pagos no aplicados cubre el pago pendiente.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 787,
+   "output_tokens": 338
+  }
+ }
+}

@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.010462,
+ "effort": "medium",
+ "fingerprint": "2b6c42dfbdba821d",
+ "item_id": "MSG-150",
+ "label": "draft",
+ "latency_ms": 4824,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T21:00:22Z",
+ "request_id": "req_011CfUckdDLvzeNJezkVT35L",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"¡Hola! Jaja, sí, el clima ha estado de todo menos amable. Sobre tu pregunta: la fecha de pago se define cuando se desembolsa el crédito, y puedes consultarla directamente en la app, en la sección \\\"Mi crédito\\\". Desde este canal no tenemos acceso a la información de tu cuenta, así que ahí la verás al instante. Un dato útil: si necesitas cambiarla, puedes pedir el cambio una vez al año, siempre que estés al día, desde la app o con un asesor. ¡Quedamos atentos a lo que necesites!\",\"citations\":[\"pagos_y_cuotas.fechas_de_pago\"],\"uncovered_points\":[],\"reasoning_brief\":\"La sección de fechas de pago cubrió cómo se define la fecha y el cambio anual; el comentario del clima se atendió de forma social.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 351,
+   "output_tokens": 314
+  }
+ }
+}

@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.014557,
+ "effort": "medium",
+ "fingerprint": "5fe66c459e06ad35",
+ "item_id": "MSG-108",
+ "label": "draft",
+ "latency_ms": 5379,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:59:41Z",
+ "request_id": "req_011CfUchZTYJfoHPxL6kqSvH",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"Hola, entiendo que necesitas claridad sobre tu reporte porque estás tramitando un crédito de vivienda.\\n\\nPor este canal no podemos consultar el estado de tu cuenta ni tu reporte. Te cuento cómo funciona: Lumo reporta a centrales de riesgo solo cuando hay mora, después del periodo de gracia y de enviarte las notificaciones previas por SMS y correo. Si te pones al día, el reporte se actualiza a positivo en el siguiente ciclo, que puede tardar hasta 30 días calendario; el historial no se borra, solo se actualiza el estado.\\n\\nYa estamos escalando tu caso al equipo de Cartera para que revisen tu situación y te contacten con la información puntual.\\n\\nQuedamos atentos.\",\"citations\":[\"mora_y_centrales.reporte_centrales\"],\"uncovered_points\":[],\"reasoning_brief\":\"La sección de reporte a centrales explica cuándo se reporta y cómo se actualiza; no se confirma estado de cuenta y se menciona la escalación a Cartera.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 640,
+   "output_tokens": 420
+  }
+ }
+}

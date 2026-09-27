@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.012512,
+ "effort": "medium",
+ "fingerprint": "467a6368489dc4fa",
+ "item_id": "MSG-140",
+ "label": "draft",
+ "latency_ms": 6613,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T21:00:11Z",
+ "request_id": "req_011CfUcjivNCvVN7fAP4Lmjm",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"¡Hola! Con gusto te ayudamos. El saldo pendiente de tu crédito 4471, el número de cuotas que te faltan y el valor de cada una los puedes ver en la app, en la sección \\\"Mi crédito\\\". Si prefieres consultarlo por este canal, primero validamos tu identidad con un asesor y te indicamos el saldo. Para el cambio de celular, puedes actualizarlo tú mismo en la app, en \\\"Mi perfil\\\"; el nuevo número aplica para las notificaciones que enviemos de ahí en adelante. Cualquier cosa, quedamos atentos. ¡Que tengas un buen día!\",\"citations\":[\"pagos_y_cuotas.saldo_y_cuotas\",\"datos_certificados_pqr.actualizacion_datos\"],\"uncovered_points\":[],\"reasoning_brief\":\"La sección de saldo y cuotas cubre la consulta del crédito y la de actualización de datos cubre el cambio de celular.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 571,
+   "output_tokens": 352
+  }
+ }
+}

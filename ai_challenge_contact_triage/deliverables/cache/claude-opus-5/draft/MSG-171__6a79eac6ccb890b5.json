@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.018132,
+ "effort": "medium",
+ "fingerprint": "6a79eac6ccb890b5",
+ "item_id": "MSG-171",
+ "label": "draft",
+ "latency_ms": 7198,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T21:00:57Z",
+ "request_id": "req_011CfUco1922cMwJaHfcT2a7",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"¡Hola! Gracias por escribirnos. Con gusto te ayudamos con los documentos de tu crédito 9000000789.\\n\\nEl extracto de pagos lo puedes solicitar directamente en la app, en la sección \\\"Documentos\\\", o con un asesor. La generación toma hasta 2 días hábiles. Por ese mismo medio puedes pedir el certificado de estar al día o paz y salvo.\\n\\nSobre el certificado de saldo a la fecha, un asesor te confirmará cómo gestionarlo, ya que requiere validación de tu identidad y revisión de tu caso.\\n\\nQuedamos atentos a lo que necesites.\",\"citations\":[\"datos_certificados_pqr.certificados_extractos\"],\"uncovered_points\":[\"El certificado de saldo a la fecha no está contemplado entre los certificados disponibles descritos.\"],\"reasoning_brief\":\"La sección de certificados y extractos cubre el extracto de pagos y su canal y tiempo; el certificado de saldo a la fecha no aparece en ninguna sección.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 600,
+   "output_tokens": 571
+  }
+ }
+}

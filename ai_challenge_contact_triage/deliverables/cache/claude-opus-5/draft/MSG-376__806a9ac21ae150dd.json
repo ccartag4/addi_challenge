@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.013388,
+ "effort": "medium",
+ "fingerprint": "806a9ac21ae150dd",
+ "item_id": "MSG-376",
+ "label": "draft",
+ "latency_ms": 6372,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T21:04:07Z",
+ "request_id": "req_011CfUd37CnCU3Y3nWFgP2qm",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"¡Hola! Sí, puedes pagar en efectivo en Efecty y en corresponsales bancarios. No manejamos un número de convenio: para pagar solo debes usar el código de pago que aparece en tu app, así que revísalo antes de acercarte al punto. Si pagas en efectivo y el pago no se refleja en 24 horas, envía el comprobante a pagos@lumo.example y lo revisamos. Sobre pagos en Baloto, un agente te confirmará esa opción muy pronto. ¡Quedamos atentos!\",\"citations\":[\"pagos_y_cuotas.metodos_de_pago\"],\"uncovered_points\":[\"Si se puede pagar en Baloto.\"],\"reasoning_brief\":\"La sección de métodos de pago cubre Efecty, corresponsales y el código de pago; Baloto no aparece.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 386,
+   "output_tokens": 424
+  }
+ }
+}

@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.013222,
+ "effort": "medium",
+ "fingerprint": "55d7205a6b9f3e2b",
+ "item_id": "MSG-175",
+ "label": "draft",
+ "latency_ms": 6088,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T21:00:56Z",
+ "request_id": "req_011CfUco2EViRwKf6xAYaSgz",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"Hola, lamento que hayas tenido que insistir durante estos días; entiendo tu molestia. Ya registramos tu queja formal como PQR y estamos escalando tu caso al equipo de PQR, que te compartirá el número de radicado para que puedas hacerle seguimiento. El tiempo legal de respuesta a una PQR es de hasta 15 días hábiles, y buscaremos darte una solución lo antes posible. Si quieres, cuéntanos por este medio qué fue lo que pasó para dejarlo dentro del caso. Gracias por tu paciencia.\",\"citations\":[\"datos_certificados_pqr.pqr\"],\"uncovered_points\":[],\"reasoning_brief\":\"La sección de PQR cubre el registro de la queja, el radicado y el plazo de hasta 15 días hábiles.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 443,
+   "output_tokens": 406
+  }
+ }
+}

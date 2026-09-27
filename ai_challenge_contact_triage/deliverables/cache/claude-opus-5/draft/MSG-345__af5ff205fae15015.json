@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.010972,
+ "effort": "medium",
+ "fingerprint": "af5ff205fae15015",
+ "item_id": "MSG-345",
+ "label": "draft",
+ "latency_ms": 4290,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T21:03:38Z",
+ "request_id": "req_011CfUd16x6dDqieHVYTc4h9",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"¡Hola! Felicitaciones por terminar de pagar tu crédito. El paz y salvo lo puedes solicitar directamente en la app, en la sección \\\"Documentos\\\", o con un asesor; la generación toma hasta 2 días hábiles. Además, al terminar de pagar, la actualización del reporte se realiza en el siguiente ciclo. Si necesitas ayuda con la solicitud, quedamos atentos. ¡Gracias por confiar en Lumo!\",\"citations\":[\"datos_certificados_pqr.certificados_extractos\",\"mora_y_centrales.paz_y_salvo\"],\"uncovered_points\":[],\"reasoning_brief\":\"La sección de certificados indica cómo solicitar el paz y salvo y el tiempo de generación; la de paz y salvo confirma la entrega tras el pago total.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 523,
+   "output_tokens": 300
+  }
+ }
+}

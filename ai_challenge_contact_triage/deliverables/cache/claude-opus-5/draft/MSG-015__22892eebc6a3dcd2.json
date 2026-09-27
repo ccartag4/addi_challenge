@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.015062,
+ "effort": "medium",
+ "fingerprint": "22892eebc6a3dcd2",
+ "item_id": "MSG-015",
+ "label": "draft",
+ "latency_ms": 5909,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:59:12Z",
+ "request_id": "req_011CfUcfQHpizogzz2SEmj1m",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"¡Hola! Gracias por avisarnos y felicitaciones por terminar de pagar tu crédito.\\n\\nEl paz y salvo lo puedes solicitar como certificado desde la app, en la sección \\\"Documentos\\\", o con un asesor; su generación tarda hasta 2 días hábiles.\\n\\nSobre las centrales de riesgo, el reporte se actualiza en el siguiente ciclo, que puede tardar hasta 30 días calendario. Ten en cuenta que el historial no se borra: lo que se actualiza es el estado.\\n\\nSi necesitas algo más, escríbenos y con gusto te ayudamos. ¡Que estés muy bien!\",\"citations\":[\"datos_certificados_pqr.certificados_extractos\",\"mora_y_centrales.paz_y_salvo\",\"mora_y_centrales.reporte_centrales\"],\"uncovered_points\":[],\"reasoning_brief\":\"Certificados cubre el trámite y tiempo del paz y salvo; paz_y_salvo y reporte_centrales cubren la actualización en el siguiente ciclo (hasta 30 días).\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 856,
+   "output_tokens": 397
+  }
+ }
+}

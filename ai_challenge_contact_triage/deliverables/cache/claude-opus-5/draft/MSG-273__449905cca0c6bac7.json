@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.012162,
+ "effort": "medium",
+ "fingerprint": "449905cca0c6bac7",
+ "item_id": "MSG-273",
+ "label": "draft",
+ "latency_ms": 4312,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T21:02:27Z",
+ "request_id": "req_011CfUcutU83FTDASxrNtaw6",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"Hola, gracias por escribirnos y por adjuntar el comprobante. Ya estamos escalando tu caso al equipo de Pagos para la conciliación del pago con referencia 778192034. El tiempo de respuesta es de hasta 5 días hábiles y te avisaremos apenas tengamos el resultado. Ten en cuenta que los pagos pueden tardar hasta 24 horas en reflejarse; por eso, cuando pasa ese tiempo, revisamos el caso con el comprobante como el que enviaste. Si tienes algo más que agregar, respóndenos este correo y lo sumamos a tu caso. ¡Gracias por tu paciencia!\",\"citations\":[\"pagos_y_cuotas.pagos_no_aplicados\"],\"uncovered_points\":[],\"reasoning_brief\":\"La sección de pagos no aplicados cubrió el envío de comprobante, la apertura del caso de conciliación y el plazo de hasta 5 días hábiles.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 506,
+   "output_tokens": 351
+  }
+ }
+}

@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.015227,
+ "effort": "medium",
+ "fingerprint": "449ca6e8e215d5b2",
+ "item_id": "MSG-323",
+ "label": "draft",
+ "latency_ms": 6204,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T21:03:19Z",
+ "request_id": "req_011CfUcyZGpZQfCBqDAXNagt",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"¡Hola! Gracias por escribirnos. Por ahora los métodos de pago habilitados son PSE, tarjeta débito o crédito, y pago en efectivo en Efecty y corresponsales bancarios con el código de pago que aparece en la app. Nequi y Daviplata no están dentro de esas opciones, así que te recomendamos usar alguna de las anteriores. Si pagas en efectivo y el pago no se refleja en 24 horas, envía el comprobante a pagos@lumo.example y lo revisamos. ¡Quedamos atentos a cualquier otra duda!\",\"citations\":[\"pagos_y_cuotas.metodos_de_pago\"],\"uncovered_points\":[],\"reasoning_brief\":\"La sección de métodos de pago lista las opciones aceptadas, lo que responde directamente la consulta sobre Nequi y Daviplata.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 374,
+   "output_tokens": 500
+  }
+ }
+}

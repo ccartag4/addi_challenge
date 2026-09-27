@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.015022,
+ "effort": "medium",
+ "fingerprint": "33ff65724e4e46dc",
+ "item_id": "MSG-311",
+ "label": "draft",
+ "latency_ms": 6343,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T21:03:08Z",
+ "request_id": "req_011CfUcxj78macb9L97cP472",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"¡Hola! Claro que sí. Para tu trámite en el banco puedes solicitar el certificado que necesites: certificado de estar al día o paz y salvo, extracto de pagos o certificado de intereses pagados. Lo puedes pedir directamente en la app, en la sección \\\"Documentos\\\", o con un asesor. La generación toma hasta 2 días hábiles. Si no estás seguro de cuál te sirve para el banco, cuéntanos y con gusto te orientamos. ¡Quedamos atentos!\",\"citations\":[\"datos_certificados_pqr.certificados_extractos\"],\"uncovered_points\":[],\"reasoning_brief\":\"La sección de certificados y extractos cubre los tipos disponibles, el canal de solicitud y el tiempo de generación.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 543,
+   "output_tokens": 458
+  }
+ }
+}

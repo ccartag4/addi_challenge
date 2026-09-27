@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.010027,
+ "effort": "medium",
+ "fingerprint": "4cb3ccd862d74b5d",
+ "item_id": "MSG-158",
+ "label": "draft",
+ "latency_ms": 4507,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T21:00:32Z",
+ "request_id": "req_011CfUcmPdoXa8QjZz1JmK8k",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"Hola, gracias por escribirnos. Los pagos por PSE pueden tardar en reflejarse: si después de 24 horas aún no aparece aplicado, envíanos el comprobante de la transacción para revisarlo. Ya estamos escalando tu caso al equipo de Pagos para la conciliación; el tiempo de respuesta es de hasta 5 días hábiles. Apenas tengamos el resultado, te contamos. Quedamos atentos a tu comprobante para agilizar la revisión.\",\"citations\":[\"pagos_y_cuotas.pagos_no_aplicados\"],\"uncovered_points\":[],\"reasoning_brief\":\"La sección de pagos no aplicados cubre el comprobante, la conciliación y el tiempo de respuesta.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 449,
+   "output_tokens": 277
+  }
+ }
+}

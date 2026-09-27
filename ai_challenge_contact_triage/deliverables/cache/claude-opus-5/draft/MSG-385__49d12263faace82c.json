@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.010733,
+ "effort": "medium",
+ "fingerprint": "49d12263faace82c",
+ "item_id": "MSG-385",
+ "label": "draft",
+ "latency_ms": 4595,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T21:04:18Z",
+ "request_id": "req_011CfUd44KvS1pxSh9hreGVe",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"¡Hola! Gracias por enviarnos el comprobante del pago. Ten en cuenta que un pago puede tardar hasta 24 horas en reflejarse. Como ya nos compartiste el soporte, estamos escalando tu caso al equipo de Pagos para la conciliación; el tiempo de respuesta es de hasta 5 días hábiles y te avisamos apenas tengamos el resultado. Cualquier novedad adicional, escríbenos por este mismo medio. ¡Gracias por tu paciencia!\",\"citations\":[\"pagos_y_cuotas.pagos_no_aplicados\"],\"uncovered_points\":[],\"reasoning_brief\":\"La sección de pagos no aplicados cubre el envío del comprobante, la ventana de 24 horas y la escalación al equipo de Pagos con respuesta hasta 5 días hábiles.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 420,
+   "output_tokens": 311
+  }
+ }
+}

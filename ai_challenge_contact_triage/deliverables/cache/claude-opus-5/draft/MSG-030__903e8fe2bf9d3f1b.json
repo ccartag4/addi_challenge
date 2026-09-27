@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.015593,
+ "effort": "medium",
+ "fingerprint": "903e8fe2bf9d3f1b",
+ "item_id": "MSG-030",
+ "label": "draft",
+ "latency_ms": 6924,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:59:24Z",
+ "request_id": "req_011CfUcgD2wGGqCKEWPjPrNW",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"Hola, gracias por contarnos lo que pasó. Entendemos que hiciste el pago dos veces, una por la app y otra por el banco. Ya estamos escalando tu caso al equipo de Pagos para la revisión correspondiente; el tiempo de respuesta es de hasta 5 días hábiles. Para agilizarlo, por favor envíanos los comprobantes de los dos pagos. Por este canal no podemos confirmar el manejo del excedente sin esa verificación, así que un asesor te contactará con la respuesta sobre tu solicitud. Quedamos atentos.\",\"citations\":[\"pagos_y_cuotas.pagos_no_aplicados\"],\"uncovered_points\":[\"Si el excedente puede abonarse a la próxima cuota.\"],\"reasoning_brief\":\"La sección de pagos no aplicados/dobles cubre el escalamiento al equipo de Pagos, el envío de comprobantes y los 5 días hábiles; no define el abono del excedente a la próxima cuota.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 447,
+   "output_tokens": 500
+  }
+ }
+}

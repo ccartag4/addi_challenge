@@ -1,8 +1,9 @@
 """
 Command-line entry point: `python -m lumo_triage <command>`.
 
-  classify   classification only (step 3): writes output/classifications.jsonl and prints a
-             per-message line plus token / cache / cost totals.
+  run        full pipeline: classification, routing, grounded drafts, verifier ->
+             output/triage_results.jsonl (one JSON line per message).
+  classify   classification only (step 3 diagnostics): output/classifications.jsonl.
 
 Runs from `deliverables/`; the data file is ../data/messages.jsonl unless --data is given.
 """
@@ -16,6 +17,8 @@ from pathlib import Path
 from . import normalize
 from .classify import PROMPT_VERSION, ClassifiedMessage, classify_messages
 from .llm import ROOT, LLMClient, LLMConfig
+from .pipeline import PIPELINE_VERSION, run
+from .schema import TriageRecord
 
 DATA_DEFAULT = ROOT.parent / "data" / "messages.jsonl"
 
@@ -29,7 +32,7 @@ def _select(messages, limit, ids):
     return messages
 
 
-def _line(r: ClassifiedMessage) -> str:
+def _classified_line(r: ClassifiedMessage) -> str:
     if r.classification is None:
         return f"{r.message.id}  !! unclassified  {r.error}"
     c = r.classification
@@ -39,26 +42,38 @@ def _line(r: ClassifiedMessage) -> str:
     return f"{r.message.id}  {c.primary_reason.value:<24} {c.confidence:.2f}  {flags:<30} {source:<5} {tokens}"
 
 
+def _record_line(rec: TriageRecord) -> str:
+    reason = rec.classification.primary_reason.value if rec.classification else "unclassified"
+    d = rec.decision
+    if rec.draft_reply.text:
+        reply = f"reply:{rec.draft_reply.source}"
+    elif rec.draft_reply.rejected_text:
+        reply = "reply:REJECTED"
+    else:
+        reply = "reply:-"
+    gap = " gap" if d.policy_gap else ""
+    return f"{rec.id}  {reason:<24} {d.priority} {d.action:<21} {d.queue:<18} {reply:<15}{gap}"
+
+
+def _print_llm_totals(llm: LLMClient, records_cost: float) -> None:
+    print(f"llm: live_calls={llm.calls} replayed={llm.replays} spent_this_run=${llm.spent_usd:.4f} recorded_cost=${records_cost:.4f}")
+
+
 def cmd_classify(args: argparse.Namespace) -> int:
     cfg = LLMConfig.from_env(model=args.model, effort=args.effort, mode=args.mode)
     llm = LLMClient(cfg)
     messages = _select(normalize.prepare(args.data), args.limit, args.ids)
     print(f"model={cfg.model} effort={cfg.effort} mode={cfg.mode} prompt={PROMPT_VERSION} messages={len(messages)}")
-
-    results = classify_messages(messages, llm, max_workers=args.workers, on_done=lambda r: print(_line(r), flush=True))
+    results = classify_messages(messages, llm, max_workers=args.workers, on_done=lambda r: print(_classified_line(r), flush=True))
 
     out = Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)
     with open(out, "w", encoding="utf-8") as f:
         for r in results:
             record = {
-                "id": r.message.id,
-                "channel": r.message.channel,
-                "text": r.message.text,
+                "id": r.message.id, "channel": r.message.channel, "text": r.message.text,
                 "classification": r.classification.model_dump(mode="json") if r.classification else None,
-                "rules_applied": r.rules_applied,
-                "reused_from": r.reused_from,
-                "error": r.error,
+                "rules_applied": r.rules_applied, "reused_from": r.reused_from, "error": r.error,
                 "llm": None if r.llm is None else {
                     "served_by": r.llm.served_by, "from_cache": r.llm.from_cache, "stop_reason": r.llm.stop_reason,
                     "input_tokens": r.llm.input_tokens, "cache_read_tokens": r.llm.cache_read_tokens,
@@ -76,15 +91,51 @@ def cmd_classify(args: argparse.Namespace) -> int:
     read = sum(r.llm.cache_read_tokens for r in with_llm)
     write = sum(r.llm.cache_write_tokens for r in with_llm)
     outp = sum(r.llm.output_tokens for r in with_llm)
-    recorded = sum(r.llm.cost_usd for r in with_llm)
-    prompt_tokens = inp + read + write
-    share = (read / prompt_tokens) if prompt_tokens else 0.0
+    share = (read / (inp + read + write)) if (inp + read + write) else 0.0
     print("")
     print(f"messages={len(results)} tier0={tier0} dedup_reused={dedup} llm_live={llm.calls} llm_replayed={llm.replays} unclassified={errors}")
     print(f"tokens: input={inp} cache_read={read} cache_write={write} output={outp}  cache_read_share={share:.0%}")
-    print(f"cost: recorded=${recorded:.4f} spent_this_run=${llm.spent_usd:.4f}")
+    _print_llm_totals(llm, sum(r.llm.cost_usd for r in with_llm))
     print(f"wrote {out}")
     return 0
+
+
+def cmd_run(args: argparse.Namespace) -> int:
+    cfg = LLMConfig.from_env(model=args.model, effort=args.effort, mode=args.mode)
+    llm = LLMClient(cfg)
+    messages = _select(normalize.prepare(args.data), args.limit, args.ids)
+    print(f"model={cfg.model} effort={cfg.effort} mode={cfg.mode} pipeline={PIPELINE_VERSION} messages={len(messages)}")
+    records = run(messages, llm, max_workers=args.workers, on_done=lambda rec: print(_record_line(rec), flush=True))
+
+    out = Path(args.out)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    with open(out, "w", encoding="utf-8") as f:
+        for rec in records:
+            f.write(json.dumps(rec.model_dump(mode="json"), ensure_ascii=False) + "\n")
+
+    actions = {}
+    for rec in records:
+        actions[rec.decision.action] = actions.get(rec.decision.action, 0) + 1
+    drafts = sum(1 for r in records if r.draft_reply.text)
+    rejected = sum(1 for r in records if r.draft_reply.rejected_text)
+    gaps = sum(1 for r in records if r.decision.policy_gap)
+    unclassified = sum(1 for r in records if r.classification is None)
+    print("")
+    print(f"messages={len(records)} actions={actions} replies={drafts} rejected_by_verifier={rejected} policy_gaps={gaps} unclassified={unclassified}")
+    _print_llm_totals(llm, sum(r.processing.cost_usd for r in records))
+    print(f"wrote {out}")
+    return 0
+
+
+def _common(p: argparse.ArgumentParser, default_out: Path) -> None:
+    p.add_argument("--data", default=str(DATA_DEFAULT))
+    p.add_argument("--limit", type=int, default=None, help="first N messages")
+    p.add_argument("--ids", default=None, help="comma-separated message ids")
+    p.add_argument("--mode", choices=["auto", "live", "offline"], default=None)
+    p.add_argument("--model", default=None)
+    p.add_argument("--effort", default=None, help="low|medium|high|xhigh|max|none")
+    p.add_argument("--workers", type=int, default=4)
+    p.add_argument("--out", default=str(default_out))
 
 
 def main(argv=None) -> int:
@@ -95,16 +146,13 @@ def main(argv=None) -> int:
     parser = argparse.ArgumentParser(prog="python -m lumo_triage")
     sub = parser.add_subparsers(dest="command", required=True)
 
-    p = sub.add_parser("classify", help="classify messages (no routing, no drafts)")
-    p.add_argument("--data", default=str(DATA_DEFAULT))
-    p.add_argument("--limit", type=int, default=None, help="first N messages")
-    p.add_argument("--ids", default=None, help="comma-separated message ids")
-    p.add_argument("--mode", choices=["auto", "live", "offline"], default=None)
-    p.add_argument("--model", default=None)
-    p.add_argument("--effort", default=None, help="low|medium|high|xhigh|max|none")
-    p.add_argument("--workers", type=int, default=4)
-    p.add_argument("--out", default=str(ROOT / "output" / "classifications.jsonl"))
-    p.set_defaults(func=cmd_classify)
+    p_run = sub.add_parser("run", help="full pipeline -> output/triage_results.jsonl")
+    _common(p_run, ROOT / "output" / "triage_results.jsonl")
+    p_run.set_defaults(func=cmd_run)
+
+    p_cls = sub.add_parser("classify", help="classification only -> output/classifications.jsonl")
+    _common(p_cls, ROOT / "output" / "classifications.jsonl")
+    p_cls.set_defaults(func=cmd_classify)
 
     args = parser.parse_args(argv)
     return args.func(args)

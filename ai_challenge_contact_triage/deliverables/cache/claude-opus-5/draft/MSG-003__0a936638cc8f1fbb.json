@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.010833,
+ "effort": "medium",
+ "fingerprint": "0a936638cc8f1fbb",
+ "item_id": "MSG-003",
+ "label": "draft",
+ "latency_ms": 4517,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:57:09Z",
+ "request_id": "req_011CfUcWSkQsWVybYFL2Y5vg",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"Buenos días, gracias por escribirnos y por adjuntar el comprobante de tu pago por PSE del crédito 4471. Ten en cuenta que un pago puede tardar hasta 24 horas en reflejarse en la app. Con tu comprobante ya estamos escalando tu caso al equipo de Pagos para la conciliación; el tiempo de respuesta es de hasta 5 días hábiles. Te avisaremos apenas tengamos el resultado. Gracias por tu paciencia.\",\"citations\":[\"pagos_y_cuotas.pagos_no_aplicados\"],\"uncovered_points\":[],\"reasoning_brief\":\"La sección de pagos no aplicados cubre el envío del comprobante, la ventana de 24 horas, la apertura del caso de conciliación y el plazo de hasta 5 días hábiles.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 485,
+   "output_tokens": 302
+  }
+ }
+}

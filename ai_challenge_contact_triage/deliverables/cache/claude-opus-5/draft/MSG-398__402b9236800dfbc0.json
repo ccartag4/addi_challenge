@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.014882,
+ "effort": "medium",
+ "fingerprint": "402b9236800dfbc0",
+ "item_id": "MSG-398",
+ "label": "draft",
+ "latency_ms": 5275,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T21:04:28Z",
+ "request_id": "req_011CfUd4kfozrymaatKmUfQ9",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"¡Hola! Gracias por avisarnos y lamentamos la molestia. Ya estamos escalando tu caso al equipo de Pagos para la conciliación. Para avanzar más rápido, envíanos el comprobante de tu pago, ya que si un pago no se refleja a las 24 horas se abre un caso con ese soporte. El tiempo de respuesta es de hasta 5 días hábiles. Ten en cuenta que, si hubo un reporte y ya estás al día, el estado se actualiza en el siguiente ciclo de reporte, que puede tardar hasta 30 días calendario. Quedamos atentos a tu comprobante para darte respuesta pronto. ¡Gracias por tu paciencia!\",\"citations\":[\"pagos_y_cuotas.pagos_no_aplicados\",\"mora_y_centrales.reporte_centrales\"],\"uncovered_points\":[],\"reasoning_brief\":\"pagos_no_aplicados cubrió el comprobante y los tiempos de conciliación; reporte_centrales explicó la actualización del reporte tras ponerse al día.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 870,
+   "output_tokens": 387
+  }
+ }
+}

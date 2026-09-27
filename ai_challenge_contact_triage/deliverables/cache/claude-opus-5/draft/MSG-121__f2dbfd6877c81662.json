@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.011657,
+ "effort": "medium",
+ "fingerprint": "f2dbfd6877c81662",
+ "item_id": "MSG-121",
+ "label": "draft",
+ "latency_ms": 4735,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:59:51Z",
+ "request_id": "req_011CfUciLYgnLbZhbby7K7kJ",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"¡Hola! Claro que sí, con gusto te ayudo con tu crédito 4471.\\n\\nPuedes solicitar el extracto de pagos desde la app, en la sección \\\"Documentos\\\", o pedirlo directamente con un asesor. La generación toma hasta 2 días hábiles.\\n\\nTen en cuenta que, si lo que necesitas para tu declaración de renta es el certificado de intereses pagados, este se solicita por el mismo medio y está disponible desde marzo del año siguiente.\\n\\nCualquier cosa, quedamos atentos. ¡Que tengas un buen día!\",\"citations\":[\"datos_certificados_pqr.certificados_extractos\"],\"uncovered_points\":[],\"reasoning_brief\":\"La sección de certificados y extractos cubre cómo solicitar el extracto de pagos, el tiempo de generación y el certificado de intereses para renta.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 555,
+   "output_tokens": 321
+  }
+ }
+}

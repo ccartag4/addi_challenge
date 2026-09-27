@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.010537,
+ "effort": "medium",
+ "fingerprint": "43802db3145ef54c",
+ "item_id": "MSG-213",
+ "label": "draft",
+ "latency_ms": 4588,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T21:01:28Z",
+ "request_id": "req_011CfUcqWywQVqzQ1R2jgpVL",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"Hola, gracias por contarnos. Los pagos pueden tardar hasta 24 horas en reflejarse en la app, así que aún es posible que se aplique solo. Si pasado ese tiempo sigue apareciendo pendiente, envíanos el comprobante de pago para revisarlo. Ya estamos escalando tu caso al equipo de Pagos para la conciliación; el tiempo de respuesta es de hasta 5 días hábiles. Te avisamos apenas tengamos novedades. ¡Gracias por tu paciencia!\",\"citations\":[\"pagos_y_cuotas.pagos_no_aplicados\"],\"uncovered_points\":[],\"reasoning_brief\":\"La sección de pagos no aplicados cubre el plazo de 24 horas, el envío del comprobante y la escalación con tiempo de respuesta.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 426,
+   "output_tokens": 302
+  }
+ }
+}

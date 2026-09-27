@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.014882,
+ "effort": "medium",
+ "fingerprint": "c8cc1e769b8e278a",
+ "item_id": "MSG-109",
+ "label": "draft",
+ "latency_ms": 5693,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:59:42Z",
+ "request_id": "req_011CfUchaaGAjF5YEeNZRDJg",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"¡Hola! Lamentamos la molestia. El bloqueo ocurre por seguridad tras varios intentos fallidos y dura 30 minutos; después puedes volver a intentar. Si sigue bloqueado, un asesor puede ayudarte a desbloquearlo validando tu identidad.\\n\\nSobre el código: el ingreso es con tu documento y un código de verificación que llega por SMS al celular registrado. Revisa que ese número sea el correcto, espera un minuto y reintenta. Si el número está desactualizado, puedes solicitar la actualización de tus datos.\\n\\nTambién te ayuda tener la app en su última versión y buena conexión. Cuéntanos si continúa y seguimos apoyándote. ¡Gracias!\",\"citations\":[\"cuenta_app_seguridad.cuenta_bloqueada\",\"cuenta_app_seguridad.acceso_otp\",\"cuenta_app_seguridad.app_no_funciona\"],\"uncovered_points\":[],\"reasoning_brief\":\"cuenta_bloqueada explicó el bloqueo de 30 minutos, acceso_otp el envío del código y datos desactualizados, y app_no_funciona los pasos básicos.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 670,
+   "output_tokens": 427
+  }
+ }
+}

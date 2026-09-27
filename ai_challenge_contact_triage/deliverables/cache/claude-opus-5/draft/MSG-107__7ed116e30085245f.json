@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.015998,
+ "effort": "medium",
+ "fingerprint": "7ed116e30085245f",
+ "item_id": "MSG-107",
+ "label": "draft",
+ "latency_ms": 6521,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:59:42Z",
+ "request_id": "req_011CfUchcEyFADtTynmy3pmr",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"¡Hola! Gracias por avisarnos. Ya estamos escalando tu caso al equipo de Pagos para revisar la conciliación de tu pago. Para agilizarlo, envíanos el comprobante del pago que hiciste el 2; el tiempo de respuesta es de hasta 5 días hábiles. Ten en cuenta que el interés de mora se cobra cuando la cuota se paga después de la fecha de vencimiento y corre desde el día siguiente a esa fecha, así que la revisión nos permitirá confirmar cómo quedó aplicado tu pago. Apenas tengamos el resultado, te contamos. ¡Gracias por tu paciencia!\",\"citations\":[\"pagos_y_cuotas.pagos_no_aplicados\",\"mora_y_centrales.mora_e_intereses\"],\"uncovered_points\":[],\"reasoning_brief\":\"pagos_no_aplicados cubre el comprobante, la escalación y los 5 días hábiles; mora_e_intereses explica cuándo corre el interés de mora.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 878,
+   "output_tokens": 430
+  }
+ }
+}
