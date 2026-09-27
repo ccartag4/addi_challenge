@@ -979,4 +979,52 @@ Full project: 29 models, 1 seed, 244 tests → 273 pass, 1 warn (known A4 residu
 bounded, numerators ≤ denominators), integrity (SCD2 version per month), completeness (dense
 grid).
 
+**Commit:** `699b3b0` feat(gold): add agg_merchant_monthly with month-end PAR30 series,
+category-at-month-end and reconciliation tests
+
+---
+
+## Step 17 — Documentation, exposures, DMBOK matrix and dbt artifacts  (2026-09-27)
+
+**Goal:** close README 4.4 (documentation of the gold models and of every non-trivial column,
+grain in every description) and produce the artefacts a reviewer needs to verify the run
+without re-executing it.
+
+**Files:** `models/gold/gold.yml` (every column of both gold models documented; two exposures,
+README 4.5), `scripts/build_data_quality_matrix.py` → `DATA_QUALITY.md`,
+`evidence/dbt_artifacts/{manifest,catalog,run_results}.json`, `evidence/dbt_build.log`.
+
+**Command(s):**
+```powershell
+dbt build --no-use-colors 2>&1 | Out-File -Encoding utf8 evidence/dbt_build.log
+python scripts/build_data_quality_matrix.py
+dbt docs generate
+New-Item -ItemType Directory -Force evidence/dbt_artifacts | Out-Null
+Copy-Item target/run_results.json, target/manifest.json, target/catalog.json evidence/dbt_artifacts/
+```
+
+**Incident:** the first parse of the documented `gold.yml` failed with a YAML syntax error:
+five column descriptions contained `: ` inside a plain scalar ("Secondary view: …"), which
+YAML reads as a nested mapping. Quoted. A side effect was instructive: the failed build left an
+empty `run_results.json`, so the matrix generator reported every test as "not run" until the
+project was rebuilt. The generator now normalises severities and the run timestamp it prints
+makes a stale artefact visible.
+
+**Result (validated in a scratch copy, then reproduced here):**
+
+| Measure | Value |
+|---|---|
+| Parse | 29 models, 18 analyses, 244 tests, 1 seed, 7 sources, **2 exposures**, no deprecations |
+| Build | 273 pass, 1 warn (known A4 residue), 2 NO-OP (exposures) |
+| `DATA_QUALITY.md` | 244 tests: completeness 70 · validity 64 · consistency 35 · uniqueness 27 · integrity 24 · accuracy 14 · timeliness 10; 30 of 30 models and seeds covered; 0 tests without a dimension |
+| Artefacts | manifest 2.0 MB · catalog 0.5 MB · run_results 0.4 MB (292 entries) |
+
+**Decision:** `DATA_QUALITY.md` is generated, never edited by hand: it reads
+`config.meta.dq_dimension` from the manifest and the status from the run results, so adding or
+changing a test changes the matrix on the next run. The exposures name the two consumers the
+README describes (Risk review, Merchant report) and make the "same numbers for both teams"
+statement visible in the lineage graph.
+
+**DMBOK dimension:** all seven, as the matrix.
+
 **Commit:** *(filled after commit)*

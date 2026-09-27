@@ -1,60 +1,137 @@
 version: 2
 
-# Gold contract. Consumption models; every test carries config.meta.dq_dimension (DAMA-DMBOK).
+# Gold contract. Consumption models; every column documented; every test carries
+# config.meta.dq_dimension (DAMA-DMBOK). Assumption and finding numbers refer to ASSUMPTIONS.md.
 
 models:
   - name: dm_loan_delinquency_snapshot
     description: >
       Grain: one row per valid loan, as of snapshot_date (default 2026-06-30). Outstanding
       balance = sum of unsettled installments (A11) converted at the snapshot-date FX rate
-      (A12); dpd = days since the due date of the oldest unpaid installment; dpd_bucket in
-      {0, 1-30, 31-60, 61-90, 90+}; is_par30 = dpd > 30. PAR30 = sum(outstanding_usd where
+      (A12); dpd = days since the due date of the oldest unpaid installment (A24); dpd_bucket
+      in {0, 1-30, 31-60, 61-90, 90+}; is_par30 = dpd > 30. PAR30 = sum(outstanding_usd where
       is_par30) / sum(outstanding_usd). Secondary columns give the net-of-partial balance and
       the balance at the disbursement-date rate for sensitivity. Derived entirely from
-      fct_installment_status and fct_loan.
+      fct_installment_status and fct_loan; never re-implements FIFO or as-of logic.
     columns:
       - name: loan_id
+        description: Loan identifier (grain).
         data_tests:
           - unique: {config: {meta: {dq_dimension: uniqueness}}}
           - not_null: {config: {meta: {dq_dimension: completeness}}}
           - relationships:
               arguments: {to: ref('fct_loan'), field: loan_id}
               config: {meta: {dq_dimension: integrity}}
+      - name: application_id
+        description: Originating application (A5).
+      - name: customer_id
+        description: Resolved real customer of the application (A4, A19).
+      - name: person_sk
+        description: Person the customer_id belongs to (A1), via bridge_customer_person.
+      - name: merchant_id
+        description: Merchant of the loan.
+      - name: merchant_sk
+        description: SCD2 merchant version in effect on the disbursement date (A14).
+      - name: merchant_category_at_disbursement
+        description: Category of that version; UNKNOWN when never categorised (A17).
+      - name: currency
+        description: COP or BRL, from the loan.
+      - name: principal
+        description: Disbursed principal, local currency.
+      - name: principal_usd
+        description: Principal at the disbursement-date FX rate (A7); the GMV contribution.
+      - name: fx_units_per_usd_at_disbursement
+        description: Rate used for principal_usd.
+      - name: disbursed_date
+        description: Bogotá business date of disbursement (A6).
+      - name: disbursed_month
+        description: First day of the disbursement month; the cohort key.
+      - name: term_months
+        description: Number of installments in the plan.
       - name: as_of_date
+        description: The snapshot date every state column refers to (A20).
         data_tests:
           - not_null: {config: {meta: {dq_dimension: completeness}}}
-      - name: dpd
-        description: Days past due of the loan; 0 when no installment is overdue.
-        data_tests:
-          - not_null: {config: {meta: {dq_dimension: completeness}}}
-          - dbt_utils.accepted_range:
-              arguments: {min_value: 0}
-              config: {meta: {dq_dimension: validity}}
-      - name: dpd_bucket
-        data_tests:
-          - accepted_values:
-              arguments: {values: ['0', '1-30', '31-60', '61-90', '90+']}
-              config: {meta: {dq_dimension: validity}}
-      - name: loan_status
-        data_tests:
-          - accepted_values:
-              arguments: {values: ['SETTLED', 'CURRENT', 'DELINQUENT']}
-              config: {meta: {dq_dimension: validity}}
+      - name: n_installments
+        description: Installments in the plan (= term_months, F16).
+      - name: n_settled
+        description: Installments fully paid as of the date.
+      - name: n_partial
+        description: Installments with 0 < paid < due as of the date.
+      - name: n_unpaid
+        description: Installments with nothing allocated as of the date.
+      - name: n_due
+        description: Installments whose due date is on or before the date.
+      - name: n_overdue
+        description: Installments strictly past their due date and unsettled (A24).
+      - name: n_not_yet_due
+        description: Installments whose due date is after the date.
+      - name: total_amount_due
+        description: Sum of the plan (principal plus interest), local currency.
+      - name: paid_amount
+        description: FIFO-allocated money received on or before the date (A21), local currency.
       - name: outstanding_local
+        description: >
+          Sum of amount_due of every unsettled installment, overdue or not yet due (A11).
+          A partially paid installment counts in full.
         data_tests:
           - dbt_utils.accepted_range:
               arguments: {min_value: 0}
               config: {meta: {dq_dimension: validity}}
-      - name: outstanding_usd
-        description: outstanding_local / FX rate of the snapshot date (A12).
+      - name: outstanding_net_of_partial_local
+        description: "Secondary view: unsettled amount net of partial payments (A11 alternative)."
+      - name: overdue_amount_local
+        description: amount_due of installments strictly past due and unsettled.
+      - name: oldest_overdue_due_date
+        description: Due date driving dpd; NULL when nothing is overdue.
+      - name: next_due_date
+        description: Next unsettled installment after the date; NULL when the loan is settled.
+      - name: last_payment_date
+        description: Bogotá date of the last effective payment on or before the date.
+      - name: dpd
+        description: Days past due of the loan = as_of_date - oldest_overdue_due_date; 0 when no installment is overdue.
         data_tests:
           - not_null: {config: {meta: {dq_dimension: completeness}}}
           - dbt_utils.accepted_range:
               arguments: {min_value: 0}
               config: {meta: {dq_dimension: validity}}
       - name: fx_units_per_usd_at_snapshot
+        description: FX rate of the snapshot date from the forward-filled calendar (A7, A12).
         data_tests:
           - not_null: {config: {meta: {dq_dimension: completeness}}}
+      - name: is_fpd30_eligible
+        description: First installment reached the 30-day mark by the date (A23).
+      - name: is_fpd30
+        description: Eligible and first installment more than 30 days past due, paid late or unpaid (A23).
+      - name: dpd_bucket
+        description: "'0' | '1-30' | '31-60' | '61-90' | '90+', a pure function of dpd."
+        data_tests:
+          - accepted_values:
+              arguments: {values: ['0', '1-30', '31-60', '61-90', '90+']}
+              config: {meta: {dq_dimension: validity}}
+      - name: is_par30
+        description: dpd > 30; the numerator flag of PAR30.
+      - name: loan_status
+        description: SETTLED (no balance) | CURRENT (balance, dpd = 0) | DELINQUENT (dpd > 0).
+        data_tests:
+          - accepted_values:
+              arguments: {values: ['SETTLED', 'CURRENT', 'DELINQUENT']}
+              config: {meta: {dq_dimension: validity}}
+      - name: outstanding_usd
+        description: outstanding_local / fx_units_per_usd_at_snapshot (A12). The PAR30 denominator contribution.
+        data_tests:
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+          - dbt_utils.accepted_range:
+              arguments: {min_value: 0}
+              config: {meta: {dq_dimension: validity}}
+      - name: outstanding_net_of_partial_usd
+        description: Secondary view in USD (A11 alternative).
+      - name: overdue_amount_usd
+        description: overdue_amount_local at the snapshot rate.
+      - name: outstanding_usd_at_disbursement_rate
+        description: "Secondary view: outstanding_local at the loan's disbursement-date rate (A12 alternative)."
+      - name: days_since_last_payment
+        description: as_of_date - last_payment_date; NULL when the loan never paid.
     data_tests:
       # bucket is a pure function of dpd
       - dbt_utils.expression_is_true:
@@ -73,7 +150,7 @@ models:
       - dbt_utils.expression_is_true:
           arguments: {expression: "(loan_status = 'DELINQUENT') = (dpd > 0)"}
           config: {meta: {dq_dimension: consistency}}
-      # a delinquent loan has at least one overdue installment, and vice versa
+      # a delinquent loan has at least one overdue installment, and vice versa (A24)
       - dbt_utils.expression_is_true:
           arguments: {expression: "(dpd > 0) = (n_overdue > 0)"}
           config: {meta: {dq_dimension: consistency}}
@@ -85,62 +162,108 @@ models:
       - dbt_utils.expression_is_true:
           arguments: {expression: "outstanding_net_of_partial_local <= outstanding_local and overdue_amount_local <= outstanding_local"}
           config: {meta: {dq_dimension: accuracy}}
-      # balance + paid = plan total (A11 gross view)
+      # balance net of partials + paid = plan total
       - dbt_utils.expression_is_true:
           arguments: {expression: "abs((outstanding_net_of_partial_local + paid_amount) - total_amount_due) < 0.01"}
           config: {meta: {dq_dimension: accuracy}}
 
   - name: agg_merchant_monthly
     description: >
-      Grain: merchant x month, dense from the first month with activity to the snapshot month
-      for every month in which the merchant existed. Flows are counted by Bogotá event date:
-      applications by creation month (A14), loans and GMV in USD by disbursement month (A6, A7),
-      FPD30 as the cohort of loans disbursed in the month measured as of the snapshot (A23).
-      PAR30 is a stock measured at the month end (A13): par30_usd_month_end /
+      Grain: merchant x month, dense from the first month with activity (2024-12) to the
+      snapshot month for every month in which the merchant existed. Flows are counted by Bogotá
+      event date: applications by creation month (A14), loans and GMV in USD by disbursement
+      month (A6, A7), FPD30 as the cohort of loans disbursed in the month measured as of the
+      snapshot (A23). PAR30 is a stock measured at the month end (A13): par30_usd_month_end /
       outstanding_usd_month_end from int_loan_month_end_status; a cohort variant as of the
       snapshot is provided as par30_cohort_rate_at_snapshot. merchant_category is the SCD2
       category in effect at the month end (A25), never the current one; rows where the
       category changed inside the month are flagged. Rates are NULL when the denominator is 0.
     columns:
       - name: merchant_id
+        description: Merchant identifier (grain, with month).
         data_tests:
           - not_null: {config: {meta: {dq_dimension: completeness}}}
           - relationships:
               arguments: {to: ref('dim_merchant'), field: merchant_id}
               config: {meta: {dq_dimension: integrity}}
+      - name: month
+        description: First day of the month (grain, with merchant_id).
+      - name: month_end
+        description: Last day of the month; the date the stock metrics and the category refer to.
       - name: merchant_sk
-        description: SCD2 version in effect at the month end.
+        description: SCD2 version in effect at the month end (A25).
         data_tests:
           - not_null: {config: {meta: {dq_dimension: integrity}}}
           - relationships:
               arguments: {to: ref('dim_merchant'), field: merchant_sk}
               config: {meta: {dq_dimension: integrity}}
+      - name: merchant_name
+        description: Current display name of the merchant (names only vary by casing, F15).
+      - name: country
+        description: CO or BR.
       - name: merchant_category
+        description: Category in effect at the month end (A25); UNKNOWN when never categorised (A17).
         data_tests:
           - not_null: {config: {meta: {dq_dimension: completeness}}}
           - accepted_values:
               arguments: {values: ['HOME', 'HEALTH', 'FASHION', 'ELECTRONICS', 'MOTORCYCLES', 'EDUCATION', 'TRAVEL', 'UNKNOWN']}
               config: {meta: {dq_dimension: validity}}
+      - name: category_at_month_start
+        description: Category in effect on the first day of the month; NULL if the merchant's first version began inside the month.
+      - name: category_changed_in_month
+        description: True when the category at month start differs from the one at month end (153 rows).
+      - name: applications
+        description: Valid applications (not deleted, A3) created in the month (A14).
+      - name: applications_approved
+        description: Of those, with final status APPROVED (A2).
+      - name: applications_deleted
+        description: CDC-deleted applications created in the month; excluded from every rate, shown for audit.
       - name: approval_rate
+        description: applications_approved / applications; NULL when there were none.
         data_tests:
           - dbt_utils.accepted_range:
               arguments: {min_value: 0, max_value: 1}
               config: {meta: {dq_dimension: validity}}
-      - name: fpd30_rate
-        data_tests:
-          - dbt_utils.accepted_range:
-              arguments: {min_value: 0, max_value: 1}
-              config: {meta: {dq_dimension: validity}}
-      - name: par30_rate
-        data_tests:
-          - dbt_utils.accepted_range:
-              arguments: {min_value: 0, max_value: 1}
-              config: {meta: {dq_dimension: validity}}
+      - name: disbursed_loans
+        description: Valid loans disbursed in the month (A5, A6).
       - name: gmv_usd
+        description: Sum of principal_usd of those loans, at each loan's disbursement-date rate (A7).
         data_tests:
           - dbt_utils.accepted_range:
               arguments: {min_value: 0}
               config: {meta: {dq_dimension: validity}}
+      - name: fpd30_eligible_loans
+        description: Loans of the cohort whose first installment reached the 30-day mark by the snapshot (A23).
+      - name: fpd30_loans
+        description: Of those, first installment more than 30 days past due, paid late or unpaid.
+      - name: fpd30_rate
+        description: fpd30_loans / fpd30_eligible_loans; NULL when no loan is eligible yet.
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments: {min_value: 0, max_value: 1}
+              config: {meta: {dq_dimension: validity}}
+      - name: loans_with_balance_month_end
+        description: Merchant's loans with outstanding balance at the month end.
+      - name: loans_par30_month_end
+        description: Of those, with DPD > 30 at the month end.
+      - name: outstanding_usd_month_end
+        description: Sum of the merchant's outstanding balances at the month end, USD at that month end's rate (A11, A12, A13).
+      - name: par30_usd_month_end
+        description: Same, restricted to loans with DPD > 30.
+      - name: par30_rate
+        description: par30_usd_month_end / outstanding_usd_month_end (A13); NULL when no balance.
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments: {min_value: 0, max_value: 1}
+              config: {meta: {dq_dimension: validity}}
+      - name: cohort_outstanding_usd_at_snapshot
+        description: "Secondary: outstanding at the snapshot of the loans disbursed in the month."
+      - name: cohort_par30_usd_at_snapshot
+        description: "Secondary: of those, with DPD > 30 at the snapshot."
+      - name: par30_cohort_rate_at_snapshot
+        description: "Secondary (A13 alternative): cohort_par30_usd_at_snapshot / cohort_outstanding_usd_at_snapshot."
+      - name: has_activity
+        description: True when the row has applications, disbursements or a balance; false rows keep the grid dense.
     data_tests:
       - dbt_utils.unique_combination_of_columns:
           arguments: {combination_of_columns: [merchant_id, month]}
@@ -162,3 +285,32 @@ models:
       - dbt_utils.expression_is_true:
           arguments: {expression: "(disbursed_loans > 0) = (gmv_usd > 0)"}
           config: {meta: {dq_dimension: consistency}}
+
+exposures:
+  - name: risk_delinquency_review
+    label: Risk — delinquency snapshot and PAR30
+    type: dashboard
+    maturity: medium
+    owner:
+      name: Risk team (Lumo)
+      email: risk@lumo.example
+    description: >
+      Monthly delinquency review: buckets, PAR30 and outstanding balance as of the snapshot,
+      plus the month-end PAR30 series per merchant. Consumes only gold models.
+    depends_on:
+      - ref('dm_loan_delinquency_snapshot')
+      - ref('agg_merchant_monthly')
+
+  - name: merchant_performance_report
+    label: Merchant team — monthly merchant performance
+    type: analysis
+    maturity: medium
+    owner:
+      name: Merchant team (Lumo)
+      email: merchants@lumo.example
+    description: >
+      Applications, approval rate, GMV in USD, disbursed loans, FPD30 and PAR30 per merchant
+      and month, under the category in effect at the time. Same numbers as the Risk review by
+      construction (assert_agg_merchant_monthly_reconciles).
+    depends_on:
+      - ref('agg_merchant_monthly')
