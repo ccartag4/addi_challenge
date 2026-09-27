@@ -1,0 +1,76 @@
+version: 2
+
+# Bronze layer contract.
+# Every test carries meta.dq_dimension (DAMA-DMBOK) so DATA_QUALITY.md can be generated
+# from the manifest. Bronze tests only assert what the raw extract itself promises:
+# identifiers are present. Everything else (uniqueness, validity) is measured in Phase 1
+# profiling and enforced from staging onwards.
+
+models:
+  - name: brz_applications_cdc
+    description: "Grain: one CDC event row as delivered, duplicates included. Raw text columns."
+    columns:
+      - name: application_id
+        data_tests:
+          - not_null:
+              meta: {dq_dimension: completeness}
+
+  - name: brz_loans
+    description: "Grain: one loan row as delivered. Raw text columns."
+    columns:
+      - name: loan_id
+        data_tests:
+          - not_null:
+              meta: {dq_dimension: completeness}
+
+  - name: brz_installments
+    description: "Grain: one installment row as delivered. Raw text columns."
+    columns:
+      - name: loan_id
+        data_tests:
+          - not_null:
+              meta: {dq_dimension: completeness}
+      - name: installment_number
+        data_tests:
+          - not_null:
+              meta: {dq_dimension: completeness}
+
+  - name: brz_payments
+    description: "Grain: one payment row as delivered, both systems, reversals included. Raw text columns."
+    columns:
+      - name: payment_id
+        data_tests:
+          - not_null:
+              meta: {dq_dimension: completeness}
+
+  - name: brz_customers
+    description: "Grain: one customer_id row as delivered. Raw text columns."
+    columns:
+      - name: customer_id
+        data_tests:
+          - not_null:
+              meta: {dq_dimension: completeness}
+
+  - name: brz_merchants_history
+    description: "Grain: one merchant attribute version as delivered. Raw text columns."
+    columns:
+      - name: merchant_id
+        data_tests:
+          - not_null:
+              meta: {dq_dimension: completeness}
+      - name: valid_from
+        data_tests:
+          - not_null:
+              meta: {dq_dimension: completeness}
+
+  - name: brz_fx_rates
+    description: "Grain: one (rate_date, currency) row as delivered. Raw text columns."
+    columns:
+      - name: rate_date
+        data_tests:
+          - not_null:
+              meta: {dq_dimension: completeness}
+      - name: currency
+        data_tests:
+          - not_null:
+              meta: {dq_dimension: completeness}

@@ -1,0 +1,44 @@
+version: 2
+
+sources:
+  - name: raw
+    description: >
+      Raw CSV extracts from Lumo's three source systems (origination core CDC, payment
+      processor, merchant master) plus customer master and published FX rates. Read directly
+      from disk with every column as text, so nothing is coerced before the staging layer
+      decides how. See ../data/data_dictionary.md for semantics.
+    meta:
+      # dbt-duckdb: each table is a DuckDB read_csv() call instead of a physical table.
+      # {name} is replaced with the table name below. all_varchar keeps raw values intact
+      # (epoch timestamps, 'N/A', '-1', thousands separators, trailing spaces).
+      external_location: "read_csv('{{ var('raw_data_path') }}/{name}.csv', header=true, all_varchar=true)"
+    tables:
+      - name: raw_applications_cdc
+        description: >
+          Change-data-capture log of credit applications. Several rows per application; the
+          current state is the latest version. `_op = 'D'` means the application was deleted
+          and did not exist for business purposes.
+      - name: raw_loans
+        description: >
+          Disbursed loans. A loan without a valid originating application is a corrupt record
+          from an old migration and must be excluded.
+      - name: raw_installments
+        description: >
+          Installment plan, one row per loan_id × installment_number. Generated at disbursement
+          and never changed.
+      - name: raw_payments
+        description: >
+          Payments at loan level from two systems: legacy_v1 (through Jun-2025, minor currency
+          units, 'LN-' loan references) and core_v2 (from Jul-2025, major units, plain loan id).
+          REVERSED rows void the payment named in reversed_payment_id.
+      - name: raw_customers
+        description: >
+          Customer master. One row per customer_id; a real person is identified by
+          document_number and may hold several customer_ids.
+      - name: raw_merchants_history
+        description: >
+          Append-only merchant attribute history. Each change appends a row with valid_from;
+          there is no end date or current flag.
+      - name: raw_fx_rates
+        description: >
+          Official FX rates, units of local currency per USD. Published on business days only.

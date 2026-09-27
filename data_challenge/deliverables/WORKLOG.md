@@ -196,8 +196,63 @@ git commit -m "chore(data): ignore dbt .user.yml and disable anonymous telemetry
 git push
 ```
 
-**Result:** *(filled after commit)*
+**Result:** first attempt committed the `.gitignore`, telemetry flag and log updates
+(`eb5f0d0`), but `git rm --cached` failed with "pathspec did not match": the path was given
+relative to the repository root while the shell was inside `deliverables/`. `.user.yml` stayed
+tracked. Second attempt from `deliverables/` with `git rm --cached .user.yml` removed it.
+
+**Finding / decision:** git pathspecs resolve against the current directory, not the repo root.
+Small AI slip, worth noting because the same mistake inside a dbt `read_csv` path would have
+been silent rather than loud.
 
 **DMBOK dimension:** n/a (configuration / data handling).
+
+**Commits:** `eb5f0d0` chore(data): ignore dbt .user.yml and disable anonymous telemetry ·
+*(second commit hash filled after run)*
+
+---
+
+## Step 05 — Sources and Bronze layer  (2026-09-27)
+
+**Goal:** declare the seven CSVs as dbt sources read straight from disk with every column as
+text, and expose them as 1:1 bronze views with a grain declared on each.
+
+**Files:** `models/bronze/sources.yml`, seven `brz_*.sql`, `models/bronze/bronze.yml`.
+
+**Command(s):**
+```powershell
+dbt run --select bronze
+dbt test --select bronze
+dbt show --inline "<row counts per bronze view>"
+```
+
+**Result (validated beforehand in a scratch copy of the project, then reproduced here):**
+
+| Bronze view | Rows | README says |
+|---|---|---|
+| brz_applications_cdc | 128,197 | ~128k |
+| brz_loans | 28,075 | ~28k |
+| brz_installments | 130,297 | ~130k |
+| brz_payments | 112,339 | ~112k |
+| brz_customers | 30,000 | 30k |
+| brz_merchants_history | 862 | ~860 |
+| brz_fx_rates | 848 | ~850 |
+
+10 completeness tests on identifier columns: all pass. Schemas created: `bronze`, `dq_audit`.
+
+**Key decisions:**
+- Sources use dbt-duckdb's `external_location` with a `read_csv(..., all_varchar=true)` call.
+  No copy of the raw files is made and no type is inferred; bronze shows the data exactly as
+  delivered, which is what a Bronze layer is for.
+- `raw_data_path` is a project var, so the same project runs against another folder with
+  `--vars` and no code change.
+- Each bronze view adds `_brz_source_file` and `_brz_built_at` for lineage.
+- Bronze tests only assert identifier presence (completeness). Uniqueness and validity are
+  deliberately *measured* in step 06 and *enforced* from staging, because bronze must keep the
+  duplicates so they can be counted and documented.
+- `store_failures` creates one table per test under `dq_audit`, empty when the test passes.
+
+**DMBOK dimension:** completeness (tests); the layer itself is the baseline for every other
+dimension.
 
 **Commit:** *(filled after commit)*
