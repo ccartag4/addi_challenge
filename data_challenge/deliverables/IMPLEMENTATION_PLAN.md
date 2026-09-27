@@ -177,7 +177,24 @@ Definitions the README leaves open, to be fixed and documented in `ASSUMPTIONS.m
 
 ---
 
-## 7. Definition of done
+## 7. Status at closing (2026-09-27)
+
+Written after step 19. The plan above is left as it was on 2026-09-26 so deviations are visible.
+
+| Planned | Done | Deviation |
+|---|---|---|
+| Phase 0 (4 steps) | ✅ steps 00–04b | `venv` with Python 3.13 instead of `uv` 3.12 (step 00); `.user.yml` incident (04b) |
+| Phase 1 bronze + profiling | ✅ steps 05–06b | profiling grew to 8 analyses plus an export script; `DATA_JOURNEY.md` added later (13b) at the user's request |
+| Phase 2 macros + staging | ✅ steps 07–08 | 2,126 CDC format duplicates discovered only at staging (F3 widened) |
+| Phase 3 six silver entities | ✅ steps 09–14 | `int_loan_validated`, `int_payment_classified` added so every exclusion carries a reason; A24 boundary fix at step 15 |
+| Phase 4 two gold models + docs | ✅ steps 15–17 | month-end series (`int_loan_month_end_status`) added so PAR30 per month is a stock (A13); exposures added; DMBOK matrix generated instead of hand-written |
+| Phase 5 results, cross-check, write-ups | ✅ steps 18–19 | cross-check compares loan by loan, not only totals |
+| Phase 6 optionals | partly | exposures done; incremental, snapshot, contracts and unit tests described in `ASSUMPTIONS.md` §C |
+
+Final state: 29 models, 1 seed, 244 tests (16 singular), 2 exposures; 273 pass, 1 expected warn;
+7 answers cross-checked 24/24 against an independent pandas recomputation.
+
+## 8. Definition of done
 
 - `dbt build` passes with zero errors; every test carries a DMBOK dimension.
 - Every model description starts with its grain.

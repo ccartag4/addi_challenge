@@ -7,17 +7,57 @@
 
 ## 1. What I delegated and what I didn't
 
+The working rule for the whole challenge: **the assistant produces candidates, I decide and
+verify, and I run every command myself.** Nothing reached the repository without me reading it
+and the output of running it.
+
 | Delegated to the AI assistant | Kept for myself | Why |
 |---|---|---|
-| Exploratory profiling scripts over the raw CSVs | Deciding which anomalies are real business rules vs noise | The AI finds patterns fast; judging their business meaning is my responsibility |
-| First drafts of SQL models, macros and YAML | Reviewing and approving every model line by line before it runs | I must be able to explain and defend every line |
-| *(to be completed as work progresses)* | | |
+| Exploratory profiling scripts (pandas, then SQL analyses `dq_01`–`dq_18`) | Deciding which anomaly is a business rule (placeholder customer, legacy ×100, reversals) and which is noise; naming and numbering every finding | The assistant finds patterns fast; deciding what they *mean* for Lumo's numbers is the job |
+| First drafts of every model, macro, test and YAML block | Approving each file line by line before it ran; rejecting or changing what I could not explain | The assessment's one hard rule: defend every part of what I submit |
+| Boilerplate: project config, `.gitignore`, export scripts, the DMBOK matrix generator, the cross-check script | Choosing the engine (DuckDB), repository location, layer layout, commit granularity, what goes in `evidence/` | Reproducibility choices shape how the reviewer verifies the work |
+| Proposing options for the open definitions (A11, A12, A13, A25) with pros and cons | Choosing the primary definition and requiring the alternative to be published next to it | The README leaves them open on purpose; the choice must be mine and visible |
+| Drafting the write-ups from the worklog | Deciding severity of each test (warn vs error), which residues to keep with a flag rather than drop, and the interpretation in Q5/Q6 | These are judgement calls about the business, not text |
+| Running validations in a scratch copy before handing me commands | Running the real build, reading every `dbt` log line for `Deprecat` and `FAIL`, and pasting outputs back | The assistant's scratch check passed for the wrong reason once (3.4); my run is the one that counts |
+
+What I did **not** delegate at all: the four decisions in `IMPLEMENTATION_PLAN.md` §3, the
+answers to the interview-style questions I asked myself after profiling (why 100 and not 1,000,
+why exclude reversals rather than net them, why the ghost customer is a placeholder), and the
+final reading of every evidence file before each commit.
 
 ---
 
-## 2. Key prompts (3–5 decisive ones)
+## 2. Key prompts (the ones that changed the direction of the work)
 
-*(to be completed; only prompts that changed the direction of the work)*
+1. **"Analyze and understand the challenge and give me an idea of how to approach the solution"**
+   (before any code). Instead of an architecture sketch, this produced a profiling pass over the
+   raw CSVs and a list of planted traps with figures: three timestamp shapes, epoch
+   milliseconds, FX gaps, legacy ×100, reversals, deleted applications, redundant customer ids.
+   It set the anchors that every later layer was checked against, and it made "profile first,
+   model second" the order of the whole build.
+
+2. **"I want to do it myself with commands so I understand the detail, you explain; leave a
+   step-by-step record; add DAMA-DMBOK for quality documentation; ask me if you have doubts."**
+   This prompt shaped the method more than any technical one: one worklog entry and one commit
+   per step, every test tagged with a DMBOK dimension (which later became a generated matrix),
+   validations in a scratch copy before I ran anything, and four explicit decision questions
+   (engine, repository, DMBOK depth, language) answered and recorded before step 0.
+
+3. **"Add the implementation plan as an additional document, as evidence, with the questions you
+   asked me and my answers."** It turned the plan from chat into a committed decision log, and
+   from then on every deviation from it (uv → venv, the month-end series, the extra documents)
+   was written down as a deviation instead of silently absorbed.
+
+4. **"Is there a way to create a document that says exactly which data it is and why it errored
+   or was done in a certain way? A table explaining what happened at each step."** This produced
+   `DATA_JOURNEY.md` and the funnel analysis `dq_15`. Its lasting effect was a discipline: no row
+   may disappear between layers without a finding or assumption number attached, and every
+   error, including the assistant's, has a root cause on record.
+
+5. **The recurring "me sale esto" with a pasted output.** Not one prompt but the loop that caught
+   most problems: the failed `dq_*` selector (3.4), the deprecation summaries (3.3, 3.5), the
+   `.user.yml` in a commit (3.2). Pasting the raw output rather than describing it is what let
+   the assistant see what it had assumed.
 
 ---
 

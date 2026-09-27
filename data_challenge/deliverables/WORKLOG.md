@@ -1080,4 +1080,44 @@ rules (A1–A25) agree to the cent and to the day on every loan.
 
 **DMBOK dimension:** accuracy and consistency of the published figures.
 
+**Commit:** `10e27f7` feat(data): add official result queries and independent pandas cross-check
+(24/24 match)
+
+---
+
+## Step 19 — Write-ups and closing  (2026-09-27)
+
+**Goal:** the deliverables the README lists that were still open: `RESULTS.md`, `README.md`
+(three commands), `AI_LOG.md` sections 1 and 2, `ASSUMPTIONS.md` section C, and the closing
+status of the plan.
+
+**Files:** `RESULTS.md` (seven answers with producing query, definitions applied, sensitivities,
+and the Q5/Q6 interpretation), `README.md` (replaces the challenge placeholder), `AI_LOG.md`
+§1 delegation table and §2 five decisive prompts, `ASSUMPTIONS.md` §C ten out-of-scope items
+with how they would be solved, `IMPLEMENTATION_PLAN.md` §7 status and deviations.
+
+**Command(s):**
+```powershell
+# fresh-clone verification of the README's three commands (scratch, not the working copy)
+git clone https://github.com/ccartag4/addi_challenge.git <scratch>\clone
+cd <scratch>\clone\data_challenge\deliverables
+py -3.13 -m venv .venv ; .\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt ; dbt deps ; dbt build
+```
+
+**Result of the fresh-clone run** (commit `10e27f7`, scratch folder, new venv):
+`pip install -r requirements.txt` → dbt-core 1.12.5, duckdb 1.5.5, pandas 3.0.6;
+`dbt deps` → dbt_utils 1.4.1; `dbt build` → `PASS=273 WARN=1 ERROR=0 SKIP=0 NO-OP=2` from a
+full parse; `lumo.duckdb` 58 MB; result export and `crosscheck_pandas.py` → 24 of 24. The only
+noise is a harmless `RequestsDependencyWarning` from a transitive dependency of dbt.
+
+**Corrections made while writing `RESULTS.md`:**
+- Q3: the 1,540 vs 1,541 difference is not "one loan" but a net of 12 loans leaving January
+  (disbursed 2026-01-01 before 05:00 UTC = 31 December in Bogotá) and 11 joining it (2026-02-01
+  before 05:00 UTC = 31 January). Verified by query before publishing the sentence.
+- Q4: the "unpaid vs paid late" split in `q04_fpd30.sql` was computed from loan-level counts
+  (any installment paid) instead of the first installment; five loans with a partially paid
+  first installment were labelled "paid late". Rewritten against `fct_installment_status`
+  installment 1; RESULTS uses the corrected split.
+
 **Commit:** *(filled after commit)*

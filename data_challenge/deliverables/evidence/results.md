@@ -1,6 +1,6 @@
 # Business questions - official result queries
 
-Generated 2026-09-27 09:05 by `scripts/run_analyses.py` from the compiled SQL under `target/compiled/.../analyses/`. Warehouse: `lumo.duckdb` (read-only).
+Generated 2026-09-27 09:15 by `scripts/run_analyses.py` from the compiled SQL under `target/compiled/.../analyses/`. Warehouse: `lumo.duckdb` (read-only).
 
 ## q01_applications
 
@@ -36,7 +36,7 @@ Source: `analyses/results/q04_fpd30.sql` - 2 row(s)
 
 | scope          | fpd30_eligible_loans | fpd30_loans | fpd30_unpaid | fpd30_paid_late | fpd30_pct |
 |----------------|----------------------|-------------|--------------|-----------------|-----------|
-| global         | 24821                | 2204        | 542          | 1662            | 8.8796    |
+| global         | 24821                | 2204        | 547          | 1657            | 8.8796    |
 | cohort 2026-01 | 1540                 | 120         | 38           | 82              | 7.7922    |
 
 ## q05_par30
