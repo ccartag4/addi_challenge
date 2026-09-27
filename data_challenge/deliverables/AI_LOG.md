@@ -93,7 +93,26 @@
   fix for the process is to grep the log for `Deprecat` after every run, which is now part of
   the step checklist.
 
-### 3.6 *(to be completed)*
+### 3.6 Profiling that counted values but not NULLs
+
+- **What it produced:** the merchant profiling analysis (`dq_08`) summarised categories with a
+  `string_agg` of distinct values and counts. The seven categories added up to 846 rows, but
+  the extract has 862. Nobody, human or assistant, subtracted. The staging `accepted_values`
+  test then passed because that test ignores NULLs by design.
+- **How I caught it:** building `dim_merchant` with a `not_null` test on `category` failed
+  with 16 rows. A second symptom was already visible in `dq_11`: 162 second versions, 157
+  category changes and 0 "name-only" changes, which cannot all be true.
+- **What I did:** inspected the 16 rows (11 single-version merchants never categorised, 5
+  second versions whose first version had a category), added explicit NULL counts per column
+  to `dq_08`, and defined A17: carry forward when an earlier version exists, `UNKNOWN`
+  otherwise, with `category_source` and `category_imputation` columns so the fill is auditable.
+  Measured the impact first: 574 valid applications and 265 loans sit on those versions, so
+  dropping them was not an option.
+- **Lesson:** a profiling query must always report NULL counts per column; distinct-value
+  summaries and `accepted_values` tests both hide NULLs. Added as a standing item of the
+  per-extract checklist.
+
+### 3.7 *(to be completed)*
 
 ---
 

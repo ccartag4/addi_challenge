@@ -71,3 +71,67 @@ models:
           config:
             meta: {dq_dimension: integrity}
             severity: warn
+
+  - name: dim_merchant
+    description: >
+      Grain: one row per merchant version (merchant_id x valid_from). SCD type 2 built from the
+      append-only history (F15): valid_to is the day before the next version starts and NULL
+      for the current version; valid_to_effective replaces NULL with 9999-12-31 for range
+      joins; is_current flags the latest version. Historical reports must join on the event
+      date (A14) to get the category in effect at the time.
+    columns:
+      - name: merchant_sk
+        description: Surrogate key of the version (hash of merchant_id, valid_from).
+        data_tests:
+          - unique: {config: {meta: {dq_dimension: uniqueness}}}
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+      - name: merchant_id
+        data_tests:
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+      - name: valid_from
+        data_tests:
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+      - name: valid_to
+        description: NULL for the current version.
+      - name: is_current
+        data_tests:
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+      - name: category
+        description: >
+          Category in effect for the version. Source gaps (F17) are filled per A17: carried
+          forward from the merchant's earlier version, or UNKNOWN when none exists. See
+          category_source / category_imputation for the raw value and the rule applied.
+        data_tests:
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+          - accepted_values:
+              arguments: {values: ['HOME', 'HEALTH', 'FASHION', 'ELECTRONICS', 'MOTORCYCLES', 'EDUCATION', 'TRAVEL', 'UNKNOWN']}
+              config: {meta: {dq_dimension: validity}}
+      - name: category_source
+        description: Category exactly as delivered; NULL on the 16 gap rows (F17).
+      - name: category_imputation
+        description: NULL when category_source was present; otherwise the rule that filled it.
+        data_tests:
+          - accepted_values:
+              arguments: {values: ['CARRIED_FORWARD', 'UNKNOWN']}
+              config: {meta: {dq_dimension: validity}}
+      - name: country
+        data_tests:
+          - accepted_values:
+              arguments: {values: ['CO', 'BR']}
+              config: {meta: {dq_dimension: validity}}
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments: {combination_of_columns: [merchant_id, valid_from]}
+          config: {meta: {dq_dimension: uniqueness}}
+      # A17: imputation is recorded whenever the source category was missing, and only then
+      - dbt_utils.expression_is_true:
+          arguments: {expression: "(category_source is null) = (category_imputation is not null)"}
+          config: {meta: {dq_dimension: consistency}}
+      # a version never ends before it starts
+      - dbt_utils.expression_is_true:
+          arguments: {expression: "valid_to is null or valid_to >= valid_from"}
+          config: {meta: {dq_dimension: validity}}
+      # the current version is the last one
+      - dbt_utils.expression_is_true:
+          arguments: {expression: "is_current = (version_number = n_versions)"}
+          config: {meta: {dq_dimension: consistency}}

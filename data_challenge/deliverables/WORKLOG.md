@@ -517,4 +517,59 @@ passes with 0 rows.
 
 **DMBOK dimension:** timeliness (A2, F6), validity (A3), integrity (A4, singular test).
 
+**Commit:** `82b6e34` feat(silver): resolve application CDC into fct_application with
+business-rule tests
+
+---
+
+## Step 10 — dim_merchant (SCD type 2)  (2026-09-27)
+
+**Goal:** turn the append-only merchant history into a slowly changing dimension with
+`valid_from`, `valid_to`, `is_current`, safe for point-in-time joins (A14).
+
+**Files:** `models/silver/core/dim_merchant.sql`, `core.yml` (dim_merchant block), singular
+tests `assert_dim_merchant_one_current_version`, `assert_dim_merchant_no_overlapping_versions`,
+`assert_every_application_matches_one_merchant_version`,
+`analyses/profiling/dq_11_scd2_merchant.sql`, `dq_08` extended with NULL counts.
+
+**Command(s):**
+```powershell
+dbt build --select "path:models/silver" "path:tests"
+dbt compile --select dq_08_merchants dq_11_scd2_merchant
+python scripts/run_analyses.py --pattern "dq_08*" --out evidence/merchant_profiling.md --title "Merchant history profiling (with NULL counts)"
+python scripts/run_analyses.py --pattern "dq_11*" --out evidence/scd2_merchant.md --title "SCD2 merchant dimension — verification"
+```
+
+**Incident:** the first build failed on `not_null_dim_merchant_category` with 16 rows. The
+profiling analysis had summarised categories by distinct value (7 categories summing to 846 of
+862 rows) and staging's `accepted_values` ignores NULLs, so the gap surfaced only at the
+dimension. Logged as AI error 3.6 and finding F17; `dq_08` now reports NULLs per column.
+
+**Result (validated from a clean `target` in a scratch copy, then reproduced here):**
+
+| Measure | Value |
+|---|---|
+| Version rows / merchants / current rows | 862 / 700 / 700 |
+| Merchants with 2 versions | 162 = 157 category changes + 5 name-only changes |
+| Versions with missing category (F17) | 16: 5 carried forward, 11 UNKNOWN (A17) |
+| Valid applications matched to exactly one version | 59,059 of 59,059 |
+| Applications whose as-of category differs from the current one | 4,822 (8.16 %) |
+| Merchant 1607 (largest by GMV) | one version, EDUCATION, BR |
+
+85 tests: 84 pass, 1 warn (the known A4 residue). The three singular tests pass with 0 rows.
+
+**Key decisions:**
+- `valid_to` is NULL for the current version (dbt snapshot convention) and
+  `valid_to_effective = 9999-12-31` exists for `BETWEEN` joins, so callers never write
+  `coalesce` themselves.
+- The point-in-time rule is not optional: 8.16 % of valid applications would be reported under
+  the wrong category if the current one were used. That figure is the answer to "why SCD2?".
+- Category gaps are filled transparently (A17): `category_source` keeps the raw value,
+  `category_imputation` names the rule, and a consistency test ties the two together.
+- `merchant_name_current` gives one display name per merchant for rankings (names only vary by
+  casing, F15).
+
+**DMBOK dimension:** consistency (SCD2 integrity tests), completeness (F17), integrity
+(point-in-time coverage test).
+
 **Commit:** *(filled after commit)*

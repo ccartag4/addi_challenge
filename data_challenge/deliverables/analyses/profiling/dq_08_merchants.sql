@@ -30,6 +30,13 @@ select * from (values
     (11, 'valid_from min .. max',                                  (select min(valid_from) || ' .. ' || max(valid_from) from m)),
     (12, 'merchants in CDC missing from history',                  (select count(*) from cdc_merchants k where not exists (select 1 from m where m.merchant_id = k.merchant_id))::varchar),
     (13, 'merchants in loans missing from history',                (select count(*) from loan_merchants k where not exists (select 1 from m where m.merchant_id = k.merchant_id))::varchar),
-    (14, 'merchants in history never used by any application',     (select count(*) from per_merchant p where not exists (select 1 from cdc_merchants k where k.merchant_id = p.merchant_id))::varchar)
+    (14, 'merchants in history never used by any application',     (select count(*) from per_merchant p where not exists (select 1 from cdc_merchants k where k.merchant_id = p.merchant_id))::varchar),
+    -- null counts per column: added after the not_null test on dim_merchant.category failed
+    -- (the first version of this analysis only counted distinct values, which hides NULLs)
+    (15, 'rows with null merchant_name',                           (select count(*) - count(merchant_name) from m)::varchar),
+    (16, 'rows with null category',                                (select count(*) - count(category) from m)::varchar),
+    (17, 'rows with null country',                                 (select count(*) - count(country) from m)::varchar),
+    (18, 'null-category rows that are a merchant''s only version', (select count(*) from m x where category is null and not exists (select 1 from m y where y.merchant_id = x.merchant_id and y.valid_from <> x.valid_from))::varchar),
+    (19, 'null-category rows with an earlier categorised version', (select count(*) from m x where category is null and exists (select 1 from m y where y.merchant_id = x.merchant_id and y.valid_from < x.valid_from and y.category is not null))::varchar)
 ) t(seq, metric, value)
 order by seq
