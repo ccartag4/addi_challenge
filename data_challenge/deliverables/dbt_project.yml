@@ -1,0 +1,54 @@
+name: lumo_lending
+version: "1.0.0"
+config-version: 2
+
+# Must match the top-level key in profiles.yml
+profile: lumo_lending
+
+model-paths: ["models"]
+macro-paths: ["macros"]
+test-paths: ["tests"]
+analysis-paths: ["analyses"]
+seed-paths: ["seeds"]
+snapshot-paths: ["snapshots"]
+
+clean-targets: ["target", "dbt_packages", "logs"]
+
+vars:
+  # Folder holding the raw CSV extracts, relative to this project
+  raw_data_path: "../data"
+  # Cut-off date for the delinquency snapshot, FPD30 and PAR30 (README 4.1 / 4.2)
+  snapshot_date: "2026-06-30"
+  # First day payments come from core_v2 instead of legacy_v1 (data dictionary)
+  cutover_date: "2025-07-01"
+  # Time zone where operations close; every business date derives from it
+  business_tz: "America/Bogota"
+
+models:
+  lumo_lending:
+    bronze:
+      +schema: bronze
+      +materialized: view
+      +docs:
+        node_color: "#CD7F32"
+    silver:
+      +schema: silver
+      staging:
+        +materialized: view
+      intermediate:
+        +materialized: table
+      core:
+        +materialized: table
+      +docs:
+        node_color: "#A8A9AD"
+    gold:
+      +schema: gold
+      +materialized: table
+      +docs:
+        node_color: "#D4AF37"
+
+data_tests:
+  lumo_lending:
+    # Store failing rows so every failed test can be inspected with SQL
+    +store_failures: true
+    +schema: dq_audit

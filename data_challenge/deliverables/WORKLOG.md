@@ -99,4 +99,45 @@ as it happens.
 **Files:** `WORKLOG.md`, `AI_LOG.md`, `ASSUMPTIONS.md`. `IMPLEMENTATION_PLAN.md` updated for the
 `venv` / Python 3.13 decision.
 
+**Commit:** `2cb78e0` docs(data): add worklog, AI log and assumptions skeletons
+
+---
+
+## Step 03 — Python environment with dbt  (2026-09-27)
+
+**Goal:** isolated environment inside `deliverables/` with pinned versions, so a reviewer
+installs exactly the same stack.
+
+**Command(s):**
+```powershell
+cd data_challenge\deliverables
+py -3.13 -m venv .venv
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+pip install dbt-duckdb pandas
+pip freeze | Out-File -Encoding ascii requirements.txt
+dbt --version
+```
+
+**Result:**
+
+| Package | Version |
+|---|---|
+| Python | 3.13.13 |
+| dbt-core | 1.12.5 |
+| dbt-duckdb | 1.11.0 |
+| duckdb | 1.5.5 |
+| pandas | 3.0.6 |
+
+62 packages pinned in `requirements.txt`. `.venv/` confirmed ignored by git
+(`git check-ignore`).
+
+**Finding / decision:** `requirements.txt` written with `Out-File -Encoding ascii` because
+PowerShell 5.1's `>` operator writes UTF-16, which is unreliable for `pip install -r`. The full
+freeze is committed, not just top-level packages, so transitive dependencies are reproducible
+too.
+
+**DMBOK dimension:** n/a (environment).
+
 **Commit:** *(filled after commit)*

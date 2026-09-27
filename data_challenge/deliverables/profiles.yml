@@ -1,0 +1,10 @@
+# Connection profile. dbt looks for profiles.yml in the current working directory
+# before ~/.dbt, so running dbt from deliverables/ needs no extra configuration.
+lumo_lending:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      # Single-file local warehouse, created on first run. Ignored by git.
+      path: lumo.duckdb
+      threads: 4

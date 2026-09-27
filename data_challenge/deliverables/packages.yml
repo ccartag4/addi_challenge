@@ -1,0 +1,5 @@
+packages:
+  # Generic tests beyond dbt's built-ins: unique_combination_of_columns, expression_is_true,
+  # accepted_range, and helpers such as date_spine.
+  - package: dbt-labs/dbt_utils
+    version: [">=1.3.0", "<2.0.0"]
