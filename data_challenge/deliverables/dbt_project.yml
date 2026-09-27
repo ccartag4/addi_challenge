@@ -14,6 +14,10 @@ snapshot-paths: ["snapshots"]
 
 clean-targets: ["target", "dbt_packages", "logs"]
 
+flags:
+  # Customer data: do not send anonymous usage telemetry to dbt Labs
+  send_anonymous_usage_stats: false
+
 vars:
   # Folder holding the raw CSV extracts, relative to this project
   raw_data_path: "../data"

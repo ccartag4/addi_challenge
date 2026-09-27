@@ -36,7 +36,22 @@
   timestamps dropped to 0 in all four files and the "outside FX range" loans disappeared.
   The final solution uses a dedicated `parse_utc_ts` macro that handles the three formats.
 
-### 3.2 *(to be completed)*
+### 3.2 Incomplete `.gitignore`: dbt's `.user.yml` committed
+
+- **What it produced:** the `.gitignore` drafted by the AI covered `target/`, `dbt_packages/`,
+  `logs/` and `*.duckdb`, but not `.user.yml`. It also predicted the commit would contain seven
+  files, without checking what dbt writes on its first run.
+- **How I caught it:** the commit output listed `create mode … .user.yml`, a file nobody had
+  written. Inspecting it showed a single line, `id: <uuid>`: dbt's anonymous telemetry
+  identifier, specific to this machine.
+- **What I did:** added `.user.yml` to `.gitignore`, removed it from the index with
+  `git rm --cached`, and disabled telemetry in `dbt_project.yml`
+  (`flags: send_anonymous_usage_stats: false`), which is also the appropriate default when a
+  project handles customer data.
+- **Lesson:** verify tool side effects with `git status --short --ignored` before trusting a
+  predicted file list.
+
+### 3.3 *(to be completed)*
 
 ---
 

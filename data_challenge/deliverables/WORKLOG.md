@@ -140,4 +140,64 @@ too.
 
 **DMBOK dimension:** n/a (environment).
 
+**Commit:** `431860a` (together with step 04)
+
+---
+
+## Step 04 — dbt project configuration  (2026-09-27)
+
+**Goal:** project ready to connect to DuckDB, with the medallion layers declared and business
+parameters held as variables.
+
+**Files:** `dbt_project.yml`, `profiles.yml`, `packages.yml`, `package-lock.yml`,
+`macros/generate_schema_name.sql`.
+
+**Command(s):**
+```powershell
+dbt deps
+dbt debug
+git add . ; git commit -m "build(data): add dbt project config, duckdb profile and dbt_utils"
+git push
+```
+
+**Result:** `dbt_utils` installed; `dbt debug` → `All checks passed!`, connection OK;
+`lumo.duckdb` created and ignored by git.
+
+**Key decisions:**
+- Bronze and staging materialised as **views** (read and clean only, no data duplication);
+  intermediate, core and gold as **tables** (heavy logic such as FIFO, queried often).
+- Business parameters as `vars`: `raw_data_path`, `snapshot_date = 2026-06-30`,
+  `cutover_date = 2025-07-01`, `business_tz = America/Bogota`. No model hard-codes them.
+- `store_failures: true` into a `dq_audit` schema: every failed test leaves its offending rows
+  queryable, which backs the DMBOK findings with evidence.
+- `generate_schema_name` override so schemas are exactly `bronze`, `silver`, `gold`,
+  `dq_audit` instead of dbt's default `main_bronze`, etc.
+- `profiles.yml` lives in the project folder; dbt reads it from the working directory, so a
+  reviewer needs no local configuration.
+
+**Finding / decision:** the commit unexpectedly included `.user.yml`, dbt's anonymous telemetry
+id created on first run. Fixed in step 04b. Logged as AI error 3.2 in `AI_LOG.md`.
+
+**DMBOK dimension:** n/a (configuration).
+
+**Commit:** `431860a` build(data): add dbt project config, duckdb profile and dbt_utils
+
+---
+
+## Step 04b — Remove `.user.yml` and disable telemetry  (2026-09-27)
+
+**Goal:** keep machine-specific files out of the repository and stop sending usage telemetry.
+
+**Command(s):**
+```powershell
+git rm --cached data_challenge/deliverables/.user.yml
+git add .gitignore data_challenge/deliverables
+git commit -m "chore(data): ignore dbt .user.yml and disable anonymous telemetry"
+git push
+```
+
+**Result:** *(filled after commit)*
+
+**DMBOK dimension:** n/a (configuration / data handling).
+
 **Commit:** *(filled after commit)*
