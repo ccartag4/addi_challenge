@@ -80,7 +80,20 @@
   previous attempt. Same rule as for the FIFO and the FX fill later: re-run from scratch before
   trusting a green result.
 
-### 3.5 *(to be completed)*
+### 3.5 Second deprecated syntax: test arguments outside `arguments:`
+
+- **What it produced:** the 27 staging tests that take parameters (`accepted_values`,
+  `dbt_utils.accepted_range`, `expression_is_true`, `unique_combination_of_columns`) were
+  written with their parameters as top-level keys, the pre-1.10 form.
+- **How I caught it:** the first `dbt build` of the staging layer reported
+  `MissingArgumentsPropertyInGenericTestDeprecation: 27 occurrences`. Everything passed, so
+  without reading the warning summary the problem would have shipped.
+- **What I did:** moved every parameter under `arguments:` and re-ran until the deprecation
+  count was zero. Same root cause as 3.3 (assistant knowledge older than dbt 1.12.5); the
+  fix for the process is to grep the log for `Deprecat` after every run, which is now part of
+  the step checklist.
+
+### 3.6 *(to be completed)*
 
 ---
 

@@ -409,4 +409,53 @@ python scripts/run_analyses.py --pattern "dq_09*" --out evidence/timestamp_parsi
 
 **DMBOK dimension:** validity (parsing), accuracy (time zone).
 
+**Commit:** `c726edf` feat(macros): add utc timestamp parsing, business time and text helpers
+with parsing evidence
+
+---
+
+## Step 08 — Silver staging layer  (2026-09-27)
+
+**Goal:** seven typed, deduplicated staging views, one per extract, with the raw anomalies
+(F1–F3, F9, F10, F14, F15) resolved and business rules (A2–A9) deliberately *not* applied yet.
+
+**Files:** `models/silver/staging/stg_*.sql` (7), `models/silver/staging/staging.yml`,
+`placeholder_customer_id` var in `dbt_project.yml`, `normalize_key` macro tightened to
+alphanumerics only.
+
+**Command(s):**
+```powershell
+dbt build --select "path:models/silver/staging"     # run + 43 tests
+dbt parse --no-partial-parse                         # zero deprecation warnings expected
+```
+
+**Result (validated from a clean `target` in a scratch copy, then reproduced here):**
+
+| Model | Rows | vs bronze | Why |
+|---|---|---|---|
+| stg_applications_cdc | 121,087 | −7,110 | 4,984 exact duplicates + 2,126 same-event-two-formats (F2, F3) |
+| stg_loans | 28,075 | 0 | |
+| stg_installments | 130,297 | 0 | |
+| stg_payments | 110,136 | −2,203 | 1,537 exact duplicates + 666 format duplicates (F2, F3) |
+| stg_customers | 30,000 | 0 | |
+| stg_merchants_history | 862 | 0 | |
+| stg_fx_rates | 848 | 0 | |
+
+43 staging tests pass (uniqueness, completeness, validity, accuracy). Sanity checks:
+1,353 placeholder-customer rows flagged; 63 birth years and 2,363 incomes nulled (A16);
+10 city keys for 9 cities; 700 merchant name keys for 700 merchants.
+
+**Key decisions:**
+- Staging is where *typing* happens and nothing else: the placeholder customer is nulled and
+  flagged but the row stays; deleted events stay with `cdc_op = 'D'`; reversal rows stay with
+  `is_reversal = true`. Each business rule is then one explicit, testable step downstream.
+- `DISTINCT` is applied on the *typed* projection, which is what makes the two-formats
+  duplicates collapse: 2,126 CDC rows and 666 payments that a string-level dedup would keep.
+- `stg_payments.amount` is already in major units for both sources (A8) so no downstream model
+  ever sees `amount_raw` semantics.
+- New deprecation caught (`MissingArgumentsPropertyInGenericTestDeprecation`, 27 tests):
+  parameters moved under `arguments:`. Logged as AI error 3.5.
+
+**DMBOK dimension:** validity, uniqueness, completeness, accuracy.
+
 **Commit:** *(filled after commit)*

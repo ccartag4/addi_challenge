@@ -27,6 +27,8 @@ vars:
   cutover_date: "2025-07-01"
   # Time zone where operations close; every business date derives from it
   business_tz: "America/Bogota"
+  # customer_id used by the origination core as "unknown customer" (finding F4, assumption A4)
+  placeholder_customer_id: 999999999
 
 models:
   lumo_lending:

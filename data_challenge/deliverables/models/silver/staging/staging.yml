@@ -1,0 +1,215 @@
+version: 2
+
+# Staging contract. Every test carries config.meta.dq_dimension (DAMA-DMBOK).
+# Staging enforces typing and validity; business rules (A2–A9) are enforced downstream.
+# Test arguments live under `arguments:` (dbt >= 1.10 syntax).
+
+models:
+  - name: stg_applications_cdc
+    description: >
+      Grain: one CDC event, typed, exact duplicates removed. Placeholder customer ids are
+      nulled and flagged (A4); deleted events are kept and flagged via cdc_op (A3 applies
+      downstream). event_date is the Bogotá business date of the event (A6).
+    columns:
+      - name: application_id
+        data_tests:
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+      - name: event_at_utc
+        description: Parsed from three raw shapes (F1). NULL here means an unparsed shape.
+        data_tests:
+          - not_null: {config: {meta: {dq_dimension: validity}}}
+      - name: ingested_at_utc
+        data_tests:
+          - not_null: {config: {meta: {dq_dimension: validity}}}
+      - name: cdc_op
+        data_tests:
+          - accepted_values:
+              arguments: {values: ['I', 'U', 'D']}
+              config: {meta: {dq_dimension: validity}}
+      - name: status
+        data_tests:
+          - accepted_values:
+              arguments: {values: ['CREATED', 'APPROVED', 'REJECTED']}
+              config: {meta: {dq_dimension: validity}}
+      - name: currency
+        data_tests:
+          - accepted_values:
+              arguments: {values: ['COP', 'BRL']}
+              config: {meta: {dq_dimension: validity}}
+      - name: requested_amount
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments: {min_value: 0, inclusive: false}
+              config: {meta: {dq_dimension: validity}}
+    data_tests:
+      - dbt_utils.expression_is_true:
+          arguments: {expression: "status <> 'APPROVED' or approved_amount is not null"}
+          config: {meta: {dq_dimension: completeness}}
+      - dbt_utils.expression_is_true:
+          arguments: {expression: "approved_amount is null or approved_amount <= requested_amount"}
+          config: {meta: {dq_dimension: accuracy}}
+
+  - name: stg_loans
+    description: >
+      Grain: one loan as delivered, typed. disbursed_date / disbursed_month are Bogotá business
+      dates (A6). Loan validity (A5) is decided in the intermediate layer.
+    columns:
+      - name: loan_id
+        data_tests:
+          - unique: {config: {meta: {dq_dimension: uniqueness}}}
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+      - name: application_id
+        data_tests:
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+      - name: disbursed_at_utc
+        data_tests:
+          - not_null: {config: {meta: {dq_dimension: validity}}}
+      - name: principal
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments: {min_value: 0, inclusive: false}
+              config: {meta: {dq_dimension: validity}}
+      - name: term_months
+        data_tests:
+          - accepted_values:
+              arguments: {values: [3, 4, 6, 12], quote: false}
+              config: {meta: {dq_dimension: validity}}
+      - name: apr
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments: {min_value: 0, max_value: 1}
+              config: {meta: {dq_dimension: validity}}
+      - name: status
+        data_tests:
+          - accepted_values:
+              arguments: {values: ['DISBURSED']}
+              config: {meta: {dq_dimension: validity}}
+      - name: currency
+        data_tests:
+          - accepted_values:
+              arguments: {values: ['COP', 'BRL']}
+              config: {meta: {dq_dimension: validity}}
+
+  - name: stg_installments
+    description: "Grain: loan_id x installment_number, typed. due_date is a local business date as delivered."
+    columns:
+      - name: due_date
+        data_tests:
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+      - name: amount_due
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments: {min_value: 0, inclusive: false}
+              config: {meta: {dq_dimension: validity}}
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments: {combination_of_columns: [loan_id, installment_number]}
+          config: {meta: {dq_dimension: uniqueness}}
+
+  - name: stg_payments
+    description: >
+      Grain: one row per payment_id, SETTLED and REVERSED alike. amount is in major units for
+      both sources (A8); loan_id is normalized from either reference format (F10); rows that
+      differed only by timestamp format are collapsed (A10). Reversals are resolved downstream.
+    columns:
+      - name: payment_id
+        description: Uniqueness here proves the format-only duplicates (F3) collapsed.
+        data_tests:
+          - unique: {config: {meta: {dq_dimension: uniqueness}}}
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+      - name: loan_id
+        data_tests:
+          - not_null: {config: {meta: {dq_dimension: validity}}}
+      - name: paid_at_utc
+        data_tests:
+          - not_null: {config: {meta: {dq_dimension: validity}}}
+      - name: source_system
+        data_tests:
+          - accepted_values:
+              arguments: {values: ['legacy_v1', 'core_v2']}
+              config: {meta: {dq_dimension: validity}}
+      - name: status
+        data_tests:
+          - accepted_values:
+              arguments: {values: ['SETTLED', 'REVERSED']}
+              config: {meta: {dq_dimension: validity}}
+      - name: payment_method
+        data_tests:
+          - accepted_values:
+              arguments: {values: ['PSE', 'CARD', 'CASH', 'TRANSFER']}
+              config: {meta: {dq_dimension: validity}}
+    data_tests:
+      - dbt_utils.expression_is_true:
+          arguments: {expression: "(status = 'SETTLED' and amount > 0) or (status = 'REVERSED' and amount < 0)"}
+          config: {meta: {dq_dimension: accuracy}}
+      - dbt_utils.expression_is_true:
+          arguments: {expression: "status <> 'REVERSED' or reversed_payment_id is not null"}
+          config: {meta: {dq_dimension: completeness}}
+
+  - name: stg_customers
+    description: >
+      Grain: one row per customer_id (technical key). Person grain is built in dim_customer (A1).
+      Sentinels nulled per A16; created_date is the UTC calendar date per A15; city_key is an
+      alphanumeric matching key, city_raw the cleaned source spelling.
+    columns:
+      - name: customer_id
+        data_tests:
+          - unique: {config: {meta: {dq_dimension: uniqueness}}}
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+      - name: document_number
+        data_tests:
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+      - name: country
+        data_tests:
+          - accepted_values:
+              arguments: {values: ['CO', 'BR']}
+              config: {meta: {dq_dimension: validity}}
+      - name: birth_year
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments: {min_value: 1901, max_value: 2010}
+              config: {meta: {dq_dimension: validity}}
+      - name: monthly_income
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments: {min_value: 0}
+              config: {meta: {dq_dimension: validity}}
+
+  - name: stg_merchants_history
+    description: "Grain: merchant_id x valid_from, typed. merchant_name_key collapses casing variants (F15)."
+    columns:
+      - name: category
+        data_tests:
+          - accepted_values:
+              arguments: {values: ['HOME', 'HEALTH', 'FASHION', 'ELECTRONICS', 'MOTORCYCLES', 'EDUCATION', 'TRAVEL']}
+              config: {meta: {dq_dimension: validity}}
+      - name: country
+        data_tests:
+          - accepted_values:
+              arguments: {values: ['CO', 'BR']}
+              config: {meta: {dq_dimension: validity}}
+      - name: valid_from
+        data_tests:
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments: {combination_of_columns: [merchant_id, valid_from]}
+          config: {meta: {dq_dimension: uniqueness}}
+
+  - name: stg_fx_rates
+    description: "Grain: rate_date x currency as published (business days only, F12)."
+    columns:
+      - name: units_per_usd
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments: {min_value: 0, inclusive: false}
+              config: {meta: {dq_dimension: validity}}
+      - name: currency
+        data_tests:
+          - accepted_values:
+              arguments: {values: ['COP', 'BRL']}
+              config: {meta: {dq_dimension: validity}}
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments: {combination_of_columns: [rate_date, currency]}
+          config: {meta: {dq_dimension: uniqueness}}
