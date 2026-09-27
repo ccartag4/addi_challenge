@@ -32,4 +32,50 @@ requested from Addi will replace it in the same file when it arrives.
 **Environment:** Python 3.13 venv in `deliverables/.venv`; `anthropic 1.8.0`, `pydantic 2.13.5`,
 `python-dotenv 1.2.3` installed during the check; the rest of the dependencies in step 0.
 
+**Commit:** `70d6e9e` docs(ai): add implementation plan, decision log, worklog and HOW_I_WORKED
+skeleton
+
+---
+
+## Step 01 — Profiling evidence, taxonomy v2, routing policy, output schema  (2026-09-27)
+
+**Goal:** turn the analysis into data the pipeline consumes: the taxonomy as YAML (with KB
+section ids), the routing policy as YAML, the output contract as pydantic models, and a test
+suite that keeps the four consistent. Plus the profiling as committed evidence.
+
+**Files:** `scripts/profile_messages.py` → `evidence/message_profiling.md`;
+`lumo_triage/policy/taxonomy.yaml`, `lumo_triage/policy/routing.yaml`, `lumo_triage/schema.py`,
+`TAXONOMY.md`, `tests/test_policy_consistency.py`; `requirements.txt` (top-level pins) and
+`requirements-lock-py313.txt`.
+
+**Command(s):**
+```powershell
+python scripts/profile_messages.py
+python -m pytest tests/test_policy_consistency.py -q
+```
+
+**Result (validated in the working copy, then reproduced by the author):**
+
+| Artefact | Content |
+|---|---|
+| `evidence/message_profiling.md` | 340 messages: channels 119/115/106, two timestamp shapes, 3 exact and 55 near-duplicate messages, 23 regex signals with counts, rough bucketing over 20 buckets with 28 unmatched |
+| `taxonomy.yaml` | 25 reasons (17 original + 8 added), 17 KB section ids bound to the exact markdown headings, 9 flags, 5 priorities with SLAs, example message ids per reason |
+| `routing.yaml` | 4 actions, 10 queues, 7 ordered overrides, 3 priority bumps, verifier rules, 4 Spanish templates |
+| `schema.py` | `Classification` (what the model returns) and `TriageRecord` / `BatchSummary` (what the pipeline writes); reason enum generated from the YAML |
+| `tests/test_policy_consistency.py` | 9 tests: unique ids, enum = YAML, valid defaults, no model drafts without policy, KB headings exist, cited sections exist, overrides reference known values, example ids exist and are not reused, templates are Spanish and short |
+
+**Incident:** the first test run failed at YAML parse time: three plain scalars in
+`taxonomy.yaml` were ambiguous (a `: ` inside a note, a value starting with a double quote,
+and comma-separated descriptions inside flow mappings, which YAML splits into extra keys).
+The same class of error as the data challenge's `gold.yml`; the consistency tests now load
+both files, so it cannot reach the pipeline unnoticed. Logged in `HOW_I_WORKED.md` §3.2.
+
+**Key decisions:**
+- The taxonomy is data, not prose: the prompt, the routing and the tests read the same YAML,
+  so a reason cannot exist in one place and not the others.
+- `policy_coverage` is a property of the reason, and reasons with `none` can never receive a
+  model-written draft (enforced by a test). "The policy doesn't cover it" becomes a routing
+  outcome with the gap named.
+- Priority is computed by code from reason and flags; the model never sets it.
+
 **Commit:** *(filled after commit)*

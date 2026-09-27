@@ -1,0 +1,130 @@
+# Routing policy — turns (reason, flags, confidence, policy coverage) into (action, queue,
+# priority). Deterministic and editable by the CX team without touching prompts.
+# Evaluation order: overrides first (first match wins), then the reason defaults from
+# taxonomy.yaml, then priority bumps. Every decision records the reason codes that fired.
+
+version: 2
+
+confidence_threshold: 0.60      # below this, the classification is not trusted: a person decides
+
+actions:
+  auto_reply:            Send the draft; no human involved.
+  auto_reply_and_route:  Send the draft as an acknowledgement and open a case in the queue.
+  route_to_human:        No draft; a person answers from the queue.
+  close_no_reply:        Close the ticket; nothing to answer.
+
+queues:
+  fraude:              Fraud and security team; blocks access and investigates.
+  cartera:             Collections; payment agreements, refinancing, bureau-report claims.
+  pagos_conciliacion:  Payments; unapplied payments, double charges, fee disputes.
+  soporte_tecnico:     App and access issues that the standard steps do not fix.
+  pqr_legal:           Formal complaints, legal threats, harassment complaints.
+  datos_privacidad:    Habeas data and personal-data requests (legal owner).
+  onboarding:          Credit application status.
+  comercial:           Sales inquiries about products.
+  cx_general:          General queue for anything else a person must handle.
+  none:                No queue.
+
+# Overrides, evaluated in this order; the first whose condition holds decides action/queue and
+# sets a minimum priority. `no_draft: true` suppresses any LLM draft; `template` names a fixed
+# Spanish reply from templates below.
+overrides:
+  - code: OVR_INJECTION
+    when: {flag: prompt_injection_suspected}
+    action: route_to_human
+    queue: cx_general
+    min_priority: P2
+    no_draft: true
+    why: A message that tries to instruct the assistant is never auto-answered.
+
+  - code: OVR_FRAUD
+    when: {flag: fraud_or_security}
+    action: auto_reply_and_route
+    queue: fraude
+    min_priority: P0
+    template: security_ack
+    why: Security cases get an immediate fixed acknowledgement and the fraud team, whatever the reason label says.
+
+  - code: OVR_HUMAN
+    when: {flag: requests_human}
+    action: route_to_human
+    queue: reason_default_or_cx_general
+    min_priority: P2
+    no_draft: true
+    why: An explicit request for a person is honoured; the reason still picks the queue.
+
+  - code: OVR_LEGAL
+    when: {any_flag: [legal_threat, collections_harassment]}
+    action: auto_reply_and_route
+    queue: pqr_legal
+    min_priority: P1
+    why: Legal exposure is handled by PQR/Legal; the PQR acknowledgement can still be sent.
+
+  - code: OVR_LOW_CONFIDENCE
+    when: {confidence_below_threshold: true}
+    action: route_to_human
+    queue: reason_default_or_cx_general
+    min_priority: P3
+    no_draft: true
+    why: The classifier is not sure; a person decides.
+
+  - code: OVR_NO_POLICY
+    when: {policy_coverage: none}
+    action: route_to_human
+    queue: reason_default_or_cx_general
+    min_priority: P3
+    no_draft: true
+    why: No policy means no grounded draft is possible; the gap itself is reported.
+
+  - code: OVR_OOS_SALES
+    when: {reason: fuera_de_alcance, out_of_scope_kind: other_business_inquiry}
+    action: route_to_human
+    queue: comercial
+    min_priority: P3
+    no_draft: true
+    why: Product questions are for sales, not for a courtesy template.
+
+# Priority bumps applied after the base/min priority (one level each, never past P0).
+priority_bumps:
+  vulnerable_customer: {levels: 1, floor: P1}
+  imminent_deadline:   {levels: 1}
+  repeat_contact:      {levels: 1}
+  secondary_reason_higher: {levels: 0, note: "the highest base priority among primary and secondary reasons is used"}
+
+# Verifier rules for LLM drafts (code, not prompt). A failed check downgrades the action to
+# route_to_human with reason code VERIFIER_<check>.
+verifier:
+  require_citations: true
+  numbers_must_appear_in_cited_sections: true
+  forbidden_phrases:
+    - condonaci
+    - "te devolvemos"
+    - "le devolvemos"
+    - "reembolso confirmado"
+    - "borramos el historial"
+    - "eliminamos el reporte"
+    - "quitamos el reporte"
+    - "no te reportaremos"
+    - "no lo reportaremos"
+  never_echo_entities: [document_number]
+  max_words: 160
+  language: es
+
+# Fixed Spanish replies for tier-0 cases (no model call, so nothing to verify).
+templates:
+  security_ack: >
+    Gracias por avisarnos. Por seguridad, no compartas tu clave, tu código de verificación ni
+    datos de tarjeta con nadie; Lumo nunca los pide por SMS, correo o enlaces. Estamos escalando
+    tu caso de inmediato al equipo de seguridad para bloquear el acceso a tu cuenta y revisar lo
+    ocurrido. Un asesor se comunicará contigo por este mismo canal.
+  greeting_prompt: >
+    ¡Hola! Gracias por escribir a Lumo. Cuéntanos en qué podemos ayudarte: por ejemplo, tu fecha
+    de pago, un pago que no se refleja, acceso a la app, certificados o cualquier otra consulta
+    sobre tu crédito.
+  unrelated: >
+    Hola, gracias por escribir. Este es el canal de atención de Lumo para consultas sobre tu
+    crédito, pagos y la app. Si necesitas ayuda con alguno de esos temas, cuéntanos y con gusto
+    te apoyamos.
+  feedback_thanks: >
+    ¡Muchas gracias por tus palabras! Compartiremos tu mensaje con el equipo. Si en algún momento
+    necesitas ayuda con tu crédito, escríbenos por este canal.

@@ -1,0 +1,381 @@
+# Taxonomy v2 — contact reasons, knowledge-base coverage and defaults.
+# Human-readable rationale for every change: TAXONOMY.md. Consumed by the classifier prompt,
+# the routing policy and the tests. The 17 original reasons are kept; 8 are added; 4 signals
+# that used to be implicit become cross-cutting flags.
+
+version: 2
+
+# Stable ids for knowledge-base sections. `heading` must match the markdown "## " heading of
+# the file (tests check it), so the loader can cite exactly what the policy says.
+kb_sections:
+  pagos_y_cuotas.saldo_y_cuotas:            {file: pagos_y_cuotas.md, heading: "Saldo y cuotas"}
+  pagos_y_cuotas.fechas_de_pago:            {file: pagos_y_cuotas.md, heading: "Fechas de pago"}
+  pagos_y_cuotas.metodos_de_pago:           {file: pagos_y_cuotas.md, heading: "Métodos de pago"}
+  pagos_y_cuotas.pago_anticipado:           {file: pagos_y_cuotas.md, heading: "Pago anticipado"}
+  pagos_y_cuotas.pagos_no_aplicados:        {file: pagos_y_cuotas.md, heading: "Pagos no aplicados / dobles"}
+  mora_y_centrales.mora_e_intereses:        {file: mora_y_centrales.md, heading: "Mora e intereses"}
+  mora_y_centrales.no_puede_pagar:          {file: mora_y_centrales.md, heading: "No puede pagar / acuerdos"}
+  mora_y_centrales.reporte_centrales:       {file: mora_y_centrales.md, heading: "Reporte a centrales de riesgo"}
+  mora_y_centrales.paz_y_salvo:             {file: mora_y_centrales.md, heading: "Paz y salvo"}
+  cuenta_app_seguridad.acceso_otp:          {file: cuenta_app_seguridad.md, heading: "Acceso y código de verificación"}
+  cuenta_app_seguridad.cuenta_bloqueada:    {file: cuenta_app_seguridad.md, heading: "Cuenta bloqueada"}
+  cuenta_app_seguridad.app_no_funciona:     {file: cuenta_app_seguridad.md, heading: "App no funciona"}
+  cuenta_app_seguridad.fraude_seguridad:    {file: cuenta_app_seguridad.md, heading: "Fraude y seguridad — prioridad alta"}
+  datos_certificados_pqr.actualizacion_datos: {file: datos_certificados_pqr.md, heading: "Actualización de datos personales"}
+  datos_certificados_pqr.certificados_extractos: {file: datos_certificados_pqr.md, heading: "Certificados y extractos"}
+  datos_certificados_pqr.pqr:               {file: datos_certificados_pqr.md, heading: "Quejas y reclamos (PQR)"}
+  datos_certificados_pqr.cancelacion:       {file: datos_certificados_pqr.md, heading: "Cancelación"}
+
+# policy_coverage: full    = the KB answers the typical question; a grounded draft is possible
+#                  partial = the KB covers the process but not the customer's specific data or case
+#                  none    = the KB says nothing; never draft, route to a person
+# default_action: auto_reply | auto_reply_and_route | route_to_human | close_no_reply
+# reply_source:   llm (grounded draft) | template (fixed Spanish text, no model) | none
+reasons:
+  - id: consulta_saldo_cuotas
+    origin: original
+    name_es: Consulta de saldo y cuotas
+    description: Cuánto debo, cuántas cuotas faltan, valor de la próxima cuota, cuánto llevo pagado.
+    kb_sections: [pagos_y_cuotas.saldo_y_cuotas]
+    policy_coverage: partial
+    default_action: auto_reply
+    default_queue: none
+    base_priority: P3
+    reply_source: llm
+    examples: [MSG-002, MSG-027, MSG-101, MSG-152, MSG-201, MSG-335, MSG-400]
+    notes: The system has no account access; the draft points to "Mi crédito" in the app and offers an agent after identity validation. Never states figures.
+
+  - id: fecha_de_pago
+    origin: original
+    name_es: Fecha de pago
+    description: Cuándo vence la cuota, cambiar la fecha de pago, confusión entre fechas.
+    kb_sections: [pagos_y_cuotas.fechas_de_pago]
+    policy_coverage: partial
+    default_action: auto_reply
+    default_queue: none
+    base_priority: P3
+    reply_source: llm
+    examples: [MSG-013, MSG-102, MSG-124, MSG-141, MSG-153, MSG-271, MSG-384]
+    notes: Date changes are fully covered (once a year, if current). The customer's own due date is not knowable here; the draft points to the app and an agent.
+
+  - id: no_puede_pagar
+    origin: original
+    name_es: No puede pagar
+    description: No puedo pagar este mes, pago parcial, prórroga, dificultad económica, enfermedad, desempleo.
+    kb_sections: [mora_y_centrales.no_puede_pagar, mora_y_centrales.mora_e_intereses]
+    policy_coverage: full
+    default_action: auto_reply_and_route
+    default_queue: cartera
+    base_priority: P2
+    reply_source: llm
+    examples: [MSG-001, MSG-103, MSG-122, MSG-155, MSG-286, MSG-293, MSG-337, MSG-390]
+    notes: The draft offers the agreement path and never promises amounts or forgiveness; Cartera owns the case.
+
+  - id: refinanciacion_acuerdo
+    origin: original
+    name_es: Refinanciación o acuerdo de pago
+    description: Restructurar la deuda, acuerdo de pago, plan de pagos, renegociar un acuerdo existente.
+    kb_sections: [mora_y_centrales.no_puede_pagar]
+    policy_coverage: full
+    default_action: auto_reply_and_route
+    default_queue: cartera
+    base_priority: P2
+    reply_source: llm
+    examples: [MSG-020, MSG-104, MSG-157, MSG-210, MSG-212, MSG-321, MSG-338, MSG-366]
+
+  - id: pago_no_aplicado
+    origin: original
+    name_es: Pago no aplicado o doble
+    description: Pagué y sigue pendiente, me cobraron dos veces, monto errado, pago que no se refleja.
+    kb_sections: [pagos_y_cuotas.pagos_no_aplicados]
+    policy_coverage: full
+    default_action: auto_reply_and_route
+    default_queue: pagos_conciliacion
+    base_priority: P2
+    reply_source: llm
+    examples: [MSG-003, MSG-012, MSG-030, MSG-105, MSG-159, MSG-214, MSG-273, MSG-291]
+    notes: Double charges escalate to Payments (up to 5 business days); no refund is confirmed by this channel.
+
+  - id: metodos_de_pago
+    origin: original
+    name_es: Métodos de pago
+    description: Cómo y dónde pagar, medios aceptados, comprobantes, PSE, Efecty, Nequi, transferencias.
+    kb_sections: [pagos_y_cuotas.metodos_de_pago]
+    policy_coverage: full
+    default_action: auto_reply
+    default_queue: none
+    base_priority: P3
+    reply_source: llm
+    examples: [MSG-023, MSG-035, MSG-106, MSG-161, MSG-216, MSG-323, MSG-340, MSG-376]
+    notes: Nequi, Daviplata and Baloto are not in the policy; the draft lists only the accepted methods and does not confirm others.
+
+  - id: mora_intereses
+    origin: original
+    name_es: Mora e intereses de mora
+    description: Qué pasa si me atraso, interés de mora, días de gracia, cuánto pago de más por el retraso.
+    kb_sections: [mora_y_centrales.mora_e_intereses, mora_y_centrales.reporte_centrales]
+    policy_coverage: full
+    default_action: auto_reply
+    default_queue: none
+    base_priority: P3
+    reply_source: llm
+    examples: [MSG-019, MSG-036, MSG-163, MSG-219, MSG-272, MSG-324, MSG-355, MSG-386]
+    notes: Disputes of charged late interest after a payment belong to pago_no_aplicado.
+
+  - id: reporte_centrales
+    origin: original
+    name_es: Reporte a centrales de riesgo
+    description: Cuándo se actualiza el reporte, me reportaron por error, quiten el reporte negativo, paz y salvo tras pagar.
+    kb_sections: [mora_y_centrales.reporte_centrales, mora_y_centrales.paz_y_salvo]
+    policy_coverage: full
+    default_action: auto_reply_and_route
+    default_queue: cartera
+    base_priority: P2
+    reply_source: llm
+    examples: [MSG-005, MSG-015, MSG-032, MSG-108, MSG-127, MSG-165, MSG-222, MSG-283, MSG-342, MSG-373]
+    notes: Update timing is answerable (next cycle, up to 30 days; history is not erased). Claims of a wrong report go to Cartera/Legal and are never confirmed by this channel.
+
+  - id: cuenta_y_app
+    origin: original
+    name_es: Cuenta y app
+    description: No llega el código OTP, cuenta bloqueada, la app falla, no puedo iniciar sesión, olvidé la clave.
+    kb_sections: [cuenta_app_seguridad.acceso_otp, cuenta_app_seguridad.cuenta_bloqueada, cuenta_app_seguridad.app_no_funciona]
+    policy_coverage: partial
+    default_action: auto_reply
+    default_queue: soporte_tecnico
+    base_priority: P2
+    reply_source: llm
+    examples: [MSG-004, MSG-024, MSG-109, MSG-129, MSG-146, MSG-167, MSG-225, MSG-343]
+    notes: OTP, blocked account and app failures are covered. "Contraseña" is not a concept in the policy (login is document + OTP); password questions get policy_gap and go to support.
+
+  - id: datos_personales
+    origin: original
+    name_es: Datos personales
+    description: Actualizar celular, correo u otros datos; notificaciones que siguen llegando al correo viejo.
+    kb_sections: [datos_certificados_pqr.actualizacion_datos]
+    policy_coverage: partial
+    default_action: auto_reply
+    default_queue: none
+    base_priority: P3
+    reply_source: llm
+    examples: [MSG-008, MSG-038, MSG-110, MSG-126, MSG-168, MSG-227, MSG-310, MSG-357]
+    notes: 'Phone and email are covered (app, "Mi perfil"). Address or other fields are not covered: policy_gap, route to cx_general.'
+
+  - id: certificados_extractos
+    origin: original
+    name_es: Certificados y extractos
+    description: Paz y salvo, certificado de estar al día, extracto de pagos, certificado de intereses para declaración de renta.
+    kb_sections: [datos_certificados_pqr.certificados_extractos, mora_y_centrales.paz_y_salvo]
+    policy_coverage: full
+    default_action: auto_reply
+    default_queue: none
+    base_priority: P3
+    reply_source: llm
+    examples: [MSG-009, MSG-022, MSG-039, MSG-111, MSG-121, MSG-171, MSG-232, MSG-262, MSG-345]
+    notes: Only the three documents in the policy are offered; "certificado de deuda" or "retención en la fuente" are partial and get an agent.
+
+  - id: fraude_seguridad
+    origin: original
+    name_es: Fraude y seguridad
+    description: Phishing, cobros o compras no reconocidas, celular perdido o robado, suplantación, cuenta hackeada.
+    kb_sections: [cuenta_app_seguridad.fraude_seguridad]
+    policy_coverage: full
+    default_action: auto_reply_and_route
+    default_queue: fraude
+    base_priority: P0
+    reply_source: llm
+    examples: [MSG-016, MSG-017, MSG-028, MSG-112, MSG-113, MSG-125, MSG-139, MSG-172, MSG-200, MSG-235]
+    notes: Phishing questions are fully answerable. Unrecognised charges and lost phones get an immediate safety acknowledgement and go to the fraud team as the top priority.
+
+  - id: queja_reclamo
+    origin: original
+    name_es: Queja o reclamo (PQR)
+    description: Queja formal, mal servicio, escalamiento, reclamo por cobro, seguimiento a una PQR.
+    kb_sections: [datos_certificados_pqr.pqr]
+    policy_coverage: full
+    default_action: auto_reply_and_route
+    default_queue: pqr_legal
+    base_priority: P2
+    reply_source: llm
+    examples: [MSG-018, MSG-114, MSG-130, MSG-134, MSG-175, MSG-199, MSG-264, MSG-347, MSG-389]
+    notes: The draft confirms the PQR will be filed with a radicado and the 15-business-day term; it never resolves the underlying dispute.
+
+  - id: felicitacion_feedback
+    origin: original
+    name_es: Felicitación o feedback positivo
+    description: Agradecimientos a un asesor, elogios a la app o al servicio.
+    kb_sections: []
+    policy_coverage: full
+    default_action: auto_reply
+    default_queue: none
+    base_priority: P4
+    reply_source: template
+    examples: [MSG-033, MSG-115, MSG-178, MSG-238, MSG-279, MSG-300, MSG-314, MSG-364]
+    notes: No policy needed; a fixed thank-you reply. Named agents are kept for the feedback report.
+
+  - id: cancelacion
+    origin: original
+    name_es: Cancelación
+    description: Cancelar el crédito o la cuenta, cerrar el producto, no renovar.
+    kb_sections: [datos_certificados_pqr.cancelacion, pagos_y_cuotas.pago_anticipado]
+    policy_coverage: full
+    default_action: auto_reply_and_route
+    default_queue: cx_general
+    base_priority: P3
+    reply_source: llm
+    examples: [MSG-034, MSG-116, MSG-136, MSG-181, MSG-241, MSG-266, MSG-315, MSG-332, MSG-382]
+    notes: Requires paz y salvo and an agent; not automatic. Requests to delete data are privacidad_habeas_data.
+
+  - id: hablar_con_humano
+    origin: original
+    name_es: Hablar con un humano
+    description: Pide explícitamente un asesor o una persona; rechaza al bot.
+    kb_sections: []
+    policy_coverage: none
+    default_action: route_to_human
+    default_queue: cx_general
+    base_priority: P2
+    reply_source: none
+    examples: [MSG-026, MSG-117, MSG-137, MSG-184, MSG-243, MSG-267, MSG-287, MSG-351]
+    notes: Only the primary reason when nothing else is asked; otherwise the request is the flag requests_human on the real reason.
+
+  - id: fuera_de_alcance
+    origin: original
+    name_es: Fuera de alcance
+    description: Temas ajenos a Lumo (otro negocio, clima, trivia) o consultas comerciales de productos que Lumo no ofrece.
+    kb_sections: []
+    policy_coverage: none
+    default_action: auto_reply
+    default_queue: none
+    base_priority: P4
+    reply_source: template
+    examples: [MSG-037, MSG-118, MSG-138, MSG-147, MSG-187, MSG-188, MSG-246, MSG-299, MSG-334, MSG-393]
+    notes: out_of_scope_kind distinguishes "unrelated" (fixed courtesy reply) from "other_business_inquiry" (routed to comercial, priority P3, no draft).
+
+  # ---- added in v2 ---------------------------------------------------------------------------
+  - id: intereses_y_cargos
+    origin: added
+    name_es: Intereses corrientes y cargos
+    description: Tasa de interés cobrada, cuota de manejo, seguro no autorizado, por qué subió la cuota o el cobro adicional (no es mora).
+    kb_sections: []
+    policy_coverage: none
+    default_action: route_to_human
+    default_queue: pagos_conciliacion
+    base_priority: P2
+    reply_source: none
+    examples: [MSG-007, MSG-029, MSG-281, MSG-296, MSG-341, MSG-387, MSG-388]
+    notes: The KB has no policy on rates or fees, so any draft would invent one. Distinct from mora_intereses, which is about late interest and is covered.
+
+  - id: pago_anticipado
+    origin: added
+    name_es: Pago anticipado o liquidación total
+    description: Adelantar cuotas, pagar todo el crédito de una vez, descuento por pago anticipado, abono a capital.
+    kb_sections: [pagos_y_cuotas.pago_anticipado]
+    policy_coverage: full
+    default_action: auto_reply
+    default_queue: none
+    base_priority: P3
+    reply_source: llm
+    examples: [MSG-006, MSG-149, MSG-193, MSG-240, MSG-242, MSG-282, MSG-319]
+    notes: Previously fell between consulta_saldo_cuotas and cancelacion; the KB answers it exactly (no penalty, interest reduced, detail in the app).
+
+  - id: estado_solicitud
+    origin: added
+    name_es: Estado de una solicitud de crédito
+    description: Estado de una solicitud enviada, sin respuesta de aprobación.
+    kb_sections: []
+    policy_coverage: none
+    default_action: route_to_human
+    default_queue: onboarding
+    base_priority: P3
+    reply_source: none
+    examples: [MSG-014]
+    notes: Not a CX post-sale reason and not in the KB; routed to the origination team.
+
+  - id: informacion_general
+    origin: added
+    name_es: Información general de Lumo
+    description: Horarios, línea telefónica, sucursales, canales de contacto.
+    kb_sections: []
+    policy_coverage: none
+    default_action: route_to_human
+    default_queue: cx_general
+    base_priority: P3
+    reply_source: none
+    examples: [MSG-010, MSG-031, MSG-186, MSG-189, MSG-289, MSG-360]
+    notes: Lumo-related, so not fuera_de_alcance, but the KB has no hours or phone numbers; a draft would invent them.
+
+  - id: privacidad_habeas_data
+    origin: added
+    name_es: Privacidad y habeas data
+    description: Qué datos míos tienen y para qué, borren mis datos, dejen de enviarme ofertas.
+    kb_sections: []
+    policy_coverage: none
+    default_action: route_to_human
+    default_queue: datos_privacidad
+    base_priority: P2
+    reply_source: none
+    examples: [MSG-182, MSG-344, MSG-367]
+    notes: Legal obligation (Ley 1581 de 2012); handled by the privacy/legal owner, never by a template.
+
+  - id: saludo_incompleto
+    origin: added
+    name_es: Saludo sin pregunta
+    description: Solo "hola" o "buenas", sin ninguna solicitud.
+    kb_sections: []
+    policy_coverage: full
+    default_action: auto_reply
+    default_queue: none
+    base_priority: P4
+    reply_source: template
+    examples: [MSG-192, MSG-269, MSG-374]
+    notes: A fixed reply asks what the customer needs; no model call.
+
+  - id: sin_accion
+    origin: added
+    name_es: Cierre o agradecimiento sin solicitud
+    description: 'Mensajes de cierre como "ok gracias", "todo bien" o "ya quedó resuelto", sin ninguna solicitud.'
+    kb_sections: []
+    policy_coverage: full
+    default_action: close_no_reply
+    default_queue: none
+    base_priority: P4
+    reply_source: none
+    examples: [MSG-025, MSG-348, MSG-399]
+    notes: Distinct from felicitacion_feedback (which names a person or the product) and from ruido.
+
+  - id: ruido
+    origin: added
+    name_es: Ruido
+    description: Galimatías, pruebas, puntos suspensivos, mensajes vacíos.
+    kb_sections: []
+    policy_coverage: full
+    default_action: close_no_reply
+    default_queue: none
+    base_priority: P4
+    reply_source: none
+    examples: [MSG-119, MSG-143, MSG-190, MSG-191, MSG-250, MSG-290, MSG-346, MSG-349, MSG-365]
+
+# Cross-cutting flags: detected by rules and/or the model, they modify priority and routing
+# (see routing.yaml) without changing the reason.
+flags:
+  requests_human:          The customer explicitly asks for a person or rejects the bot.
+  fraud_or_security:       Unrecognised charge, phishing, lost or stolen phone, identity theft, hacked account.
+  legal_threat:            Mentions the Superintendencia, a lawyer, a lawsuit or a regulator.
+  collections_harassment:  Complains about the frequency or manner of collection calls, or calls to relatives.
+  vulnerable_customer:     Unemployment, illness, hospitalisation, caring for a sick relative.
+  imminent_deadline:       An installment is due today or tomorrow, or a report is about to happen.
+  repeat_contact:          Says it is the second or third time writing about the same issue.
+  prompt_injection_suspected: The text tries to instruct the assistant (ignore rules, reveal prompt, act as).
+  pii_present:             The text contains a document number, full card data or similar.
+
+out_of_scope_kinds:
+  unrelated:               Not about Lumo at all (food delivery, weather, trivia, another company).
+  other_business_inquiry:  Asks Lumo for a product it does not offer here (phones, car loans, mortgages, insurance, savings).
+
+priorities:
+  P0: {label: critical, sla_hours: 1,    description: "Active security or fraud risk"}
+  P1: {label: high,     sla_hours: 4,    description: "Money wrongly taken, legal exposure, imminent reporting, vulnerable customer"}
+  P2: {label: normal,   sla_hours: 24,   description: "Blocked from paying or using the product, formal complaints, hardship"}
+  P3: {label: low,      sla_hours: 48,   description: "Information, documents, data updates"}
+  P4: {label: none,     sla_hours: null, description: "No action or courtesy only"}

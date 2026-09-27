@@ -23,6 +23,18 @@ LLM-judge calibration, offline determinism, adversarial fixtures)*
   the artefact came from PowerShell rendering UTF-8 on the console.
 - **What I did:** removed the "encoding fix" from the plan; kept unicode NFC normalisation only.
 
+### 3.2 Ambiguous YAML, for the second time in this assessment
+
+- **What it produced:** `taxonomy.yaml` with three values YAML cannot parse as intended: a note
+  containing `: `, a description starting with a double quote, and priority descriptions with
+  commas inside `{...}` flow mappings, which YAML reads as extra keys.
+- **How I caught it:** the consistency test suite failed at collection with a `ScannerError` at
+  a line and column; the same mistake had already happened in the data challenge (`gold.yml`).
+- **What I did:** quoted the three values and kept the tests loading both policy files, so a
+  malformed policy fails the build before any message is processed.
+- **Lesson:** free text inside YAML must be quoted by default; an assistant that writes prose
+  into config files will trip on this again unless a test parses the file.
+
 *(more cases added as they happen)*
 
 ## 4. What I would improve with more time
