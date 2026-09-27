@@ -314,9 +314,15 @@ is not usable as evidence).
 
 **Command(s):**
 ```powershell
-dbt compile --select "dq_*"
+dbt compile --select "path:analyses/profiling"
 python scripts/run_analyses.py --pattern "dq_*" --out evidence/bronze_profiling.md --title "Bronze profiling — raw extract data quality"
 ```
+
+**Incident:** the command first handed over was `dbt compile --select "dq_*"`, which dbt
+answered with "does not match any enabled nodes". Name wildcards select models but not
+analyses; `path:` or `resource_type:analysis` do. The AI had "validated" the command in a
+scratch project where earlier `dbt show` calls had already compiled the analyses, so the export
+script found files and the check passed for the wrong reason. Logged as AI error 3.4.
 
 **Result:** *(filled after run; see `evidence/bronze_profiling.md`)*
 

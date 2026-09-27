@@ -3,9 +3,13 @@ Run compiled dbt analyses against the local DuckDB warehouse and write the full 
 Markdown tables. `dbt show` truncates cell values, so it cannot serve as evidence; this script
 can.
 
-Usage (from deliverables/, after `dbt compile --select "<pattern>"`):
+Usage (from deliverables/). Note: dbt name wildcards such as `dq_*` do not select analyses;
+select them by path instead, then filter here by file-name pattern:
 
+    dbt compile --select "path:analyses/profiling"
     python scripts/run_analyses.py --pattern "dq_*" --out evidence/bronze_profiling.md
+
+    dbt compile --select "path:analyses/results"
     python scripts/run_analyses.py --pattern "q0*"  --out evidence/results.md
 
 The warehouse is opened read-only, so the script never modifies data.

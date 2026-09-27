@@ -65,7 +65,22 @@
   `requirements.txt` plus reading the tool's own warnings is the check, not the assistant's
   memory.
 
-### 3.4 *(to be completed)*
+### 3.4 A validation that passed for the wrong reason
+
+- **What it produced:** the instruction `dbt compile --select "dq_*"` to compile the profiling
+  analyses, reported as validated in a scratch copy of the project.
+- **How I caught it:** in my environment dbt answered "The selection criterion 'dq_*' does not
+  match any enabled nodes" and the export script found nothing to run. The assistant's scratch
+  check had passed only because previous `dbt show --select <analysis>` calls had already left
+  compiled SQL under `target/compiled/`, so the script read stale files.
+- **What I did:** tested the selector variants with `dbt ls`. Name wildcards do not select
+  analyses; `path:analyses/profiling` and `resource_type:analysis` do. Fixed the command in the
+  worklog and in the script's usage notes.
+- **Lesson:** a validation must start from a clean state, or it validates the leftovers of the
+  previous attempt. Same rule as for the FIFO and the FX fill later: re-run from scratch before
+  trusting a green result.
+
+### 3.5 *(to be completed)*
 
 ---
 
