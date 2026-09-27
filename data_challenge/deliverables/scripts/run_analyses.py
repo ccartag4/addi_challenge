@@ -80,7 +80,7 @@ def main() -> int:
             body = f"```\nERROR: {exc}\n```"
             status = "ERROR"
         rel = f.relative_to(COMPILED_ANALYSES).as_posix()
-        parts += [f"## {f.stem}", "", f"Source: `analyses/{rel}` — {status}", "", body, ""]
+        parts += [f"## {f.stem}", "", f"Source: `analyses/{rel}` - {status}", "", body, ""]
         print(f"{f.stem:<32} {status}")
 
     out_path = PROJECT_DIR / args.out
