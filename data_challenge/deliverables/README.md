@@ -7,10 +7,10 @@ files under `evidence/`.
 
 ## Run it in three commands
 
-From this folder (`data_challenge/deliverables/`), with Python 3.11–3.13 available:
+From this folder (`data_challenge/deliverables/`), with Python 3.11, 3.12 or 3.13:
 
 ```bash
-pip install -r requirements.txt      # 1. dbt-core, dbt-duckdb, duckdb, pandas (pinned)
+pip install -r requirements.txt      # 1. dbt-core, dbt-duckdb, duckdb, pandas (top-level pins)
 dbt deps                             # 2. dbt_utils
 dbt build                            # 3. seeds + 29 models + 244 tests → lumo.duckdb
 ```
@@ -21,9 +21,23 @@ A4). The two NO-OPs are exposures.
 
 Use a virtual environment if you prefer (`python -m venv .venv` then activate it). The
 connection profile (`profiles.yml`) lives in this folder and creates the local file
-`lumo.duckdb` (about 60 MB); no configuration is needed. On Windows, run from PowerShell or
-cmd. A `RequestsDependencyWarning` about `chardet` may be printed by a transitive dependency;
-it is harmless. Verified end to end on a fresh clone (see `WORKLOG.md`, step 19).
+`lumo.duckdb` (about 60 MB); no configuration is needed. A `RequestsDependencyWarning` about
+`chardet` may be printed by a transitive dependency; it is harmless.
+
+**Dependencies, two files.** `requirements.txt` pins the four top-level packages and lets pip
+resolve the rest for your OS and Python. `requirements-lock-py313.txt` is the exact
+`pip freeze` of the environment the published results were produced in; use it for a
+byte-identical setup on Python 3.13 (it does not install on 3.11/3.12).
+
+| Check | Windows | macOS arm64 | macOS x86_64 | Linux x86_64 |
+|---|---|---|---|---|
+| Three commands executed end to end (fresh clone, plus result export and cross-check) | Python 3.13 ✅ · Python 3.11 ✅ | — | — | — |
+| Dependency resolution of `requirements.txt` (`uv pip compile`) | 3.11 ✅ · 3.13 ✅ | 3.11 ✅ · 3.12 ✅ · 3.13 ✅ | 3.13 ✅ | 3.12 ✅ · 3.13 ✅ |
+| Every wheel of `requirements-lock-py313.txt` available (`pip download --platform`) | 3.13 ✅ | 3.13 ✅ | 3.13 ✅ | 3.13 ✅ |
+
+No macOS or Linux machine was available, so those columns are resolution and wheel checks, not
+executions; the code itself is dbt, DuckDB and pandas with no OS-specific paths. Details in
+`WORKLOG.md`, steps 19 and 19b.
 
 ## Then, optionally
 

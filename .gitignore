@@ -16,3 +16,6 @@ logs/
 __MACOSX/
 Thumbs.db
 .vscode/
+
+# personal study material, not part of the submission
+data_challenge/deliverables/WALKTHROUGH.md

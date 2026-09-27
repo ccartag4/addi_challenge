@@ -1120,4 +1120,49 @@ noise is a harmless `RequestsDependencyWarning` from a transitive dependency of 
   first installment were labelled "paid late". Rewritten against `fct_installment_status`
   installment 1; RESULTS uses the corrected split.
 
+**Commit:** `7d63f48` docs(data): add RESULTS, README, AI log sections 1-2, out-of-scope list and
+closing status
+
+---
+
+## Step 19b — Architecture diagrams and repository navigation  (2026-09-27)
+
+**Goal:** make the submission navigable for a reviewer who lands on GitHub: a root README that
+points to both challenges, and an architecture document with Mermaid diagrams (lineage, metric
+flow, working method, verification layers) plus a requirement-to-file map.
+
+**Files:** `data_challenge/deliverables/ARCHITECTURE.md`, repository-root `README.md`,
+`requirements.txt` (top-level pins) and `requirements-lock-py313.txt`. A step-by-step
+walkthrough written for the author's own interview preparation is kept locally and excluded
+from the repository via `.gitignore`; it is not a deliverable.
+
+**Cross-platform validation of the dependencies (requested by the author):**
+
+1. First attempt: `pip download -r requirements.txt --only-binary=:all: --platform …` for
+   macOS arm64/x86_64, Linux and Windows on Python 3.13 and 3.11. Every target failed on
+   `dbt-core-experimental-parser==2.0.5`. Inspection: the package is published as a sdist only,
+   contains no native sources (pure Python, custom build backend, `requires-python >= 3.9`),
+   and is a hard dependency of dbt-core 1.12.5. A binary-only check cannot see it: false alarm.
+2. Second attempt excluding that package: the 3.13 targets still failed because pip re-resolves
+   dbt-core's dependencies; the 3.11 targets failed on a **real** problem, `networkx==3.7`
+   (`Requires-Python >= 3.12`). The committed freeze was therefore not installable on Python
+   3.11 anywhere, contradicting the README.
+3. Fix: `requirements.txt` now holds the four top-level pins; the freeze moved to
+   `requirements-lock-py313.txt` with an explanatory header.
+4. Resolution check with `uv pip compile --python-platform … --python-version …` on the new
+   file: OK for macOS arm64 (3.11, 3.12, 3.13), macOS x86_64 (3.13), Linux x86_64 (3.12, 3.13),
+   Windows (3.11, 3.13). On 3.11 the resolver picks `networkx 3.6.1` and `numpy 2.4.6`; on
+   3.12+ `networkx 3.7`, `numpy 2.5.3`.
+5. Wheel availability of the exact lock (`--no-deps`, sdist package excluded): 61 of 61 wheels
+   found for macOS arm64, macOS x86_64 and Linux x86_64 on Python 3.13.
+6. Execution with Python 3.11 on Windows: a first run in the scratch folder failed with
+   `DLL load failed while importing _duckdb: The filename or extension is too long`, a Windows
+   long-path limit of that folder (path length > 200), not a dependency issue. Repeated in
+   `C:\dev\_addi_py311_check` (path length 52): `pip install`, `dbt deps`, `dbt build` →
+   `PASS=273 WARN=1`, result export and cross-check 24 of 24.
+
+Logged as AI error 3.8 (the freeze was presented as a portability guarantee) and error E11 in
+`DATA_JOURNEY.md`. The README now states exactly which combinations were executed and which
+were only resolved. The check folder `C:\dev\_addi_py311_check` can be deleted.
+
 **Commit:** *(filled after commit)*

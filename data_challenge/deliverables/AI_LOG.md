@@ -169,7 +169,29 @@ final reading of every evidence file before each commit.
   inconsistent with itself. Tests that relate two models' outputs catch what reading one model
   at a time does not.
 
-### 3.8 *(to be completed)*
+### 3.8 A "reproducible" requirements file that only reproduced my machine
+
+- **What it produced:** at step 03 the assistant recommended committing the full `pip freeze`
+  as the reproducibility guarantee, and the README claimed Python 3.11–3.13. The fresh-clone
+  test at step 19 passed, but it ran on the same OS and Python as the freeze.
+- **How I caught it:** I asked for the requirements to be validated for Mac and Windows. The
+  assistant checked wheel availability per platform with `pip download --platform` and then
+  resolved the dependency tree per platform with `uv pip compile`. Two facts came out: the
+  freeze pinned `networkx==3.7`, which requires Python 3.12+, so `pip install` fails on Python
+  3.11 on any OS; and one dbt dependency (`dbt-core-experimental-parser`) is published as a
+  pure-Python sdist only, which made the first binary-only check report a false failure on
+  every platform until the package was inspected.
+- **What I did:** split the file in two. `requirements.txt` now pins only the four top-level
+  packages and lets pip resolve the transitive set for the reader's OS and Python (resolution
+  verified for macOS arm64 and x86_64, Linux and Windows on 3.11, 3.12 and 3.13);
+  `requirements-lock-py313.txt` keeps the exact tested environment, whose wheels were verified
+  to exist for macOS and Linux on 3.13. The README states which combinations were executed and
+  which were only resolved.
+- **Lesson:** a freeze is a record of one machine, not a portability guarantee. "Works on a fresh
+  clone" must be qualified by OS and Python version, and a claim about other platforms needs a
+  check that targets those platforms.
+
+### 3.9 *(to be completed)*
 
 ---
 
