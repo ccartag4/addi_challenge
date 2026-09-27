@@ -623,4 +623,58 @@ Both reconciliation tests pass with 0 rows.
 **DMBOK dimension:** uniqueness (person grain), integrity (bridge coverage), consistency
 (count reconciliation), validity (city seed).
 
+**Commit:** `10bf1f9` feat(silver): add person-grain dim_customer, customer bridge and
+canonical city seed
+
+---
+
+## Step 12 — FX daily calendar and fct_loan with USD  (2026-09-27)
+
+**Goal:** a gap-free daily FX calendar with auditable forward fill (A7), an intermediate that
+gives every delivered loan a verdict and a reason (A5), and the loan fact with USD amounts,
+the SCD2 merchant version at disbursement and the resolved customer.
+
+**Files:** `models/silver/intermediate/int_fx_daily.sql`, `int_loan_validated.sql`
+(+ `intermediate.yml`), `models/silver/core/fct_loan.sql` (+ `core.yml`), singular tests
+`assert_fx_daily_calendar_is_complete`, `assert_loan_agrees_with_application`,
+`analyses/profiling/dq_13_loans_gmv.sql`.
+
+**Command(s):**
+```powershell
+dbt build
+dbt compile --select dq_13_loans_gmv
+python scripts/run_analyses.py --pattern "dq_13*" --out evidence/loans_gmv.md --title "Loans, FX fill and GMV in USD"
+```
+
+**Result (validated from a clean `target` in a scratch copy, then reproduced here):**
+
+| Measure | Value |
+|---|---|
+| Loans delivered / excluded / valid (Q2) | 28,075 / 120 (all `NO_APPLICATION`) / 27,955 |
+| Total GMV in USD (Q2) | 8,780,942.16 |
+| GMV by currency (USD) | COP 5,266,459.97 · BRL 3,514,482.19 |
+| Cohort 2026-01 (Q3) | 1,540 loans · 473,272.15 USD (1,541 loans if UTC months were used) |
+| Loans disbursed on a day with no published rate | 8,223 (29.42 %), max staleness 3 days |
+| Loans matched to a merchant version at disbursement | 27,955 of 27,955 (237 on UNKNOWN category) |
+| Top 5 merchants by GMV (Q6 preview) | 1607 BR EDUCATION 23.49 % · 1397 · 1664 · 1030 · 1286; top 5 = 39.63 %, top 20 = 53.86 % |
+| Days application → disbursement | 0 to 7, median 4 |
+
+Full project: 22 models, 1 seed, 142 tests → 164 pass, 1 warn (known A4 residue). The GMV
+total matches the independent pandas pass from 2026-09-26 to the cent.
+
+**Key decisions:**
+- The FX calendar is a model, not a join-time trick: `rate_source_date` and `days_stale`
+  travel to every loan, so "which rate did this USD figure use?" has an answer per row. Without
+  the fill, 29.42 % of loans would have no USD value.
+- `int_loan_validated` keeps all 28,075 loans with `exclusion_reason`; `fct_loan` is the
+  filtered view the README asks for. A consistency test ties `is_valid` to the reason.
+- `principal_usd` keeps 6 decimals; rounding happens only in gold/RESULTS, so sums reconcile
+  with an independent computation.
+- Merchant version and customer are resolved here once (A14, A19), so gold models never
+  repeat point-in-time logic.
+
+**DMBOK dimension:** completeness (FX calendar), accuracy (USD conversion, principal =
+approved amount), consistency (loan vs application), integrity (application, customer,
+merchant version links), timeliness (dates ordering, staleness bound).
+
 **Commit:** *(filled after commit)*

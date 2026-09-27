@@ -183,6 +183,90 @@ models:
           arguments: {expression: "first_created_date <= last_created_date"}
           config: {meta: {dq_dimension: timeliness}}
 
+  - name: fct_loan
+    description: >
+      Grain: one row per valid loan (A5). principal_usd = principal / units_per_usd at the
+      Bogotá disbursement date (A6, A7), with fx_rate_source_date and fx_days_stale exposing the
+      forward fill. merchant_sk / merchant_category_at_disbursement are the SCD2 version in
+      effect on the disbursement date (A14). customer_id is the application's resolved real
+      customer (A4, A19); loan_customer_id keeps the loan's own value. Installment summary
+      columns come from the plan (F16).
+    columns:
+      - name: loan_id
+        data_tests:
+          - unique: {config: {meta: {dq_dimension: uniqueness}}}
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+      - name: application_id
+        data_tests:
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+          - unique: {config: {meta: {dq_dimension: uniqueness}}}
+          - relationships:
+              arguments: {to: ref('fct_application'), field: application_id}
+              config: {meta: {dq_dimension: integrity}}
+      - name: customer_id
+        data_tests:
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+          - relationships:
+              arguments: {to: ref('stg_customers'), field: customer_id}
+              config: {meta: {dq_dimension: integrity}}
+      - name: person_sk
+        data_tests:
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+          - relationships:
+              arguments: {to: ref('dim_customer'), field: person_sk}
+              config: {meta: {dq_dimension: integrity}}
+      - name: merchant_sk
+        description: Exactly one SCD2 version must cover the disbursement date.
+        data_tests:
+          - not_null: {config: {meta: {dq_dimension: integrity}}}
+          - relationships:
+              arguments: {to: ref('dim_merchant'), field: merchant_sk}
+              config: {meta: {dq_dimension: integrity}}
+      - name: principal_usd
+        description: principal / fx_units_per_usd, 6 decimals; round only at presentation.
+        data_tests:
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+          - dbt_utils.accepted_range:
+              arguments: {min_value: 0, inclusive: false}
+              config: {meta: {dq_dimension: validity}}
+      - name: fx_units_per_usd
+        data_tests:
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+      - name: fx_days_stale
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments: {min_value: 0, max_value: 5}
+              config: {meta: {dq_dimension: timeliness}}
+      - name: currency
+        data_tests:
+          - accepted_values:
+              arguments: {values: ['COP', 'BRL']}
+              config: {meta: {dq_dimension: validity}}
+      - name: disbursed_date
+        data_tests:
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+    data_tests:
+      # F8 / A5: the loan mirrors its application
+      - dbt_utils.expression_is_true:
+          arguments: {expression: "principal = approved_amount"}
+          config: {meta: {dq_dimension: accuracy}}
+      # F16: the installment plan matches the term
+      - dbt_utils.expression_is_true:
+          arguments: {expression: "n_installments = term_months"}
+          config: {meta: {dq_dimension: consistency}}
+      # the plan repays at least the principal
+      - dbt_utils.expression_is_true:
+          arguments: {expression: "total_amount_due >= principal"}
+          config: {meta: {dq_dimension: accuracy}}
+      # a loan cannot be disbursed before its application was created
+      - dbt_utils.expression_is_true:
+          arguments: {expression: "disbursed_date >= application_created_date"}
+          config: {meta: {dq_dimension: timeliness}}
+      # the first installment is due after disbursement
+      - dbt_utils.expression_is_true:
+          arguments: {expression: "first_due_date > disbursed_date"}
+          config: {meta: {dq_dimension: timeliness}}
+
   - name: bridge_customer_person
     description: >
       Grain: one row per customer_id, mapped to its person_sk. Facts keep the source

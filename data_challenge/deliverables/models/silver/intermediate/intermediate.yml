@@ -17,3 +17,61 @@ models:
       - dbt_utils.expression_is_true:
           arguments: {expression: "rn_event_desc >= 1 and rn_ingest_desc >= 1 and rn_event_asc >= 1"}
           config: {meta: {dq_dimension: validity}}
+
+  - name: int_fx_daily
+    description: >
+      Grain: one row per calendar day x currency, from the first published rate to the later of
+      the last published rate and snapshot_date. units_per_usd is forward-filled from the last
+      published rate on or before the day (A7, F12); rate_source_date and days_stale make the
+      fill auditable. is_published marks the days the provider actually published.
+    columns:
+      - name: units_per_usd
+        data_tests:
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+          - dbt_utils.accepted_range:
+              arguments: {min_value: 0, inclusive: false}
+              config: {meta: {dq_dimension: validity}}
+      - name: rate_source_date
+        data_tests:
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+      - name: days_stale
+        description: Days since the rate was published. 0 on published days; up to 4 over a long weekend.
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments: {min_value: 0, max_value: 5}
+              config: {meta: {dq_dimension: timeliness}}
+      - name: currency
+        data_tests:
+          - accepted_values:
+              arguments: {values: ['COP', 'BRL']}
+              config: {meta: {dq_dimension: validity}}
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments: {combination_of_columns: [rate_date, currency]}
+          config: {meta: {dq_dimension: uniqueness}}
+      - dbt_utils.expression_is_true:
+          arguments: {expression: "rate_source_date <= rate_date"}
+          config: {meta: {dq_dimension: timeliness}}
+      - dbt_utils.expression_is_true:
+          arguments: {expression: "not is_published or days_stale = 0"}
+          config: {meta: {dq_dimension: consistency}}
+
+  - name: int_loan_validated
+    description: >
+      Grain: one row per loan as delivered (28,075). Adds the application's key attributes,
+      the validity verdict (A5) and exclusion_reason for loans that fct_loan drops (F7).
+    columns:
+      - name: loan_id
+        data_tests:
+          - unique: {config: {meta: {dq_dimension: uniqueness}}}
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+      - name: exclusion_reason
+        data_tests:
+          - accepted_values:
+              arguments: {values: ['NO_APPLICATION', 'APPLICATION_DELETED', 'APPLICATION_NOT_APPROVED']}
+              config: {meta: {dq_dimension: validity}}
+    data_tests:
+      # excluded if and only if a reason is recorded
+      - dbt_utils.expression_is_true:
+          arguments: {expression: "is_valid = (exclusion_reason is null)"}
+          config: {meta: {dq_dimension: consistency}}
