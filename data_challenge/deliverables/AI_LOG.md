@@ -112,7 +112,24 @@
   summaries and `accepted_values` tests both hide NULLs. Added as a standing item of the
   per-extract checklist.
 
-### 3.7 *(to be completed)*
+### 3.7 "Overdue" defined with ≤ instead of <
+
+- **What it produced:** `fct_installment_status.is_overdue = due_date <= as_of_date and not
+  is_settled`, so an installment due exactly on the snapshot date and unpaid was flagged
+  overdue while its `days_past_due` was 0.
+- **How I caught it:** not by reading the SQL. The gold snapshot carries a consistency test,
+  `(dpd > 0) = (n_overdue > 0)`, which failed with 164 loans: every one of them had a single
+  unpaid installment due on 2026-06-30. Two definitions written by the same assistant in two
+  models disagreed, and the cross-model test exposed it.
+- **What I did:** made "overdue" strictly past the due date (A24), added the invariant
+  `is_overdue ⇒ days_past_due > 0` to the installment fact, and re-ran dq_16 and dq_17 so the
+  evidence matches the corrected definition. PAR30 and FPD30 do not move (both use > 30 days);
+  only the count of "overdue installments" and the 1–30 bucket's loan count change.
+- **Lesson:** boundary conditions (=, ≤, <) are where an assistant is most likely to be
+  inconsistent with itself. Tests that relate two models' outputs catch what reading one model
+  at a time does not.
+
+### 3.8 *(to be completed)*
 
 ---
 

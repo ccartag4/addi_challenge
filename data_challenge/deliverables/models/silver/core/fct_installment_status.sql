@@ -9,6 +9,7 @@
 --   settled_date       Bogotá date of the payment that completed the installment (A22)
 --   days_to_settle     settled_date - due_date (negative = paid early)
 --   days_past_due      accrued: until settlement if settled, until as_of_date otherwise (A23)
+--   is_due / is_overdue  due_date <= as_of_date  /  due_date < as_of_date and not settled (A24)
 --   is_fpd30_eligible  first installment whose due date reached the 30-day mark by as_of_date
 --   is_fpd30           eligible and more than 30 days past due (paid late or still unpaid)
 {% set as_of_date = "cast('" ~ var('snapshot_date') ~ "' as date)" %}
@@ -93,7 +94,8 @@ dated as (
         *,
         case when is_settled     then last_payment_date     end     as settled_date,
         case when is_settled_any then last_payment_date_any end     as settled_date_any,
-        (is_due and not is_settled)                                 as is_overdue
+        -- A24: past due from the day AFTER the due date; on the due date itself DPD is 0
+        (due_date < as_of_date and not is_settled)                  as is_overdue
     from derived
 ),
 

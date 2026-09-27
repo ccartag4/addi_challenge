@@ -46,7 +46,8 @@ their customer from the application because their latest CDC event carried the p
 | silver.stg_installments | 130,297 | 0 | no duplicates; plan is internally consistent (F16) |
 | … on valid loans | 130,297 | 0 | the 120 excluded loans have no installments at all |
 | silver.int_payment_allocation | 114,347 | grain change | payment × installment pairs from FIFO (A21): 107,554 payments, 6,772 of them split across installments, 14,451 installments funded by several payments; 0 money left unallocated |
-| silver.fct_installment_status | 130,297 | 0 | one row per installment as of 2026-06-30 (A20): 99,542 settled, 245 partial, 30,510 unpaid; 6,120 overdue; 24,821 first installments FPD30-eligible, 2,204 flagged (A23) |
+| silver.fct_installment_status | 130,297 | 0 | one row per installment as of 2026-06-30 (A20): 99,542 settled, 245 partial, 30,510 unpaid; 5,935 past due (A24); 24,821 first installments FPD30-eligible, 2,204 flagged (A23) |
+| gold.dm_loan_delinquency_snapshot | 27,955 | grain change | installments → loans: 18,890 settled, 6,208 current, 2,857 delinquent; outstanding 2,069,175.39 USD, PAR30 20.5008 % (A11, A12) |
 
 ### payments
 
@@ -109,7 +110,8 @@ normalized (F10); 1 payment is dated after the snapshot and is kept for gold to 
 | 12 (`c483994`) | `int_fx_daily`, `int_loan_validated`, `fct_loan`, 2 singular tests | 1,200-day FX calendar; 27,955 valid loans; GMV 8,780,942.16 USD, equal to the independent pandas pass to the cent; 8,223 loans on days with no published rate; 2026-01 cohort 1,540 loans / 473,272.15 USD | provider publishes on business days; loans are disbursed every day | A7 forward fill with source date and staleness on every row; A19 customer from the application | none | evidence/loans_gmv.md |
 | 13 (`a81377a`) | `int_payment_classified`, `fct_payment`, 3 singular tests | 107,554 effective payments; 1,291 reversal rows void exactly 1,291 payments; legacy closed on Bogotá time, core opened on UTC midnight (F18); 1 payment after the snapshot | the "5 double reversals" of raw profiling were reversal rows delivered in two formats (F3) | A9 by set membership, unaffected; F11 reworded; cutover test | binder error: a test referenced a CTE column that was not projected; one-line fix | evidence/payments_effective.md |
 | 13b (`f8e26ee`) | `DATA_JOURNEY.md`, `dq_15_row_count_funnel` | 30 funnel rows; every delta maps to a finding or assumption; FX calendar 1,200 rows of which 848 published | — | row-level accounting maintained at every step | none | evidence/row_count_funnel.md |
-| 14 (*pending*) | `int_payment_allocation`, `fct_installment_status`, 4 singular tests | 114,347 allocation pairs, 0 unallocated money; 99,542 / 245 / 30,510 installments settled / partial / unpaid as of the snapshot; FPD30 8.8796 % global and 7.7922 % for 2026-01; preview PAR30 20.5008 % on 2,069,175.39 USD outstanding | payments arrive at loan level; FIFO by interval overlap reproduces the README rule without recursion | A11, A12, A20–A23; full-history allocation, as-of cut in the fact | a leftover placeholder line in the fact's select list was removed before the first build | evidence/fifo_and_delinquency.md |
+| 14 (`04c92bb`) | `int_payment_allocation`, `fct_installment_status`, 4 singular tests | 114,347 allocation pairs, 0 unallocated money; 99,542 / 245 / 30,510 installments settled / partial / unpaid as of the snapshot; FPD30 8.8796 % global and 7.7922 % for 2026-01; preview PAR30 20.5008 % on 2,069,175.39 USD outstanding | payments arrive at loan level; FIFO by interval overlap reproduces the README rule without recursion | A11, A12, A20–A23; full-history allocation, as-of cut in the fact | a leftover placeholder line in the fact's select list was removed before the first build | evidence/fifo_and_delinquency.md |
+| 15 (*pending*) | `dm_loan_delinquency_snapshot` (first gold model), 2 singular tests | 27,955 loans: 18,890 settled, 6,208 current, 2,857 delinquent; outstanding 2,069,175.39 USD; PAR30 20.5008 %; sensitivities move PAR30 by < 0.1 pp; PAR30 77.88 % on 2025 loans vs 6.43 % on 2026 loans | a gold consistency test failed on 164 loans whose only unpaid installment was due exactly on the snapshot date: "overdue" had been written with ≤ while DPD counts days after the due date | A24 overdue = strictly past due; A11 gross balance, A12 snapshot rate, alternatives published as columns | AI 3.7: definitional boundary caught by a cross-model test | evidence/delinquency_snapshot.md |
 
 ---
 
@@ -126,6 +128,7 @@ normalized (F10); 1 payment is dated after the snapshot and is kept for gold to 
 | E7 | 08 | `MissingArgumentsPropertyInGenericTestDeprecation` ×27 | AI (stale syntax) | test parameters outside `arguments:` | moved under `arguments:` | AI 3.5 |
 | E8 | 10 | `not_null_dim_merchant_category` FAIL 16 | data + AI | 16 versions without category; profiling had no NULL counts; `accepted_values` ignores NULLs | A17 imputation with audit columns; NULL counts in dq_08 | AI 3.6, F17 |
 | E9 | 13 | `Binder Error: Referenced column "reversal_amount_total" not found` | AI | column computed in a CTE, not projected | added to the select list | WORKLOG 13 |
+| E10 | 15 | gold test `(dpd > 0) = (n_overdue > 0)` FAIL 164 | AI (definition) | `is_overdue` used `due_date <= as_of_date`; DPD counts days after the due date, so installments due on the snapshot date were "overdue with 0 days" | overdue = strictly past due (A24); invariant `is_overdue ⇒ days_past_due > 0` added | AI 3.7 |
 | W1 | 09 → | standing warning: 3 valid applications without a real customer | data | every event of those applications carries the placeholder id | kept with `has_unresolved_customer`, warn-level test by design | F4, A4 |
 
 ---
@@ -138,3 +141,4 @@ normalized (F10); 1 payment is dated after the snapshot and is kept for gold to 
 | 4,984 duplicate CDC rows (dq_02) | 7,110 rows removed at staging (dq_15) | 2,126 additional events are identical once timestamps are parsed (F3); invisible to a string-level comparison |
 | 886 people with conflicting birth years (dq_07) | 884 (dq_12) | birth year 1900 is a sentinel (A16); two conflicts existed only against that sentinel |
 | 104 placeholder twin rows (raw) | 146 (after parsing) | more twins become visible once both rows share a parsed timestamp (F4) |
+| 6,120 installments overdue as of the snapshot (dq_16, step 14) | 5,935 (dq_16 after step 15) | 185 installments due exactly on 2026-06-30 were counted as overdue with 0 days past due; A24 makes "overdue" start the day after the due date. PAR30 and FPD30 unchanged. |

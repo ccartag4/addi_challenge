@@ -1,0 +1,91 @@
+version: 2
+
+# Gold contract. Consumption models; every test carries config.meta.dq_dimension (DAMA-DMBOK).
+
+models:
+  - name: dm_loan_delinquency_snapshot
+    description: >
+      Grain: one row per valid loan, as of snapshot_date (default 2026-06-30). Outstanding
+      balance = sum of unsettled installments (A11) converted at the snapshot-date FX rate
+      (A12); dpd = days since the due date of the oldest unpaid installment; dpd_bucket in
+      {0, 1-30, 31-60, 61-90, 90+}; is_par30 = dpd > 30. PAR30 = sum(outstanding_usd where
+      is_par30) / sum(outstanding_usd). Secondary columns give the net-of-partial balance and
+      the balance at the disbursement-date rate for sensitivity. Derived entirely from
+      fct_installment_status and fct_loan.
+    columns:
+      - name: loan_id
+        data_tests:
+          - unique: {config: {meta: {dq_dimension: uniqueness}}}
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+          - relationships:
+              arguments: {to: ref('fct_loan'), field: loan_id}
+              config: {meta: {dq_dimension: integrity}}
+      - name: as_of_date
+        data_tests:
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+      - name: dpd
+        description: Days past due of the loan; 0 when no installment is overdue.
+        data_tests:
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+          - dbt_utils.accepted_range:
+              arguments: {min_value: 0}
+              config: {meta: {dq_dimension: validity}}
+      - name: dpd_bucket
+        data_tests:
+          - accepted_values:
+              arguments: {values: ['0', '1-30', '31-60', '61-90', '90+']}
+              config: {meta: {dq_dimension: validity}}
+      - name: loan_status
+        data_tests:
+          - accepted_values:
+              arguments: {values: ['SETTLED', 'CURRENT', 'DELINQUENT']}
+              config: {meta: {dq_dimension: validity}}
+      - name: outstanding_local
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments: {min_value: 0}
+              config: {meta: {dq_dimension: validity}}
+      - name: outstanding_usd
+        description: outstanding_local / FX rate of the snapshot date (A12).
+        data_tests:
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+          - dbt_utils.accepted_range:
+              arguments: {min_value: 0}
+              config: {meta: {dq_dimension: validity}}
+      - name: fx_units_per_usd_at_snapshot
+        data_tests:
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+    data_tests:
+      # bucket is a pure function of dpd
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: >
+              dpd_bucket = case when dpd = 0 then '0' when dpd <= 30 then '1-30'
+                                when dpd <= 60 then '31-60' when dpd <= 90 then '61-90' else '90+' end
+          config: {meta: {dq_dimension: consistency}}
+      - dbt_utils.expression_is_true:
+          arguments: {expression: "is_par30 = (dpd > 30)"}
+          config: {meta: {dq_dimension: consistency}}
+      # status is a pure function of balance and dpd
+      - dbt_utils.expression_is_true:
+          arguments: {expression: "(loan_status = 'SETTLED') = (outstanding_local = 0)"}
+          config: {meta: {dq_dimension: consistency}}
+      - dbt_utils.expression_is_true:
+          arguments: {expression: "(loan_status = 'DELINQUENT') = (dpd > 0)"}
+          config: {meta: {dq_dimension: consistency}}
+      # a delinquent loan has at least one overdue installment, and vice versa
+      - dbt_utils.expression_is_true:
+          arguments: {expression: "(dpd > 0) = (n_overdue > 0)"}
+          config: {meta: {dq_dimension: consistency}}
+      # installment counts add up
+      - dbt_utils.expression_is_true:
+          arguments: {expression: "n_settled + n_partial + n_unpaid = n_installments and n_installments = term_months"}
+          config: {meta: {dq_dimension: consistency}}
+      # net-of-partial never exceeds the gross balance; overdue never exceeds outstanding
+      - dbt_utils.expression_is_true:
+          arguments: {expression: "outstanding_net_of_partial_local <= outstanding_local and overdue_amount_local <= outstanding_local"}
+          config: {meta: {dq_dimension: accuracy}}
+      # balance + paid = plan total (A11 gross view)
+      - dbt_utils.expression_is_true:
+          arguments: {expression: "abs((outstanding_net_of_partial_local + paid_amount) - total_amount_due) < 0.01"}
+          config: {meta: {dq_dimension: accuracy}}

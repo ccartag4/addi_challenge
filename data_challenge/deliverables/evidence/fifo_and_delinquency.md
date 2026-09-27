@@ -1,6 +1,6 @@
 # FIFO allocation and installment status as of the snapshot
 
-Generated 2026-09-27 02:01 by `scripts/run_analyses.py` from the compiled SQL under `target/compiled/.../analyses/`. Warehouse: `lumo.duckdb` (read-only).
+Generated 2026-09-27 02:09 by `scripts/run_analyses.py` from the compiled SQL under `target/compiled/.../analyses/`. Warehouse: `lumo.duckdb` (read-only).
 
 ## dq_16_fifo_and_delinquency
 
@@ -16,7 +16,7 @@ Source: `analyses/profiling/dq_16_fifo_and_delinquency.sql` - 24 row(s)
 | 6   | unallocated excess by currency                               | BRL=0.00, COP=0.00                                |
 | 7   | installments as of snapshot: settled / partial / unpaid      | 99542 / 245 / 30510                               |
 | 8   | installments: due by snapshot / not yet due                  | 104995 / 25302                                    |
-| 9   | installments overdue as of snapshot                          | 6120                                              |
+| 9   | installments overdue as of snapshot                          | 5935                                              |
 | 10  | settled installments: early / on time / late 1-30 / late >30 | 46386 / 7540 / 39725 / 5891                       |
 | 11  | median / max days_to_settle (settled)                        | 0.0 / 70                                          |
 | 12  | max days_past_due accrued (any installment)                  | 512                                               |

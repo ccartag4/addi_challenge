@@ -834,4 +834,69 @@ README's "one payment may settle several installments".
 received reconciliation), timeliness (settlement dates, as-of), integrity (loan and payment
 links).
 
+**Commit:** `04c92bb` feat(silver): add FIFO payment allocation and fct_installment_status with
+conservation tests
+
+---
+
+## Step 15 — Gold: dm_loan_delinquency_snapshot  (2026-09-27)
+
+**Goal:** the first consumption model (README 4.1 gold 2): per valid loan as of 2026-06-30,
+outstanding balance in USD, DPD and delinquency bucket, with PAR30 derivable in one line.
+
+**Files:** `models/gold/dm_loan_delinquency_snapshot.sql`, `models/gold/gold.yml`, singular
+tests `assert_snapshot_covers_every_valid_loan`, `assert_snapshot_dpd_matches_installments`,
+`analyses/profiling/dq_17_delinquency_snapshot.sql`. Fix in
+`fct_installment_status.is_overdue` (+ tests) and assumptions A24.
+
+**Design:** the mart aggregates `fct_installment_status` per loan and classifies. It never
+re-implements FIFO or as-of logic. Two secondary balances travel with the primary one so the
+open definitions are visible: net of partial payments (A11 alternative) and valued at the
+disbursement-date rate (A12 alternative).
+
+**Command(s):**
+```powershell
+dbt build
+dbt compile --select dq_16_fifo_and_delinquency dq_17_delinquency_snapshot
+python scripts/run_analyses.py --pattern "dq_16*" --out evidence/fifo_and_delinquency.md --title "FIFO allocation and installment status as of the snapshot"
+python scripts/run_analyses.py --pattern "dq_17*" --out evidence/delinquency_snapshot.md --title "Delinquency snapshot as of 2026-06-30 - PAR30 and sensitivity"
+```
+
+**Incident:** the first build failed the gold consistency test `(dpd > 0) = (n_overdue > 0)`
+with 164 loans. Each had a single unpaid installment due exactly on the snapshot date:
+`is_overdue` had been written with `<=` while DPD counts days *after* the due date. Fixed by
+defining overdue as strictly past due (A24) and adding `is_overdue ⇒ days_past_due > 0` to the
+installment fact. Logged as AI error 3.7. Effect: overdue installments 6,120 → 5,935 and overdue
+amount 483,904.28 → 468,613.91 USD; PAR30, FPD30, buckets and statuses unchanged.
+
+**Result (validated from a clean `target` in a scratch copy, then reproduced here):**
+
+| Measure | Value |
+|---|---|
+| Loans in snapshot | 27,955 (every valid loan, settled ones included) |
+| Status | SETTLED 18,890 · CURRENT 6,208 · DELINQUENT 2,857 |
+| DPD buckets (loans / USD share) | 0: 25,098 / 68.84 % · 1–30: 947 / 10.66 % · 31–60: 292 / 2.95 % · 61–90: 125 / 1.25 % · 90+: 1,493 / 16.29 % |
+| **Total outstanding balance (Q5)** | **2,069,175.39 USD** at 2026-06-30 rates (COP 4,141.00 · BRL 5.6113) |
+| **PAR30 (Q5)** | 424,197.74 / 2,069,175.39 = **20.5008 %** (1,910 loans with DPD > 30 of 9,065 with balance) |
+| PAR30 by currency | COP 19.79 % · BRL 21.67 % |
+| Sensitivity A11 (net of partial) | 2,057,634.75 USD · PAR30 20.5683 % |
+| Sensitivity A12 (disbursement-date rates) | 2,047,237.02 USD · PAR30 20.4910 % |
+| PAR30 by disbursement year | 2025: 77.88 % · 2026: 6.43 % |
+| Delinquent loans that never paid | 735 |
+| Top merchant by outstanding | 1607 with 22.47 % of the balance |
+
+Full project: 27 models, 1 seed, 218 tests → 245 pass, 1 warn (known A4 residue). The warehouse
+now has the four intended schemas: bronze (7), silver (20), gold (1), dq_audit.
+
+**Finding / decision:**
+- The two open definitions move PAR30 by less than 0.1 pp and the balance by about 1 %, so the
+  README-literal choices (A11 gross, A12 snapshot rate) are safe and documented with their
+  sensitivities rather than argued about.
+- PAR30 is a 2025-vintage problem: 77.88 % of the outstanding balance of 2025 loans is more than
+  30 days late, against 6.43 % for 2026. The old book is what remains unpaid; the young book is
+  mostly not yet due. This matters for Q6's "concentration risk in your own metrics".
+
+**DMBOK dimension:** consistency (bucket/status/DPD invariants), accuracy (gold recomputed from
+silver), completeness (every valid loan present).
+
 **Commit:** *(filled after commit)*

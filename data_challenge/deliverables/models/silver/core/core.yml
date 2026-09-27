@@ -393,9 +393,12 @@ models:
       - dbt_utils.expression_is_true:
           arguments: {expression: "not is_fpd30_eligible or is_first_installment"}
           config: {meta: {dq_dimension: validity}}
-      # overdue = due and not settled
+      # overdue = strictly past the due date and not settled (A24); overdue implies positive DPD
       - dbt_utils.expression_is_true:
-          arguments: {expression: "is_overdue = (is_due and not is_settled)"}
+          arguments: {expression: "is_overdue = (due_date < as_of_date and not is_settled)"}
+          config: {meta: {dq_dimension: consistency}}
+      - dbt_utils.expression_is_true:
+          arguments: {expression: "not is_overdue or days_past_due > 0"}
           config: {meta: {dq_dimension: consistency}}
 
   - name: bridge_customer_person
