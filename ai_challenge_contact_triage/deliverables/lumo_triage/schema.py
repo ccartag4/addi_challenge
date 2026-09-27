@@ -90,6 +90,31 @@ class Classification(BaseModel):
     summary: str = Field(..., max_length=240, description="Una frase en español que resume la solicitud.")
     reasoning_brief: str = Field(..., max_length=300, description="Por qué ese motivo y esas banderas, en una o dos frases.")
 
+    # The API enforces types and enums; the length and range constraints below are checked
+    # client-side. They are repaired rather than rejected: a verbose model (Haiku 4.5 wrote a
+    # 300+ character reasoning_brief for one message on every attempt) must not turn a correct
+    # classification into "unclassified". Validators do not change the JSON schema, so the
+    # committed response cache stays valid.
+    @field_validator("summary", mode="before")
+    @classmethod
+    def _cap_summary(cls, v):
+        return v[:240].rstrip() if isinstance(v, str) and len(v) > 240 else v
+
+    @field_validator("reasoning_brief", mode="before")
+    @classmethod
+    def _cap_reasoning(cls, v):
+        return v[:300].rstrip() if isinstance(v, str) and len(v) > 300 else v
+
+    @field_validator("confidence", mode="before")
+    @classmethod
+    def _clamp_confidence(cls, v):
+        return min(1.0, max(0.0, v)) if isinstance(v, (int, float)) else v
+
+    @field_validator("secondary_reasons", mode="before")
+    @classmethod
+    def _cap_secondary(cls, v):
+        return v[:3] if isinstance(v, list) and len(v) > 3 else v
+
     @field_validator("secondary_reasons")
     @classmethod
     def _no_duplicates(cls, v: list[Reason]) -> list[Reason]:

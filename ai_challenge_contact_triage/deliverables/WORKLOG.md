@@ -405,6 +405,16 @@ comparison claude-haiku-4-5: exact=95.6% cost/msg=$0.0020
 | Claude Haiku 4.5 as classifier | Same exact accuracy on the primary reason (86/90) at USD 0.0020 per message (7× cheaper) and 3.5 s p50 (vs 5.5 s); lenient 87/90 vs 90/90, macro-F1 0.940 vs 0.949. Its two misses are not equivalent to Opus's: MSG-389, a third complaint about an unresolved problem, became `sin_accion`, which the policy closes without a reply. |
 | Cost of the evaluation | judge USD 0.19 + Haiku USD 0.18 + stability USD 0.43 ≈ USD 0.80; everything is cached, so re-running the eval after the human review costs nothing. |
 
+**Incident:** the Haiku comparison made two live calls on every re-run and its exact accuracy
+moved between 86/90 and 87/90. The trace showed the same message (MSG-220) called twice per
+run; a probe (three live calls) showed Haiku writes a `reasoning_brief` longer than 300
+characters for it every time, which the client-side pydantic check rejected (the API strips
+string-length constraints), so the message was "unclassified" until a retry happened to fit and
+the successful answer was never cached in time. Fix: length and range constraints are repaired
+by truncation and clamping in `schema.py` (validators do not change the JSON schema, so the
+committed cache keys are untouched; a new test pins a real cache key to the current prompt and
+schema). The retry-on-invalid-output path stays for genuinely malformed answers.
+
 **Pending:** David's review of the 90 labels and 20 drafts (`gold_note = ok` or corrections),
 then `python -m lumo_triage eval` again (free: all calls cached) and the commit.
 

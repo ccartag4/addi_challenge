@@ -1,6 +1,6 @@
 # Evaluation report — Lumo contact triage
 
-Generated 2026-09-27T22:02:00Z by `python -m lumo_triage eval`. Gold set: 90 messages (0 reviewed by a person, 90 still on the assistant's pre-label). Predictions are the committed `output/triage_results.jsonl`.
+Generated 2026-09-27T23:23:06Z by `python -m lumo_triage eval`. Gold set: 90 messages (0 reviewed by a person, 90 still on the assistant's pre-label). Predictions are the committed `output/triage_results.jsonl`.
 
 ## Headline
 
@@ -18,7 +18,7 @@ Generated 2026-09-27T22:02:00Z by `python -m lumo_triage eval`. Gold set: 90 mes
 | Judge (claude-sonnet-5): overall ok | 54/57 (94.7 %) |
 | Adversarial fixtures passed | 10/10 |
 | Classification stability (live re-run) | 30/30 same primary reason |
-| Comparison `claude-haiku-4-5`: primary reason exact / lenient | 95.6 % / 96.7 % (USD 0.0020 per message, p50 3,484 ms) |
+| Comparison `claude-haiku-4-5`: primary reason exact / lenient | 96.7 % / 97.8 % (USD 0.0020 per message, p50 3,484 ms) |
 
 ## Where the pipeline and the gold labels differ
 
@@ -117,9 +117,9 @@ Judge `claude-sonnet-5` over 57 drafts (USD 0.1861): grounded 54, answers the re
 
 | Metric | main run | comparison |
 |---|---:|---:|
-| Primary reason exact | 95.6 % | 95.6 % |
-| Primary reason lenient | 100.0 % | 96.7 % |
-| Macro-F1 | 0.949 | 0.940 |
+| Primary reason exact | 95.6 % | 96.7 % |
+| Primary reason lenient | 100.0 % | 97.8 % |
+| Macro-F1 | 0.949 | 0.953 |
 | Cost per classification (USD) | 0.0140 | 0.0020 |
 | Latency p50 (ms) | 5,497 | 3,484 |
 | Cache-read share of prompt tokens | 97.8 % | 97.8 % |

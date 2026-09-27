@@ -123,7 +123,13 @@ the committed cache is a faithful representative of what a live run produces.
 On this gold set Haiku 4.5 matches Opus 5's exact accuracy on the primary reason at one seventh
 of the cost and two thirds of the latency. Its two misses are not equivalent, though: MSG-015
 went to `pago_anticipado` (harmless routing) and MSG-389, a frustrated third complaint, went to
-`sin_accion`, which the policy closes without a reply. On 90 messages that is one dangerous
+`sin_accion`, which the policy closes without a reply. A third difference showed up as
+infrastructure rather than accuracy: for MSG-220 Haiku wrote a `reasoning_brief` longer than the
+300-character limit on every attempt (the API does not enforce string lengths; the client does),
+so under strict validation the message counted as unclassified in the first two evaluation runs
+(exact 86/90) and as correct once a retry happened to fit (87/90). The length and range
+constraints are now repaired by truncation instead of rejected, which removes that noise without
+changing the schema or the cache. On 90 messages that is one dangerous
 miss; the honest reading is that Haiku is a credible classifier for volume **behind** the safety
 net the pipeline already has (flags from rules, the confidence threshold, the verifier), and
 that the choice should be made on a larger gold set with the unsafe count as the deciding

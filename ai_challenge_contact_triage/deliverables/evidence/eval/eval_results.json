@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-09-27T22:02:00Z",
+  "generated_at_utc": "2026-09-27T23:23:06Z",
   "gold_n": 90,
   "reviewed_n": 0,
   "reason": {
@@ -1520,11 +1520,11 @@
     "model": "claude-haiku-4-5",
     "reason": {
       "n": 90,
-      "exact": 86,
-      "exact_rate": 0.9555555555555556,
-      "lenient": 87,
-      "lenient_rate": 0.9666666666666667,
-      "macro_f1": 0.9395555555555556,
+      "exact": 87,
+      "exact_rate": 0.9666666666666667,
+      "lenient": 88,
+      "lenient_rate": 0.9777777777777777,
+      "macro_f1": 0.9528888888888889,
       "confusion": [
         {
           "gold": "certificados_extractos",
@@ -1537,20 +1537,15 @@
           "n": 1
         },
         {
-          "gold": "intereses_y_cargos",
-          "pred": "unclassified",
-          "n": 1
-        },
-        {
           "gold": "queja_reclamo",
           "pred": "sin_accion",
           "n": 1
         }
       ]
     },
-    "cost_usd": 0.002010142857142857,
+    "cost_usd": 0.0020119882352941177,
     "latency_p50_ms": 3484,
-    "cache_share": 0.977517511793657,
+    "cache_share": 0.9776608132844397,
     "disagreements": [
       {
         "id": "MSG-015",

@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.002167,
+ "effort": null,
+ "fingerprint": "3445a53bdf9f40fb",
+ "item_id": "MSG-220",
+ "label": "classify",
+ "latency_ms": 3687,
+ "model_requested": "claude-haiku-4-5",
+ "recorded_at": "2026-09-27T22:07:28Z",
+ "request_id": "req_011CfUhsTkMf1s3ZHkjLMHXv",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\": \"intereses_y_cargos\", \"secondary_reasons\": [\"mora_intereses\"], \"confidence\": 0.72, \"out_of_scope_kind\": null, \"flags\": {\"requests_human\": false, \"fraud_or_security\": false, \"legal_threat\": false, \"collections_harassment\": false, \"vulnerable_customer\": false, \"imminent_deadline\": false, \"repeat_contact\": false, \"prompt_injection_suspected\": false, \"pii_present\": false}, \"entities\": {\"credit_number\": null, \"document_number\": null, \"amount\": null, \"payment_date\": null, \"transaction_reference\": null, \"payment_method_or_bank\": null, \"named_agent\": null, \"masked_values\": []}, \"sentiment\": \"negative\", \"language\": \"es\", \"summary\": \"El cliente cuestiona un cobro extra y pregunta si son intereses de mora.\", \"reasoning_brief\": \"El cliente reporta un cobro adicional inesperado y pregunta explícitamente si es mora. Aunque menciona mora, la pregunta central es por qué aparece un cobro extra sin contexto de atraso claro, lo que sugiere intereses corrientes o cargos. Sin embargo, la mención directa de mora lo hace ambiguo.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-haiku-4-5-20251001",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 5767,
+   "input_tokens": 60,
+   "output_tokens": 306
+  }
+ }
+}

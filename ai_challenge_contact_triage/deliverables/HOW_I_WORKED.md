@@ -140,6 +140,21 @@ LLM-judge calibration, offline determinism, adversarial fixtures)*
 - **Lesson:** an aggregate that ties hides errors of very different cost; the deciding metric
   for a routing model is the unsafe count, and that needs a larger gold set than 90.
 
+### 3.10 A metric that moved by one message between identical runs
+
+- **What it produced:** the Haiku comparison reported 95.6 % on one run and 96.7 % on the next,
+  and each run made "two live calls" although everything was supposed to be cached.
+- **How I caught it:** the trace file. The same message id (MSG-220) appeared with attempt 1 and
+  attempt 2 in every run. Three live probes showed why: Haiku's `reasoning_brief` for that
+  message is always longer than the 300-character limit that my pydantic model enforces but the
+  API does not; strict validation rejected a correct classification, the retry sometimes fitted,
+  and a rejected answer is never cached.
+- **What I did:** repaired length and range violations by truncation instead of rejecting them
+  (validators do not touch the JSON schema, so the 568 committed responses keep their keys), and
+  added a test that pins a real cache key to the current prompt and schema so drift cannot hide.
+- **Lesson:** "live calls: 0" on a replay is a property to assert, not to assume; a number that
+  changes between identical runs is a bug report, even when both values look fine.
+
 *(more cases added as they happen)*
 
 ## 4. What I would improve with more time

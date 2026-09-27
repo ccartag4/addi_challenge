@@ -148,6 +148,31 @@ def test_schema_sent_to_the_api_has_no_unsupported_keywords():
     assert set(reasons) == set(REASON_IDS)
 
 
+def test_length_and_range_constraints_are_repaired_not_rejected():
+    data = sample_classification().model_dump()
+    data.update(reasoning_brief="x" * 350, summary="y" * 260, confidence=1.2,
+                secondary_reasons=["fecha_de_pago", "mora_intereses", "ruido", "cancelacion"])
+    c = Classification(**data)
+    assert len(c.reasoning_brief) == 300 and len(c.summary) == 240 and c.confidence == 1.0 and len(c.secondary_reasons) == 3
+
+
+def test_committed_cache_keys_still_match_the_current_prompt_and_schema(by_id):
+    """A prompt or schema drift would silently turn the committed cache into dead files; this
+    pins the key of one real message to the file committed for it."""
+    from lumo_triage.classify import SYSTEM_PROMPT, build_user_content
+    from lumo_triage.llm import DEFAULT_CACHE_DIR, _fingerprint
+    if not DEFAULT_CACHE_DIR.exists():
+        pytest.skip("no committed cache")
+    m = by_id["MSG-003"]
+    cfg = LLMConfig(mode="offline", cache_dir=DEFAULT_CACHE_DIR, trace_path=None)
+    client = LLMClient(cfg)
+    schema = json_schema_for(Classification)
+    request = client.build_request(SYSTEM_PROMPT, build_user_content(m), schema)
+    key = _fingerprint({"model": request["model"], "effort": request["output_config"].get("effort"),
+                        "system": SYSTEM_PROMPT, "user": build_user_content(m), "schema": schema})
+    assert (DEFAULT_CACHE_DIR / "claude-opus-5" / "classify" / f"MSG-003__{key}.json").exists()
+
+
 # ---------------------------------------------------------------- request shape, cache, trace
 def test_request_shape_matches_the_documented_api(tmp_path):
     client, fake = make_client(tmp_path, [body(sample_classification().model_dump_json())])
