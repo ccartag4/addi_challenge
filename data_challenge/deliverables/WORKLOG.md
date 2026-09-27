@@ -287,7 +287,8 @@ dbt test --select bronze          # still PASS=10
 
 **DMBOK dimension:** n/a (tooling).
 
-**Commit:** *(filled after commit)*
+**Commit:** `b28e3a2` fix(bronze): move test meta under config per dbt 1.10+ and log the
+correction (also carries the first version of the profiling analyses and the export script)
 
 ---
 
@@ -324,8 +325,88 @@ analyses; `path:` or `resource_type:analysis` do. The AI had "validated" the com
 scratch project where earlier `dbt show` calls had already compiled the analyses, so the export
 script found files and the check passed for the wrong reason. Logged as AI error 3.4.
 
-**Result:** *(filled after run; see `evidence/bronze_profiling.md`)*
+**Result:** eight analyses, 118 measurements, written to `evidence/bronze_profiling.md`.
+Headline figures (details and dimensions in `ASSUMPTIONS.md` section B):
 
-**Finding / decision:** *(filled after run)*
+| Measurement | Value |
+|---|---|
+| Timestamp shapes per column | 3 (plain, ISO-Z, epoch ms) |
+| Exact duplicate rows | apps 4,984 · payments 1,537 |
+| Payment ids duplicated by timestamp format only | 666 |
+| Deleted applications | 941 |
+| Placeholder customer id `999999999` | 1,353 events · 1,348 applications |
+| Loans without application / without installments | 120 / 120 |
+| legacy_v1 amount ÷ installment | 100.0 (COP and BRL) |
+| Reversal rows / payments reversed twice | 1,296 / 5 |
+| FX missing days per currency | 176 = 170 weekend + 6 holidays |
+| Redundant customer ids | 907 (346 cross-country) |
+| Merchants with a second version | 162 (157 category changes) |
+
+**Finding / decision:** one finding was new relative to the exploratory pandas pass: the
+applications with more than one `customer_id` (1,345) and the single customer id missing from
+the master (1,353 CDC rows) are the same phenomenon. A follow-up query showed the id is
+`999999999`, a placeholder present on every operation and status; 104 of its rows are exact
+twins of a real-customer row at the same instant, which is what `dq_02` reported as key
+duplicates. Decision A4: treat it as NULL and resolve the customer from the application's other
+events. Positive findings (F8, F16: principal = approved amount, installment count = term) are
+kept as enforced tests because they protect the joins.
+
+**DMBOK dimensions covered:** validity, uniqueness, completeness, accuracy, consistency,
+integrity, timeliness.
+
+**Commit:** `06efbb1` docs(data): add SQL profiling evidence of the raw extracts and log selector fix
+
+---
+
+## Step 06b — Findings written to ASSUMPTIONS.md  (2026-09-27)
+
+**Goal:** turn the measurements into numbered, citable assumptions (A1–A10 decided, A11–A14
+pending) and findings (F1–F16) with DMBOK dimension, treatment and the test that will enforce
+each one.
+
+**Commit:** *(filled after commit)*
+
+---
+
+## Step 07 — Macros: timestamp parsing, business time, text hygiene  (2026-09-27)
+
+**Goal:** one place for the three transformations every staging model needs, each verified
+before use.
+
+**Files:** `macros/parse_utc_ts.sql`, `macros/business_time.sql`, `macros/text_helpers.sql`,
+`analyses/profiling/dq_09_timestamp_parsing.sql`.
+
+| Macro | Does | Finding / assumption |
+|---|---|---|
+| `parse_utc_ts(col)` | Three raw shapes → naive UTC `TIMESTAMP`; anything else → NULL | F1 |
+| `to_business_ts` / `to_business_date` | UTC → `America/Bogota` wall-clock / date, zone from `vars.business_tz` | A6 |
+| `clean_text`, `normalize_key`, `parse_number` | Trim/collapse whitespace, accent-insensitive upper key, thousands-separator-safe numeric cast | F14, F15 |
+
+**Command(s):**
+```powershell
+dbt compile --select dq_09_timestamp_parsing
+python scripts/run_analyses.py --pattern "dq_09*" --out evidence/timestamp_parsing.md --title "Timestamp parsing coverage and Bogota date shifts"
+```
+
+**Result:**
+
+| Column | Rows | Parse failures | Day shifts in Bogotá | Month shifts |
+|---|---|---|---|---|
+| applications_cdc.event_at_utc | 128,197 | 0 | 26,860 | 889 |
+| loans.disbursed_at_utc | 28,075 | 0 | 5,900 | 171 |
+| payments.paid_at_utc | 112,339 | 0 | 24,393 | 766 |
+| customers.created_at | 30,000 | 0 | 30,000 | 991 |
+
+**Finding / decision:**
+- **Epoch parsing must use `epoch_ms()`, not `to_timestamp()::timestamp`.** Hand check on this
+  machine: DuckDB's session `TimeZone` is `America/Bogota`, and
+  `to_timestamp(1778106658000/1000.0)::timestamp` returns `2026-05-06 17:30:58` while
+  `epoch_ms(1778106658000)` returns `2026-05-06 22:30:58`. The cast through TIMESTAMPTZ applies
+  the local zone and would have shifted 13,564 epoch values by five hours with no error.
+- **Customer `created_at` is a date at midnight UTC** (every one of the 30,000 rows would move
+  a day under the Bogotá rule). Recorded as A15: creation date = UTC date.
+- Bogotá conversion verified: `2026-01-01 03:00:00` UTC → `2025-12-31 22:00:00` local.
+
+**DMBOK dimension:** validity (parsing), accuracy (time zone).
 
 **Commit:** *(filled after commit)*
