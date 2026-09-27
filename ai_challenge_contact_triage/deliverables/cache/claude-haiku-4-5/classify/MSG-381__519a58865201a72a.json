@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.001907,
+ "effort": null,
+ "fingerprint": "519a58865201a72a",
+ "item_id": "MSG-381",
+ "label": "classify",
+ "latency_ms": 3069,
+ "model_requested": "claude-haiku-4-5",
+ "recorded_at": "2026-09-27T21:54:25Z",
+ "request_id": "req_011CfUgspZPCpPXdqR6FnMqZ",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"cuenta_y_app\",\"secondary_reasons\":[],\"confidence\":0.92,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"negative\",\"language\":\"es\",\"summary\":\"El cliente no puede iniciar sesión porque la aplicación no reconoce su correo después de cerrarse la sesión.\",\"reasoning_brief\":\"Se trata de un problema de acceso a la cuenta y la aplicación (login fallido), claramente cubierto por la política de cuenta_y_app. El cliente solicita ayuda informal pero no pide explícitamente hablar con una persona.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-haiku-4-5-20251001",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 5767,
+   "input_tokens": 55,
+   "output_tokens": 255
+  }
+ }
+}

@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.002437,
+ "effort": "medium",
+ "fingerprint": "61fdc3d5531c7ab5",
+ "item_id": "MSG-160",
+ "label": "judge",
+ "latency_ms": 1946,
+ "model_requested": "claude-sonnet-5",
+ "recorded_at": "2026-09-27T21:51:07Z",
+ "request_id": "req_011CfUgdKmsdYMmbaJMQgf7Y",
+ "response": {
+  "content": [
+   {
+    "text": "{\"grounded\":true,\"answers_request\":true,\"no_forbidden_promise\":true,\"tone_ok\":true,\"overall_ok\":true,\"issues\":[],\"reasoning_brief\":\"Draft accurately reflects the cited section, answers the question about payment methods, includes helpful tip on receipts, no forbidden promises, warm appropriate tone.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-sonnet-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1127,
+   "input_tokens": 511,
+   "output_tokens": 119
+  }
+ }
+}

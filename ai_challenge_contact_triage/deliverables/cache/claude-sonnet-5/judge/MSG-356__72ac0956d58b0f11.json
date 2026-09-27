@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.002495,
+ "effort": "medium",
+ "fingerprint": "72ac0956d58b0f11",
+ "item_id": "MSG-356",
+ "label": "judge",
+ "latency_ms": 2192,
+ "model_requested": "claude-sonnet-5",
+ "recorded_at": "2026-09-27T21:52:15Z",
+ "request_id": "req_011CfUgiHQdpaKjto2QSpwXY",
+ "response": {
+  "content": [
+   {
+    "text": "{\"grounded\":true,\"answers_request\":true,\"no_forbidden_promise\":true,\"tone_ok\":true,\"overall_ok\":true,\"issues\":[],\"reasoning_brief\":\"Draft correctly directs customer to app for cuota value and offers identity validation for channel disclosure, matching policy; no invented figures or forbidden promises; tone warm and appropriate.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-sonnet-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1127,
+   "input_tokens": 505,
+   "output_tokens": 126
+  }
+ }
+}

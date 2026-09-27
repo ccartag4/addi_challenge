@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.00197,
+ "effort": null,
+ "fingerprint": "bcc6dca86dafe22c",
+ "item_id": "MSG-319",
+ "label": "classify",
+ "latency_ms": 3069,
+ "model_requested": "claude-haiku-4-5",
+ "recorded_at": "2026-09-27T21:54:12Z",
+ "request_id": "req_011CfUgrr6sgWsbUXqz4EXPa",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\": \"pago_anticipado\", \"secondary_reasons\": [], \"confidence\": 0.92, \"out_of_scope_kind\": null, \"flags\": {\"requests_human\": false, \"fraud_or_security\": false, \"legal_threat\": false, \"collections_harassment\": false, \"vulnerable_customer\": false, \"imminent_deadline\": false, \"repeat_contact\": false, \"prompt_injection_suspected\": false, \"pii_present\": false}, \"entities\": {\"credit_number\": null, \"document_number\": null, \"amount\": null, \"payment_date\": null, \"transaction_reference\": null, \"payment_method_or_bank\": null, \"named_agent\": null, \"masked_values\": []}, \"sentiment\": \"neutral\", \"language\": \"es\", \"summary\": \"El cliente pregunta si puede pagar su cuota antes de la fecha de corte sin inconvenientes.\", \"reasoning_brief\": \"Es una pregunta clara sobre pago anticipado: el cliente quiere saber si puede adelantar el pago sin problema. No hay solicitud de asesor, urgencia ni otros elementos que agreguen complejidad.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-haiku-4-5-20251001",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 5767,
+   "input_tokens": 53,
+   "output_tokens": 268
+  }
+ }
+}

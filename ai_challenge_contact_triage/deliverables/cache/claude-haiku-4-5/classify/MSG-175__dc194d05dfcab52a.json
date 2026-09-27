@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.002033,
+ "effort": null,
+ "fingerprint": "dc194d05dfcab52a",
+ "item_id": "MSG-175",
+ "label": "classify",
+ "latency_ms": 3241,
+ "model_requested": "claude-haiku-4-5",
+ "recorded_at": "2026-09-27T21:53:41Z",
+ "request_id": "req_011CfUgpbL4tMzv6B8Jhkgym",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\": \"queja_reclamo\", \"secondary_reasons\": [], \"confidence\": 0.95, \"out_of_scope_kind\": null, \"flags\": {\"requests_human\": false, \"fraud_or_security\": false, \"legal_threat\": false, \"collections_harassment\": false, \"vulnerable_customer\": false, \"imminent_deadline\": false, \"repeat_contact\": true, \"prompt_injection_suspected\": false, \"pii_present\": false}, \"entities\": {\"credit_number\": null, \"document_number\": null, \"amount\": null, \"payment_date\": null, \"transaction_reference\": null, \"payment_method_or_bank\": null, \"named_agent\": null, \"masked_values\": []}, \"sentiment\": \"negative\", \"language\": \"es\", \"summary\": \"El cliente quiere presentar una queja formal porque lleva 3 días llamando sin resolver su problema.\", \"reasoning_brief\": \"Es una PQR explícita (\\\"quiero poner una queja\\\") con frustración por falta de resolución y contactos previos sin éxito. El flag repeat_contact se activa porque menciona múltiples llamadas sin resultado.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-haiku-4-5-20251001",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 5767,
+   "input_tokens": 66,
+   "output_tokens": 278
+  }
+ }
+}

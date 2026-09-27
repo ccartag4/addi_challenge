@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.001132,
+ "effort": null,
+ "fingerprint": "884274114fbe7015",
+ "item_id": "MSG-377",
+ "label": "classify",
+ "latency_ms": 2594,
+ "model_requested": "claude-haiku-4-5",
+ "recorded_at": "2026-09-27T21:54:23Z",
+ "request_id": "req_011CfUgsiEsYCx2uJegPrGWB",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"reporte_centrales\",\"confidence\":0.92,\"summary\":\"Cliente reclama por reporte a Datacredito por atraso en una cuota.\",\"reasoning_brief\":\"El cliente pregunta sobre un reporte negativo en centrales de riesgo tras un atraso reciente, lo que es reporte_centrales. Muestra inconformidad pero no amenaza legal ni solicita cancelación.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-haiku-4-5-20251001",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 5767,
+   "input_tokens": 55,
+   "output_tokens": 100
+  }
+ }
+}

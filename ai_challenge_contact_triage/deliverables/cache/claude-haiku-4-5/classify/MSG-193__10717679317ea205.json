@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.002259,
+ "effort": null,
+ "fingerprint": "10717679317ea205",
+ "item_id": "MSG-193",
+ "label": "classify",
+ "latency_ms": 4663,
+ "model_requested": "claude-haiku-4-5",
+ "recorded_at": "2026-09-27T21:53:48Z",
+ "request_id": "req_011CfUgpzBzHcouhNVQrGk7D",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\": \"consulta_saldo_cuotas\", \"secondary_reasons\": [\"pago_anticipado\"], \"confidence\": 0.92, \"out_of_scope_kind\": null, \"flags\": {\"requests_human\": false, \"fraud_or_security\": false, \"legal_threat\": false, \"collections_harassment\": false, \"vulnerable_customer\": false, \"imminent_deadline\": false, \"repeat_contact\": false, \"prompt_injection_suspected\": false, \"pii_present\": true}, \"entities\": {\"credit_number\": \"8830\", \"document_number\": null, \"amount\": null, \"payment_date\": null, \"transaction_reference\": null, \"payment_method_or_bank\": null, \"named_agent\": null, \"masked_values\": []}, \"sentiment\": \"neutral\", \"language\": \"es\", \"summary\": \"Cliente consulta su saldo total del crédito 8830 y pregunta cómo adelantar cuotas y abonar a capital para reducir intereses.\", \"reasoning_brief\": \"El motivo principal es consulta de saldo (pregunta explícita por saldo total). Secundariamente, pago_anticipado es claro en la pregunta sobre adelantar cuotas y funcionamiento del abono a capital. El cliente proporciona el número de crédito, confirmando PII.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-haiku-4-5-20251001",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 5767,
+   "input_tokens": 92,
+   "output_tokens": 318
+  }
+ }
+}

@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.002033,
+ "effort": null,
+ "fingerprint": "09f9f8ed4ee09fb8",
+ "item_id": "MSG-014",
+ "label": "classify",
+ "latency_ms": 3216,
+ "model_requested": "claude-haiku-4-5",
+ "recorded_at": "2026-09-27T21:53:16Z",
+ "request_id": "req_011CfUgnggUSoxatx9BgERCj",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\": \"estado_solicitud\", \"secondary_reasons\": [], \"confidence\": 0.95, \"out_of_scope_kind\": null, \"flags\": {\"requests_human\": false, \"fraud_or_security\": false, \"legal_threat\": false, \"collections_harassment\": false, \"vulnerable_customer\": false, \"imminent_deadline\": false, \"repeat_contact\": false, \"prompt_injection_suspected\": false, \"pii_present\": false}, \"entities\": {\"credit_number\": null, \"document_number\": null, \"amount\": null, \"payment_date\": null, \"transaction_reference\": null, \"payment_method_or_bank\": null, \"named_agent\": null, \"masked_values\": []}, \"sentiment\": \"neutral\", \"language\": \"es\", \"summary\": \"Cliente pregunta por el estado de su solicitud de crédito enviada hace 4 días.\", \"reasoning_brief\": \"Es una consulta sobre el estado de una solicitud de crédito en trámite, que corresponde al equipo de originación y no es un tema de servicio posventa. El cliente no reporta una situación urgente ni requiere un agente inmediato.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-haiku-4-5-20251001",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 5767,
+   "input_tokens": 66,
+   "output_tokens": 278
+  }
+ }
+}

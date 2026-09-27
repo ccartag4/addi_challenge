@@ -1,6 +1,6 @@
 # Batch summary — Lumo contact triage
 
-Generated 2026-09-27T21:22:38Z by pipeline `0.4.0 (classify-v1, draft-v2)`, model `claude-opus-5`. Computed from `triage_results.jsonl` (340 messages); nothing in this file was written by the model.
+Generated 2026-09-27T21:46:53Z by pipeline `0.4.0 (classify-v1, draft-v2)`, model `claude-opus-5`. Computed from `triage_results.jsonl` (340 messages); nothing in this file was written by the model.
 
 ## Headline
 
@@ -9,20 +9,20 @@ Generated 2026-09-27T21:22:38Z by pipeline `0.4.0 (classify-v1, draft-v2)`, mode
 | Messages | 340 |
 | Reply ready to send (auto-answerable) | 278 (81.8 %) |
 | of which model drafts that passed the verifier / fixed templates | 234 / 44 |
-| Cases opened for a person | 195 (57.4 %) |
-| of which answered automatically and routed / needing a person's answer | 145 / 50 |
+| Cases opened for a person | 202 (59.4 %) |
+| of which answered automatically and routed / needing a person's answer | 152 / 50 |
 | Closed without reply (noise, closures) | 12 |
 | Model drafts rejected by the verifier | 4 |
-| Messages touching a knowledge-base gap | 54 |
+| Messages touching a knowledge-base gap | 61 |
 | Unclassified | 0 |
 
 ## What stands out
 
-- 278 of 340 messages (81.8 %) leave with a reply ready to send; 195 (57.4 %) open a case for a person.
+- 278 of 340 messages (81.8 %) leave with a reply ready to send; 202 (59.4 %) open a case for a person.
 - 22 security or fraud cases (6.5 %) go to the fraud queue at P0 with the fixed safety acknowledgement.
 - 19 customers explicitly asked for a person; 13 of them asked nothing else.
 - 13 messages mention job loss, illness or a similar hardship and were raised to P1.
-- Knowledge-base gaps found while drafting: Certificados y extractos (6); Métodos de pago (5); Refinanciación o acuerdo de pago (4). The customers' own requests are listed under policy gaps.
+- Knowledge-base gaps found while drafting: Certificados y extractos (6); Cuenta y app (6); Métodos de pago (6). The customers' own requests are listed under policy gaps.
 - 16 messages fall on reasons the knowledge base does not cover at all (fees and rates, hours, application status, habeas data); they always reach a person.
 - 4 model drafts were rejected by the verifier and routed to a person: forbidden_phrases (3), numbers (1).
 - 0 classifications fell below the 0.60 confidence threshold; 7 more sit between 0.60 and 0.69 and are worth a spot check.
@@ -41,8 +41,8 @@ Generated 2026-09-27T21:22:38Z by pipeline `0.4.0 (classify-v1, draft-v2)`, mode
 | `no_puede_pagar` — No puede pagar | 19 | 5.6 % | 18 | 19 | 0.91 |
 | `reporte_centrales` — Reporte a centrales de riesgo | 19 | 5.6 % | 19 | 19 | 0.90 |
 | `fecha_de_pago` — Fecha de pago | 19 | 5.6 % | 18 | 3 | 0.92 |
-| `cuenta_y_app` — Cuenta y app | 18 | 5.3 % | 18 | 0 | 0.93 |
-| `metodos_de_pago` — Métodos de pago | 18 | 5.3 % | 18 | 5 | 0.93 |
+| `cuenta_y_app` — Cuenta y app | 18 | 5.3 % | 18 | 6 | 0.93 |
+| `metodos_de_pago` — Métodos de pago | 18 | 5.3 % | 18 | 6 | 0.93 |
 | `refinanciacion_acuerdo` — Refinanciación o acuerdo de pago | 17 | 5.0 % | 15 | 17 | 0.89 |
 | `datos_personales` — Datos personales | 16 | 4.7 % | 13 | 4 | 0.94 |
 | `felicitacion_feedback` — Felicitación o feedback positivo | 14 | 4.1 % | 14 | 0 | 0.96 |
@@ -64,8 +64,8 @@ Generated 2026-09-27T21:22:38Z by pipeline `0.4.0 (classify-v1, draft-v2)`, mode
 
 | Action | n |
 |---|---:|
-| `auto_reply_and_route` | 145 |
-| `auto_reply` | 133 |
+| `auto_reply_and_route` | 152 |
+| `auto_reply` | 126 |
 | `route_to_human` | 50 |
 | `close_no_reply` | 12 |
 
@@ -73,18 +73,19 @@ Generated 2026-09-27T21:22:38Z by pipeline `0.4.0 (classify-v1, draft-v2)`, mode
 |---|---|---:|---:|
 | P0 (critical) | 1 h | 22 | 22 |
 | P1 (high) | 4 h | 30 | 29 |
-| P2 (normal) | 24 h | 123 | 98 |
-| P3 (low) | 48 h | 131 | 46 |
+| P2 (normal) | 24 h | 123 | 104 |
+| P3 (low) | 48 h | 131 | 47 |
 | P4 (none) | - | 34 | 0 |
 
 | Queue | cases | P0 | P1 | P2 | P3 |
 |---|---:|---:|---:|---:|---:|
+| `cx_general` | 54 | 0 | 0 | 17 | 37 |
 | `cartera` | 53 | 0 | 15 | 38 | 0 |
-| `cx_general` | 53 | 0 | 0 | 17 | 36 |
 | `pagos_conciliacion` | 39 | 0 | 1 | 38 | 0 |
 | `fraude` | 22 | 22 | 0 | 0 | 0 |
 | `pqr_legal` | 14 | 0 | 13 | 1 | 0 |
 | `comercial` | 9 | 0 | 0 | 0 | 9 |
+| `soporte_tecnico` | 6 | 0 | 0 | 6 | 0 |
 | `datos_privacidad` | 4 | 0 | 0 | 4 | 0 |
 | `onboarding` | 1 | 0 | 0 | 0 | 1 |
 
@@ -95,7 +96,8 @@ Generated 2026-09-27T21:22:38Z by pipeline `0.4.0 (classify-v1, draft-v2)`, mode
 | intereses_y_cargos: no policy | 8 |
 | informacion_general: no policy | 6 |
 | certificados_extractos: partially covered | 6 |
-| metodos_de_pago: partially covered | 5 |
+| cuenta_y_app: partially covered | 6 |
+| metodos_de_pago: partially covered | 6 |
 | refinanciacion_acuerdo: partially covered | 4 |
 | datos_personales: partially covered | 4 |
 | pago_no_aplicado: partially covered | 3 |
@@ -133,9 +135,9 @@ Generated 2026-09-27T21:22:38Z by pipeline `0.4.0 (classify-v1, draft-v2)`, mode
 
 **certificados_extractos** — Certificados y extractos
 
-- MSG-132: No hay información sobre la emisión del certificado de retención en la fuente ni sobre si Lumo lo expide.; No se indica cómo ni cuándo el cliente podría obtener ese certificado del año anterior.
-- MSG-145: Certificado de deuda actual con desglose de capital e intereses causados
-- MSG-171: El certificado de saldo a la fecha no está contemplado entre los certificados disponibles descritos.
+- MSG-132: No hay información sobre la emisión del certificado de retención en la fuente ni sobre si Lumo lo expide.; No se indica cómo ni cuándo el cliente podría obtener ese certificado del año anterior.; Only paz y salvo / al día, the payment statement and the interest certificate exist in the policy; other certificates need an agent.
+- MSG-145: Certificado de deuda actual con desglose de capital e intereses causados; Only paz y salvo / al día, the payment statement and the interest certificate exist in the policy; other certificates need an agent.
+- MSG-171: El certificado de saldo a la fecha no está contemplado entre los certificados disponibles descritos.; Only paz y salvo / al día, the payment statement and the interest certificate exist in the policy; other certificates need an agent.
 - MSG-232: El envío de los documentos al correo electrónico del cliente.
 - MSG-262: Si el certificado puede enviarse al correo electrónico del cliente.
 - MSG-328: Si el extracto puede enviarse directamente al correo del cliente.
@@ -147,6 +149,15 @@ Generated 2026-09-27T21:22:38Z by pipeline `0.4.0 (classify-v1, draft-v2)`, mode
 - MSG-321: Los pasos exactos para activar el plan de pagos desde la app.
 - MSG-338: Si se permite renegociar un acuerdo de pago por segunda vez y bajo qué condiciones.
 
+**cuenta_y_app** — Cuenta y app
+
+- MSG-146: The policy has no password flow (login is document + OTP); a support case is opened.
+- MSG-166: The policy has no password flow (login is document + OTP); a support case is opened.
+- MSG-224: The policy has no password flow (login is document + OTP); a support case is opened.
+- MSG-260: The policy has no password flow (login is document + OTP); a support case is opened.
+- MSG-309: The policy has no password flow (login is document + OTP); a support case is opened.
+- MSG-368: The policy has no password flow (login is document + OTP); a support case is opened.
+
 **fecha_de_pago** — Fecha de pago
 
 - MSG-153: Confirmación de la fecha exacta de vencimiento de la cuota del mes para el crédito 8902.; Aclaración sobre la diferencia entre la fecha mostrada en la app y la del mensaje recibido.
@@ -155,10 +166,10 @@ Generated 2026-09-27T21:22:38Z by pipeline `0.4.0 (classify-v1, draft-v2)`, mode
 
 **datos_personales** — Datos personales
 
-- MSG-169: Cómo actualizar la dirección de residencia en el perfil
-- MSG-228: Cómo actualizar la dirección de residencia
-- MSG-285: Cómo actualizar la dirección de residencia en el sistema de Lumo.; Cómo actualizar la ciudad de residencia en el sistema de Lumo.
-- MSG-327: Cómo corregir o actualizar la dirección registrada en los datos personales.
+- MSG-169: Cómo actualizar la dirección de residencia en el perfil; Address changes are not covered by the policy (only phone and e-mail).
+- MSG-228: Cómo actualizar la dirección de residencia; Address changes are not covered by the policy (only phone and e-mail).
+- MSG-285: Cómo actualizar la dirección de residencia en el sistema de Lumo.; Cómo actualizar la ciudad de residencia en el sistema de Lumo.; Address changes are not covered by the policy (only phone and e-mail).
+- MSG-327: Cómo corregir o actualizar la dirección registrada en los datos personales.; Address changes are not covered by the policy (only phone and e-mail).
 
 **queja_reclamo** — Queja o reclamo (PQR)
 
@@ -179,11 +190,12 @@ Generated 2026-09-27T21:22:38Z by pipeline `0.4.0 (classify-v1, draft-v2)`, mode
 
 **metodos_de_pago** — Métodos de pago
 
-- MSG-216: Si es posible pagar con Nequi.
-- MSG-217: Si es posible pagar en Baloto
-- MSG-340: El número de cuenta bancaria para hacer transferencia.; El link de pago solicitado.
+- MSG-216: Si es posible pagar con Nequi.; Payment rails other than PSE, cards, Efecty and bank correspondents (Nequi, Daviplata, Baloto, transfers, payment links) are not in the policy.
+- MSG-217: Si es posible pagar en Baloto; Payment rails other than PSE, cards, Efecty and bank correspondents (Nequi, Daviplata, Baloto, transfers, payment links) are not in the policy.
+- MSG-323: Payment rails other than PSE, cards, Efecty and bank correspondents (Nequi, Daviplata, Baloto, transfers, payment links) are not in the policy.
+- MSG-340: El número de cuenta bancaria para hacer transferencia.; El link de pago solicitado.; Payment rails other than PSE, cards, Efecty and bank correspondents (Nequi, Daviplata, Baloto, transfers, payment links) are not in the policy.
 - MSG-352: La ruta exacta dentro de la app para llegar a la opción de pago con PSE.
-- MSG-376: Si se puede pagar en Baloto.
+- MSG-376: Si se puede pagar en Baloto.; Payment rails other than PSE, cards, Efecty and bank correspondents (Nequi, Daviplata, Baloto, transfers, payment links) are not in the policy.
 
 **mora_intereses** — Mora e intereses de mora
 

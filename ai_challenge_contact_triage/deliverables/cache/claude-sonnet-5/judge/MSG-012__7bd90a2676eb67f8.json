@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.002889,
+ "effort": "medium",
+ "fingerprint": "7bd90a2676eb67f8",
+ "item_id": "MSG-012",
+ "label": "judge",
+ "latency_ms": 2287,
+ "model_requested": "claude-sonnet-5",
+ "recorded_at": "2026-09-27T21:43:24Z",
+ "request_id": "req_011CfUg39NrLhsdSgzdbfHM8",
+ "response": {
+  "content": [
+   {
+    "text": "{\"grounded\":true,\"answers_request\":true,\"no_forbidden_promise\":true,\"tone_ok\":true,\"overall_ok\":true,\"issues\":[],\"reasoning_brief\":\"El draft refleja fielmente la sección citada: escala a Pagos, no confirma devolución, pide comprobante, menciona plazo de 5 días hábiles. Tono cálido, sin culpar al cliente, sin promesas prohibidas.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-sonnet-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1127,
+   "input_tokens": 587,
+   "output_tokens": 149
+  }
+ }
+}

@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.002021,
+ "effort": null,
+ "fingerprint": "a826ebec60c112db",
+ "item_id": "MSG-295",
+ "label": "classify",
+ "latency_ms": 4612,
+ "model_requested": "claude-haiku-4-5",
+ "recorded_at": "2026-09-27T21:54:08Z",
+ "request_id": "req_011CfUgrRbEHStZZYYsbce3G",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"fraude_seguridad\",\"secondary_reasons\":[],\"confidence\":0.95,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":false,\"fraud_or_security\":true,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"negative\",\"language\":\"es\",\"summary\":\"El cliente reporta que le robaron el celular con la aplicación Lumo instalada y solicita bloquear su cuenta.\",\"reasoning_brief\":\"Se trata de un incidente de seguridad claro (pérdida de dispositivo con acceso a la app) que requiere protección inmediata de la cuenta. La flag fraud_or_security se activa por el robo del teléfono con la aplicación activa, identificado como riesgo prioritario en la política.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-haiku-4-5-20251001",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 5767,
+   "input_tokens": 59,
+   "output_tokens": 277
+  }
+ }
+}

@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.001947,
+ "effort": null,
+ "fingerprint": "9ea61a3d38a5b3d0",
+ "item_id": "MSG-344",
+ "label": "classify",
+ "latency_ms": 3190,
+ "model_requested": "claude-haiku-4-5",
+ "recorded_at": "2026-09-27T21:54:16Z",
+ "request_id": "req_011CfUgs8RtRP6VRCMU6NyrS",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\": \"privacidad_habeas_data\", \"secondary_reasons\": [], \"confidence\": 0.95, \"out_of_scope_kind\": null, \"flags\": {\"requests_human\": false, \"fraud_or_security\": false, \"legal_threat\": false, \"collections_harassment\": false, \"vulnerable_customer\": false, \"imminent_deadline\": false, \"repeat_contact\": false, \"prompt_injection_suspected\": false, \"pii_present\": false}, \"entities\": {\"credit_number\": null, \"document_number\": null, \"amount\": null, \"payment_date\": null, \"transaction_reference\": null, \"payment_method_or_bank\": null, \"named_agent\": null, \"masked_values\": []}, \"sentiment\": \"neutral\", \"language\": \"es\", \"summary\": \"El cliente pregunta qué datos personales tiene Lumo almacenados y para qué los utiliza.\", \"reasoning_brief\": \"Es una solicitud explícita sobre privacidad y manejo de datos personales, regulada por habeas data. Requiere atención legal especializada, no un chatbot.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-haiku-4-5-20251001",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 5767,
+   "input_tokens": 50,
+   "output_tokens": 264
+  }
+ }
+}

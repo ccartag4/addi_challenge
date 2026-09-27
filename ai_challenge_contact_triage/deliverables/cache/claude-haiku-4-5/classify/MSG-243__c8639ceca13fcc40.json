@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.001986,
+ "effort": null,
+ "fingerprint": "c8639ceca13fcc40",
+ "item_id": "MSG-243",
+ "label": "classify",
+ "latency_ms": 3086,
+ "model_requested": "claude-haiku-4-5",
+ "recorded_at": "2026-09-27T21:53:54Z",
+ "request_id": "req_011CfUgqWDGY3gf9q1ULp4Av",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\": \"hablar_con_humano\", \"secondary_reasons\": [], \"confidence\": 0.99, \"out_of_scope_kind\": null, \"flags\": {\"requests_human\": true, \"fraud_or_security\": false, \"legal_threat\": false, \"collections_harassment\": false, \"vulnerable_customer\": false, \"imminent_deadline\": false, \"repeat_contact\": false, \"prompt_injection_suspected\": false, \"pii_present\": false}, \"entities\": {\"credit_number\": null, \"document_number\": null, \"amount\": null, \"payment_date\": null, \"transaction_reference\": null, \"payment_method_or_bank\": null, \"named_agent\": null, \"masked_values\": []}, \"sentiment\": \"neutral\", \"language\": \"es\", \"summary\": \"El cliente solicita hablar con un asesor humano en lugar del bot.\", \"reasoning_brief\": \"El cliente explícitamente rechaza la interacción con el bot y pide un asesor humano. No hay ninguna otra solicitud o problema descrito, por lo que hablar_con_humano es la razón primaria.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-haiku-4-5-20251001",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 5767,
+   "input_tokens": 59,
+   "output_tokens": 270
+  }
+ }
+}

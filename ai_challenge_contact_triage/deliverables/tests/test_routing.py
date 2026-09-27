@@ -137,6 +137,18 @@ def test_wanting_a_person_and_being_off_topic_are_not_policy_gaps():
     assert routing.route(cls("intereses_y_cargos")).decision.policy_gap.startswith("The knowledge base has no policy")
 
 
+def test_known_policy_gaps_are_detected_by_pattern():
+    assert routing.known_gaps("cuenta_y_app", "no puedo entrar me dice contraseña incorrecta")
+    assert routing.known_gaps("cuenta_y_app", "no me llega el codigo de verificacion") == []
+    assert routing.known_gaps("metodos_de_pago", "puedo pagar por Nequi?") and routing.known_gaps("metodos_de_pago", "puedo pagar en efecty?") == []
+    assert routing.known_gaps("datos_personales", "quiero cambiar mi direccion de residencia")
+    assert routing.known_gaps("certificados_extractos", "necesito el certificado de retencion en la fuente")
+    assert routing.known_gaps("pago_no_aplicado", "contraseña") == []          # patterns are bound to their reason
+    for reason, items in routing.KNOWN_GAPS.items():
+        for pattern, gap in items:
+            assert gap.endswith(".") and pattern.pattern, reason
+
+
 def test_missing_classification_is_routed_to_a_person():
     plan = routing.route(None)
     d = plan.decision

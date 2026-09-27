@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.002949,
+ "effort": "medium",
+ "fingerprint": "ccd625a6ec001c33",
+ "item_id": "MSG-116",
+ "label": "judge",
+ "latency_ms": 2203,
+ "model_requested": "claude-sonnet-5",
+ "recorded_at": "2026-09-27T21:50:41Z",
+ "request_id": "req_011CfUgbPKPpMt2CWiaUTA79",
+ "response": {
+  "content": [
+   {
+    "text": "{\"grounded\":true,\"answers_request\":true,\"no_forbidden_promise\":true,\"tone_ok\":true,\"overall_ok\":true,\"issues\":[],\"reasoning_brief\":\"Draft accurately reflects cited sections on cancellation requiring paz y salvo and advisor handling, plus prepayment info. It routes to an advisor, uses warm tú tone, no forbidden promises or invented facts.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-sonnet-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1127,
+   "input_tokens": 667,
+   "output_tokens": 139
+  }
+ }
+}

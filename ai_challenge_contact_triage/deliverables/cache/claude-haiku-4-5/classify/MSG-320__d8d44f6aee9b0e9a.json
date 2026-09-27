@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.001172,
+ "effort": null,
+ "fingerprint": "d8d44f6aee9b0e9a",
+ "item_id": "MSG-320",
+ "label": "classify",
+ "latency_ms": 2108,
+ "model_requested": "claude-haiku-4-5",
+ "recorded_at": "2026-09-27T21:54:13Z",
+ "request_id": "req_011CfUgryPfmtQTZSGbFFoFv",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"no_puede_pagar\",\"confidence\":0.92,\"summary\":\"El cliente solicita pagar la cuota en dos parcialidades debido a otros gastos este mes.\",\"reasoning_brief\":\"El cliente indica dificultad económica temporal (otros gastos) y pide aplazar o fraccionamiento de pago, lo cual es característica de no_puede_pagar. No solicita refinanciación formal ni pago anticipado.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-haiku-4-5-20251001",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 5767,
+   "input_tokens": 65,
+   "output_tokens": 106
+  }
+ }
+}

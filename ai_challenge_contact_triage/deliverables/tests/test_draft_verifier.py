@@ -231,6 +231,18 @@ def test_pipeline_records_policy_gaps_from_the_draft(tmp_path, by_id, kb):
     assert rec2.decision.action == "route_to_human" and rec2.draft_reply.text is None and "DRAFT_NOT_ANSWERABLE" in rec2.processing.rules_applied
 
 
+def test_pipeline_opens_a_case_for_a_known_policy_gap(tmp_path, by_id, kb):
+    """MSG-166: password question answered with the OTP flow; the known gap still opens a support case."""
+    otp_reply = ("¡Hola! El ingreso a la app es con tu documento y un código de verificación (OTP) que llega por SMS al "
+                 "celular registrado. Verifica que ese número sea el correcto, espera 1 minuto y vuelve a intentar. Quedamos atentos.")
+    llm, _ = make_llm(tmp_path, [body(classification_json(primary_reason="cuenta_y_app")),
+                                 body(draft_json(text=otp_reply, citations=("cuenta_app_seguridad.acceso_otp",)))])
+    rec = pipeline.run([by_id["MSG-166"]], llm, kb, max_workers=1)[0]
+    assert rec.decision.action == "auto_reply_and_route" and rec.decision.queue == "soporte_tecnico"
+    assert "password flow" in rec.decision.policy_gap and {"KNOWN_GAP", "GAP_ROUTED"} <= set(rec.processing.rules_applied)
+    assert rec.draft_reply.text == otp_reply                                   # the covered part is still answered
+
+
 def test_pipeline_handles_rules_templates_and_failures_without_the_model(tmp_path, by_id, kb):
     llm, fake = make_llm(tmp_path, [body(classification_json(primary_reason="consulta_saldo_cuotas", flags=Flags(fraud_or_security=True)))])
     recs = pipeline.run([by_id["MSG-192"], by_id["MSG-119"], by_id["MSG-016"]], llm, kb, max_workers=2)

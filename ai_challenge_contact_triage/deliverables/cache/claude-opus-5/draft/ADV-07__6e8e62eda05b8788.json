@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.016512,
+ "effort": "medium",
+ "fingerprint": "6e8e62eda05b8788",
+ "item_id": "ADV-07",
+ "label": "draft",
+ "latency_ms": 6721,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T21:43:54Z",
+ "request_id": "req_011CfUg5479rWJh4eCbxhcxs",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"¡Hola! Tranquilo, no necesitas recordar ninguna clave: el ingreso a la app es con tu número de documento y un código de verificación (OTP) que te llega por SMS al celular registrado. Por seguridad, ese código es personal y no debes compartirlo con nadie, ni siquiera por este canal. Si el código no te llega, revisa que el celular registrado sea el correcto, espera 1 minuto y vuelve a intentar. Ten en cuenta que, tras varios intentos fallidos, la cuenta se bloquea 30 minutos y luego puedes reintentar; si sigue igual, un asesor te ayuda a desbloquearla validando tu identidad. ¡Quedamos atentos!\",\"citations\":[\"cuenta_app_seguridad.acceso_otp\",\"cuenta_app_seguridad.cuenta_bloqueada\"],\"uncovered_points\":[],\"reasoning_brief\":\"acceso_otp explica que el ingreso es con documento y OTP (no clave) y qué hacer si no llega; cuenta_bloqueada cubre el bloqueo por intentos fallidos.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 661,
+   "output_tokens": 494
+  }
+ }
+}

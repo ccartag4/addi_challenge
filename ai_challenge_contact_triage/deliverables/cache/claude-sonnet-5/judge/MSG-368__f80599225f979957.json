@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.003417,
+ "effort": "medium",
+ "fingerprint": "f80599225f979957",
+ "item_id": "MSG-368",
+ "label": "judge",
+ "latency_ms": 2351,
+ "model_requested": "claude-sonnet-5",
+ "recorded_at": "2026-09-27T21:52:22Z",
+ "request_id": "req_011CfUgip3sLL7T6FqNmpdit",
+ "response": {
+  "content": [
+   {
+    "text": "{\"grounded\": true, \"answers_request\": true, \"no_forbidden_promise\": true, \"tone_ok\": true, \"overall_ok\": true, \"issues\": [], \"reasoning_brief\": \"Draft correctly explains the OTP-based login (no password), covers lockout, app troubleshooting, and escalation, all matching cited sections. No invented data, no forbidden promises, warm tone in tú form.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-sonnet-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1127,
+   "input_tokens": 926,
+   "output_tokens": 134
+  }
+ }
+}

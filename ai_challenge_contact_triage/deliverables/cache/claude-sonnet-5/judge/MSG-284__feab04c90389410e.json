@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.002351,
+ "effort": "medium",
+ "fingerprint": "feab04c90389410e",
+ "item_id": "MSG-284",
+ "label": "judge",
+ "latency_ms": 2100,
+ "model_requested": "claude-sonnet-5",
+ "recorded_at": "2026-09-27T21:51:49Z",
+ "request_id": "req_011CfUggNGXn52zxFr9ZuHjH",
+ "response": {
+  "content": [
+   {
+    "text": "{\"grounded\":true,\"answers_request\":true,\"no_forbidden_promise\":true,\"tone_ok\":true,\"overall_ok\":true,\"issues\":[],\"reasoning_brief\":\"Draft follows cited steps exactly, escalates appropriately, confirms web payment as stated by customer, warm tone in tú form, no invented facts or promises.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-sonnet-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1127,
+   "input_tokens": 473,
+   "output_tokens": 118
+  }
+ }
+}

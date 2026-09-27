@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.002062,
+ "effort": null,
+ "fingerprint": "eebaef6170d590f9",
+ "item_id": "MSG-310",
+ "label": "classify",
+ "latency_ms": 3317,
+ "model_requested": "claude-haiku-4-5",
+ "recorded_at": "2026-09-27T21:54:11Z",
+ "request_id": "req_011CfUgrkyoNKRUmr5LnYqaN",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\": \"datos_personales\", \"secondary_reasons\": [], \"confidence\": 0.95, \"out_of_scope_kind\": null, \"flags\": {\"requests_human\": false, \"fraud_or_security\": false, \"legal_threat\": false, \"collections_harassment\": false, \"vulnerable_customer\": false, \"imminent_deadline\": false, \"repeat_contact\": false, \"prompt_injection_suspected\": false, \"pii_present\": false}, \"entities\": {\"credit_number\": null, \"document_number\": null, \"amount\": null, \"payment_date\": null, \"transaction_reference\": null, \"payment_method_or_bank\": null, \"named_agent\": null, \"masked_values\": []}, \"sentiment\": \"neutral\", \"language\": \"es\", \"summary\": \"El cliente necesita actualizar su número de celular y correo electrónico en el sistema.\", \"reasoning_brief\": \"La solicitud es clara: el cliente requiere cambiar sus datos de contacto (celular y correo) porque cambió de número recientemente. Esto cae directamente en la categoría datos_personales, que cubre actualizaciones de teléfono y correo a través de la app.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-haiku-4-5-20251001",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 5767,
+   "input_tokens": 65,
+   "output_tokens": 284
+  }
+ }
+}

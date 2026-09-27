@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.002815,
+ "effort": "medium",
+ "fingerprint": "fc8c6c8558837fbf",
+ "item_id": "MSG-150",
+ "label": "judge",
+ "latency_ms": 2431,
+ "model_requested": "claude-sonnet-5",
+ "recorded_at": "2026-09-27T21:50:53Z",
+ "request_id": "req_011CfUgcF8YmBeE7SJpE7VZ3",
+ "response": {
+  "content": [
+   {
+    "text": "{\"grounded\":true,\"answers_request\":true,\"no_forbidden_promise\":true,\"tone_ok\":true,\"overall_ok\":true,\"issues\":[],\"reasoning_brief\":\"El draft explica correctamente que no hay acceso a datos de cuenta desde este canal, remite a la app para ver la fecha exacta, y añade info correcta sobre cambio de fecha una vez al año. Tono cálido y natural, sin promesas prohibidas.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-sonnet-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1127,
+   "input_tokens": 515,
+   "output_tokens": 156
+  }
+ }
+}

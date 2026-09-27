@@ -17,7 +17,7 @@ from .draft import DRAFT_PROMPT_VERSION, draft_reply
 from .kb import KnowledgeBase, load_kb
 from .llm import LLMClient, LLMResult
 from .normalize import Message
-from .routing import ROUTING, Plan, route
+from .routing import ROUTING, Plan, known_gaps, route
 from .schema import Dedup, DraftReply, Processing, TriageRecord
 from .verify import DraftCheckInput, failed_checks, verify
 
@@ -94,6 +94,18 @@ def triage_message(cm: ClassifiedMessage, llm: LLMClient, kb: KnowledgeBase) -> 
                 draft = DraftReply(text=None, source="none", kb_citations=out.citations, verifier=check, rejected_text=out.reply_text)
                 decision.action = "route_to_human"
                 codes += [f"VERIFIER_{c.upper()}" for c in failed_checks(check)]
+
+    # known policy holes detected by pattern in the customer's text (taxonomy.yaml known_gaps)
+    if cls is not None:
+        for gap in known_gaps(cls.primary_reason.value, m.text):
+            if gap not in (decision.policy_gap or ""):
+                decision.policy_gap = f"{decision.policy_gap}; {gap}" if decision.policy_gap else gap
+                codes.append("KNOWN_GAP")
+            if decision.action == "auto_reply" and draft.text:
+                decision.action = "auto_reply_and_route"
+                decision.queue = _human_queue(plan)
+                if "GAP_ROUTED" not in codes:
+                    codes.append("GAP_ROUTED")
 
     # safety net: an auto action must carry a sendable reply
     if decision.action in ("auto_reply", "auto_reply_and_route") and not draft.text:

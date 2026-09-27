@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.002039,
+ "effort": null,
+ "fingerprint": "a75be351f3fb8f11",
+ "item_id": "MSG-039",
+ "label": "classify",
+ "latency_ms": 4629,
+ "model_requested": "claude-haiku-4-5",
+ "recorded_at": "2026-09-27T21:53:23Z",
+ "request_id": "req_011CfUgo7w1cBJsD3kmAgvVH",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\": \"certificados_extractos\", \"secondary_reasons\": [], \"confidence\": 0.92, \"out_of_scope_kind\": null, \"flags\": {\"requests_human\": false, \"fraud_or_security\": false, \"legal_threat\": false, \"collections_harassment\": false, \"vulnerable_customer\": false, \"imminent_deadline\": false, \"repeat_contact\": false, \"prompt_injection_suspected\": false, \"pii_present\": false}, \"entities\": {\"credit_number\": null, \"document_number\": null, \"amount\": null, \"payment_date\": null, \"transaction_reference\": null, \"payment_method_or_bank\": null, \"named_agent\": null, \"masked_values\": []}, \"sentiment\": \"neutral\", \"language\": \"es\", \"summary\": \"Solicita un certificado o extracto de intereses pagados en 2025 para un trámite.\", \"reasoning_brief\": \"El cliente pide explícitamente un detalle de intereses pagados, que corresponde a uno de los tres certificados cubiertos por la política (extracto de pagos e intereses para declaración de renta). Es una solicitud clara de documentación.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-haiku-4-5-20251001",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 5767,
+   "input_tokens": 62,
+   "output_tokens": 280
+  }
+ }
+}

@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.001998,
+ "effort": null,
+ "fingerprint": "5afee33c4905d82d",
+ "item_id": "MSG-115",
+ "label": "classify",
+ "latency_ms": 3347,
+ "model_requested": "claude-haiku-4-5",
+ "recorded_at": "2026-09-27T21:53:27Z",
+ "request_id": "req_011CfUgoV2mYPmfNdKY4YAc2",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\": \"felicitacion_feedback\", \"secondary_reasons\": [], \"confidence\": 0.95, \"out_of_scope_kind\": null, \"flags\": {\"requests_human\": false, \"fraud_or_security\": false, \"legal_threat\": false, \"collections_harassment\": false, \"vulnerable_customer\": false, \"imminent_deadline\": false, \"repeat_contact\": false, \"prompt_injection_suspected\": false, \"pii_present\": false}, \"entities\": {\"credit_number\": null, \"document_number\": null, \"amount\": null, \"payment_date\": null, \"transaction_reference\": null, \"payment_method_or_bank\": null, \"named_agent\": null, \"masked_values\": []}, \"sentiment\": \"positive\", \"language\": \"es\", \"summary\": \"Cliente felicita a Lumo por la facilidad de la app y la rapidez de aprobación.\", \"reasoning_brief\": \"El mensaje es elogio explícito de la app y el servicio (facilidad y velocidad de aprobación), sin solicitud de acción. Corresponde a felicitación positiva sin necesidad de respuesta operativa.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-haiku-4-5-20251001",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 5767,
+   "input_tokens": 61,
+   "output_tokens": 272
+  }
+ }
+}

@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.002087,
+ "effort": null,
+ "fingerprint": "7480c6faddc4ab1c",
+ "item_id": "MSG-259",
+ "label": "classify",
+ "latency_ms": 3472,
+ "model_requested": "claude-haiku-4-5",
+ "recorded_at": "2026-09-27T21:54:03Z",
+ "request_id": "req_011CfUgrAFkU9WqFzC6FDRFM",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\": \"reporte_centrales\", \"secondary_reasons\": [], \"confidence\": 0.85, \"out_of_scope_kind\": null, \"flags\": {\"requests_human\": false, \"fraud_or_security\": false, \"legal_threat\": false, \"collections_harassment\": false, \"vulnerable_customer\": false, \"imminent_deadline\": true, \"repeat_contact\": false, \"prompt_injection_suspected\": false, \"pii_present\": false}, \"entities\": {\"credit_number\": null, \"document_number\": null, \"amount\": null, \"payment_date\": null, \"transaction_reference\": null, \"payment_method_or_bank\": null, \"named_agent\": null, \"masked_values\": []}, \"sentiment\": \"negative\", \"language\": \"es\", \"summary\": \"El cliente fue reportado a Datacredito por una cuota que ya pagó y solicita que se quite el reporte urgentemente.\", \"reasoning_brief\": \"El mensaje trata sobre un reporte a centrales de riesgo por una cuota ya pagada, que es reporte_centrales. El cliente expresa urgencia ('urgente'), lo que activa la bandera imminent_deadline por la sensación de prisa en resolver el problema.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-haiku-4-5-20251001",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 5767,
+   "input_tokens": 60,
+   "output_tokens": 290
+  }
+ }
+}

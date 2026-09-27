@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.002759,
+ "effort": "medium",
+ "fingerprint": "67d56a7335bc5e1b",
+ "item_id": "MSG-318",
+ "label": "judge",
+ "latency_ms": 2270,
+ "model_requested": "claude-sonnet-5",
+ "recorded_at": "2026-09-27T21:52:07Z",
+ "request_id": "req_011CfUghfRS5UtkNhSc3PLJf",
+ "response": {
+  "content": [
+   {
+    "text": "{\"grounded\":true,\"answers_request\":true,\"no_forbidden_promise\":true,\"tone_ok\":true,\"overall_ok\":true,\"issues\":[],\"reasoning_brief\":\"El draft se basa correctamente en la sección citada, dirige al cliente a la app y explica que se requiere validar identidad para compartir datos por este canal, sin prometer nada indebido. Tono cálido y apropiado.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-sonnet-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1127,
+   "input_tokens": 567,
+   "output_tokens": 140
+  }
+ }
+}

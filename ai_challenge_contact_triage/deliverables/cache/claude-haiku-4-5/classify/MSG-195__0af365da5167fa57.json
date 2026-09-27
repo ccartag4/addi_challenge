@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.002006,
+ "effort": null,
+ "fingerprint": "0af365da5167fa57",
+ "item_id": "MSG-195",
+ "label": "classify",
+ "latency_ms": 4237,
+ "model_requested": "claude-haiku-4-5",
+ "recorded_at": "2026-09-27T21:53:49Z",
+ "request_id": "req_011CfUgq4N1WP5df5NWcehwH",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"pago_no_aplicado\",\"secondary_reasons\":[\"mora_intereses\"],\"confidence\":0.92,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":true,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"negative\",\"language\":\"es\",\"summary\":\"El cliente pagó pero el pago no se aplicó y ahora le están cobrando mora; quiere hablar con una persona.\",\"reasoning_brief\":\"Es un caso de pago no aplicado porque el cliente dice que pagó y el saldo sigue pendiente, generando un cobro de mora que considera injusto. Además solicita explícitamente hablar con alguien, por lo que se activa el flag requests_human.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-haiku-4-5-20251001",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 5767,
+   "input_tokens": 69,
+   "output_tokens": 272
+  }
+ }
+}

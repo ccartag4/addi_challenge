@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.001222,
+ "effort": null,
+ "fingerprint": "c3e49b996419b584",
+ "item_id": "MSG-217",
+ "label": "classify",
+ "latency_ms": 1937,
+ "model_requested": "claude-haiku-4-5",
+ "recorded_at": "2026-09-27T21:53:50Z",
+ "request_id": "req_011CfUgqLAH9P5rGrNBNYq2t",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"metodos_de_pago\",\"confidence\":0.95,\"summary\":\"Cliente pregunta dónde y cómo pagar la cuota, específicamente si puede hacerlo en Efecty o Baloto.\",\"reasoning_brief\":\"El cliente consulta métodos de pago aceptados, mencionando dos medios específicos (Efecty y Baloto). Esta es una pregunta directa sobre opciones de pago, que cae bajo metodos_de_pago.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-haiku-4-5-20251001",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 5767,
+   "input_tokens": 55,
+   "output_tokens": 118
+  }
+ }
+}

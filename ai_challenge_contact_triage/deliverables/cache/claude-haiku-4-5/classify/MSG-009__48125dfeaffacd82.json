@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.00201,
+ "effort": null,
+ "fingerprint": "48125dfeaffacd82",
+ "item_id": "MSG-009",
+ "label": "classify",
+ "latency_ms": 4487,
+ "model_requested": "claude-haiku-4-5",
+ "recorded_at": "2026-09-27T21:53:13Z",
+ "request_id": "req_011CfUgnRtEXiNRWVQuoKwVJ",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\": \"certificados_extractos\", \"secondary_reasons\": [], \"confidence\": 0.95, \"out_of_scope_kind\": null, \"flags\": {\"requests_human\": false, \"fraud_or_security\": false, \"legal_threat\": false, \"collections_harassment\": false, \"vulnerable_customer\": false, \"imminent_deadline\": false, \"repeat_contact\": false, \"prompt_injection_suspected\": false, \"pii_present\": false}, \"entities\": {\"credit_number\": null, \"document_number\": null, \"amount\": null, \"payment_date\": null, \"transaction_reference\": null, \"payment_method_or_bank\": null, \"named_agent\": null, \"masked_values\": []}, \"sentiment\": \"neutral\", \"language\": \"es\", \"summary\": \"Cliente solicita un certificado de que está al día con su crédito para un trámite.\", \"reasoning_brief\": \"La solicitud es clara: el cliente necesita un certificado de estar al día, que es uno de los documentos específicos cubiertos por la política. Pregunta dónde solicitarlo, lo que requiere una respuesta sobre el proceso.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-haiku-4-5-20251001",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 5767,
+   "input_tokens": 68,
+   "output_tokens": 273
+  }
+ }
+}

@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.002851,
+ "effort": "medium",
+ "fingerprint": "2f74150bb880bdcb",
+ "item_id": "MSG-121",
+ "label": "judge",
+ "latency_ms": 2570,
+ "model_requested": "claude-sonnet-5",
+ "recorded_at": "2026-09-27T21:50:44Z",
+ "request_id": "req_011CfUgbYkfsYFH62WVfAmcb",
+ "response": {
+  "content": [
+   {
+    "text": "{\"grounded\":true,\"answers_request\":true,\"no_forbidden_promise\":true,\"tone_ok\":true,\"overall_ok\":true,\"issues\":[],\"reasoning_brief\":\"El draft usa correctamente la sección citada, distingue entre extracto de pagos y certificado de intereses, ofrece los canales y el plazo de 2 días hábiles sin inventar datos ni prometer nada indebido. Tono cálido y en tú.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-sonnet-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1127,
+   "input_tokens": 553,
+   "output_tokens": 152
+  }
+ }
+}

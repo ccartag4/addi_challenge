@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.00194,
+ "effort": null,
+ "fingerprint": "dd51b0cf49187eaa",
+ "item_id": "MSG-110",
+ "label": "classify",
+ "latency_ms": 3330,
+ "model_requested": "claude-haiku-4-5",
+ "recorded_at": "2026-09-27T21:53:25Z",
+ "request_id": "req_011CfUgoPWsu6ZdtEkb7CjSh",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\": \"datos_personales\", \"secondary_reasons\": [], \"confidence\": 0.95, \"out_of_scope_kind\": null, \"flags\": {\"requests_human\": false, \"fraud_or_security\": false, \"legal_threat\": false, \"collections_harassment\": false, \"vulnerable_customer\": false, \"imminent_deadline\": false, \"repeat_contact\": false, \"prompt_injection_suspected\": false, \"pii_present\": false}, \"entities\": {\"credit_number\": null, \"document_number\": null, \"amount\": null, \"payment_date\": null, \"transaction_reference\": null, \"payment_method_or_bank\": null, \"named_agent\": null, \"masked_values\": []}, \"sentiment\": \"neutral\", \"language\": \"es\", \"summary\": \"Cliente quiere actualizar su número de teléfono en la cuenta porque cambió de número.\", \"reasoning_brief\": \"La solicitud es explícitamente sobre actualizar datos personales (número telefónico). Es un trámite cubierto por la política que se gestiona desde la app, sección Mi perfil.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-haiku-4-5-20251001",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 5767,
+   "input_tokens": 58,
+   "output_tokens": 261
+  }
+ }
+}

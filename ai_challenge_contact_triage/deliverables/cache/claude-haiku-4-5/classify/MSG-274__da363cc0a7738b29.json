@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.002038,
+ "effort": null,
+ "fingerprint": "da363cc0a7738b29",
+ "item_id": "MSG-274",
+ "label": "classify",
+ "latency_ms": 4299,
+ "model_requested": "claude-haiku-4-5",
+ "recorded_at": "2026-09-27T21:54:03Z",
+ "request_id": "req_011CfUgr7Dgcrt2niSW2bhwt",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"refinanciacion_acuerdo\",\"secondary_reasons\":[\"mora_intereses\"],\"confidence\":0.85,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":true,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"negative\",\"language\":\"es\",\"summary\":\"Cliente atrasado en 2 cuotas solicita un acuerdo de pago y se queja de llamadas diarias.\",\"reasoning_brief\":\"La solicitud principal es un acuerdo de pago para reestructurar la deuda. El atraso en las cuotas y las llamadas diarias establecen una situación de mora con posible harassment de cobranza, justificando las banderas collections_harassment y mora_intereses como secundaria.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-haiku-4-5-20251001",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 5767,
+   "input_tokens": 66,
+   "output_tokens": 279
+  }
+ }
+}

@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.002475,
+ "effort": "medium",
+ "fingerprint": "97d7df88772704d3",
+ "item_id": "MSG-110",
+ "label": "judge",
+ "latency_ms": 2562,
+ "model_requested": "claude-sonnet-5",
+ "recorded_at": "2026-09-27T21:50:36Z",
+ "request_id": "req_011CfUgb1HKuT7q3qs39Waz7",
+ "response": {
+  "content": [
+   {
+    "text": "{\"grounded\":true,\"answers_request\":true,\"no_forbidden_promise\":true,\"tone_ok\":true,\"overall_ok\":true,\"issues\":[],\"reasoning_brief\":\"El draft indica correctamente cómo actualizar el celular desde la app, coincide con la sección citada, no promete nada indebido y mantiene tono cálido en español informal.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-sonnet-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1127,
+   "input_tokens": 510,
+   "output_tokens": 123
+  }
+ }
+}

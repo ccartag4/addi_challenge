@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.003153,
+ "effort": "medium",
+ "fingerprint": "94da6c2a7fb2ddf8",
+ "item_id": "MSG-155",
+ "label": "judge",
+ "latency_ms": 2626,
+ "model_requested": "claude-sonnet-5",
+ "recorded_at": "2026-09-27T21:51:01Z",
+ "request_id": "req_011CfUgcnFoaPZDmydvSq8jz",
+ "response": {
+  "content": [
+   {
+    "text": "{\"grounded\":true,\"answers_request\":true,\"no_forbidden_promise\":true,\"tone_ok\":true,\"overall_ok\":true,\"issues\":[],\"reasoning_brief\":\"El borrador refleja fielmente las secciones citadas, ofrece acuerdo de pago vía equipo de Cartera, no promete montos ni condonación, y mantiene tono cálido y empático sin culpar al cliente.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-sonnet-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1127,
+   "input_tokens": 754,
+   "output_tokens": 142
+  }
+ }
+}

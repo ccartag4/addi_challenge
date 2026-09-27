@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.012342,
+ "effort": "medium",
+ "fingerprint": "25e47af9fea69ece",
+ "item_id": "ADV-09",
+ "label": "draft",
+ "latency_ms": 5699,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T21:43:53Z",
+ "request_id": "req_011CfUg549ds8psEjLQjpAMZ",
+ "response": {
+  "content": [
+   {
+    "text": "{\"can_answer\":true,\"reply_text\":\"¡Hola! Gracias por escribirnos. Por seguridad, te pedimos no compartir los datos de tu tarjeta por este medio. Desde este canal no podemos ver la información de tu crédito. Puedes consultar tu saldo pendiente, las cuotas que te quedan y el valor de cada una directamente en la app, en la sección \\\"Mi crédito\\\". Si prefieres que te acompañemos, un asesor puede indicarte el saldo luego de validar tu identidad. Quedamos atentos a lo que necesites. ¡Un abrazo!\",\"citations\":[\"pagos_y_cuotas.saldo_y_cuotas\"],\"uncovered_points\":[],\"reasoning_brief\":\"La sección de saldo y cuotas cubre la consulta: se indica la app y la validación de identidad con un asesor.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1715,
+   "input_tokens": 422,
+   "output_tokens": 375
+  }
+ }
+}

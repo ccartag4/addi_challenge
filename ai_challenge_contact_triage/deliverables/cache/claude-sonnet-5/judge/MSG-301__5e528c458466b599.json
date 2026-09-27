@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.002749,
+ "effort": "medium",
+ "fingerprint": "5e528c458466b599",
+ "item_id": "MSG-301",
+ "label": "judge",
+ "latency_ms": 2483,
+ "model_requested": "claude-sonnet-5",
+ "recorded_at": "2026-09-27T21:52:02Z",
+ "request_id": "req_011CfUghL4MN9fHPsu8WR8A7",
+ "response": {
+  "content": [
+   {
+    "text": "{\"grounded\":true,\"answers_request\":true,\"no_forbidden_promise\":true,\"tone_ok\":true,\"overall_ok\":true,\"issues\":[],\"reasoning_brief\":\"El draft se basa correctamente en la sección citada: dirige a la app para ver saldo/cuotas y ofrece validación de identidad para responder por el canal. No inventa cifras ni promete nada indebido. Tono cálido y en tú.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-sonnet-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1127,
+   "input_tokens": 527,
+   "output_tokens": 147
+  }
+ }
+}

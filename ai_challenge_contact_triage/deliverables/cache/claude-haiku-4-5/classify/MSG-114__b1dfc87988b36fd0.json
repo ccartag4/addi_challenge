@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.001875,
+ "effort": null,
+ "fingerprint": "b1dfc87988b36fd0",
+ "item_id": "MSG-114",
+ "label": "classify",
+ "latency_ms": 4018,
+ "model_requested": "claude-haiku-4-5",
+ "recorded_at": "2026-09-27T21:53:27Z",
+ "request_id": "req_011CfUgoUL75whM7vqgQPrC8",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"queja_reclamo\",\"secondary_reasons\":[],\"confidence\":0.95,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":true,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"negative\",\"language\":\"es\",\"summary\":\"Cliente desea presentar una queja formal por mal servicio después de tres días de llamadas sin resolución.\",\"reasoning_brief\":\"El cliente explícitamente solicita hacer una queja (PQR) y reporta múltiples contactos sin resolución, lo que constituye repeat_contact. El sentimiento es claramente negativo por la frustración expresada.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-haiku-4-5-20251001",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 5767,
+   "input_tokens": 63,
+   "output_tokens": 247
+  }
+ }
+}

@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.002074,
+ "effort": null,
+ "fingerprint": "676448882db5006c",
+ "item_id": "MSG-210",
+ "label": "classify",
+ "latency_ms": 4396,
+ "model_requested": "claude-haiku-4-5",
+ "recorded_at": "2026-09-27T21:53:52Z",
+ "request_id": "req_011CfUgqHKNVGv2xXtu4vi5H",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\": \"refinanciacion_acuerdo\", \"secondary_reasons\": [], \"confidence\": 0.95, \"out_of_scope_kind\": null, \"flags\": {\"requests_human\": false, \"fraud_or_security\": false, \"legal_threat\": false, \"collections_harassment\": false, \"vulnerable_customer\": false, \"imminent_deadline\": false, \"repeat_contact\": false, \"prompt_injection_suspected\": false, \"pii_present\": false}, \"entities\": {\"credit_number\": null, \"document_number\": null, \"amount\": null, \"payment_date\": null, \"transaction_reference\": null, \"payment_method_or_bank\": null, \"named_agent\": null, \"masked_values\": []}, \"sentiment\": \"neutral\", \"language\": \"es\", \"summary\": \"Cliente solicita refinanciar su deuda dividiéndola en más cuotas mediante un acuerdo de pago.\", \"reasoning_brief\": \"El cliente pide explícitamente un acuerdo de pago y refinanciación de la deuda, especificando el deseo de extender el plazo en más cuotas. Esta es una solicitud clara de reestructuración de la obligación.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-haiku-4-5-20251001",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 5767,
+   "input_tokens": 62,
+   "output_tokens": 287
+  }
+ }
+}

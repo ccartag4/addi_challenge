@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.003261,
+ "effort": "medium",
+ "fingerprint": "d1b7fa8a6526e47b",
+ "item_id": "MSG-259",
+ "label": "judge",
+ "latency_ms": 2486,
+ "model_requested": "claude-sonnet-5",
+ "recorded_at": "2026-09-27T21:51:39Z",
+ "request_id": "req_011CfUgfco7dpB1giQboPjGL",
+ "response": {
+  "content": [
+   {
+    "text": "{\"grounded\":true,\"answers_request\":true,\"no_forbidden_promise\":true,\"tone_ok\":true,\"overall_ok\":true,\"issues\":[],\"reasoning_brief\":\"El draft cita correctamente las secciones, no confirma error ni promete borrado, escala a Cartera y pide comprobante, tono cálido en tú, sin culpar al cliente.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-sonnet-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1127,
+   "input_tokens": 883,
+   "output_tokens": 127
+  }
+ }
+}

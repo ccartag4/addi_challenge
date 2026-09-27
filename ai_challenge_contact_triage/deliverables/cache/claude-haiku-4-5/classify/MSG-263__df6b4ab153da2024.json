@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.002106,
+ "effort": null,
+ "fingerprint": "df6b4ab153da2024",
+ "item_id": "MSG-263",
+ "label": "classify",
+ "latency_ms": 4505,
+ "model_requested": "claude-haiku-4-5",
+ "recorded_at": "2026-09-27T21:54:01Z",
+ "request_id": "req_011CfUgqwJdZ9UAABw3DPbaD",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\": \"fraude_seguridad\", \"secondary_reasons\": [], \"confidence\": 0.98, \"out_of_scope_kind\": null, \"flags\": {\"requests_human\": false, \"fraud_or_security\": true, \"legal_threat\": false, \"collections_harassment\": false, \"vulnerable_customer\": false, \"imminent_deadline\": false, \"repeat_contact\": false, \"prompt_injection_suspected\": false, \"pii_present\": false}, \"entities\": {\"credit_number\": null, \"document_number\": null, \"amount\": null, \"payment_date\": null, \"transaction_reference\": null, \"payment_method_or_bank\": null, \"named_agent\": null, \"masked_values\": []}, \"sentiment\": \"negative\", \"language\": \"es\", \"summary\": \"Cliente reporta una compra no reconocida en su cuenta y sospecha que fue hackeado.\", \"reasoning_brief\": \"Se trata de un caso de fraude y seguridad: el cliente reporta una compra no autorizada y una posible suplantación de cuenta (hackeo). Esto activa la bandera fraud_or_security como máxima prioridad, requiriendo atención inmediata del equipo de fraude.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-haiku-4-5-20251001",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 5767,
+   "input_tokens": 64,
+   "output_tokens": 293
+  }
+ }
+}

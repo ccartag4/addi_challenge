@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.004271,
+ "effort": "medium",
+ "fingerprint": "a84abfb6c0f0f2f4",
+ "item_id": "MSG-176",
+ "label": "judge",
+ "latency_ms": 3878,
+ "model_requested": "claude-sonnet-5",
+ "recorded_at": "2026-09-27T21:51:17Z",
+ "request_id": "req_011CfUgdsYKtFxH8FBJ9u2PX",
+ "response": {
+  "content": [
+   {
+    "text": "{\"grounded\": true, \"answers_request\": true, \"no_forbidden_promise\": true, \"tone_ok\": true, \"overall_ok\": true, \"issues\": [], \"reasoning_brief\": \"El draft cita correctamente los tiempos (15 días PQR, 5 días pagos), no promete devolución, pide comprobante, escala el caso y mantiene tono empático en español. Cumple con todos los criterios.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-sonnet-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1127,
+   "input_tokens": 798,
+   "output_tokens": 245
+  }
+ }
+}

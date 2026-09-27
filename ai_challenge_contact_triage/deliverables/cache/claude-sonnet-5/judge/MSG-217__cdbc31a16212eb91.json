@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.002941,
+ "effort": "medium",
+ "fingerprint": "cdbc31a16212eb91",
+ "item_id": "MSG-217",
+ "label": "judge",
+ "latency_ms": 2448,
+ "model_requested": "claude-sonnet-5",
+ "recorded_at": "2026-09-27T21:51:32Z",
+ "request_id": "req_011CfUgf7YyQcqReChvsie35",
+ "response": {
+  "content": [
+   {
+    "text": "{\"grounded\":true,\"answers_request\":true,\"no_forbidden_promise\":true,\"tone_ok\":true,\"overall_ok\":true,\"issues\":[],\"reasoning_brief\":\"El draft cita correctamente los métodos de pago de la sección, aclara que Baloto no está habilitado sin inventar datos, y remite a un agente para confirmar alternativas. No promete nada indebido y el tono es cálido y directo en español.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-sonnet-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1127,
+   "input_tokens": 618,
+   "output_tokens": 148
+  }
+ }
+}

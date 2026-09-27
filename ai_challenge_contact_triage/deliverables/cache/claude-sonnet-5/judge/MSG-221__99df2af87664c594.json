@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.003693,
+ "effort": "medium",
+ "fingerprint": "99df2af87664c594",
+ "item_id": "MSG-221",
+ "label": "judge",
+ "latency_ms": 2073,
+ "model_requested": "claude-sonnet-5",
+ "recorded_at": "2026-09-27T21:51:34Z",
+ "request_id": "req_011CfUgfJ2G15nLiUBqmgEz6",
+ "response": {
+  "content": [
+   {
+    "text": "{\"grounded\":true,\"answers_request\":true,\"no_forbidden_promise\":true,\"tone_ok\":true,\"overall_ok\":true,\"issues\":[],\"reasoning_brief\":\"Draft accurately reflects cited sections on reporting timeline, paz y salvo, and certificate process; routes to Cartera without confirming errors or promising specific outcomes; tone is warm and appropriate.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-sonnet-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1127,
+   "input_tokens": 1064,
+   "output_tokens": 134
+  }
+ }
+}

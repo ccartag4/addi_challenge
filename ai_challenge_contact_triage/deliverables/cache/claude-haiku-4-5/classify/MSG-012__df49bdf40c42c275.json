@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.002161,
+ "effort": null,
+ "fingerprint": "df49bdf40c42c275",
+ "item_id": "MSG-012",
+ "label": "classify",
+ "latency_ms": 3550,
+ "model_requested": "claude-haiku-4-5",
+ "recorded_at": "2026-09-27T21:53:12Z",
+ "request_id": "req_011CfUgnRqFfnsZuZeHtQNKR",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\": \"pago_no_aplicado\", \"secondary_reasons\": [], \"confidence\": 0.95, \"out_of_scope_kind\": null, \"flags\": {\"requests_human\": false, \"fraud_or_security\": false, \"legal_threat\": false, \"collections_harassment\": false, \"vulnerable_customer\": false, \"imminent_deadline\": false, \"repeat_contact\": false, \"prompt_injection_suspected\": false, \"pii_present\": false}, \"entities\": {\"credit_number\": null, \"document_number\": null, \"amount\": null, \"payment_date\": null, \"transaction_reference\": null, \"payment_method_or_bank\": \"tarjeta\", \"named_agent\": null, \"masked_values\": []}, \"sentiment\": \"negative\", \"language\": \"es\", \"summary\": \"El cliente reporta que fue cobrado dos veces la misma cuota este mes y solicita la devolución del dinero.\", \"reasoning_brief\": \"Se trata de un doble cobro de la misma cuota, lo cual es un caso clásico de pago_no_aplicado. El cliente expresa urgencia, pero la resolución requiere validación y escalamiento al equipo de Pagos según la política (hasta 5 días hábiles).\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-haiku-4-5-20251001",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 5767,
+   "input_tokens": 74,
+   "output_tokens": 302
+  }
+ }
+}

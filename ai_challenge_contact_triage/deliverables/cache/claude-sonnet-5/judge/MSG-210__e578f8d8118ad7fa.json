@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.002655,
+ "effort": "medium",
+ "fingerprint": "e578f8d8118ad7fa",
+ "item_id": "MSG-210",
+ "label": "judge",
+ "latency_ms": 2283,
+ "model_requested": "claude-sonnet-5",
+ "recorded_at": "2026-09-27T21:51:30Z",
+ "request_id": "req_011CfUgewkMzcXScAGGC6dCe",
+ "response": {
+  "content": [
+   {
+    "text": "{\"grounded\":true,\"answers_request\":true,\"no_forbidden_promise\":true,\"tone_ok\":true,\"overall_ok\":true,\"issues\":[],\"reasoning_brief\":\"El borrador ofrece la opción de acuerdo de pago, escala a Cartera sin prometer condiciones específicas ni montos, tono cálido y directo en español, cumple la política citada.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-sonnet-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1127,
+   "input_tokens": 565,
+   "output_tokens": 130
+  }
+ }
+}

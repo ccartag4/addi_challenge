@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.001993,
+ "effort": null,
+ "fingerprint": "77dc8ae55a0f7d3b",
+ "item_id": "MSG-149",
+ "label": "classify",
+ "latency_ms": 4232,
+ "model_requested": "claude-haiku-4-5",
+ "recorded_at": "2026-09-27T21:53:34Z",
+ "request_id": "req_011CfUgoy9Cu1Y5kRQoap5HS",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\": \"pago_anticipado\", \"secondary_reasons\": [], \"confidence\": 0.95, \"out_of_scope_kind\": null, \"flags\": {\"requests_human\": false, \"fraud_or_security\": false, \"legal_threat\": false, \"collections_harassment\": false, \"vulnerable_customer\": false, \"imminent_deadline\": false, \"repeat_contact\": false, \"prompt_injection_suspected\": false, \"pii_present\": false}, \"entities\": {\"credit_number\": null, \"document_number\": null, \"amount\": null, \"payment_date\": null, \"transaction_reference\": null, \"payment_method_or_bank\": null, \"named_agent\": null, \"masked_values\": []}, \"sentiment\": \"neutral\", \"language\": \"es\", \"summary\": \"Cliente pregunta cuánto cuesta pagar todo el crédito de una vez y si hay descuento por pago anticipado.\", \"reasoning_brief\": \"La solicitud es explícita sobre liquidación total y descuento por pago anticipado, temas cubiertos en la política. No hay otras demandas ni señales de urgencia.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-haiku-4-5-20251001",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 5767,
+   "input_tokens": 71,
+   "output_tokens": 269
+  }
+ }
+}

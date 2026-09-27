@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.002014,
+ "effort": null,
+ "fingerprint": "e041b18eb4523e41",
+ "item_id": "MSG-182",
+ "label": "classify",
+ "latency_ms": 3063,
+ "model_requested": "claude-haiku-4-5",
+ "recorded_at": "2026-09-27T21:53:45Z",
+ "request_id": "req_011CfUgpqGTqVHS2e4XvNh45",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\": \"cancelacion\", \"secondary_reasons\": [\"privacidad_habeas_data\"], \"confidence\": 0.95, \"out_of_scope_kind\": null, \"flags\": {\"requests_human\": false, \"fraud_or_security\": false, \"legal_threat\": false, \"collections_harassment\": false, \"vulnerable_customer\": false, \"imminent_deadline\": false, \"repeat_contact\": false, \"prompt_injection_suspected\": false, \"pii_present\": false}, \"entities\": {\"credit_number\": null, \"document_number\": null, \"amount\": null, \"payment_date\": null, \"transaction_reference\": null, \"payment_method_or_bank\": null, \"named_agent\": null, \"masked_values\": []}, \"sentiment\": \"neutral\", \"language\": \"es\", \"summary\": \"Cliente quiere cerrar su cuenta y que eliminen sus datos personales.\", \"reasoning_brief\": \"El cliente solicita dos acciones distintas: cerrar el crédito (cancelacion) y borrar sus datos (privacidad_habeas_data). Ambas requieren intervención de agentes especializados y validación de paz y salvo.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-haiku-4-5-20251001",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 5767,
+   "input_tokens": 57,
+   "output_tokens": 276
+  }
+ }
+}

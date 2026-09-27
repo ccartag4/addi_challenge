@@ -111,6 +111,35 @@ LLM-judge calibration, offline determinism, adversarial fixtures)*
 - **Lesson:** a strict verifier is only credible if its false positives are counted and read.
   Keeping the rejected text in the record turned a debugging session into a five-minute review.
 
+### 3.8 What the verifier could not see, the judge did
+
+- **What it produced:** 57 drafts in the gold set passed all eight code checks. The rubric judge
+  (a different model, `claude-sonnet-5`) rejected three of them: two name the app section
+  "Mi crédito", which the knowledge base does contain but which was not among the sections
+  cited for those messages (the name reached the model through my drafting instructions), and
+  one tells the customer that a radicado "quedó registrado" without giving one.
+- **How I caught it:** only by running the judge on every gold draft instead of a handful; the
+  first five were all fine. The judge's `issues` field named the exact phrase each time.
+- **What I did:** kept the drafts as they are (they are true, and re-drafting 234 replies costs
+  the full run again), recorded the three cases in EVALUATION.md, and queued two prompt changes
+  for the next version: cite the navigation section whenever the app is named, and never claim
+  a case number was issued.
+- **Lesson:** the verifier proves what a regex can prove; provenance and overclaiming need a
+  reader. Running the judge on a sample would have missed all three.
+
+### 3.9 A cheaper model that is "as accurate" and one miss that is not
+
+- **What it produced:** Claude Haiku 4.5 classified the 90 gold messages with the same exact
+  accuracy as Opus 5 (86/90) at a seventh of the cost, an attractive headline for the
+  10,000-messages-a-day discussion.
+- **How I caught it:** the report lists the misses, not only the rate. One of Haiku's two
+  errors turned "esta es la tercera vez que escribo por el mismo problema" into `sin_accion`,
+  which the policy closes without a reply.
+- **What I did:** wrote the comparison with the unsafe miss next to the accuracy, and framed
+  Haiku as viable behind the pipeline's safety net rather than as a drop-in replacement.
+- **Lesson:** an aggregate that ties hides errors of very different cost; the deciding metric
+  for a routing model is the unsafe count, and that needs a larger gold set than 90.
+
 *(more cases added as they happen)*
 
 ## 4. What I would improve with more time

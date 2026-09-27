@@ -1,0 +1,9 @@
+{
+  "model": "claude-opus-5",
+  "n": 30,
+  "same_primary": 30,
+  "changed": [],
+  "mean_conf_delta": 0.00366666666666667,
+  "cost_usd": 0.42813150000000005,
+  "ran_at_utc": "2026-09-27T22:02:00Z"
+}

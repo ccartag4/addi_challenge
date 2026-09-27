@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.002327,
+ "effort": "medium",
+ "fingerprint": "76543a98bf8ff1fd",
+ "item_id": "MSG-008",
+ "label": "judge",
+ "latency_ms": 2400,
+ "model_requested": "claude-sonnet-5",
+ "recorded_at": "2026-09-27T21:43:19Z",
+ "request_id": "req_011CfUg2o5idfBHvv2R9hQay",
+ "response": {
+  "content": [
+   {
+    "text": "{\"grounded\": true, \"answers_request\": true, \"no_forbidden_promise\": true, \"tone_ok\": true, \"overall_ok\": true, \"issues\": [], \"reasoning_brief\": \"El draft responde correctamente con la información de la sección citada, sin inventar datos ni prometer nada indebido, en tono cálido y directo.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-sonnet-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1127,
+   "input_tokens": 486,
+   "output_tokens": 113
+  }
+ }
+}

@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.002903,
+ "effort": "medium",
+ "fingerprint": "d68c1d1aa3487865",
+ "item_id": "MSG-158",
+ "label": "judge",
+ "latency_ms": 2780,
+ "model_requested": "claude-sonnet-5",
+ "recorded_at": "2026-09-27T21:51:05Z",
+ "request_id": "req_011CfUgd7uFcs4wKJkNWgNW5",
+ "response": {
+  "content": [
+   {
+    "text": "{\"grounded\":true,\"answers_request\":true,\"no_forbidden_promise\":true,\"tone_ok\":true,\"overall_ok\":true,\"issues\":[],\"reasoning_brief\":\"El draft usa correctamente la sección citada: pide comprobante tras 24h, menciona escalamiento a Pagos y plazo de 5 días hábiles, sin prometer devolución ni confirmar error. Tono cálido y en tú, responde directamente a la solicitud.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-sonnet-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1127,
+   "input_tokens": 544,
+   "output_tokens": 159
+  }
+ }
+}

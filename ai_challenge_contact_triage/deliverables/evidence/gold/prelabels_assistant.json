@@ -1,0 +1,593 @@
+{
+  "_about": "Pre-labels written by the assistant reading each message and the policy, independent of the pipeline output (Anthropic eval guide: the reference must not come from the model under test). The human confirms or corrects them in gold_set.csv. reason = primary contact reason (taxonomy v2 id); priority = P0-P4 per taxonomy.yaml; action = auto_reply | auto_reply_and_route | route_to_human | close_no_reply.",
+  "MSG-001": {
+    "reason": "no_puede_pagar",
+    "priority": "P1",
+    "action": "auto_reply_and_route",
+    "note": "job loss: vulnerable customer, Cartera case"
+  },
+  "MSG-002": {
+    "reason": "consulta_saldo_cuotas",
+    "priority": "P3",
+    "action": "auto_reply",
+    "note": "secondary fecha_de_pago",
+    "secondary": [
+      "fecha_de_pago"
+    ]
+  },
+  "MSG-008": {
+    "reason": "datos_personales",
+    "priority": "P3",
+    "action": "auto_reply",
+    "note": "phone change in the app"
+  },
+  "MSG-009": {
+    "reason": "certificados_extractos",
+    "priority": "P3",
+    "action": "auto_reply",
+    "note": ""
+  },
+  "MSG-012": {
+    "reason": "pago_no_aplicado",
+    "priority": "P1",
+    "action": "auto_reply_and_route",
+    "note": "double charge = money wrongly taken; Pagos case; no refund promised"
+  },
+  "MSG-013": {
+    "reason": "fecha_de_pago",
+    "priority": "P3",
+    "action": "auto_reply",
+    "note": ""
+  },
+  "MSG-014": {
+    "reason": "estado_solicitud",
+    "priority": "P3",
+    "action": "route_to_human",
+    "note": "no policy; onboarding"
+  },
+  "MSG-015": {
+    "reason": "certificados_extractos",
+    "priority": "P3",
+    "action": "auto_reply",
+    "note": "two questions, both covered; reporte_centrales as secondary is equally acceptable",
+    "secondary": [
+      "reporte_centrales"
+    ]
+  },
+  "MSG-019": {
+    "reason": "mora_intereses",
+    "priority": "P3",
+    "action": "auto_reply",
+    "note": ""
+  },
+  "MSG-020": {
+    "reason": "refinanciacion_acuerdo",
+    "priority": "P2",
+    "action": "auto_reply_and_route",
+    "note": "Cartera case"
+  },
+  "MSG-021": {
+    "reason": "reporte_centrales",
+    "priority": "P1",
+    "action": "auto_reply_and_route",
+    "note": "imminent reporting, says already paid",
+    "secondary": [
+      "pago_no_aplicado"
+    ]
+  },
+  "MSG-028": {
+    "reason": "fraude_seguridad",
+    "priority": "P0",
+    "action": "auto_reply_and_route",
+    "note": "stolen phone"
+  },
+  "MSG-038": {
+    "reason": "datos_personales",
+    "priority": "P3",
+    "action": "auto_reply_and_route",
+    "note": "policy: old e-mail still receiving -> escalate to support"
+  },
+  "MSG-039": {
+    "reason": "certificados_extractos",
+    "priority": "P3",
+    "action": "auto_reply",
+    "note": "interest certificate for 2025"
+  },
+  "MSG-040": {
+    "reason": "hablar_con_humano",
+    "priority": "P2",
+    "action": "route_to_human",
+    "note": ""
+  },
+  "MSG-105": {
+    "reason": "pago_no_aplicado",
+    "priority": "P2",
+    "action": "auto_reply_and_route",
+    "note": ""
+  },
+  "MSG-106": {
+    "reason": "metodos_de_pago",
+    "priority": "P3",
+    "action": "auto_reply",
+    "note": ""
+  },
+  "MSG-110": {
+    "reason": "datos_personales",
+    "priority": "P3",
+    "action": "auto_reply",
+    "note": "old phone lost; app path still applies"
+  },
+  "MSG-113": {
+    "reason": "fraude_seguridad",
+    "priority": "P0",
+    "action": "auto_reply_and_route",
+    "note": "unrecognised charge"
+  },
+  "MSG-114": {
+    "reason": "queja_reclamo",
+    "priority": "P1",
+    "action": "auto_reply_and_route",
+    "note": "formal complaint after 3 days of calls (repeat contact)"
+  },
+  "MSG-115": {
+    "reason": "felicitacion_feedback",
+    "priority": "P4",
+    "action": "auto_reply",
+    "note": "template"
+  },
+  "MSG-116": {
+    "reason": "cancelacion",
+    "priority": "P3",
+    "action": "auto_reply_and_route",
+    "note": "an agent handles cancellation"
+  },
+  "MSG-119": {
+    "reason": "ruido",
+    "priority": "P4",
+    "action": "close_no_reply",
+    "note": ""
+  },
+  "MSG-121": {
+    "reason": "certificados_extractos",
+    "priority": "P3",
+    "action": "auto_reply",
+    "note": ""
+  },
+  "MSG-125": {
+    "reason": "fraude_seguridad",
+    "priority": "P0",
+    "action": "auto_reply_and_route",
+    "note": "lost phone"
+  },
+  "MSG-130": {
+    "reason": "queja_reclamo",
+    "priority": "P2",
+    "action": "auto_reply_and_route",
+    "note": "explicit formal complaint; mora_intereses secondary; PQR case",
+    "secondary": [
+      "mora_intereses"
+    ]
+  },
+  "MSG-138": {
+    "reason": "fuera_de_alcance",
+    "priority": "P4",
+    "action": "auto_reply",
+    "note": "unrelated (another company); courtesy template"
+  },
+  "MSG-149": {
+    "reason": "pago_anticipado",
+    "priority": "P3",
+    "action": "auto_reply",
+    "note": ""
+  },
+  "MSG-150": {
+    "reason": "fecha_de_pago",
+    "priority": "P3",
+    "action": "auto_reply",
+    "note": "weather chit-chat plus a real request"
+  },
+  "MSG-152": {
+    "reason": "consulta_saldo_cuotas",
+    "priority": "P3",
+    "action": "auto_reply",
+    "note": ""
+  },
+  "MSG-154": {
+    "reason": "fecha_de_pago",
+    "priority": "P3",
+    "action": "auto_reply",
+    "note": ""
+  },
+  "MSG-155": {
+    "reason": "no_puede_pagar",
+    "priority": "P1",
+    "action": "auto_reply_and_route",
+    "note": "job loss"
+  },
+  "MSG-157": {
+    "reason": "refinanciacion_acuerdo",
+    "priority": "P2",
+    "action": "auto_reply_and_route",
+    "note": ""
+  },
+  "MSG-158": {
+    "reason": "pago_no_aplicado",
+    "priority": "P2",
+    "action": "auto_reply_and_route",
+    "note": ""
+  },
+  "MSG-160": {
+    "reason": "metodos_de_pago",
+    "priority": "P3",
+    "action": "auto_reply",
+    "note": ""
+  },
+  "MSG-166": {
+    "reason": "cuenta_y_app",
+    "priority": "P2",
+    "action": "auto_reply_and_route",
+    "note": "password flow not in policy; support case"
+  },
+  "MSG-175": {
+    "reason": "queja_reclamo",
+    "priority": "P1",
+    "action": "auto_reply_and_route",
+    "note": "repeat contact"
+  },
+  "MSG-176": {
+    "reason": "pago_no_aplicado",
+    "priority": "P1",
+    "action": "auto_reply_and_route",
+    "note": "double charge; formal complaint as secondary; Pagos + PQR",
+    "secondary": [
+      "queja_reclamo"
+    ]
+  },
+  "MSG-178": {
+    "reason": "felicitacion_feedback",
+    "priority": "P4",
+    "action": "auto_reply",
+    "note": ""
+  },
+  "MSG-182": {
+    "reason": "cancelacion",
+    "priority": "P2",
+    "action": "auto_reply_and_route",
+    "note": "secondary privacidad_habeas_data; privacy owner must get the case",
+    "secondary": [
+      "privacidad_habeas_data"
+    ]
+  },
+  "MSG-186": {
+    "reason": "hablar_con_humano",
+    "priority": "P2",
+    "action": "route_to_human",
+    "note": "wants an agent by phone; informacion_general (phone line) secondary; either primary defensible",
+    "secondary": [
+      "informacion_general"
+    ]
+  },
+  "MSG-192": {
+    "reason": "saludo_incompleto",
+    "priority": "P4",
+    "action": "auto_reply",
+    "note": "template"
+  },
+  "MSG-193": {
+    "reason": "consulta_saldo_cuotas",
+    "priority": "P3",
+    "action": "auto_reply",
+    "note": "two questions; pago_anticipado secondary (equally acceptable as primary)",
+    "secondary": [
+      "pago_anticipado"
+    ]
+  },
+  "MSG-194": {
+    "reason": "no_puede_pagar",
+    "priority": "P2",
+    "action": "auto_reply_and_route",
+    "note": "mora and reporting as secondary",
+    "secondary": [
+      "mora_intereses",
+      "reporte_centrales"
+    ]
+  },
+  "MSG-195": {
+    "reason": "pago_no_aplicado",
+    "priority": "P2",
+    "action": "route_to_human",
+    "note": "asks for a person"
+  },
+  "MSG-206": {
+    "reason": "fecha_de_pago",
+    "priority": "P3",
+    "action": "auto_reply",
+    "note": ""
+  },
+  "MSG-210": {
+    "reason": "refinanciacion_acuerdo",
+    "priority": "P2",
+    "action": "auto_reply_and_route",
+    "note": ""
+  },
+  "MSG-217": {
+    "reason": "metodos_de_pago",
+    "priority": "P3",
+    "action": "auto_reply",
+    "note": "Baloto not in policy; a follow-up case is acceptable"
+  },
+  "MSG-220": {
+    "reason": "intereses_y_cargos",
+    "priority": "P2",
+    "action": "route_to_human",
+    "note": "ambiguous charge; needs account access"
+  },
+  "MSG-221": {
+    "reason": "reporte_centrales",
+    "priority": "P3",
+    "action": "auto_reply",
+    "note": "fully answerable (next cycle, paz y salvo in app); a Cartera case is not strictly needed",
+    "secondary": [
+      "certificados_extractos"
+    ]
+  },
+  "MSG-243": {
+    "reason": "hablar_con_humano",
+    "priority": "P2",
+    "action": "route_to_human",
+    "note": ""
+  },
+  "MSG-244": {
+    "reason": "hablar_con_humano",
+    "priority": "P2",
+    "action": "route_to_human",
+    "note": ""
+  },
+  "MSG-245": {
+    "reason": "fuera_de_alcance",
+    "priority": "P3",
+    "action": "route_to_human",
+    "note": "other_business_inquiry -> comercial"
+  },
+  "MSG-246": {
+    "reason": "fuera_de_alcance",
+    "priority": "P3",
+    "action": "route_to_human",
+    "note": "other_business_inquiry -> comercial"
+  },
+  "MSG-249": {
+    "reason": "pago_no_aplicado",
+    "priority": "P2",
+    "action": "auto_reply_and_route",
+    "note": "the pending payment matters more than the statement; certificados secondary",
+    "secondary": [
+      "certificados_extractos"
+    ]
+  },
+  "MSG-259": {
+    "reason": "reporte_centrales",
+    "priority": "P1",
+    "action": "auto_reply_and_route",
+    "note": "bureau dispute, says already paid, urgent"
+  },
+  "MSG-263": {
+    "reason": "fraude_seguridad",
+    "priority": "P0",
+    "action": "auto_reply_and_route",
+    "note": ""
+  },
+  "MSG-274": {
+    "reason": "refinanciacion_acuerdo",
+    "priority": "P1",
+    "action": "auto_reply_and_route",
+    "note": "collections harassment flag; queue could be Cartera or PQR",
+    "secondary": [
+      "queja_reclamo"
+    ]
+  },
+  "MSG-275": {
+    "reason": "metodos_de_pago",
+    "priority": "P3",
+    "action": "auto_reply",
+    "note": ""
+  },
+  "MSG-278": {
+    "reason": "pago_no_aplicado",
+    "priority": "P2",
+    "action": "auto_reply_and_route",
+    "note": ""
+  },
+  "MSG-284": {
+    "reason": "cuenta_y_app",
+    "priority": "P2",
+    "action": "auto_reply_and_route",
+    "note": "app crash with details -> support per policy"
+  },
+  "MSG-295": {
+    "reason": "fraude_seguridad",
+    "priority": "P0",
+    "action": "auto_reply_and_route",
+    "note": ""
+  },
+  "MSG-297": {
+    "reason": "reporte_centrales",
+    "priority": "P1",
+    "action": "auto_reply_and_route",
+    "note": "dispute with stated impact; complaint secondary",
+    "secondary": [
+      "queja_reclamo"
+    ]
+  },
+  "MSG-298": {
+    "reason": "no_puede_pagar",
+    "priority": "P2",
+    "action": "auto_reply_and_route",
+    "note": "three requests; the hardship drives the case; saldo and fecha secondary",
+    "secondary": [
+      "consulta_saldo_cuotas",
+      "fecha_de_pago"
+    ]
+  },
+  "MSG-301": {
+    "reason": "consulta_saldo_cuotas",
+    "priority": "P3",
+    "action": "auto_reply",
+    "note": ""
+  },
+  "MSG-310": {
+    "reason": "datos_personales",
+    "priority": "P3",
+    "action": "auto_reply",
+    "note": ""
+  },
+  "MSG-318": {
+    "reason": "consulta_saldo_cuotas",
+    "priority": "P3",
+    "action": "auto_reply",
+    "note": "masked document must stay masked"
+  },
+  "MSG-319": {
+    "reason": "pago_anticipado",
+    "priority": "P3",
+    "action": "auto_reply",
+    "note": ""
+  },
+  "MSG-320": {
+    "reason": "no_puede_pagar",
+    "priority": "P2",
+    "action": "auto_reply_and_route",
+    "note": "partial payment request"
+  },
+  "MSG-329": {
+    "reason": "fraude_seguridad",
+    "priority": "P1",
+    "action": "auto_reply_and_route",
+    "note": "phishing report, account not yet compromised: P1 defensible, policy says P0"
+  },
+  "MSG-331": {
+    "reason": "felicitacion_feedback",
+    "priority": "P4",
+    "action": "auto_reply",
+    "note": ""
+  },
+  "MSG-341": {
+    "reason": "intereses_y_cargos",
+    "priority": "P2",
+    "action": "route_to_human",
+    "note": ""
+  },
+  "MSG-344": {
+    "reason": "privacidad_habeas_data",
+    "priority": "P2",
+    "action": "route_to_human",
+    "note": ""
+  },
+  "MSG-346": {
+    "reason": "ruido",
+    "priority": "P4",
+    "action": "close_no_reply",
+    "note": ""
+  },
+  "MSG-348": {
+    "reason": "sin_accion",
+    "priority": "P4",
+    "action": "close_no_reply",
+    "note": ""
+  },
+  "MSG-356": {
+    "reason": "consulta_saldo_cuotas",
+    "priority": "P3",
+    "action": "auto_reply",
+    "note": ""
+  },
+  "MSG-360": {
+    "reason": "informacion_general",
+    "priority": "P3",
+    "action": "route_to_human",
+    "note": "no hours in the policy"
+  },
+  "MSG-361": {
+    "reason": "certificados_extractos",
+    "priority": "P3",
+    "action": "auto_reply",
+    "note": ""
+  },
+  "MSG-367": {
+    "reason": "cancelacion",
+    "priority": "P2",
+    "action": "auto_reply_and_route",
+    "note": "marketing opt-out = habeas data secondary; privacy owner",
+    "secondary": [
+      "privacidad_habeas_data"
+    ]
+  },
+  "MSG-368": {
+    "reason": "cuenta_y_app",
+    "priority": "P2",
+    "action": "auto_reply_and_route",
+    "note": "password not in policy; support"
+  },
+  "MSG-374": {
+    "reason": "saludo_incompleto",
+    "priority": "P4",
+    "action": "auto_reply",
+    "note": ""
+  },
+  "MSG-377": {
+    "reason": "reporte_centrales",
+    "priority": "P2",
+    "action": "auto_reply_and_route",
+    "note": ""
+  },
+  "MSG-379": {
+    "reason": "metodos_de_pago",
+    "priority": "P3",
+    "action": "auto_reply",
+    "note": ""
+  },
+  "MSG-381": {
+    "reason": "cuenta_y_app",
+    "priority": "P2",
+    "action": "auto_reply_and_route",
+    "note": "e-mail not recognised -> support"
+  },
+  "MSG-385": {
+    "reason": "pago_no_aplicado",
+    "priority": "P2",
+    "action": "auto_reply_and_route",
+    "note": ""
+  },
+  "MSG-386": {
+    "reason": "fecha_de_pago",
+    "priority": "P3",
+    "action": "auto_reply",
+    "note": "mora secondary",
+    "secondary": [
+      "mora_intereses"
+    ]
+  },
+  "MSG-389": {
+    "reason": "queja_reclamo",
+    "priority": "P1",
+    "action": "route_to_human",
+    "note": "third contact, no details: a person should take it"
+  },
+  "MSG-392": {
+    "reason": "pago_no_aplicado",
+    "priority": "P2",
+    "action": "route_to_human",
+    "note": "asks for a person"
+  },
+  "MSG-394": {
+    "reason": "no_puede_pagar",
+    "priority": "P2",
+    "action": "auto_reply_and_route",
+    "note": "fear of reporting; Cartera"
+  },
+  "MSG-399": {
+    "reason": "sin_accion",
+    "priority": "P4",
+    "action": "close_no_reply",
+    "note": ""
+  }
+}

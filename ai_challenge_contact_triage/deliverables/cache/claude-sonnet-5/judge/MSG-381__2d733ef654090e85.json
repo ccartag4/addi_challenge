@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.003611,
+ "effort": "medium",
+ "fingerprint": "2d733ef654090e85",
+ "item_id": "MSG-381",
+ "label": "judge",
+ "latency_ms": 2534,
+ "model_requested": "claude-sonnet-5",
+ "recorded_at": "2026-09-27T21:52:29Z",
+ "request_id": "req_011CfUgjJgowJSkGKTdJ2oR6",
+ "response": {
+  "content": [
+   {
+    "text": "{\"grounded\":true,\"answers_request\":true,\"no_forbidden_promise\":true,\"tone_ok\":true,\"overall_ok\":true,\"issues\":[],\"reasoning_brief\":\"El draft usa correctamente las secciones citadas sobre OTP, bloqueo de cuenta y app no funciona, sin inventar datos ni prometer nada indebido. Tono cálido y en tú, responde la solicitud principal y ofrece escalamiento a asesor si persiste.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-sonnet-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1127,
+   "input_tokens": 878,
+   "output_tokens": 163
+  }
+ }
+}

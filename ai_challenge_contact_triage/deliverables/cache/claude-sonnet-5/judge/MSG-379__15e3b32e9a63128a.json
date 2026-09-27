@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.002419,
+ "effort": "medium",
+ "fingerprint": "15e3b32e9a63128a",
+ "item_id": "MSG-379",
+ "label": "judge",
+ "latency_ms": 1913,
+ "model_requested": "claude-sonnet-5",
+ "recorded_at": "2026-09-27T21:52:27Z",
+ "request_id": "req_011CfUgjAThp22mK1cqY3HyJ",
+ "response": {
+  "content": [
+   {
+    "text": "{\"grounded\":true,\"answers_request\":true,\"no_forbidden_promise\":true,\"tone_ok\":true,\"overall_ok\":true,\"issues\":[],\"reasoning_brief\":\"Draft accurately lists payment methods from cited section, matches details exactly, answers the question, no forbidden promises, warm Spanish tone with tú.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-sonnet-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1127,
+   "input_tokens": 522,
+   "output_tokens": 115
+  }
+ }
+}

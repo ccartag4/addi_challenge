@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.002969,
+ "effort": "medium",
+ "fingerprint": "0da281f0cbada8c1",
+ "item_id": "MSG-114",
+ "label": "judge",
+ "latency_ms": 2583,
+ "model_requested": "claude-sonnet-5",
+ "recorded_at": "2026-09-27T21:50:39Z",
+ "request_id": "req_011CfUgbCHcj4JuQh8z53BjN",
+ "response": {
+  "content": [
+   {
+    "text": "{\"grounded\": true, \"answers_request\": true, \"no_forbidden_promise\": true, \"tone_ok\": true, \"overall_ok\": true, \"issues\": [], \"reasoning_brief\": \"El draft reconoce la molestia, informa el registro de PQR, el plazo legal de 15 días hábiles y el enrutamiento, todo respaldado por la sección citada. No promete resultados específicos ni montos, y el tono es cálido y en tú.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-sonnet-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1127,
+   "input_tokens": 612,
+   "output_tokens": 152
+  }
+ }
+}

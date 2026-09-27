@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.001971,
+ "effort": null,
+ "fingerprint": "3839394f1914e15d",
+ "item_id": "MSG-186",
+ "label": "classify",
+ "latency_ms": 4172,
+ "model_requested": "claude-haiku-4-5",
+ "recorded_at": "2026-09-27T21:53:48Z",
+ "request_id": "req_011CfUgpyRbq5hVTtwbMy9yN",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"hablar_con_humano\",\"secondary_reasons\":[],\"confidence\":0.95,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":true,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"neutral\",\"language\":\"es\",\"summary\":\"Cliente solicita hablar con un agente por teléfono en lugar de continuar con el chatbot.\",\"reasoning_brief\":\"El cliente rechaza explícitamente el bot y pide hablar directamente con un agente por teléfono sin exponer un tema específico de crédito. La pregunta sobre la línea de atención es secundaria a la intención principal de escalamiento a un humano.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-haiku-4-5-20251001",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 5767,
+   "input_tokens": 84,
+   "output_tokens": 262
+  }
+ }
+}

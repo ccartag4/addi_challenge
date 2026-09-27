@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.002861,
+ "effort": "medium",
+ "fingerprint": "425fd3eff3bf4314",
+ "item_id": "MSG-377",
+ "label": "judge",
+ "latency_ms": 2415,
+ "model_requested": "claude-sonnet-5",
+ "recorded_at": "2026-09-27T21:52:25Z",
+ "request_id": "req_011CfUgiz86zx7LKztqnijUY",
+ "response": {
+  "content": [
+   {
+    "text": "{\"grounded\":true,\"answers_request\":true,\"no_forbidden_promise\":true,\"tone_ok\":true,\"overall_ok\":true,\"issues\":[],\"reasoning_brief\":\"El draft usa correctamente las secciones citadas, escala el reclamo sin confirmar error, no promete nada prohibido, y mantiene tono cálido en español con tú.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-sonnet-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1127,
+   "input_tokens": 698,
+   "output_tokens": 124
+  }
+ }
+}

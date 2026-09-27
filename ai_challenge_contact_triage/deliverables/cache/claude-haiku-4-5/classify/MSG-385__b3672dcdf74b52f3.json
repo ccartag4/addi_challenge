@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.002084,
+ "effort": null,
+ "fingerprint": "b3672dcdf74b52f3",
+ "item_id": "MSG-385",
+ "label": "classify",
+ "latency_ms": 4510,
+ "model_requested": "claude-haiku-4-5",
+ "recorded_at": "2026-09-27T21:54:28Z",
+ "request_id": "req_011CfUgsuM7en3qQAsY3oeto",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\": \"pago_no_aplicado\", \"secondary_reasons\": [], \"confidence\": 0.95, \"out_of_scope_kind\": null, \"flags\": {\"requests_human\": false, \"fraud_or_security\": false, \"legal_threat\": false, \"collections_harassment\": false, \"vulnerable_customer\": false, \"imminent_deadline\": false, \"repeat_contact\": false, \"prompt_injection_suspected\": false, \"pii_present\": false}, \"entities\": {\"credit_number\": null, \"document_number\": null, \"amount\": null, \"payment_date\": \"ayer\", \"transaction_reference\": null, \"payment_method_or_bank\": null, \"named_agent\": null, \"masked_values\": []}, \"sentiment\": \"neutral\", \"language\": \"es\", \"summary\": \"El cliente realizó una transferencia ayer que no aparece reflejada en su cuenta.\", \"reasoning_brief\": \"El cliente reporta haber pagado (transferencia ayer) pero el pago no se ve reflejado en el sistema. Este es un caso de pago no aplicado, que puede tomar hasta 5 días hábiles en procesarse. El cliente intenta adjuntar un comprobante de pago.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-haiku-4-5-20251001",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 5767,
+   "input_tokens": 57,
+   "output_tokens": 290
+  }
+ }
+}

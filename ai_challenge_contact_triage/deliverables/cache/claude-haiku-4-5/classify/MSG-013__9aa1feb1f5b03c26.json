@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.00209,
+ "effort": null,
+ "fingerprint": "9aa1feb1f5b03c26",
+ "item_id": "MSG-013",
+ "label": "classify",
+ "latency_ms": 3386,
+ "model_requested": "claude-haiku-4-5",
+ "recorded_at": "2026-09-27T21:53:16Z",
+ "request_id": "req_011CfUgngESShWSTjQ84gqHt",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\": \"fecha_de_pago\", \"secondary_reasons\": [], \"confidence\": 0.95, \"out_of_scope_kind\": null, \"flags\": {\"requests_human\": false, \"fraud_or_security\": false, \"legal_threat\": false, \"collections_harassment\": false, \"vulnerable_customer\": false, \"imminent_deadline\": false, \"repeat_contact\": false, \"prompt_injection_suspected\": false, \"pii_present\": false}, \"entities\": {\"credit_number\": null, \"document_number\": null, \"amount\": null, \"payment_date\": null, \"transaction_reference\": null, \"payment_method_or_bank\": null, \"named_agent\": null, \"masked_values\": []}, \"sentiment\": \"neutral\", \"language\": \"es\", \"summary\": \"El cliente pregunta si puede cambiar su fecha de pago del 5 al 30 porque cobra ese día.\", \"reasoning_brief\": \"La solicitud es explícita y clara sobre cambio de fecha de pago. El cliente explica su situación económica (llega justo con el pago actual), pero el motivo principal es la consulta sobre cambio de fechas, que cae dentro de fecha_de_pago.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-haiku-4-5-20251001",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 5767,
+   "input_tokens": 68,
+   "output_tokens": 289
+  }
+ }
+}

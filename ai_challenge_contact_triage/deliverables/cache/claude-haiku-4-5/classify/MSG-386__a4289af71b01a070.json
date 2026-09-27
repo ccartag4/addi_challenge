@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.001834,
+ "effort": null,
+ "fingerprint": "a4289af71b01a070",
+ "item_id": "MSG-386",
+ "label": "classify",
+ "latency_ms": 3955,
+ "model_requested": "claude-haiku-4-5",
+ "recorded_at": "2026-09-27T21:54:27Z",
+ "request_id": "req_011CfUgsvu8P6m7U2PmdgVDK",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"fecha_de_pago\",\"secondary_reasons\":[],\"confidence\":0.92,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"neutral\",\"language\":\"es\",\"summary\":\"Consulta cuál es la fecha límite de pago de su cuota antes de que se cobre mora.\",\"reasoning_brief\":\"El cliente pregunta directamente cuándo vence su cuota y el impacto de no pagar a tiempo. Es una consulta sobre fecha de pago y cómo evitar intereses de mora.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-haiku-4-5-20251001",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 5767,
+   "input_tokens": 47,
+   "output_tokens": 242
+  }
+ }
+}

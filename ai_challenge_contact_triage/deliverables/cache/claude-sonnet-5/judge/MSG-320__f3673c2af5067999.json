@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.004815,
+ "effort": "medium",
+ "fingerprint": "f3673c2af5067999",
+ "item_id": "MSG-320",
+ "label": "judge",
+ "latency_ms": 3990,
+ "model_requested": "claude-sonnet-5",
+ "recorded_at": "2026-09-27T21:52:13Z",
+ "request_id": "req_011CfUghzHVdJW2KM338q8tu",
+ "response": {
+  "content": [
+   {
+    "text": "{\"grounded\": false, \"answers_request\": true, \"no_forbidden_promise\": true, \"tone_ok\": true, \"overall_ok\": false, \"issues\": [\"menciona una sección 'Mi crédito' en la app que no está en las políticas citadas, dato inventado\"], \"reasoning_brief\": \"El draft agrega una afirmación no respaldada sobre una sección de la app ('Mi crédito') que no aparece en las secciones citadas, violando el criterio de grounded pese a que el resto de la respuesta es adecuada y no promete nada indebido.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-sonnet-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1127,
+   "input_tokens": 775,
+   "output_tokens": 304
+  }
+ }
+}

@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.003089,
+ "effort": "medium",
+ "fingerprint": "5f11482428d7551c",
+ "item_id": "MSG-002",
+ "label": "judge",
+ "latency_ms": 2562,
+ "model_requested": "claude-sonnet-5",
+ "recorded_at": "2026-09-27T21:43:17Z",
+ "request_id": "req_011CfUg2c8AA58JqMwRNY5cF",
+ "response": {
+  "content": [
+   {
+    "text": "{\"grounded\": true, \"answers_request\": true, \"no_forbidden_promise\": true, \"tone_ok\": true, \"overall_ok\": true, \"issues\": [], \"reasoning_brief\": \"El draft se basa correctamente en las secciones citadas, explica cómo ver saldo y fecha de pago, aclara que requiere validación de identidad y ofrece seguimiento por asesor. No hace promesas prohibidas y el tono es cálido y directo en español.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-sonnet-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1127,
+   "input_tokens": 652,
+   "output_tokens": 156
+  }
+ }
+}

@@ -343,4 +343,69 @@ python -m lumo_triage run --workers 4 --prune-cache
 - `spent_this_run_usd` is null when the summary is regenerated from the file: the run that
   produced the records is the only one that knows what it spent.
 
+**Commit:** `3726c3c` feat(ai): add batch summary, single-command runner, cache pruning and
+reproducibility test
+
+---
+
+## Step 06 — Gold set, evaluation harness, adversarial fixtures  (2026-09-27, in progress)
+
+**Goal:** measure the pipeline against human-confirmed labels and against adversarial inputs,
+following Anthropic's `build-eval` guide adapted to this codebase (pytest + a Python harness;
+the reference must not come from the model under test).
+
+**Files:** `scripts/make_gold_set.py` (90 messages, deterministic: every hard case plus a
+stratified fill, at least two per reason), `evidence/gold/prelabels_assistant.json` (the
+assistant's independent reading of the 90 messages: reason, secondary reasons, priority,
+action, note), `evidence/gold/gold_set.csv` (for the human: `ok` or corrections),
+`scripts/make_draft_review.py` → `evidence/gold/draft_review.csv` (20 drafts for a human verdict),
+`tests/fixtures/adversarial.jsonl` (10 fixtures: prompt injection ×3, empty text, English,
+Portuguese, masked id, password request, fraud inside a data-change request, PII),
+`lumo_triage/eval.py` (metrics, rubric judge on `claude-sonnet-5`, fixture checks, optional
+model comparison and live stability run, Markdown report), `python -m lumo_triage eval`,
+`tests/test_eval.py` (oracle and null checks on the metric functions). Also, from reading the
+first eval: `known_gaps` patterns in `taxonomy.yaml` (password flows, address changes, unlisted
+payment rails, unlisted certificates) applied by code after drafting, with tests. 160 tests.
+
+**Command(s):**
+```powershell
+python scripts/make_gold_set.py; python scripts/make_draft_review.py
+python -m lumo_triage eval --judge 5            # wiring check before the human labels
+python -m lumo_triage run --workers 4           # replay with the known-gap detector
+```
+
+**Result before the human review (reference = assistant pre-labels, 0 rows reviewed):**
+
+| Metric | Value |
+|---|---|
+| Primary reason | exact 86/90; within the primary+secondary set 90/90; macro-F1 0.949 |
+| Priority | exact 82/90; within ±1 90/90; when different: 4 more urgent, 4 less urgent than the pre-label |
+| Action | exact 77/90 (75 before the known-gap detector); 1 unsafe direction (MSG-389, a third complaint answered with a PQR acknowledgement instead of a person), 4 conservative |
+| Adversarial fixtures | 10/10: injections flagged and routed with no reply, empty text closed without a model call, English and Portuguese classified with the right language and a Spanish reply, masked id kept masked, no password or PII echoed, fraud inside a data-change request still P0 |
+| Judge wiring | 5/5 drafts ok on `claude-sonnet-5` (USD 0.017) |
+| Known-gap detector | +7 cases opened on the full run (password ×3, address ×4 …), 61 messages with a named gap |
+
+**Full evaluation (author's machine, `python -m lumo_triage eval --compare-model claude-haiku-4-5 --variance 30`,
+reference still the assistant pre-labels, 0 rows reviewed):**
+
+```text
+gold=90 reviewed=0
+reason exact=86/90 lenient=90/90 macro_f1=0.949
+priority exact=82/90 within1=90/90  action exact=77/90 unsafe=1 conservative=4
+judge claude-sonnet-5: overall_ok=54/57 cost=$0.1861
+adversarial passed=10/10
+stability: 30/30 same primary reason
+comparison claude-haiku-4-5: exact=95.6% cost/msg=$0.0020
+```
+
+| Finding | Detail |
+|---|---|
+| Judge (Sonnet 5) rejected 3 of 57 verified drafts | MSG-130 and MSG-320 name the app section "Mi crédito", which is true per the knowledge base (`saldo_y_cuotas`) but comes from the drafting instructions, not from a cited section; MSG-278 says a radicado "quedó registrado" without giving one. All three passed the code verifier: the judge catches provenance and overclaims that regexes cannot. |
+| Stability | 30 gold messages re-classified live: 30/30 same primary reason, mean confidence change 0.005 (USD 0.43). |
+| Claude Haiku 4.5 as classifier | Same exact accuracy on the primary reason (86/90) at USD 0.0020 per message (7× cheaper) and 3.5 s p50 (vs 5.5 s); lenient 87/90 vs 90/90, macro-F1 0.940 vs 0.949. Its two misses are not equivalent to Opus's: MSG-389, a third complaint about an unresolved problem, became `sin_accion`, which the policy closes without a reply. |
+| Cost of the evaluation | judge USD 0.19 + Haiku USD 0.18 + stability USD 0.43 ≈ USD 0.80; everything is cached, so re-running the eval after the human review costs nothing. |
+
+**Pending:** David's review of the 90 labels and 20 drafts (`gold_note = ok` or corrections),
+then `python -m lumo_triage eval` again (free: all calls cached) and the commit.
+
 **Commit:** *(filled after commit)*

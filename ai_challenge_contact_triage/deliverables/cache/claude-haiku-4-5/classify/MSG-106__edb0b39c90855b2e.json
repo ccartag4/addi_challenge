@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.002055,
+ "effort": null,
+ "fingerprint": "edb0b39c90855b2e",
+ "item_id": "MSG-106",
+ "label": "classify",
+ "latency_ms": 3343,
+ "model_requested": "claude-haiku-4-5",
+ "recorded_at": "2026-09-27T21:53:23Z",
+ "request_id": "req_011CfUgoEgoyWU33xDu8eRJx",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\": \"metodos_de_pago\", \"secondary_reasons\": [], \"confidence\": 0.95, \"out_of_scope_kind\": null, \"flags\": {\"requests_human\": false, \"fraud_or_security\": false, \"legal_threat\": false, \"collections_harassment\": false, \"vulnerable_customer\": false, \"imminent_deadline\": false, \"repeat_contact\": false, \"prompt_injection_suspected\": false, \"pii_present\": false}, \"entities\": {\"credit_number\": null, \"document_number\": null, \"amount\": null, \"payment_date\": null, \"transaction_reference\": null, \"payment_method_or_bank\": \"efecty\", \"named_agent\": null, \"masked_values\": []}, \"sentiment\": \"neutral\", \"language\": \"es\", \"summary\": \"El cliente pregunta por qué medios de pago puede pagar su cuota y si es posible usar Efecty.\", \"reasoning_brief\": \"El cliente solicita información explícita sobre métodos de pago aceptados, incluyendo una pregunta específica sobre Efecty. Esta es una consulta clara sobre medios de pago sin elementos de urgencia ni complejidad adicional.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-haiku-4-5-20251001",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 5767,
+   "input_tokens": 63,
+   "output_tokens": 283
+  }
+ }
+}

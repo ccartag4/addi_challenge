@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.001987,
+ "effort": null,
+ "fingerprint": "51539f919fe0d262",
+ "item_id": "MSG-194",
+ "label": "classify",
+ "latency_ms": 3359,
+ "model_requested": "claude-haiku-4-5",
+ "recorded_at": "2026-09-27T21:53:47Z",
+ "request_id": "req_011CfUgq2JjbcqAQSdykQcJ2",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"no_puede_pagar\",\"secondary_reasons\":[\"mora_intereses\",\"reporte_centrales\"],\"confidence\":0.92,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"negative\",\"language\":\"es\",\"summary\":\"Cliente no puede pagar este mes pero quiere saber cuánta mora pagaría si paga la otra semana y si será reportado.\",\"reasoning_brief\":\"El cliente declara explícitamente que no puede pagar (hardship), pero también pregunta específicamente sobre mora (interés por retraso) y reporte a centrales. Estas tres solicitudes están claramente presentes en el mismo mensaje.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-haiku-4-5-20251001",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 5767,
+   "input_tokens": 65,
+   "output_tokens": 269
+  }
+ }
+}

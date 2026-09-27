@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.001887,
+ "effort": null,
+ "fingerprint": "45d862d346f892ef",
+ "item_id": "MSG-206",
+ "label": "classify",
+ "latency_ms": 3166,
+ "model_requested": "claude-haiku-4-5",
+ "recorded_at": "2026-09-27T21:53:51Z",
+ "request_id": "req_011CfUgqGhfVBqsDku2YRVUr",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"fecha_de_pago\",\"secondary_reasons\":[],\"confidence\":0.92,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"neutral\",\"language\":\"es\",\"summary\":\"Cliente solicita confirmar la fecha límite de pago de la cuota de mayo.\",\"reasoning_brief\":\"El cliente pregunta explícitamente por la fecha de vencimiento de la cuota de mayo para evitar retrasos. Esta es una consulta clara sobre fecha_de_pago, sin elementos de urgencia inmediata ni otras complicaciones.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-haiku-4-5-20251001",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 5767,
+   "input_tokens": 70,
+   "output_tokens": 248
+  }
+ }
+}

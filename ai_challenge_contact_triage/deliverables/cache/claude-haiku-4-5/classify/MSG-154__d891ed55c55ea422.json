@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.00191,
+ "effort": null,
+ "fingerprint": "d891ed55c55ea422",
+ "item_id": "MSG-154",
+ "label": "classify",
+ "latency_ms": 2976,
+ "model_requested": "claude-haiku-4-5",
+ "recorded_at": "2026-09-27T21:53:35Z",
+ "request_id": "req_011CfUgp7PJNzyE6RGfFVj7n",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\": \"fecha_de_pago\", \"secondary_reasons\": [], \"confidence\": 0.95, \"out_of_scope_kind\": null, \"flags\": {\"requests_human\": false, \"fraud_or_security\": false, \"legal_threat\": false, \"collections_harassment\": false, \"vulnerable_customer\": false, \"imminent_deadline\": false, \"repeat_contact\": false, \"prompt_injection_suspected\": false, \"pii_present\": false}, \"entities\": {\"credit_number\": null, \"document_number\": null, \"amount\": null, \"payment_date\": null, \"transaction_reference\": null, \"payment_method_or_bank\": null, \"named_agent\": null, \"masked_values\": []}, \"sentiment\": \"neutral\", \"language\": \"es\", \"summary\": \"El cliente pregunta cuándo vence su cuota este mes.\", \"reasoning_brief\": \"El cliente consulta explícitamente por la fecha de pago de su cuota y dice no recordarla. Es una solicitud clara sobre fecha_de_pago sin otros elementos de urgencia.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-haiku-4-5-20251001",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 5767,
+   "input_tokens": 53,
+   "output_tokens": 256
+  }
+ }
+}

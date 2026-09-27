@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.002087,
+ "effort": null,
+ "fingerprint": "e01191388cf64790",
+ "item_id": "MSG-015",
+ "label": "classify",
+ "latency_ms": 3585,
+ "model_requested": "claude-haiku-4-5",
+ "recorded_at": "2026-09-27T21:53:17Z",
+ "request_id": "req_011CfUgnjZMkDjUKvH474Hby",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"pago_anticipado\",\"secondary_reasons\":[\"certificados_extractos\",\"reporte_centrales\"],\"confidence\":0.82,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"neutral\",\"language\":\"es\",\"summary\":\"Cliente pagó la totalidad del crédito y pregunta cuándo recibe paz y salvo y se actualiza su reporte en centrales de riesgo.\",\"reasoning_brief\":\"El mensaje principal es pago anticipado (liquidación total del crédito). Secundariamente pregunta por paz y salvo (certificados_extractos) y por la actualización del reporte negativo en centrales (reporte_centrales). Son tres temas distintos pero relacionados con el mismo evento.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-haiku-4-5-20251001",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 5767,
+   "input_tokens": 70,
+   "output_tokens": 288
+  }
+ }
+}

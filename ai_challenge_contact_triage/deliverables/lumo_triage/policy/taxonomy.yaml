@@ -108,6 +108,8 @@ reasons:
     reply_source: llm
     examples: [MSG-023, MSG-035, MSG-106, MSG-161, MSG-216, MSG-323, MSG-340, MSG-376]
     notes: Nequi, Daviplata and Baloto are not in the policy; the draft lists only the accepted methods and does not confirm others.
+    known_gaps:
+      - {pattern: "\\bnequi\\b|\\bdaviplata\\b|\\bbaloto\\b|link de pago|cuenta bancaria|n[uú]mero de cuenta", gap: "Payment rails other than PSE, cards, Efecty and bank correspondents (Nequi, Daviplata, Baloto, transfers, payment links) are not in the policy."}
 
   - id: mora_intereses
     origin: original
@@ -147,6 +149,8 @@ reasons:
     reply_source: llm
     examples: [MSG-004, MSG-024, MSG-109, MSG-129, MSG-146, MSG-167, MSG-225, MSG-343]
     notes: OTP, blocked account and app failures are covered. "Contraseña" is not a concept in the policy (login is document + OTP); password questions get policy_gap and go to support.
+    known_gaps:
+      - {pattern: "contrase[nñ]a|password|clave de (?:la |mi )?app|recuperar(?:la)? (?:la )?(?:clave|contrase[nñ]a)", gap: "The policy has no password flow (login is document + OTP); a support case is opened."}
 
   - id: datos_personales
     origin: original
@@ -160,6 +164,8 @@ reasons:
     reply_source: llm
     examples: [MSG-008, MSG-038, MSG-110, MSG-126, MSG-168, MSG-227, MSG-310, MSG-357]
     notes: 'Phone and email are covered (app, "Mi perfil"). Address or other fields are not covered: policy_gap, route to cx_general.'
+    known_gaps:
+      - {pattern: "direcci[oó]n|ciudad de residencia|\\bbarrio\\b", gap: "Address changes are not covered by the policy (only phone and e-mail)."}
 
   - id: certificados_extractos
     origin: original
@@ -173,6 +179,8 @@ reasons:
     reply_source: llm
     examples: [MSG-009, MSG-022, MSG-039, MSG-111, MSG-121, MSG-171, MSG-232, MSG-262, MSG-345]
     notes: Only the three documents in the policy are offered; "certificado de deuda" or "retención en la fuente" are partial and get an agent.
+    known_gaps:
+      - {pattern: "retenci[oó]n|certificado de deuda|desglose|saldo a la fecha|capital e intereses", gap: "Only paz y salvo / al día, the payment statement and the interest certificate exist in the policy; other certificates need an agent."}
 
   - id: fraude_seguridad
     origin: original

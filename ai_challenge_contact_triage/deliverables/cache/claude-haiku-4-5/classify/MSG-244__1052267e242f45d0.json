@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.001956,
+ "effort": null,
+ "fingerprint": "1052267e242f45d0",
+ "item_id": "MSG-244",
+ "label": "classify",
+ "latency_ms": 3242,
+ "model_requested": "claude-haiku-4-5",
+ "recorded_at": "2026-09-27T21:53:55Z",
+ "request_id": "req_011CfUgqcAhKKJSdGGV8sKtF",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"hablar_con_humano\",\"secondary_reasons\":[],\"confidence\":0.95,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":true,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"negative\",\"language\":\"es\",\"summary\":\"El cliente solicita hablar con un agente real porque considera que el chat automatizado no lo entiende.\",\"reasoning_brief\":\"El mensaje solicita explícitamente un asesor o persona sin ninguna otra pregunta o solicitud relacionada con crédito. Aunque hay frustración con el bot, no hay un tema subyacente a clasificar, por lo que hablar_con_humano es el motivo principal.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-haiku-4-5-20251001",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 5767,
+   "input_tokens": 64,
+   "output_tokens": 263
+  }
+ }
+}

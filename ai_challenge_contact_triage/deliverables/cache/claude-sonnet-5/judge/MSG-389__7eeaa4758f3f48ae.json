@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.003623,
+ "effort": "medium",
+ "fingerprint": "7eeaa4758f3f48ae",
+ "item_id": "MSG-389",
+ "label": "judge",
+ "latency_ms": 4031,
+ "model_requested": "claude-sonnet-5",
+ "recorded_at": "2026-09-27T21:52:37Z",
+ "request_id": "req_011CfUgjowx1YvA86hDpbB1D",
+ "response": {
+  "content": [
+   {
+    "text": "{\"grounded\": true, \"answers_request\": true, \"no_forbidden_promise\": true, \"tone_ok\": true, \"overall_ok\": true, \"issues\": [], \"reasoning_brief\": \"El borrador se basa en la sección citada, no promete nada indebido, reconoce la molestia y pide el detalle del problema para poder enrutar correctamente, sin inventar datos ni radicados falsos.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-sonnet-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1127,
+   "input_tokens": 624,
+   "output_tokens": 215
+  }
+ }
+}

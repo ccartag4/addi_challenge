@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.001335,
+ "effort": null,
+ "fingerprint": "b280d7dd59cf088f",
+ "item_id": "MSG-368",
+ "label": "classify",
+ "latency_ms": 3593,
+ "model_requested": "claude-haiku-4-5",
+ "recorded_at": "2026-09-27T21:54:24Z",
+ "request_id": "req_011CfUgsfWB59FCVJdm1ygpn",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"cuenta_y_app\",\"confidence\":0.85,\"summary\":\"Cliente no puede ingresar a la app porque recibe error de contraseña incorrecta después de cambiarla varias veces.\",\"reasoning_brief\":\"El cliente reporta un problema de acceso a la app con error de autenticación recurrente. Se clasifica como cuenta_y_app (bloques de cuenta y fallas de app). El concepto de 'contraseña' no existe en la política (login es documento + OTP), por lo que es necesaria validación adicional.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-haiku-4-5-20251001",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 5767,
+   "input_tokens": 63,
+   "output_tokens": 139
+  }
+ }
+}

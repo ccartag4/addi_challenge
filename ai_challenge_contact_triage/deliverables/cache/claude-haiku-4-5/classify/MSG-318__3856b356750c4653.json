@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.002104,
+ "effort": null,
+ "fingerprint": "3856b356750c4653",
+ "item_id": "MSG-318",
+ "label": "classify",
+ "latency_ms": 3432,
+ "model_requested": "claude-haiku-4-5",
+ "recorded_at": "2026-09-27T21:54:11Z",
+ "request_id": "req_011CfUgrmLsuepgtBTAqR6uB",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\": \"consulta_saldo_cuotas\", \"secondary_reasons\": [], \"confidence\": 0.95, \"out_of_scope_kind\": null, \"flags\": {\"requests_human\": false, \"fraud_or_security\": false, \"legal_threat\": false, \"collections_harassment\": false, \"vulnerable_customer\": false, \"imminent_deadline\": false, \"repeat_contact\": false, \"prompt_injection_suspected\": false, \"pii_present\": true}, \"entities\": {\"credit_number\": null, \"document_number\": \"1.020.XXX.XXX\", \"amount\": null, \"payment_date\": null, \"transaction_reference\": null, \"payment_method_or_bank\": null, \"named_agent\": null, \"masked_values\": [\"1.020.XXX.XXX\"]}, \"sentiment\": \"neutral\", \"language\": \"es\", \"summary\": \"Cliente solicita conocer el saldo pendiente de su crédito y el valor de la próxima cuota.\", \"reasoning_brief\": \"Es una consulta clara de saldo y cuota. El cliente proporciona su documento (parcialmente enmascarado) como identificación para la consulta, lo que genera la bandera de PII.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-haiku-4-5-20251001",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 5767,
+   "input_tokens": 77,
+   "output_tokens": 290
+  }
+ }
+}

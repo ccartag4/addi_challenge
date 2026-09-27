@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.002915,
+ "effort": "medium",
+ "fingerprint": "c5c260e48c29735f",
+ "item_id": "MSG-106",
+ "label": "judge",
+ "latency_ms": 2359,
+ "model_requested": "claude-sonnet-5",
+ "recorded_at": "2026-09-27T21:50:34Z",
+ "request_id": "req_011CfUgaqBNCkW8TfT5gw6wc",
+ "response": {
+  "content": [
+   {
+    "text": "{\"grounded\": true, \"answers_request\": true, \"no_forbidden_promise\": true, \"tone_ok\": true, \"overall_ok\": true, \"issues\": [], \"reasoning_brief\": \"El draft responde correctamente con los métodos de pago citados, incluye el detalle de Efecty y el correo de comprobantes, todo respaldado por la sección citada. No hay promesas prohibidas, tono cálido y en tú, y responde directamente la pregunta del cliente.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-sonnet-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1127,
+   "input_tokens": 545,
+   "output_tokens": 160
+  }
+ }
+}

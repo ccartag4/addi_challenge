@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.001379,
+ "effort": null,
+ "fingerprint": "ddfcb6ea8281bbd1",
+ "item_id": "MSG-021",
+ "label": "classify",
+ "latency_ms": 2677,
+ "model_requested": "claude-haiku-4-5",
+ "recorded_at": "2026-09-27T21:53:18Z",
+ "request_id": "req_011CfUgnvTwjRS7bzPWC5BRh",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"reporte_centrales\",\"confidence\":0.92,\"sentiment\":\"negative\",\"language\":\"es\",\"summary\":\"Cliente pagó pero recibió aviso de reporte a centrales de riesgo; solicita cómo evitar el reporte.\",\"reasoning_brief\":\"El cliente refiere haber pagado y cuestiona por qué recibe notificación de reporte a centrales. Es un caso de actualización de reportes tras pago o posible error administrativo, que corresponde a reporte_centrales. La urgencia y el pago reciente generan imminent_deadline.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-haiku-4-5-20251001",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 5767,
+   "input_tokens": 67,
+   "output_tokens": 147
+  }
+ }
+}

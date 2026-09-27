@@ -160,6 +160,28 @@ def cmd_summarize(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_eval(args: argparse.Namespace) -> int:
+    from .eval import REPORT, evaluate, load_gold, write_outputs
+
+    res = evaluate(mode=args.mode or "auto", judge_model=args.judge_model, judge_limit=args.judge,
+                   compare_model=args.compare_model, variance_n=args.variance, workers=args.workers)
+    write_outputs(res, load_gold())
+    r, p, a = res.reason, res.priority, res.action
+    print(f"gold={res.gold_n} reviewed={res.reviewed_n}")
+    print(f"reason exact={r['exact']}/{r['n']} lenient={r['lenient']}/{r['n']} macro_f1={r['macro_f1']:.3f}")
+    print(f"priority exact={p['exact']}/{p['n']} within1={p['within_one']}/{p['n']}  action exact={a['exact']}/{a['n']} unsafe={a['unsafe']} conservative={a['conservative']}")
+    if res.judge.get("n"):
+        print(f"judge {res.judge['model']}: overall_ok={res.judge['overall_ok']}/{res.judge['n']} cost=${res.judge['cost_usd']:.4f}" +
+              (f" human_agree={res.judge['human_agree']}/{res.judge['human_n']}" if res.judge.get("human_n") else ""))
+    print(f"adversarial passed={sum(1 for x in res.adversarial if x['passed'])}/{len(res.adversarial)}")
+    if res.variance:
+        print(f"stability: {res.variance['same_primary']}/{res.variance['n']} same primary reason")
+    if res.comparison:
+        print(f"comparison {res.comparison['model']}: exact={res.comparison['reason']['exact_rate']:.1%} cost/msg=${res.comparison['cost_usd']:.4f}")
+    print(f"wrote {REPORT}")
+    return 0
+
+
 def _common(p: argparse.ArgumentParser, default_out: Path) -> None:
     p.add_argument("--data", default=str(DATA_DEFAULT))
     p.add_argument("--limit", type=int, default=None, help="first N messages")
@@ -191,6 +213,15 @@ def main(argv=None) -> int:
     p_sum = sub.add_parser("summarize", help="regenerate batch_summary.json/.md from triage_results.jsonl")
     p_sum.add_argument("--results", default=str(ROOT / "output" / "triage_results.jsonl"))
     p_sum.set_defaults(func=cmd_summarize)
+
+    p_eval = sub.add_parser("eval", help="grade the committed output against the gold set -> evidence/eval_report.md")
+    p_eval.add_argument("--mode", choices=["auto", "live", "offline"], default=None)
+    p_eval.add_argument("--judge-model", default="claude-sonnet-5", help="rubric judge for drafts (not the model under test)")
+    p_eval.add_argument("--judge", type=int, default=None, help="judge at most N drafts (0 disables the judge; default all gold drafts)")
+    p_eval.add_argument("--compare-model", default=None, help="classify the gold messages with another model, e.g. claude-haiku-4-5")
+    p_eval.add_argument("--variance", type=int, default=0, help="re-classify N gold messages live to measure stability (costs money)")
+    p_eval.add_argument("--workers", type=int, default=4)
+    p_eval.set_defaults(func=cmd_eval)
 
     args = parser.parse_args(argv)
     return args.func(args)

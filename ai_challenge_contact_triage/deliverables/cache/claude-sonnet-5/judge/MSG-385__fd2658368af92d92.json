@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.002579,
+ "effort": "medium",
+ "fingerprint": "fd2658368af92d92",
+ "item_id": "MSG-385",
+ "label": "judge",
+ "latency_ms": 2115,
+ "model_requested": "claude-sonnet-5",
+ "recorded_at": "2026-09-27T21:52:31Z",
+ "request_id": "req_011CfUgjVVwQqeRbxwGCF6Ws",
+ "response": {
+  "content": [
+   {
+    "text": "{\"grounded\":true,\"answers_request\":true,\"no_forbidden_promise\":true,\"tone_ok\":true,\"overall_ok\":true,\"issues\":[],\"reasoning_brief\":\"Draft accurately reflects policy: 24h wait, comprobante received, escalation to pagos with 5 días hábiles response time. No forbidden promises, warm tono, addresses request.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-sonnet-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1127,
+   "input_tokens": 542,
+   "output_tokens": 127
+  }
+ }
+}

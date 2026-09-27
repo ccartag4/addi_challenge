@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.001207,
+ "effort": null,
+ "fingerprint": "078a2d872b3200dc",
+ "item_id": "MSG-245",
+ "label": "classify",
+ "latency_ms": 1950,
+ "model_requested": "claude-haiku-4-5",
+ "recorded_at": "2026-09-27T21:53:56Z",
+ "request_id": "req_011CfUgqjRWTJ4hAjGUFegDN",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"fuera_de_alcance\",\"confidence\":0.95,\"out_of_scope_kind\":\"other_business_inquiry\",\"summary\":\"Cliente pregunta si Lumo vende celulares a cuotas o solo ofrece créditos.\",\"reasoning_brief\":\"El cliente consulta por un producto que Lumo no ofrece (financiamiento de celulares); es una consulta comercial sobre un negocio diferente al de créditos de consumo.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-haiku-4-5-20251001",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 5767,
+   "input_tokens": 55,
+   "output_tokens": 115
+  }
+ }
+}

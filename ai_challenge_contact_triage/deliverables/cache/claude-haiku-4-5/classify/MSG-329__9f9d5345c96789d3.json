@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.002191,
+ "effort": null,
+ "fingerprint": "9f9d5345c96789d3",
+ "item_id": "MSG-329",
+ "label": "classify",
+ "latency_ms": 3582,
+ "model_requested": "claude-haiku-4-5",
+ "recorded_at": "2026-09-27T21:54:15Z",
+ "request_id": "req_011CfUgs18qkVhmZ9SN3b75P",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\": \"fraude_seguridad\", \"secondary_reasons\": [], \"confidence\": 0.95, \"out_of_scope_kind\": null, \"flags\": {\"requests_human\": false, \"fraud_or_security\": true, \"legal_threat\": false, \"collections_harassment\": false, \"vulnerable_customer\": false, \"imminent_deadline\": false, \"repeat_contact\": false, \"prompt_injection_suspected\": false, \"pii_present\": false}, \"entities\": {\"credit_number\": null, \"document_number\": null, \"amount\": null, \"payment_date\": null, \"transaction_reference\": null, \"payment_method_or_bank\": null, \"named_agent\": null, \"masked_values\": []}, \"sentiment\": \"negative\", \"language\": \"es\", \"summary\": \"El cliente recibió un mensaje sospechoso pidiendo la clave dinámica, supuestamente de Lumo, y pregunta si es estafa.\", \"reasoning_brief\": \"Se trata de una potencial suplantación o phishing dirigido al cliente. La solicitud de clave dinámica a través de un mensaje no autorizado es un indicador clásico de fraude o seguridad, y el cliente correctamente lo cuestiona. Requiere validación inmediata del equipo de fraude.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-haiku-4-5-20251001",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 5767,
+   "input_tokens": 69,
+   "output_tokens": 309
+  }
+ }
+}

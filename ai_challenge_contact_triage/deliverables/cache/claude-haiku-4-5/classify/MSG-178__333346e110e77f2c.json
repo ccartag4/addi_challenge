@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.001811,
+ "effort": null,
+ "fingerprint": "333346e110e77f2c",
+ "item_id": "MSG-178",
+ "label": "classify",
+ "latency_ms": 2936,
+ "model_requested": "claude-haiku-4-5",
+ "recorded_at": "2026-09-27T21:53:44Z",
+ "request_id": "req_011CfUgpmdSDGkEJCdUXdhrs",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"felicitacion_feedback\",\"secondary_reasons\":[],\"confidence\":0.98,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":\"camilo\",\"masked_values\":[]},\"sentiment\":\"positive\",\"language\":\"es\",\"summary\":\"El cliente elogia al asesor Camilo por su atención amable y servicio.\",\"reasoning_brief\":\"El mensaje es una felicitación explícita hacia un asesor nombrado por su buen servicio. No hay solicitud adicional, solo agradecimiento y elogio.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-haiku-4-5-20251001",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 5767,
+   "input_tokens": 64,
+   "output_tokens": 234
+  }
+ }
+}

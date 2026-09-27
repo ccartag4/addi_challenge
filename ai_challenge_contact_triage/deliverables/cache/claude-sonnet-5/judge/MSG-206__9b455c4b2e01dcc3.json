@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.002587,
+ "effort": "medium",
+ "fingerprint": "9b455c4b2e01dcc3",
+ "item_id": "MSG-206",
+ "label": "judge",
+ "latency_ms": 2752,
+ "model_requested": "claude-sonnet-5",
+ "recorded_at": "2026-09-27T21:51:27Z",
+ "request_id": "req_011CfUgejuy3xejsSmuSMLV7",
+ "response": {
+  "content": [
+   {
+    "text": "{\"grounded\":true,\"answers_request\":true,\"no_forbidden_promise\":true,\"tone_ok\":true,\"overall_ok\":true,\"issues\":[],\"reasoning_brief\":\"Draft correctly states no account access, points to app and advisor for exact date, adds relevant policy on changing payment date. No invented facts or forbidden promises, tone warm and appropriate.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-sonnet-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1127,
+   "input_tokens": 551,
+   "output_tokens": 126
+  }
+ }
+}

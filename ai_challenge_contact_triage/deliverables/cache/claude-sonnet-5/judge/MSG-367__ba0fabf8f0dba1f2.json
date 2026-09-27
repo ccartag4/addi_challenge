@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.003085,
+ "effort": "medium",
+ "fingerprint": "ba0fabf8f0dba1f2",
+ "item_id": "MSG-367",
+ "label": "judge",
+ "latency_ms": 2746,
+ "model_requested": "claude-sonnet-5",
+ "recorded_at": "2026-09-27T21:52:20Z",
+ "request_id": "req_011CfUgid83t9SV9t8fUeL63",
+ "response": {
+  "content": [
+   {
+    "text": "{\"grounded\": true, \"answers_request\": true, \"no_forbidden_promise\": true, \"tone_ok\": true, \"overall_ok\": true, \"issues\": [], \"reasoning_brief\": \"El draft usa correctamente las secciones citadas para explicar cancelación y pago anticipado, y remite la solicitud de ofertas al equipo de datos, tal como indica la triage. No promete nada prohibido, tono cálido y en tú.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-sonnet-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1127,
+   "input_tokens": 690,
+   "output_tokens": 148
+  }
+ }
+}

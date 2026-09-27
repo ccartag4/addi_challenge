@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.002144,
+ "effort": null,
+ "fingerprint": "dcee76fb89541de4",
+ "item_id": "MSG-125",
+ "label": "classify",
+ "latency_ms": 3687,
+ "model_requested": "claude-haiku-4-5",
+ "recorded_at": "2026-09-27T21:53:31Z",
+ "request_id": "req_011CfUgomdfF6rDdDLmLiHte",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\": \"fraude_seguridad\", \"secondary_reasons\": [], \"confidence\": 0.95, \"out_of_scope_kind\": null, \"flags\": {\"requests_human\": false, \"fraud_or_security\": true, \"legal_threat\": false, \"collections_harassment\": false, \"vulnerable_customer\": false, \"imminent_deadline\": false, \"repeat_contact\": false, \"prompt_injection_suspected\": false, \"pii_present\": false}, \"entities\": {\"credit_number\": null, \"document_number\": null, \"amount\": null, \"payment_date\": null, \"transaction_reference\": null, \"payment_method_or_bank\": null, \"named_agent\": null, \"masked_values\": []}, \"sentiment\": \"negative\", \"language\": \"es\", \"summary\": \"Perdió el celular con la app de Lumo activa y necesita bloquear la cuenta para evitar acceso no autorizado.\", \"reasoning_brief\": \"Un teléfono perdido con acceso a la app de Lumo es un riesgo inmediato de seguridad y potencial fraude. El cliente solicita protección de su cuenta, lo que dispara la bandera fraud_or_security y requiere atención prioritaria del equipo de fraude.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-haiku-4-5-20251001",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 5767,
+   "input_tokens": 67,
+   "output_tokens": 300
+  }
+ }
+}

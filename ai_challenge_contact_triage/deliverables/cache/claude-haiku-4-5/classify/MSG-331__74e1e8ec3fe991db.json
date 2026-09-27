@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.001998,
+ "effort": null,
+ "fingerprint": "74e1e8ec3fe991db",
+ "item_id": "MSG-331",
+ "label": "classify",
+ "latency_ms": 3251,
+ "model_requested": "claude-haiku-4-5",
+ "recorded_at": "2026-09-27T21:54:14Z",
+ "request_id": "req_011CfUgs1zST6u4FGSuQ9ab7",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\": \"felicitacion_feedback\", \"secondary_reasons\": [], \"confidence\": 0.95, \"out_of_scope_kind\": null, \"flags\": {\"requests_human\": false, \"fraud_or_security\": false, \"legal_threat\": false, \"collections_harassment\": false, \"vulnerable_customer\": false, \"imminent_deadline\": false, \"repeat_contact\": false, \"prompt_injection_suspected\": false, \"pii_present\": false}, \"entities\": {\"credit_number\": null, \"document_number\": null, \"amount\": null, \"payment_date\": null, \"transaction_reference\": null, \"payment_method_or_bank\": null, \"named_agent\": null, \"masked_values\": []}, \"sentiment\": \"positive\", \"language\": \"es\", \"summary\": \"Cliente agradece la atención de la asesora, destacando su amabilidad.\", \"reasoning_brief\": \"El mensaje es una felicitación directa por el buen servicio recibido, aunque no menciona el nombre específico de la asesor. El tono positivo y la expresión de gratitud caracterizan claramente una felicitacion_feedback.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-haiku-4-5-20251001",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 5767,
+   "input_tokens": 56,
+   "output_tokens": 273
+  }
+ }
+}

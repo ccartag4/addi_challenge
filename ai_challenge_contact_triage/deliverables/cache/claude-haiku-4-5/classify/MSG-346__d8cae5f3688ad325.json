@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.000986,
+ "effort": null,
+ "fingerprint": "d8cae5f3688ad325",
+ "item_id": "MSG-346",
+ "label": "classify",
+ "latency_ms": 1654,
+ "model_requested": "claude-haiku-4-5",
+ "recorded_at": "2026-09-27T21:54:16Z",
+ "request_id": "req_011CfUgsFv697LxVTVu5KVeG",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"ruido\",\"confidence\":0.95,\"summary\":\"Mensaje incoherente sin solicitud clara.\",\"reasoning_brief\":\"El texto contiene caracteres aleatorios y sin sentido (ggg asdkjf), lo que indica ruido o prueba sin una solicitud real.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-haiku-4-5-20251001",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 5767,
+   "input_tokens": 49,
+   "output_tokens": 72
+  }
+ }
+}

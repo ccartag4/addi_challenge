@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.002076,
+ "effort": null,
+ "fingerprint": "d8e1d38f469d19b8",
+ "item_id": "MSG-361",
+ "label": "classify",
+ "latency_ms": 4484,
+ "model_requested": "claude-haiku-4-5",
+ "recorded_at": "2026-09-27T21:54:21Z",
+ "request_id": "req_011CfUgsP5wyk1rUysDPxmac",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\": \"certificados_extractos\", \"secondary_reasons\": [\"cancelacion\"], \"confidence\": 0.85, \"out_of_scope_kind\": null, \"flags\": {\"requests_human\": false, \"fraud_or_security\": false, \"legal_threat\": false, \"collections_harassment\": false, \"vulnerable_customer\": false, \"imminent_deadline\": false, \"repeat_contact\": false, \"prompt_injection_suspected\": false, \"pii_present\": false}, \"entities\": {\"credit_number\": null, \"document_number\": null, \"amount\": null, \"payment_date\": null, \"transaction_reference\": null, \"payment_method_or_bank\": null, \"named_agent\": null, \"masked_values\": []}, \"sentiment\": \"neutral\", \"language\": \"es\", \"summary\": \"El cliente solicita un certificado de paz y salvo porque ha terminado de pagar todo el crédito.\", \"reasoning_brief\": \"El cliente pide explícitamente paz y salvo, que es un documento cubierto por certificados_extractos. También menciona terminar de pagar, lo que sugiere intención de cancelación, pero la solicitud primaria es el certificado. Ambas necesidades están presentes.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-haiku-4-5-20251001",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 5767,
+   "input_tokens": 49,
+   "output_tokens": 290
+  }
+ }
+}

@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.003137,
+ "effort": "medium",
+ "fingerprint": "a7c813cc80974a4a",
+ "item_id": "MSG-019",
+ "label": "judge",
+ "latency_ms": 2397,
+ "model_requested": "claude-sonnet-5",
+ "recorded_at": "2026-09-27T21:50:24Z",
+ "request_id": "req_011CfUga5cVqQJqXjrb8p3iN",
+ "response": {
+  "content": [
+   {
+    "text": "{\"grounded\":true,\"answers_request\":true,\"no_forbidden_promise\":true,\"tone_ok\":true,\"overall_ok\":true,\"issues\":[],\"reasoning_brief\":\"Draft accurately reflects both cited sections, no invented figures, no forbidden promises, tone warm and appropriate. App reference is generic guidance, not account-specific data.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-sonnet-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1127,
+   "input_tokens": 846,
+   "output_tokens": 122
+  }
+ }
+}

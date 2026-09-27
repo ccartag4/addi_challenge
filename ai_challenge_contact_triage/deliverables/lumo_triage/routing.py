@@ -12,6 +12,7 @@ auto-reply action ends up with no possible reply, it degrades to `route_to_human
 """
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass, field
 from typing import Any, Optional
 
@@ -87,6 +88,19 @@ def _matches(when: dict[str, Any], cls: Classification, reason: dict, threshold:
         if key == "any_reason" and value != cls.primary_reason.value and value not in secondary:
             return False
     return True
+
+
+KNOWN_GAPS: dict[str, list[tuple["re.Pattern[str]", str]]] = {
+    r["id"]: [(re.compile(g["pattern"], re.I), g["gap"]) for g in r.get("known_gaps", [])]
+    for r in TAXONOMY["reasons"]
+}
+
+
+def known_gaps(reason_id: str, text: str) -> list[str]:
+    """Policy holes the taxonomy already knows about, detected in the customer's text by pattern
+    (password flows, address changes, unlisted payment rails, unlisted certificates). They are
+    added to `policy_gap` whether or not the model noticed them."""
+    return [gap for pattern, gap in KNOWN_GAPS.get(reason_id, []) if pattern.search(text)]
 
 
 def _queue(spec: str, reason: dict) -> str:

@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.005038,
+ "effort": "medium",
+ "fingerprint": "42b5849119c50297",
+ "item_id": "MSG-013",
+ "label": "judge",
+ "latency_ms": 3289,
+ "model_requested": "claude-sonnet-5",
+ "recorded_at": "2026-09-27T21:50:19Z",
+ "request_id": "req_011CfUgZfuUonPkDTf2zaVCU",
+ "response": {
+  "content": [
+   {
+    "text": "{\"grounded\":true,\"answers_request\":true,\"no_forbidden_promise\":true,\"tone_ok\":true,\"overall_ok\":true,\"issues\":[],\"reasoning_brief\":\"El draft usa la información de la sección citada correctamente, responde la pregunta del cliente, no promete nada indebido y mantiene tono cálido en español con tuteo.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-sonnet-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 1127,
+   "cache_read_input_tokens": 0,
+   "input_tokens": 500,
+   "output_tokens": 122
+  }
+ }
+}

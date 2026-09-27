@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.003661,
+ "effort": "medium",
+ "fingerprint": "fe8fbde97a0eebac",
+ "item_id": "MSG-015",
+ "label": "judge",
+ "latency_ms": 2382,
+ "model_requested": "claude-sonnet-5",
+ "recorded_at": "2026-09-27T21:50:21Z",
+ "request_id": "req_011CfUgZueDhzXku4KkFU9Qn",
+ "response": {
+  "content": [
+   {
+    "text": "{\"grounded\":true,\"answers_request\":true,\"no_forbidden_promise\":true,\"tone_ok\":true,\"overall_ok\":true,\"issues\":[],\"reasoning_brief\":\"Draft accurately reflects both cited sections: certificate request process and timing, and reporting update cycle up to 30 days without promising deletion or specific dates. Tone is warm, appropriate, no blame, no forbidden promises.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-sonnet-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1127,
+   "input_tokens": 1018,
+   "output_tokens": 140
+  }
+ }
+}

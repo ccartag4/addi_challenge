@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.002059,
+ "effort": null,
+ "fingerprint": "b986e0ca06210a26",
+ "item_id": "MSG-040",
+ "label": "classify",
+ "latency_ms": 3166,
+ "model_requested": "claude-haiku-4-5",
+ "recorded_at": "2026-09-27T21:53:22Z",
+ "request_id": "req_011CfUgoA2H2aF9MQdDvP7h4",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\": \"hablar_con_humano\", \"secondary_reasons\": [], \"confidence\": 0.85, \"out_of_scope_kind\": null, \"flags\": {\"requests_human\": true, \"fraud_or_security\": false, \"legal_threat\": false, \"collections_harassment\": false, \"vulnerable_customer\": false, \"imminent_deadline\": false, \"repeat_contact\": false, \"prompt_injection_suspected\": false, \"pii_present\": false}, \"entities\": {\"credit_number\": null, \"document_number\": null, \"amount\": null, \"payment_date\": null, \"transaction_reference\": null, \"payment_method_or_bank\": null, \"named_agent\": null, \"masked_values\": []}, \"sentiment\": \"negative\", \"language\": \"es\", \"summary\": \"El cliente lleva esperando 20 minutos y solicita atención de una persona.\", \"reasoning_brief\": \"El cliente expresa frustración por la espera y pide explícitamente hablar con alguien ('hay alguien ahi?'). No hay solicitud de fondo, solo la demanda de atención humana, lo que hace que hablar_con_humano sea la razón principal.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-haiku-4-5-20251001",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 5767,
+   "input_tokens": 52,
+   "output_tokens": 286
+  }
+ }
+}

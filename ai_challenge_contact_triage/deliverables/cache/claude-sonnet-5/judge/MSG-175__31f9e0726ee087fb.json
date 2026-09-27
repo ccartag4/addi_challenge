@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.002913,
+ "effort": "medium",
+ "fingerprint": "31f9e0726ee087fb",
+ "item_id": "MSG-175",
+ "label": "judge",
+ "latency_ms": 2558,
+ "model_requested": "claude-sonnet-5",
+ "recorded_at": "2026-09-27T21:51:13Z",
+ "request_id": "req_011CfUgdgckTQm8iZZ41dm3K",
+ "response": {
+  "content": [
+   {
+    "text": "{\"grounded\": true, \"answers_request\": true, \"no_forbidden_promise\": true, \"tone_ok\": true, \"overall_ok\": true, \"issues\": [], \"reasoning_brief\": \"El draft registra la queja como PQR, menciona el plazo legal de 15 días hábiles (coincide con la sección citada), reconoce la molestia sin culpar al cliente, y pide más info para el caso. No promete nada indebido ni inventa datos.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-sonnet-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1127,
+   "input_tokens": 584,
+   "output_tokens": 152
+  }
+ }
+}

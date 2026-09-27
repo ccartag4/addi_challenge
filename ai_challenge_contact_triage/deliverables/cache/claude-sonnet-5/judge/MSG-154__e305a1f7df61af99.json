@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.002497,
+ "effort": "medium",
+ "fingerprint": "e305a1f7df61af99",
+ "item_id": "MSG-154",
+ "label": "judge",
+ "latency_ms": 2661,
+ "model_requested": "claude-sonnet-5",
+ "recorded_at": "2026-09-27T21:50:58Z",
+ "request_id": "req_011CfUgcaqxQHiCTn7GgEcy4",
+ "response": {
+  "content": [
+   {
+    "text": "{\"grounded\":true,\"answers_request\":true,\"no_forbidden_promise\":true,\"tone_ok\":true,\"overall_ok\":true,\"issues\":[],\"reasoning_brief\":\"El draft no inventa datos, remite a la app/asesor para la fecha específica, cita correctamente la política de cambio de fecha, tono cálido en tú, sin promesas prohibidas.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-sonnet-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1127,
+   "input_tokens": 486,
+   "output_tokens": 130
+  }
+ }
+}

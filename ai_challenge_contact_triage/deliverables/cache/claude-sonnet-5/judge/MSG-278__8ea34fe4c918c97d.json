@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.005273,
+ "effort": "medium",
+ "fingerprint": "8ea34fe4c918c97d",
+ "item_id": "MSG-278",
+ "label": "judge",
+ "latency_ms": 5387,
+ "model_requested": "claude-sonnet-5",
+ "recorded_at": "2026-09-27T21:51:47Z",
+ "request_id": "req_011CfUgfyGBKQWGAkF4wGuJ8",
+ "response": {
+  "content": [
+   {
+    "text": "{\"grounded\": false, \"answers_request\": true, \"no_forbidden_promise\": true, \"tone_ok\": true, \"overall_ok\": false, \"issues\": [\"afirma que ya quedó registrado un número de radicado sin proporcionarlo, lo cual no está respaldado\"], \"reasoning_brief\": \"El draft asegura que el caso PQR ya tiene número de radicado asignado, pero no lo entrega ni hay evidencia de que se haya generado; esto es una afirmación no verificable en este canal. El resto (tiempos, escalamiento a Pagos, solicitud de comprobante) está bien fundamentado en las secciones citadas.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-sonnet-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1127,
+   "input_tokens": 774,
+   "output_tokens": 350
+  }
+ }
+}

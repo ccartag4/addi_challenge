@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.003473,
+ "effort": "medium",
+ "fingerprint": "b1a257a5276d807b",
+ "item_id": "MSG-149",
+ "label": "judge",
+ "latency_ms": 2848,
+ "model_requested": "claude-sonnet-5",
+ "recorded_at": "2026-09-27T21:50:51Z",
+ "request_id": "req_011CfUgc2xp7F7QHC97mEj1Y",
+ "response": {
+  "content": [
+   {
+    "text": "{\"grounded\":true,\"answers_request\":true,\"no_forbidden_promise\":true,\"tone_ok\":true,\"overall_ok\":true,\"issues\":[],\"reasoning_brief\":\"El draft usa correctamente las secciones citadas: confirma pago anticipado sin penalidad, aclara que no hay descuento fijo pero sí reducción de intereses, y remite a la app o a validación de identidad para el saldo. No inventa cifras ni promete nada prohibido. Tono cálido y en español con 'tú'.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-sonnet-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1127,
+   "input_tokens": 734,
+   "output_tokens": 178
+  }
+ }
+}

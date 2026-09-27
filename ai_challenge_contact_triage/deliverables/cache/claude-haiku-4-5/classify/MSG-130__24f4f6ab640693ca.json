@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.002021,
+ "effort": null,
+ "fingerprint": "24f4f6ab640693ca",
+ "item_id": "MSG-130",
+ "label": "classify",
+ "latency_ms": 4359,
+ "model_requested": "claude-haiku-4-5",
+ "recorded_at": "2026-09-27T21:53:32Z",
+ "request_id": "req_011CfUgonevEHiJ8KoUbHAdt",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"mora_intereses\",\"secondary_reasons\":[\"queja_reclamo\"],\"confidence\":0.85,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"negative\",\"language\":\"es\",\"summary\":\"Cliente con cuota vencida solicita explicación sobre el cálculo de intereses de mora y desea presentar un reclamo formal.\",\"reasoning_brief\":\"El tema principal es la mora e intereses de mora: el cliente tiene una cuota vencida y cuestiona los intereses cobrados. Secundariamente, solicita un reclamo formal (PQR), lo que añade una componente de queja o reclamación.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-haiku-4-5-20251001",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 5767,
+   "input_tokens": 84,
+   "output_tokens": 272
+  }
+ }
+}

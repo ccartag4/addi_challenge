@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.001947,
+ "effort": null,
+ "fingerprint": "199fb885e877f485",
+ "item_id": "MSG-138",
+ "label": "classify",
+ "latency_ms": 3276,
+ "model_requested": "claude-haiku-4-5",
+ "recorded_at": "2026-09-27T21:53:32Z",
+ "request_id": "req_011CfUgorsvc76zNFqW5PedY",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"fuera_de_alcance\",\"secondary_reasons\":[],\"confidence\":0.95,\"out_of_scope_kind\":\"unrelated\",\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"neutral\",\"language\":\"es\",\"summary\":\"El cliente pregunta por el número de atención de Claro y reconoce que se equivocó de chat.\",\"reasoning_brief\":\"La consulta es sobre otro negocio (Claro, una empresa de telecomunicaciones), completamente ajena a Lumo. El cliente mismo reconoce que se equivocó de chat, confirmando que no es una solicitud relacionada con crédito.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-haiku-4-5-20251001",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 5767,
+   "input_tokens": 55,
+   "output_tokens": 263
+  }
+ }
+}

@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.002375,
+ "effort": "medium",
+ "fingerprint": "d839d68604572f27",
+ "item_id": "MSG-310",
+ "label": "judge",
+ "latency_ms": 2038,
+ "model_requested": "claude-sonnet-5",
+ "recorded_at": "2026-09-27T21:52:04Z",
+ "request_id": "req_011CfUghWhKA3inrrGwJ4778",
+ "response": {
+  "content": [
+   {
+    "text": "{\"grounded\":true,\"answers_request\":true,\"no_forbidden_promise\":true,\"tone_ok\":true,\"overall_ok\":true,\"issues\":[],\"reasoning_brief\":\"El draft responde correctamente citando la sección, sin inventar datos, sin promesas prohibidas, tono cálido y en español con tú.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-sonnet-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 1127,
+   "input_tokens": 515,
+   "output_tokens": 112
+  }
+ }
+}
