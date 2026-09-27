@@ -1,0 +1,73 @@
+version: 2
+
+# Core entities contract. Every test carries config.meta.dq_dimension (DAMA-DMBOK).
+
+models:
+  - name: fct_application
+    description: >
+      Grain: one row per application_id, in its final state (latest CDC event by business
+      time, A2). Contains every application including deleted ones; is_valid excludes deletes
+      (A3) and is_approved additionally requires final_status = APPROVED. customer_id is the
+      resolved real customer (A4). created_date/created_month come from the first event in
+      Bogotá time (A6, A14). is_out_of_order flags applications whose final status would differ
+      if ordered by ingest time (F6).
+    columns:
+      - name: application_id
+        data_tests:
+          - unique: {config: {meta: {dq_dimension: uniqueness}}}
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+      - name: customer_id
+        description: Resolved real customer. NULL only when every event carried the placeholder.
+        data_tests:
+          - relationships:
+              arguments: {to: ref('stg_customers'), field: customer_id}
+              config:
+                meta: {dq_dimension: integrity}
+                where: "customer_id is not null"
+      - name: merchant_id
+        data_tests:
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+          - relationships:
+              arguments: {to: ref('stg_merchants_history'), field: merchant_id}
+              config: {meta: {dq_dimension: integrity}}
+      - name: final_status
+        data_tests:
+          - accepted_values:
+              arguments: {values: ['CREATED', 'APPROVED', 'REJECTED']}
+              config: {meta: {dq_dimension: validity}}
+      - name: currency
+        data_tests:
+          - accepted_values:
+              arguments: {values: ['COP', 'BRL']}
+              config: {meta: {dq_dimension: validity}}
+      - name: created_date
+        data_tests:
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+      - name: n_events
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments: {min_value: 1}
+              config: {meta: {dq_dimension: validity}}
+    data_tests:
+      # A3: a deleted application is never valid
+      - dbt_utils.expression_is_true:
+          arguments: {expression: "not (is_deleted and is_valid)"}
+          config: {meta: {dq_dimension: validity}}
+      # every valid application reached a decision (no dangling CREATED)
+      - dbt_utils.expression_is_true:
+          arguments: {expression: "not is_valid or final_status in ('APPROVED', 'REJECTED')"}
+          config: {meta: {dq_dimension: completeness}}
+      # an approved application carries an approved amount, never above the requested one
+      - dbt_utils.expression_is_true:
+          arguments: {expression: "not is_approved or (approved_amount is not null and approved_amount <= requested_amount)"}
+          config: {meta: {dq_dimension: accuracy}}
+      # decision cannot precede creation
+      - dbt_utils.expression_is_true:
+          arguments: {expression: "decided_at_utc is null or decided_at_utc >= created_at_utc"}
+          config: {meta: {dq_dimension: timeliness}}
+      # A4 residue: a valid application should have a real customer (warn: expected residue is tiny)
+      - dbt_utils.expression_is_true:
+          arguments: {expression: "not is_valid or customer_id is not null"}
+          config:
+            meta: {dq_dimension: integrity}
+            severity: warn

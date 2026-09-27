@@ -1,0 +1,19 @@
+version: 2
+
+models:
+  - name: int_application_events
+    description: >
+      Grain: one CDC event (same as stg_applications_cdc), enriched with window-function ranks
+      (latest by event time, latest by ingest time, first event) and per-application flags
+      (resolved real customer, deleted). No filtering; used only by fct_application.
+    columns:
+      - name: rn_event_desc
+        description: "1 = latest version by business time (A2); tie-breaks: ingest time, I<U<D, real customer first."
+      - name: resolved_customer_id
+        description: "The single non-placeholder customer_id seen on the application (A4). NULL if none."
+      - name: application_deleted
+        description: "True if any event of the application is a CDC delete (A3)."
+    data_tests:
+      - dbt_utils.expression_is_true:
+          arguments: {expression: "rn_event_desc >= 1 and rn_ingest_desc >= 1 and rn_event_asc >= 1"}
+          config: {meta: {dq_dimension: validity}}

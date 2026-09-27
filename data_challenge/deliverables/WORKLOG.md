@@ -458,4 +458,63 @@ dbt parse --no-partial-parse                         # zero deprecation warnings
 
 **DMBOK dimension:** validity, uniqueness, completeness, accuracy.
 
+**Commit:** `cc91de4` feat(staging): typed and deduplicated silver staging views with 43
+DMBOK-tagged tests
+
+---
+
+## Step 09 — CDC resolution: int_application_events → fct_application  (2026-09-27)
+
+**Goal:** first business-rule model. Turn ~121k CDC events into one row per application in
+its final state, applying A2 (ordering), A3 (deletes), A4 (placeholder customer) and A14
+(creation date) as explicit, testable steps.
+
+**Files:** `models/silver/intermediate/int_application_events.sql` (+ `intermediate.yml`),
+`models/silver/core/fct_application.sql` (+ `core.yml`),
+`tests/assert_deleted_applications_have_no_loans.sql` (first singular business test),
+`analyses/profiling/dq_10_cdc_resolution.sql`.
+
+**Design:** the intermediate model keeps the *event* grain and only adds window ranks
+(`rn_event_desc`, `rn_ingest_desc`, `rn_event_asc`) and per-application flags
+(`resolved_customer_id`, `application_deleted`). The fact model picks the rank-1 rows. This
+split means any final state can be audited by looking at the ranked events, and a reviewer can
+answer "why is this application REJECTED?" with one query.
+
+**Command(s):**
+```powershell
+dbt build --select "path:models/silver" "path:tests"
+dbt compile --select dq_10_cdc_resolution
+python scripts/run_analyses.py --pattern "dq_10*" --out evidence/cdc_resolution.md --title "CDC resolution — applications in final state"
+```
+
+**Result (validated from a clean `target` in a scratch copy, then reproduced here):**
+
+| Measure | Value |
+|---|---|
+| Applications in CDC | 60,000 |
+| Deleted (A3) | 941 |
+| Valid | 59,059 |
+| Valid and approved | 33,007 |
+| Valid and rejected | 26,052 |
+| Valid still CREATED | 0 |
+| Global approval rate | 55.8882 % |
+| Final status differs if ordered by ingest time (F6) | 54, all valid |
+| Valid applications with no real customer (F4 residue) | 3 |
+| Events per application | 2 to 4, mean 2.02 |
+
+68 tests: 67 pass, 1 warn (the 3-application residue, configured as `severity: warn` on
+purpose and documented in F4). The singular test `assert_deleted_applications_have_no_loans`
+passes with 0 rows.
+
+**Finding / decision:**
+- F6 is now measured exactly: 54 applications would carry a different final status under
+  ingest-time ordering. All 54 are valid, so the choice in A2 changes Q1 by up to 54 counts.
+- The A4 residue is 3 valid applications whose only events carry the placeholder. They keep
+  `customer_id = NULL` and `has_unresolved_customer = true` rather than being dropped: they are
+  real applications with a real merchant and decision, only the customer link is unknown.
+- `created_date` starts on 2024-12-31 although the earliest UTC event is 2025-01-01: the first
+  events of the year happen before 05:00 UTC and belong to the previous Bogotá day (A6).
+
+**DMBOK dimension:** timeliness (A2, F6), validity (A3), integrity (A4, singular test).
+
 **Commit:** *(filled after commit)*
