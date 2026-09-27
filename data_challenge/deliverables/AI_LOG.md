@@ -135,5 +135,40 @@
 
 ## 4. How I verified the final numbers in `RESULTS.md`
 
-*(to be completed in Phase 5: independent pandas cross-check, reconciliation of every
-difference, row-count lineage from bronze to gold)*
+Five layers, from cheapest to strongest. Every figure in `RESULTS.md` passed all five.
+
+1. **Anchors before the pipeline existed.** On day one an exploratory pandas pass over the raw
+   CSVs produced first estimates (valid applications, approved, GMV, cohort 2026-01, top
+   merchants, people). They were written down before any dbt model was built, so the pipeline
+   had numbers to be wrong against. GMV matched to the cent at step 12; the FPD30 denominator
+   (24,821) matched at step 14.
+2. **Row-count funnel with a reason for every delta.** `dq_15_row_count_funnel` (evidence in
+   `evidence/row_count_funnel.md`, narrative in `DATA_JOURNEY.md` section A): 128,197 CDC rows
+   → 60,000 applications → 59,059 valid; 28,075 loans → 27,955; 112,339 payment rows → 107,554
+   effective; 30,000 customer ids → 29,093 people. No row disappears without a finding or
+   assumption number attached.
+3. **Contract tests between layers.** 244 tests, 16 of them singular business tests, run on
+   every build. The ones that guard the published figures directly:
+   `assert_payment_counts_reconcile` (A9 arithmetic), the four FIFO conservation tests
+   (money in = money allocated, per payment, per installment, per loan, in FIFO order),
+   `assert_snapshot_dpd_matches_installments` (gold recomputed from silver),
+   `assert_month_end_series_matches_snapshot` (two computations of the same state agree loan by
+   loan), and `assert_agg_merchant_monthly_reconciles` (the aggregate adds back to the facts on
+   eight totals). `DATA_QUALITY.md` shows their status for the committed run.
+4. **Definition sensitivity.** Where the README left a definition open I published the
+   alternative next to the chosen figure instead of choosing silently: Q7 under
+   document + country (29,439 / 561), Q5 net of partial payments (20.5683 %) and at
+   disbursement-date rates (20.4910 %), Q3 under UTC months (1,541 loans). None of them changes
+   the story; all of them are in `ASSUMPTIONS.md` with the reason for the primary choice.
+5. **Independent recomputation from the raw files.** `scripts/crosscheck_pandas.py` rebuilds
+   every answer from the CSVs with a different code path: its own timestamp parser, CDC resolved
+   by sort-and-take-last, FIFO as an explicit per-loan loop in integer cents (the SQL uses an
+   interval-overlap join in DECIMAL). It only touches the warehouse at the end, read-only, to
+   compare. Result (`evidence/crosscheck_pandas.md`): 24 of 24 checks match, including DPD and
+   outstanding balance on each of the 27,955 loans. The AI wrote this script too, so it is not
+   "human vs AI"; it is "two implementations of the same written rules must agree", which is
+   the check I can defend.
+
+What I did **not** do: I did not compare against an external source of truth for FX or for the
+business definitions, because none exists in the challenge. The published numbers are correct
+*given ASSUMPTIONS.md*; each assumption is the thing to challenge.

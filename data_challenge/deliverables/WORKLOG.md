@@ -1027,4 +1027,57 @@ statement visible in the lineage graph.
 
 **DMBOK dimension:** all seven, as the matrix.
 
+**Commit:** `577c7cd` docs(data): document gold columns, add exposures, generate DMBOK matrix and
+commit dbt artifacts
+
+---
+
+## Step 18 — Result queries and independent cross-check  (2026-09-27)
+
+**Goal:** one committed query per business question (README 4.3: "the number and the model or
+query that produces it") and an independent recomputation of every figure that does not touch
+the warehouse until the final comparison.
+
+**Files:** `analyses/results/q01_applications.sql` … `q07_customers.sql` (8 queries, `q06b` is
+the concentration breakdown), `scripts/crosscheck_pandas.py`, `evidence/results.md`,
+`evidence/crosscheck_pandas.md`.
+
+**Command(s):**
+```powershell
+dbt compile --select "path:analyses/results"
+python scripts/run_analyses.py --pattern "q0*" --out evidence/results.md --title "Business questions - official result queries"
+python scripts/crosscheck_pandas.py
+```
+
+**Incidents:**
+- `q02` and `q05` used `sum(x) over ()` for the share column together with `group by rollup`;
+  the window included the TOTAL row, so every share came out at half its value (50.0 % on the
+  total). Replaced by a scalar subquery on the fact. Caught by reading the output, not by a
+  test: shares are presentation, not contract.
+- The cross-check crashed on `float * decimal.Decimal`: DuckDB returns `Decimal` for DECIMAL
+  sums. Normalised at the boundary.
+
+**Result (validated in a scratch copy, then reproduced here):** 24 of 24 checks match.
+
+| Check | pandas from raw CSVs | dbt warehouse |
+|---|---|---|
+| Q1 valid / approved / rate | 59,059 / 33,007 / 55.8882 % | same |
+| Q2 loans / GMV USD | 27,955 / 8,780,942.16 | same |
+| Q3 cohort 2026-01 loans / GMV | 1,540 / 473,272.15 | same |
+| Q4 FPD30 global eligible / flagged / rate | 24,821 / 2,204 / 8.8796 % | same |
+| Q4 FPD30 2026-01 eligible / flagged / rate | 1,540 / 120 / 7.7922 % | same |
+| Q5 outstanding / PAR30 numerator / PAR30 | 2,069,175.39 / 424,197.74 / 20.5008 % | same |
+| Q6 top 5 merchants by GMV | 1607, 1397, 1664, 1030, 1286 | same order, same USD |
+| Q7 ids / people / redundant | 30,000 / 29,093 / 907 | same |
+| Effective payments | 107,554 | same |
+| Loan-by-loan DPD and balance (27,955 loans) | 0 loans differ | |
+
+**Why this is independent:** the script parses the CSVs with its own function, resolves the CDC
+by sorting and taking the last row, and allocates payments with an explicit per-loan loop in
+integer cents. The dbt path parses with a Jinja macro, resolves the CDC with window ranks, and
+allocates with an interval-overlap join in DECIMAL. Two implementations of the same business
+rules (A1–A25) agree to the cent and to the day on every loan.
+
+**DMBOK dimension:** accuracy and consistency of the published figures.
+
 **Commit:** *(filled after commit)*
