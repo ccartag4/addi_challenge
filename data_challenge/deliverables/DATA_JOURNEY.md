@@ -45,7 +45,8 @@ their customer from the application because their latest CDC event carried the p
 | bronze.brz_installments | 130,297 | | as delivered |
 | silver.stg_installments | 130,297 | 0 | no duplicates; plan is internally consistent (F16) |
 | … on valid loans | 130,297 | 0 | the 120 excluded loans have no installments at all |
-| silver.fct_installment_status | *(step 14)* | | |
+| silver.int_payment_allocation | 114,347 | grain change | payment × installment pairs from FIFO (A21): 107,554 payments, 6,772 of them split across installments, 14,451 installments funded by several payments; 0 money left unallocated |
+| silver.fct_installment_status | 130,297 | 0 | one row per installment as of 2026-06-30 (A20): 99,542 settled, 245 partial, 30,510 unpaid; 6,120 overdue; 24,821 first installments FPD30-eligible, 2,204 flagged (A23) |
 
 ### payments
 
@@ -107,6 +108,8 @@ normalized (F10); 1 payment is dated after the snapshot and is kept for gold to 
 | 11 (`10bf1f9`) | `dim_customer`, `bridge_customer_person`, city seed, 2 singular tests | 29,093 people, 907 redundant ids, 346 cross-country, 884 conflicting birth years; alternative identity 29,439 / 561 | people onboarded more than once; the source captured different attributes each time | A1 identity by document, A18 latest record, flags instead of filters, canonical cities as a seed | none | evidence/customer_identity.md |
 | 12 (`c483994`) | `int_fx_daily`, `int_loan_validated`, `fct_loan`, 2 singular tests | 1,200-day FX calendar; 27,955 valid loans; GMV 8,780,942.16 USD, equal to the independent pandas pass to the cent; 8,223 loans on days with no published rate; 2026-01 cohort 1,540 loans / 473,272.15 USD | provider publishes on business days; loans are disbursed every day | A7 forward fill with source date and staleness on every row; A19 customer from the application | none | evidence/loans_gmv.md |
 | 13 (`a81377a`) | `int_payment_classified`, `fct_payment`, 3 singular tests | 107,554 effective payments; 1,291 reversal rows void exactly 1,291 payments; legacy closed on Bogotá time, core opened on UTC midnight (F18); 1 payment after the snapshot | the "5 double reversals" of raw profiling were reversal rows delivered in two formats (F3) | A9 by set membership, unaffected; F11 reworded; cutover test | binder error: a test referenced a CTE column that was not projected; one-line fix | evidence/payments_effective.md |
+| 13b (`f8e26ee`) | `DATA_JOURNEY.md`, `dq_15_row_count_funnel` | 30 funnel rows; every delta maps to a finding or assumption; FX calendar 1,200 rows of which 848 published | — | row-level accounting maintained at every step | none | evidence/row_count_funnel.md |
+| 14 (*pending*) | `int_payment_allocation`, `fct_installment_status`, 4 singular tests | 114,347 allocation pairs, 0 unallocated money; 99,542 / 245 / 30,510 installments settled / partial / unpaid as of the snapshot; FPD30 8.8796 % global and 7.7922 % for 2026-01; preview PAR30 20.5008 % on 2,069,175.39 USD outstanding | payments arrive at loan level; FIFO by interval overlap reproduces the README rule without recursion | A11, A12, A20–A23; full-history allocation, as-of cut in the fact | a leftover placeholder line in the fact's select list was removed before the first build | evidence/fifo_and_delinquency.md |
 
 ---
 

@@ -764,4 +764,74 @@ valid loans.
 
 **Decision:** maintained at the end of every step from here on, together with the worklog.
 
+**Commit:** `f8e26ee` docs(data): add DATA_JOURNEY with row-count funnel, step ledger and error ledger
+
+---
+
+## Step 14 — FIFO allocation and fct_installment_status  (2026-09-27)
+
+**Goal:** apply loan-level payments to installments FIFO (README 4.2) and state every
+installment as of the snapshot: paid amount, settlement date, accrued days past due, FPD30
+eligibility and flag.
+
+**Files:** `models/silver/intermediate/int_payment_allocation.sql`,
+`models/silver/core/fct_installment_status.sql`, `intermediate.yml` / `core.yml` blocks,
+singular tests `assert_allocation_never_exceeds_payment`,
+`assert_allocation_never_exceeds_installment`, `assert_fifo_no_skipped_installments`,
+`assert_installment_paid_reconciles_with_payments`,
+`analyses/profiling/dq_16_fifo_and_delinquency.sql`. Assumptions A11, A12, A20–A23 written.
+
+**Design:** no recursion. Installments form consecutive intervals on a cumulative "debt line",
+payments form consecutive intervals on a cumulative "money line" (running sums already in
+`fct_payment`), and a payment funds an installment by the overlap of the two intervals. That is
+FIFO by construction, it is one join, and every payment→installment pair is a row that can be
+audited. The allocation is full-history; the fact applies the as-of cut by `paid_date`.
+
+**Command(s):**
+```powershell
+dbt build
+dbt compile --select dq_16_fifo_and_delinquency
+python scripts/run_analyses.py --pattern "dq_16*" --out evidence/fifo_and_delinquency.md --title "FIFO allocation and installment status as of the snapshot"
+```
+
+**Result (validated from a clean `target` in a scratch copy, then reproduced here):**
+
+| Measure | Value |
+|---|---|
+| Allocation rows (payment × installment) | 114,347 |
+| Payments allocated / pure overpayment / unallocated excess | 107,554 / 0 / 0.00 in both currencies |
+| Payments split across 2+ installments · installments funded by 2+ payments | 6,772 · 14,451 |
+| Installments as of 2026-06-30: settled / partial / unpaid | 99,542 / 245 / 30,510 |
+| Installments due / not yet due · overdue | 104,995 / 25,302 · 6,120 |
+| Settled: early / on time / late 1–30 / late > 30 | 46,386 / 7,540 / 39,725 / 5,891 |
+| Max days to settle · max accrued DPD | 70 · 512 |
+| **FPD30 global (Q4)** | 2,204 / 24,821 = **8.8796 %** |
+| **FPD30 cohort 2026-01 (Q4)** | 120 / 1,540 = **7.7922 %** |
+| FPD30 flagged: unpaid vs paid late | 547 unpaid · 1,657 paid > 30 days late |
+| Preview Q5 (mart built in step 15): loans with balance / fully settled | 9,065 / 18,890 |
+| Preview Q5: outstanding USD at snapshot rate · PAR30 | 2,069,175.39 · 20.5008 % |
+| DPD buckets (loans) | 0 = 25,098 · 1–30 = 947 · 31–60 = 292 · 61–90 = 125 · 90+ = 1,493 |
+
+Full project: 26 models, 1 seed, 195 tests → 221 pass, 1 warn (known A4 residue). The four
+FIFO business tests pass with 0 rows. FPD30 denominator (24,821) equals the independent pandas
+anchor from 2026-09-26.
+
+**Hand check:** a payment of 122,800 on 2026-03-22 is split 61,400 / 61,400 across installments
+1 and 2 of its loan; another loan's payment of 2026-05-12 settles installments 4 and 5 at once
+while installment 6 (due 2026-07-16) stays unpaid and *not* overdue. Both behaviours are the
+README's "one payment may settle several installments".
+
+**Finding / decision:**
+- The plan is paid unusually punctually: median days-to-settle is 0 and 46,386 installments
+  were paid early. Delinquency is concentrated: 1,493 loans sit in the 90+ bucket and drive
+  PAR30; FPD30 flags are mostly *late payers* (1,657) rather than never-payers (547).
+- Zero unallocated excess confirms that customers never pay beyond the plan total, so
+  "outstanding" in A11 is never negative and no refund logic is needed.
+- Only 2 installments are touched by the single post-snapshot payment, so the as-of cut (A20)
+  matters conceptually more than numerically here.
+
+**DMBOK dimension:** accuracy (money conservation tests), consistency (FIFO order, paid vs
+received reconciliation), timeliness (settlement dates, as-of), integrity (loan and payment
+links).
+
 **Commit:** *(filled after commit)*

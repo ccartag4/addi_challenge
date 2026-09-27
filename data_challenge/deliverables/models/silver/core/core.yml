@@ -317,6 +317,87 @@ models:
           arguments: {combination_of_columns: [loan_id, loan_payment_seq]}
           config: {meta: {dq_dimension: uniqueness}}
 
+  - name: fct_installment_status
+    description: >
+      Grain: loan_id x installment_number for every valid loan. State of each installment as of
+      snapshot_date (A20): FIFO-allocated paid_amount (A21), is_settled, settled_date (A22),
+      days_to_settle, accrued days_past_due (A23), and the FPD30 eligibility/flag for first
+      installments. *_any columns use every effective payment without the snapshot cut.
+      Loan-level DPD, buckets and outstanding balance are derived in dm_loan_delinquency_snapshot.
+    columns:
+      - name: installment_sk
+        data_tests:
+          - unique: {config: {meta: {dq_dimension: uniqueness}}}
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+      - name: loan_id
+        data_tests:
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+          - relationships:
+              arguments: {to: ref('fct_loan'), field: loan_id}
+              config: {meta: {dq_dimension: integrity}}
+      - name: due_date
+        data_tests:
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+      - name: amount_due
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments: {min_value: 0, inclusive: false}
+              config: {meta: {dq_dimension: validity}}
+      - name: paid_amount
+        description: Between 0 and amount_due by construction of the allocation.
+        data_tests:
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+          - dbt_utils.accepted_range:
+              arguments: {min_value: 0}
+              config: {meta: {dq_dimension: validity}}
+      - name: remaining_amount
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments: {min_value: 0}
+              config: {meta: {dq_dimension: validity}}
+      - name: days_past_due
+        data_tests:
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+          - dbt_utils.accepted_range:
+              arguments: {min_value: 0}
+              config: {meta: {dq_dimension: validity}}
+      - name: as_of_date
+        data_tests:
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments: {combination_of_columns: [loan_id, installment_number]}
+          config: {meta: {dq_dimension: uniqueness}}
+      # paid never exceeds due; settled means nothing remains
+      - dbt_utils.expression_is_true:
+          arguments: {expression: "paid_amount <= amount_due"}
+          config: {meta: {dq_dimension: accuracy}}
+      - dbt_utils.expression_is_true:
+          arguments: {expression: "is_settled = (remaining_amount = 0)"}
+          config: {meta: {dq_dimension: consistency}}
+      # settlement date exists exactly when settled, and never after the as-of date
+      - dbt_utils.expression_is_true:
+          arguments: {expression: "is_settled = (settled_date is not null)"}
+          config: {meta: {dq_dimension: consistency}}
+      - dbt_utils.expression_is_true:
+          arguments: {expression: "settled_date is null or settled_date <= as_of_date"}
+          config: {meta: {dq_dimension: timeliness}}
+      # as-of paid amount can never exceed the full-history amount
+      - dbt_utils.expression_is_true:
+          arguments: {expression: "paid_amount <= paid_amount_any"}
+          config: {meta: {dq_dimension: consistency}}
+      # FPD30 flag only on eligible first installments
+      - dbt_utils.expression_is_true:
+          arguments: {expression: "not is_fpd30 or is_fpd30_eligible"}
+          config: {meta: {dq_dimension: validity}}
+      - dbt_utils.expression_is_true:
+          arguments: {expression: "not is_fpd30_eligible or is_first_installment"}
+          config: {meta: {dq_dimension: validity}}
+      # overdue = due and not settled
+      - dbt_utils.expression_is_true:
+          arguments: {expression: "is_overdue = (is_due and not is_settled)"}
+          config: {meta: {dq_dimension: consistency}}
+
   - name: bridge_customer_person
     description: >
       Grain: one row per customer_id, mapped to its person_sk. Facts keep the source

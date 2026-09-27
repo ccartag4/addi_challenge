@@ -105,3 +105,34 @@ models:
       - dbt_utils.expression_is_true:
           arguments: {expression: "payment_class <> 'REVERSED_OUT' or abs(reversal_amount_total) >= amount"}
           config: {meta: {dq_dimension: accuracy}}
+
+  - name: int_payment_allocation
+    description: >
+      Grain: one row per (payment_id, installment_number) pair funded by the payment: the FIFO
+      allocation of loan-level payments to the installment plan (A21), computed as the overlap
+      of cumulative payment intervals with cumulative installment intervals. Full history
+      (no snapshot cut). Overpayment beyond the plan total is not allocated.
+    columns:
+      - name: allocated_amount
+        data_tests:
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+          - dbt_utils.accepted_range:
+              arguments: {min_value: 0, inclusive: false}
+              config: {meta: {dq_dimension: validity}}
+      - name: payment_id
+        data_tests:
+          - relationships:
+              arguments: {to: ref('fct_payment'), field: payment_id}
+              config: {meta: {dq_dimension: integrity}}
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments: {combination_of_columns: [payment_id, installment_number]}
+          config: {meta: {dq_dimension: uniqueness}}
+      # a single allocation never exceeds either side of the overlap
+      - dbt_utils.expression_is_true:
+          arguments: {expression: "allocated_amount <= payment_amount and allocated_amount <= amount_due"}
+          config: {meta: {dq_dimension: accuracy}}
+      # the intervals really overlap
+      - dbt_utils.expression_is_true:
+          arguments: {expression: "cum_paid_start < cum_due_end and cum_paid_end > cum_due_start"}
+          config: {meta: {dq_dimension: consistency}}
