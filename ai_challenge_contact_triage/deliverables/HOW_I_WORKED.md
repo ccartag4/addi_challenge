@@ -62,6 +62,22 @@ LLM-judge calibration, offline determinism, adversarial fixtures)*
 - **Lesson:** a number in an evidence file is only trustworthy if the code that produces the
   pipeline is tested against it; the disagreement was small, the habit it enforces is not.
 
+### 3.5 A rule that read "hoy" as a payment date
+
+- **What it produced:** the entity extractor treated any bare "ayer", "hoy" or "mañana" as a
+  payment date. On the first six live classifications, the weather message MSG-037 ("qué
+  opinan del clima hoy") came out with `payment_date = "hoy"`. The model had correctly left the
+  field null; the rule added it, and the merge policy (rules win) kept it.
+- **How I caught it:** by reading the outputs, not from a test. The verbatim verifier passed,
+  because "hoy" is in the text; it checks that a value exists, not that it means what the field
+  says.
+- **What I did:** relative words now count only within a few words of a payment or due-date
+  verb ("pagué ayer", "si pago hoy", "se vence mañana"); eleven sample messages pin the rule in
+  both directions.
+- **Lesson:** "code overrides the model" is only safe when the code is at least as precise as
+  the model on that field. Verbatim verification is necessary, not sufficient; low-precision
+  rules must either be tightened or defer to the model.
+
 *(more cases added as they happen)*
 
 ## 4. What I would improve with more time

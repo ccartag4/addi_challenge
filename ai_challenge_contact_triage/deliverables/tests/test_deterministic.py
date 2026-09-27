@@ -83,6 +83,14 @@ def test_extraction_on_real_messages(by_id, mid, expected):
         assert getattr(ents, key) == value, f"{mid} {key}: {getattr(ents, key)!r} != {value!r}"
 
 
+@pytest.mark.parametrize("mid, expected", [
+    ("MSG-011", "hoy"), ("MSG-213", "ayer"), ("MSG-385", "ayer"), ("MSG-036", "el lunes"), ("MSG-105", "ayer"),
+    ("MSG-037", None), ("MSG-125", None), ("MSG-150", None), ("MSG-178", None), ("MSG-025", None), ("MSG-033", None),
+])
+def test_relative_words_are_payment_dates_only_next_to_a_payment_verb(by_id, mid, expected):
+    assert extract.extract_payment_date(by_id[mid].text) == expected, by_id[mid].text
+
+
 @pytest.mark.parametrize("mid, masked", [
     ("MSG-276", "1.0xx.xxx.xxx"),
     ("MSG-318", "1.020.XXX.XXX"),

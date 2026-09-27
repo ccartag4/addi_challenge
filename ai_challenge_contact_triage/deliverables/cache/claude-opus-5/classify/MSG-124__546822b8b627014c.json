@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.012718,
+ "effort": "medium",
+ "fingerprint": "546822b8b627014c",
+ "item_id": "MSG-124",
+ "label": "classify",
+ "latency_ms": 5124,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:22:28Z",
+ "request_id": "req_011CfUZs1FioRJuZQEth2aQm",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"fecha_de_pago\",\"secondary_reasons\":[],\"confidence\":0.94,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"neutral\",\"language\":\"es\",\"summary\":\"El cliente quiere conocer la fecha límite de pago de su cuota de mayo porque no la encuentra.\",\"reasoning_brief\":\"Pregunta por el vencimiento de su cuota, lo que corresponde a fecha_de_pago; no hay señales de urgencia ni otras banderas.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 7426,
+   "input_tokens": 76,
+   "output_tokens": 345
+  }
+ }
+}

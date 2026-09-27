@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.012563,
+ "effort": "medium",
+ "fingerprint": "6edf02151d9b3adc",
+ "item_id": "MSG-395",
+ "label": "classify",
+ "latency_ms": 5150,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:28:28Z",
+ "request_id": "req_011CfUaKYGWXncz38FyULPUL",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"fecha_de_pago\",\"secondary_reasons\":[],\"confidence\":0.92,\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"neutral\",\"language\":\"es\",\"summary\":\"El cliente pregunta cuál es la fecha exacta de su pago, pues el mensaje que recibió no la indicaba.\",\"reasoning_brief\":\"Consulta sobre la fecha de vencimiento de la cuota, que corresponde a fecha_de_pago; no hay señales de urgencia ni otras banderas.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 7426,
+   "input_tokens": 70,
+   "output_tokens": 340
+  }
+ }
+}

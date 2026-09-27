@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.012993,
+ "effort": "medium",
+ "fingerprint": "bb5e65add4d717aa",
+ "item_id": "MSG-262",
+ "label": "classify",
+ "latency_ms": 5467,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:25:40Z",
+ "request_id": "req_011CfUa78SDAbQqpkYzCbL78",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"certificados_extractos\",\"secondary_reasons\":[],\"confidence\":0.95,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"neutral\",\"language\":\"es\",\"summary\":\"El cliente solicita un certificado de paz y salvo para un trámite y pide que se lo envíen al correo.\",\"reasoning_brief\":\"Pide un documento (paz y salvo), que corresponde a certificados_extractos; no hay señales de urgencia, fraude ni petición de asesor.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 7426,
+   "input_tokens": 71,
+   "output_tokens": 357
+  }
+ }
+}

@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.012558,
+ "effort": "medium",
+ "fingerprint": "94ac46eab916f8dd",
+ "item_id": "MSG-296",
+ "label": "classify",
+ "latency_ms": 5090,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:26:22Z",
+ "request_id": "req_011CfUaADrUbZd4jf7kipxnm",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"intereses_y_cargos\",\"secondary_reasons\":[],\"confidence\":0.93,\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"negative\",\"language\":\"es\",\"summary\":\"El cliente pregunta qué tasa de interés le están cobrando y considera que es muy alta frente a otras opciones.\",\"reasoning_brief\":\"Se trata de la tasa de interés corriente y no de mora ni de un pago, por lo que corresponde a intereses_y_cargos; el tono es de inconformidad.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 7426,
+   "input_tokens": 74,
+   "output_tokens": 339
+  }
+ }
+}

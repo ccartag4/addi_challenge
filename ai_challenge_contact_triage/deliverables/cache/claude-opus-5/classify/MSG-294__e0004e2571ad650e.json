@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.013458,
+ "effort": "medium",
+ "fingerprint": "e0004e2571ad650e",
+ "item_id": "MSG-294",
+ "label": "classify",
+ "latency_ms": 6972,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:26:22Z",
+ "request_id": "req_011CfUaA5zhkgGN86VeEgKzL",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"certificados_extractos\",\"secondary_reasons\":[],\"confidence\":0.92,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"neutral\",\"language\":\"es\",\"summary\":\"El cliente solicita que le reenvíen el extracto de abril, que no le llegó al correo, para un trámite de crédito hipotecario.\",\"reasoning_brief\":\"Pide el reenvío de un extracto de pagos, lo que corresponde a certificados_extractos; la mención del crédito hipotecario es solo el motivo del trámite, no una consulta comercial a Lumo.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 7426,
+   "input_tokens": 84,
+   "output_tokens": 373
+  }
+ }
+}

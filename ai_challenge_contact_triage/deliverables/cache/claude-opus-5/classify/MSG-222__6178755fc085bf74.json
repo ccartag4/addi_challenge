@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.013053,
+ "effort": "medium",
+ "fingerprint": "6178755fc085bf74",
+ "item_id": "MSG-222",
+ "label": "classify",
+ "latency_ms": 5719,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:24:48Z",
+ "request_id": "req_011CfUa3EKovin5g1UD7k9FM",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"reporte_centrales\",\"secondary_reasons\":[],\"confidence\":0.94,\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"negative\",\"language\":\"es\",\"summary\":\"El cliente ya pagó y pregunta cuándo se actualiza o se retira su reporte en centrales de riesgo, pues le afecta para un crédito de vivienda.\",\"reasoning_brief\":\"Pregunta por la actualización/retiro del reporte negativo tras pagar, tema propio de reporte_centrales. Sentimiento negativo por la afectación crediticia.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 7426,
+   "input_tokens": 83,
+   "output_tokens": 357
+  }
+ }
+}

@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.013408,
+ "effort": "medium",
+ "fingerprint": "c48db6d70557e15b",
+ "item_id": "MSG-196",
+ "label": "classify",
+ "latency_ms": 5757,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:24:07Z",
+ "request_id": "req_011CfUZzEUuKxCTD72P3joG1",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"datos_personales\",\"secondary_reasons\":[\"certificados_extractos\",\"felicitacion_feedback\"],\"confidence\":0.82,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":\"9000000321\",\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"positive\",\"language\":\"es\",\"summary\":\"El cliente pide actualizar su correo registrado, solicitar un extracto del crédito 9000000321 y felicita la atención recibida.\",\"reasoning_brief\":\"La solicitud principal es actualizar el correo (datos_personales); el extracto y la felicitación son motivos secundarios claramente distintos.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 7426,
+   "input_tokens": 114,
+   "output_tokens": 365
+  }
+ }
+}

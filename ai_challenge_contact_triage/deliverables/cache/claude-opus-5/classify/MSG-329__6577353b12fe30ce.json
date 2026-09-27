@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.013318,
+ "effort": "medium",
+ "fingerprint": "6577353b12fe30ce",
+ "item_id": "MSG-329",
+ "label": "classify",
+ "latency_ms": 5456,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:27:07Z",
+ "request_id": "req_011CfUaDYCsJFcvhzTyeVDdW",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"fraude_seguridad\",\"secondary_reasons\":[],\"confidence\":0.95,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":false,\"fraud_or_security\":true,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"neutral\",\"language\":\"es\",\"summary\":\"El cliente recibió un mensaje que le pide la clave dinámica supuestamente de Lumo y quiere saber si es legítimo o una estafa.\",\"reasoning_brief\":\"Posible phishing: mensaje sospechoso solicitando clave dinámica en nombre de Lumo, por lo que corresponde fraude_seguridad con fraud_or_security.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 7426,
+   "input_tokens": 86,
+   "output_tokens": 367
+  }
+ }
+}

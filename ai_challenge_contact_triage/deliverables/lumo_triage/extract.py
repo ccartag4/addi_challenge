@@ -39,14 +39,28 @@ RE_REFERENCE = re.compile(
     r"(?:referencia|ref\.?|n[uú]mero de transacci[oó]n|transacci[oó]n|comprobante)\s*(?:n[uú]mero|#|:)?\s*([A-Za-z]?\d{4,})",
     re.I,
 )
-RE_DATE = re.compile(
-    rf"\b\d{{1,2}} de (?:{MONTHS})\b"
-    rf"|\bel (?:{WEEKDAYS})(?: pasado)?\b"
-    r"|\bayer\b|\banteayer\b|\bhoy\b|\bma[nñ]ana\b"
-    r"|\bhace \d+ (?:d[ií]as|semanas?|mes(?:es)?)\b"
-    r"|\bpagu[eé] el \d{1,2}\b",
-    re.I,
-)
+# Payment-date patterns, tried in this order; each yields the group given. Relative words
+# ('ayer', 'hoy', 'mañana') count only within a few words of a payment or due-date verb:
+# "pagué ayer" is a payment date, "el clima hoy" and "perdí mi celular ayer" are not
+# (MSG-037, MSG-125 in the sample; found by reading the first live outputs).
+PAY_VERB = r"(?:pagu[eé]|pago|pagar|pague|consign[eé]|transfer[ií]|abon[eé]|(?:se )?vence)"
+RELATIVE = r"(ayer|anteayer|hoy|ma[nñ]ana)"
+DATE_PATTERNS: list[tuple[re.Pattern, int]] = [
+    (re.compile(rf"\b(\d{{1,2}} de (?:{MONTHS}))\b", re.I), 1),
+    (re.compile(rf"\b(el (?:{WEEKDAYS})(?: pasado)?)\b", re.I), 1),
+    (re.compile(rf"\b{PAY_VERB}\b(?:\W+\w+){{0,4}}?\W+{RELATIVE}\b", re.I), 1),
+    (re.compile(rf"\b{RELATIVE}\b(?:\W+\w+){{0,3}}?\W+{PAY_VERB}\b", re.I), 1),
+    (re.compile(r"\b(hace \d+ (?:d[ií]as|semanas?|mes(?:es)?))\b", re.I), 1),
+    (re.compile(r"\bpagu[eé] (el \d{1,2})\b", re.I), 1),
+]
+
+
+def extract_payment_date(text: str) -> Optional[str]:
+    for pattern, group in DATE_PATTERNS:
+        m = pattern.search(text)
+        if m:
+            return m.group(group)
+    return None
 RE_PAYMENT_METHOD = re.compile(
     r"\b(?:PSE|Nequi|Daviplata|Efecty|Baloto|Bancolombia|Davivienda|corresponsal(?:es)? bancarios?|"
     r"transferencia|tarjeta de cr[eé]dito|tarjeta d[eé]bito|tarjeta|efectivo|banco)\b",
@@ -104,7 +118,7 @@ def extract_entities(text: str) -> Entities:
         credit_number=credit,
         document_number=document,
         amount=amount,
-        payment_date=_first(RE_DATE, text),
+        payment_date=extract_payment_date(text),
         transaction_reference=reference,
         payment_method_or_bank=method,
         named_agent=agent,

@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.012698,
+ "effort": "medium",
+ "fingerprint": "3cb680fe4c63ba1c",
+ "item_id": "MSG-219",
+ "label": "classify",
+ "latency_ms": 5316,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:24:42Z",
+ "request_id": "req_011CfUa2qZLmDdByBPVDh8LR",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"mora_intereses\",\"secondary_reasons\":[],\"confidence\":0.87,\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"negative\",\"language\":\"es\",\"summary\":\"El cliente reclama por intereses de mora altos y pregunta cuál es el interés diario.\",\"reasoning_brief\":\"Se refiere explícitamente a intereses de mora y su cálculo, lo que corresponde a mora_intereses; no hay pago reportado ni tasa corriente. Tono de queja, por eso sentimiento negativo.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 7426,
+   "input_tokens": 72,
+   "output_tokens": 345
+  }
+ }
+}

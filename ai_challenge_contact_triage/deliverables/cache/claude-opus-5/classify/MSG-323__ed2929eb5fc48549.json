@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.012748,
+ "effort": "medium",
+ "fingerprint": "ed2929eb5fc48549",
+ "item_id": "MSG-323",
+ "label": "classify",
+ "latency_ms": 4559,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:26:58Z",
+ "request_id": "req_011CfUaCvkAWybfCEuWVfTUF",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"metodos_de_pago\",\"secondary_reasons\":[],\"confidence\":0.95,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":\"nequi o daviplata\",\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"neutral\",\"language\":\"es\",\"summary\":\"El cliente pregunta si puede pagar su crédito con Nequi o Daviplata.\",\"reasoning_brief\":\"Consulta sobre medios de pago aceptados; Nequi y Daviplata no están en la política, pero el tema es metodos_de_pago. Sin señales adicionales.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 7426,
+   "input_tokens": 57,
+   "output_tokens": 350
+  }
+ }
+}

@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.012693,
+ "effort": "medium",
+ "fingerprint": "81f0e4574cb91322",
+ "item_id": "MSG-334",
+ "label": "classify",
+ "latency_ms": 5426,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:27:13Z",
+ "request_id": "req_011CfUaDz7MPVEgBEpXwfUqt",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"fuera_de_alcance\",\"secondary_reasons\":[],\"confidence\":0.93,\"out_of_scope_kind\":\"unrelated\",\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"neutral\",\"language\":\"es\",\"summary\":\"El cliente pregunta si este número corresponde a una pizzería, tema ajeno a Lumo.\",\"reasoning_brief\":\"El mensaje no tiene relación con Lumo ni con productos financieros; es un contacto equivocado, por eso fuera_de_alcance con kind unrelated.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 7426,
+   "input_tokens": 56,
+   "output_tokens": 348
+  }
+ }
+}

@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.012893,
+ "effort": "medium",
+ "fingerprint": "50c8d5531059e05e",
+ "item_id": "MSG-312",
+ "label": "classify",
+ "latency_ms": 5519,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:26:44Z",
+ "request_id": "req_011CfUaBpPPw64QPwEFTKotU",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"fraude_seguridad\",\"secondary_reasons\":[],\"confidence\":0.97,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":false,\"fraud_or_security\":true,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"negative\",\"language\":\"es\",\"summary\":\"El cliente reporta una compra no reconocida hecha con su cuenta y pide ayuda urgente por posible robo.\",\"reasoning_brief\":\"Compra no reconocida y presunto robo de cuenta corresponde a fraude_seguridad con la bandera fraud_or_security; el tono es de angustia.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 7426,
+   "input_tokens": 96,
+   "output_tokens": 348
+  }
+ }
+}

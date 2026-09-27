@@ -133,14 +133,18 @@ class Processing(BaseModel):
 
     pipeline_version: str
     rules_applied: list[str] = Field(default_factory=list)
-    model: Optional[str] = None
+    model: Optional[str] = Field(None, description="Model requested for this message, if any.")
+    served_by: Optional[str] = Field(None, description="Model that actually answered (differs after a server-side refusal fallback).")
+    effort: Optional[str] = None
     llm_calls: int = 0
     input_tokens: int = 0
     output_tokens: int = 0
     cache_read_tokens: int = 0
-    response_cache_hits: int = 0
+    cache_write_tokens: int = 0
+    response_cache_hits: int = Field(0, description="Responses replayed from the on-disk cache instead of a live call.")
     latency_ms: int = 0
-    cost_usd: float = 0.0
+    cost_usd: float = Field(0.0, description="What the LLM calls for this message cost when they were made (0 for rule-only messages).")
+    llm_error: Optional[str] = Field(None, description="Set when the model could not classify the message (refusal, invalid output, API unavailable).")
 
 
 class Dedup(BaseModel):
@@ -160,7 +164,7 @@ class TriageRecord(BaseModel):
     received_at_utc: str
     sender: str
     dedup: Dedup
-    classification: Classification
+    classification: Optional[Classification] = Field(None, description="None only when the model failed; the decision then routes to a person.")
     decision: Decision
     draft_reply: DraftReply
     processing: Processing
@@ -185,8 +189,10 @@ class BatchSummary(BaseModel):
     flags: dict[str, int]
     duplicates: dict[str, int] = Field(description="exact and near-duplicate counts")
     low_confidence: int
+    unclassified: int = Field(0, description="Messages the model could not classify; routed to a person.")
     llm_calls: int
     response_cache_hits: int
     tokens: dict[str, int]
-    cost_usd: float
+    cost_usd: float = Field(description="Cost of the LLM calls behind this output when they were made.")
+    spent_this_run_usd: float = Field(0.0, description="Cost actually incurred by this run (0 when fully replayed from cache).")
     notable: list[str] = Field(default_factory=list, description="Anything a CX lead should look at.")

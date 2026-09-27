@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.016278,
+ "effort": "medium",
+ "fingerprint": "ef942988d051ed32",
+ "item_id": "MSG-021",
+ "label": "classify",
+ "latency_ms": 5600,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:21:37Z",
+ "request_id": "req_011CfUZoC9hSiBqAU8DKQqh7",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"reporte_centrales\",\"secondary_reasons\":[\"pago_no_aplicado\"],\"confidence\":0.76,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":true,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"negative\",\"language\":\"es\",\"summary\":\"El cliente recibió un aviso de posible reporte a centrales y, habiendo pagado ya, pregunta qué hacer para evitar el reporte.\",\"reasoning_brief\":\"El tema central es evitar el reporte a centrales tras un aviso; como afirma haber pagado y el aviso persiste, se agrega pago_no_aplicado como secundario y se marca plazo inminente.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 7426,
+   "input_tokens": 78,
+   "output_tokens": 487
+  }
+ }
+}

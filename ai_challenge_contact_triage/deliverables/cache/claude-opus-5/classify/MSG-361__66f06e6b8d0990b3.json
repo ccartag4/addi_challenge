@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.012488,
+ "effort": "medium",
+ "fingerprint": "66f06e6b8d0990b3",
+ "item_id": "MSG-361",
+ "label": "classify",
+ "latency_ms": 4532,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:27:45Z",
+ "request_id": "req_011CfUaGNKPWT2fR3s6fqDBi",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"certificados_extractos\",\"secondary_reasons\":[],\"confidence\":0.94,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"neutral\",\"language\":\"es\",\"summary\":\"El cliente solicita un paz y salvo porque ya terminó de pagar todo el crédito.\",\"reasoning_brief\":\"Pide un documento (paz y salvo), que corresponde a certificados_extractos; no hay señales de urgencia, fraude ni solicitud de asesor.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 7426,
+   "input_tokens": 60,
+   "output_tokens": 339
+  }
+ }
+}

@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.012778,
+ "effort": "medium",
+ "fingerprint": "3119cc39551d974b",
+ "item_id": "MSG-172",
+ "label": "classify",
+ "latency_ms": 5011,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:23:38Z",
+ "request_id": "req_011CfUZxALZSdpUPVWmtg8La",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"fraude_seguridad\",\"secondary_reasons\":[],\"confidence\":0.96,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":false,\"fraud_or_security\":true,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"negative\",\"language\":\"es\",\"summary\":\"El cliente reporta el cobro de un crédito que no solicitó y sospecha suplantación de identidad con sus datos.\",\"reasoning_brief\":\"Cobro no reconocido y posible uso indebido de datos personales, lo que corresponde a fraude_seguridad con la bandera fraud_or_security.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 7426,
+   "input_tokens": 78,
+   "output_tokens": 347
+  }
+ }
+}

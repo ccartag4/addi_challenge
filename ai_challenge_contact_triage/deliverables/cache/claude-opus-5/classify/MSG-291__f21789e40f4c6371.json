@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.013853,
+ "effort": "medium",
+ "fingerprint": "f21789e40f4c6371",
+ "item_id": "MSG-291",
+ "label": "classify",
+ "latency_ms": 4633,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:26:15Z",
+ "request_id": "req_011CfUa9kA6SPQ4eHuKegccr",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"pago_no_aplicado\",\"secondary_reasons\":[],\"confidence\":0.95,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":\"$95.000\",\"payment_date\":\"9 de mayo\",\"transaction_reference\":\"M4471829\",\"payment_method_or_bank\":\"Nequi\",\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"negative\",\"language\":\"es\",\"summary\":\"El cliente reporta que un pago de $95.000 hecho por Nequi el 9 de mayo no se ha aplicado a su crédito y pide verificación urgente.\",\"reasoning_brief\":\"Pago realizado que no se refleja en el crédito, con referencia de transacción; corresponde a pago_no_aplicado. No hay señales de fraude ni amenaza legal.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 7426,
+   "input_tokens": 103,
+   "output_tokens": 385
+  }
+ }
+}

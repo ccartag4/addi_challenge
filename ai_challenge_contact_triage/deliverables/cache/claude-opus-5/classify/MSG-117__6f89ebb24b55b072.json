@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.012128,
+ "effort": "medium",
+ "fingerprint": "6f89ebb24b55b072",
+ "item_id": "MSG-117",
+ "label": "classify",
+ "latency_ms": 4273,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:22:20Z",
+ "request_id": "req_011CfUZrSPYMUbSBbps8ktZy",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"hablar_con_humano\",\"secondary_reasons\":[],\"confidence\":0.95,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":true,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"neutral\",\"language\":\"es\",\"summary\":\"El cliente pide ser atendido por un asesor humano y no por el bot.\",\"reasoning_brief\":\"Solo solicita hablar con una persona, sin otra consulta, por lo que es hablar_con_humano con la bandera requests_human.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 7426,
+   "input_tokens": 58,
+   "output_tokens": 325
+  }
+ }
+}

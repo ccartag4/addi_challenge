@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.013588,
+ "effort": "medium",
+ "fingerprint": "9731ee1a9b677055",
+ "item_id": "MSG-171",
+ "label": "classify",
+ "latency_ms": 5897,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:23:38Z",
+ "request_id": "req_011CfUZx6FFNRjJAXWUoH5Pf",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"certificados_extractos\",\"secondary_reasons\":[],\"confidence\":0.93,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":\"9000000789\",\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"neutral\",\"language\":\"es\",\"summary\":\"El cliente solicita el extracto de los últimos 6 meses de su crédito 9000000789 y un certificado de saldo a la fecha para un trámite bancario.\",\"reasoning_brief\":\"Pide documentos (extracto y certificado de saldo), lo que corresponde a certificados_extractos; el certificado de saldo/deuda no está plenamente cubierto por la política.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 7426,
+   "input_tokens": 110,
+   "output_tokens": 373
+  }
+ }
+}

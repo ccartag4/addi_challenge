@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.013523,
+ "effort": "medium",
+ "fingerprint": "a650bb3ad2f3305c",
+ "item_id": "MSG-218",
+ "label": "classify",
+ "latency_ms": 6207,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:24:42Z",
+ "request_id": "req_011CfUa2nQarYdKjeAzASjm2",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"metodos_de_pago\",\"secondary_reasons\":[],\"confidence\":0.93,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":\"tarjeta de credito\",\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"neutral\",\"language\":\"es\",\"summary\":\"El cliente solicita informaci\\\"on sobre los canales y m\\\"etodos de pago disponibles, incluyendo si acepta tarjeta de cr\\\"edito.\",\"reasoning_brief\":\"Pregunta por medios y canales de pago para abonar a su obligaci\\\"on, lo que corresponde a metodos_de_pago; no hay banderas aplicables.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 7426,
+   "input_tokens": 92,
+   "output_tokens": 374
+  }
+ }
+}

@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.013463,
+ "effort": "medium",
+ "fingerprint": "1afb9f4f705ad878",
+ "item_id": "MSG-278",
+ "label": "classify",
+ "latency_ms": 5553,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:25:59Z",
+ "request_id": "req_011CfUa8V6CyGfjQw8VLyLVf",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"pago_no_aplicado\",\"secondary_reasons\":[\"queja_reclamo\"],\"confidence\":0.89,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":\"desde el mes pasado\",\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"negative\",\"language\":\"es\",\"summary\":\"El cliente dice que pagó todo el mes pasado pero el sistema sigue mostrando deuda y pide que lo corrijan.\",\"reasoning_brief\":\"Pago realizado que no se refleja en el saldo, por lo que corresponde a pago_no_aplicado; el tono de molestia sugiere queja como motivo secundario.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 7426,
+   "input_tokens": 85,
+   "output_tokens": 373
+  }
+ }
+}

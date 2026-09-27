@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.013643,
+ "effort": "medium",
+ "fingerprint": "2db143cb6c052081",
+ "item_id": "MSG-193",
+ "label": "classify",
+ "latency_ms": 5458,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:24:03Z",
+ "request_id": "req_011CfUZyxv2S59zm9mTayp8h",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"consulta_saldo_cuotas\",\"secondary_reasons\":[\"pago_anticipado\"],\"confidence\":0.78,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":\"8830\",\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"neutral\",\"language\":\"es\",\"summary\":\"El cliente pregunta el saldo total de su crédito 8830 y cómo adelantar cuotas o hacer abono a capital para pagar menos intereses.\",\"reasoning_brief\":\"Dos solicitudes distintas: consulta de saldo (principal, va primero) y pago anticipado/abono a capital como secundaria. Sin banderas.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 7426,
+   "input_tokens": 116,
+   "output_tokens": 374
+  }
+ }
+}

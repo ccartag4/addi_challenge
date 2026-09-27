@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.015053,
+ "effort": "medium",
+ "fingerprint": "884c9229896aff49",
+ "item_id": "MSG-322",
+ "label": "classify",
+ "latency_ms": 5242,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:26:58Z",
+ "request_id": "req_011CfUaCt4BmewdhcfVGG3zp",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"pago_no_aplicado\",\"secondary_reasons\":[],\"confidence\":0.95,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":\"el lunes\",\"transaction_reference\":\"778452\",\"payment_method_or_bank\":\"corresponsal bancario\",\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"neutral\",\"language\":\"es\",\"summary\":\"El cliente pagó el lunes en un corresponsal bancario y el pago sigue figurando como pendiente; pide verificación con la referencia 778452.\",\"reasoning_brief\":\"Reporta un pago realizado que no se refleja, lo que corresponde a pago_no_aplicado; no hay señales de fraude, urgencia ni amenaza legal.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 7426,
+   "input_tokens": 88,
+   "output_tokens": 436
+  }
+ }
+}

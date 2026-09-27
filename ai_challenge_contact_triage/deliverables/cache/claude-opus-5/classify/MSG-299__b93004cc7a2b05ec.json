@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.012723,
+ "effort": "medium",
+ "fingerprint": "b93004cc7a2b05ec",
+ "item_id": "MSG-299",
+ "label": "classify",
+ "latency_ms": 5244,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:26:27Z",
+ "request_id": "req_011CfUaAbYxApEgfztpLjvMz",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"fuera_de_alcance\",\"secondary_reasons\":[],\"confidence\":0.93,\"out_of_scope_kind\":\"unrelated\",\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"neutral\",\"language\":\"es\",\"summary\":\"El cliente pregunta por la capital de Francia y luego aclara que se equivocó de chat.\",\"reasoning_brief\":\"Pregunta de trivia sin relación con Lumo; el propio cliente reconoce el error de canal, por lo que es fuera_de_alcance tipo unrelated.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 7426,
+   "input_tokens": 62,
+   "output_tokens": 348
+  }
+ }
+}

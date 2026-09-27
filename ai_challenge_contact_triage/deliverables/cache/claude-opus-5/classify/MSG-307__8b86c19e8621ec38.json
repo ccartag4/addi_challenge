@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.015318,
+ "effort": "medium",
+ "fingerprint": "8b86c19e8621ec38",
+ "item_id": "MSG-307",
+ "label": "classify",
+ "latency_ms": 5571,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:26:38Z",
+ "request_id": "req_011CfUaBNWuQ2sfJweUnfBGU",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"mora_intereses\",\"secondary_reasons\":[],\"confidence\":0.87,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":\"00482910\",\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"negative\",\"language\":\"es\",\"summary\":\"La clienta pregunta por qué le cobran intereses de mora tan altos en su crédito 00482910 y considera el valor excesivo.\",\"reasoning_brief\":\"Se queja del cobro de intereses de mora, tema cubierto por mora_intereses; no menciona pago realizado ni tasa corriente. Tono de inconformidad, sin banderas aplicables.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 7426,
+   "input_tokens": 96,
+   "output_tokens": 445
+  }
+ }
+}

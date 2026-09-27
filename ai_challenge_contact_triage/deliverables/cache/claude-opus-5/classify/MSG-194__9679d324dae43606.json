@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.019423,
+ "effort": "medium",
+ "fingerprint": "9679d324dae43606",
+ "item_id": "MSG-194",
+ "label": "classify",
+ "latency_ms": 8315,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:24:07Z",
+ "request_id": "req_011CfUZz2iyKbHSCPNMEHtTg",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"no_puede_pagar\",\"secondary_reasons\":[\"mora_intereses\",\"reporte_centrales\"],\"confidence\":0.62,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"neutral\",\"language\":\"es\",\"summary\":\"El cliente no puede pagar este mes y pregunta cuánto sería el interés de mora si paga la próxima semana y si lo reportarían a centrales.\",\"reasoning_brief\":\"Declara dificultad de pago (no_puede_pagar) y añade dos consultas claras: interés de mora por pagar tarde y posible reporte a centrales, que quedan como motivos secundarios.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 7426,
+   "input_tokens": 82,
+   "output_tokens": 612
+  }
+ }
+}

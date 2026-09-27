@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.014043,
+ "effort": "medium",
+ "fingerprint": "a239385454270339",
+ "item_id": "MSG-200",
+ "label": "classify",
+ "latency_ms": 5933,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:24:13Z",
+ "request_id": "req_011CfUZzgXpLdGBBvw7PTbAd",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"fraude_seguridad\",\"secondary_reasons\":[\"cuenta_y_app\",\"hablar_con_humano\"],\"confidence\":0.95,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":true,\"fraud_or_security\":true,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"negative\",\"language\":\"es\",\"summary\":\"El cliente cree que hackearon su cuenta, ve movimientos desconocidos, no puede entrar a la app y pide hablar con un humano para bloquear todo.\",\"reasoning_brief\":\"Cuenta hackeada y movimientos no reconocidos implican fraude_seguridad con fraud_or_security; el acceso a la app y la solicitud de asesor quedan como secundario y flag.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 7426,
+   "input_tokens": 91,
+   "output_tokens": 395
+  }
+ }
+}

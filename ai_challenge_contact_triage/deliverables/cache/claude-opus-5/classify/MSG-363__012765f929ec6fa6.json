@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.012888,
+ "effort": "medium",
+ "fingerprint": "012765f929ec6fa6",
+ "item_id": "MSG-363",
+ "label": "classify",
+ "latency_ms": 5271,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:27:47Z",
+ "request_id": "req_011CfUaGWhR5qd9MbrPpXTNf",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"fraude_seguridad\",\"secondary_reasons\":[],\"confidence\":0.95,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":false,\"fraud_or_security\":true,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"neutral\",\"language\":\"es\",\"summary\":\"El cliente recibió un SMS sospechoso que pide sus datos con un enlace y quiere saber si es legítimo de Lumo.\",\"reasoning_brief\":\"Posible phishing: mensaje sospechoso con link solicitando datos, por lo que corresponde fraude_seguridad con la bandera de fraude activada.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 7426,
+   "input_tokens": 65,
+   "output_tokens": 354
+  }
+ }
+}

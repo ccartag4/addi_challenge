@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.013743,
+ "effort": "medium",
+ "fingerprint": "b77fe574f0282d97",
+ "item_id": "MSG-297",
+ "label": "classify",
+ "latency_ms": 5608,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:26:26Z",
+ "request_id": "req_011CfUaAVQN8m6geg98feHZm",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"reporte_centrales\",\"secondary_reasons\":[\"queja_reclamo\"],\"confidence\":0.9,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"negative\",\"language\":\"es\",\"summary\":\"El cliente reclama que lo reportaron a centrales de riesgo sin aviso, afectando una solicitud de préstamo, y exige explicación y corrección inmediata.\",\"reasoning_brief\":\"El tema central es un reporte a centrales que el cliente considera indebido (reporte_centrales), con tono de reclamo formal, por lo que se añade queja_reclamo como secundario.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 7426,
+   "input_tokens": 101,
+   "output_tokens": 381
+  }
+ }
+}

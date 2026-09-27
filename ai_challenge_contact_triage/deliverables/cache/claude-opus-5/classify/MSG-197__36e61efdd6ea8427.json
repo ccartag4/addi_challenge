@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.013708,
+ "effort": "medium",
+ "fingerprint": "36e61efdd6ea8427",
+ "item_id": "MSG-197",
+ "label": "classify",
+ "latency_ms": 4929,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:24:08Z",
+ "request_id": "req_011CfUZzNEUvx1g2cY1SPRrS",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"refinanciacion_acuerdo\",\"secondary_reasons\":[\"reporte_centrales\"],\"confidence\":0.85,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"neutral\",\"language\":\"es\",\"summary\":\"El cliente solicita un acuerdo de pago y además quiere saber si ya fue reportado a las centrales de riesgo.\",\"reasoning_brief\":\"Pide explícitamente un acuerdo de pago (motivo principal) y, como segunda solicitud distinta, consultar su reporte en centrales. Sin señales de urgencia, fraude ni pedido de asesor.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 7426,
+   "input_tokens": 84,
+   "output_tokens": 383
+  }
+ }
+}

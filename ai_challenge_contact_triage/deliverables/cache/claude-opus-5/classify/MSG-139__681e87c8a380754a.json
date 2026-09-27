@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.013143,
+ "effort": "medium",
+ "fingerprint": "681e87c8a380754a",
+ "item_id": "MSG-139",
+ "label": "classify",
+ "latency_ms": 6452,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:22:58Z",
+ "request_id": "req_011CfUZu5dhoKQxEYhVBdAeB",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"fraude_seguridad\",\"secondary_reasons\":[],\"confidence\":0.95,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":false,\"fraud_or_security\":true,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":true},\"entities\":{\"credit_number\":null,\"document_number\":\"9000000123\",\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"negative\",\"language\":\"es\",\"summary\":\"El cliente no reconoce una cuota nueva y sospecha que usaron su identidad para una compra que no hizo.\",\"reasoning_brief\":\"Cobro no reconocido y posible suplantación de identidad, por lo que corresponde fraude_seguridad con fraud_or_security; incluye número de documento, por eso pii_present.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 7426,
+   "input_tokens": 96,
+   "output_tokens": 358
+  }
+ }
+}

@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.013808,
+ "effort": "medium",
+ "fingerprint": "d4a8db4cc31a9ee0",
+ "item_id": "MSG-162",
+ "label": "classify",
+ "latency_ms": 4639,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:23:26Z",
+ "request_id": "req_011CfUZwG8nbtQjdnx9ce6aa",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"pago_no_aplicado\",\"secondary_reasons\":[\"mora_intereses\"],\"confidence\":0.85,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"negative\",\"language\":\"es\",\"summary\":\"El cliente dice que pagó a tiempo pero le cobran intereses de mora y pide que le expliquen el detalle del cobro.\",\"reasoning_brief\":\"Los intereses aparecen tras un pago que el cliente afirma haber hecho a tiempo, por lo que corresponde a pago_no_aplicado; mora_intereses queda como secundario por la explicación solicitada.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 7426,
+   "input_tokens": 114,
+   "output_tokens": 381
+  }
+ }
+}

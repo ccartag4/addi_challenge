@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.012998,
+ "effort": "medium",
+ "fingerprint": "41e4564ae4f4339e",
+ "item_id": "MSG-232",
+ "label": "classify",
+ "latency_ms": 5514,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:24:58Z",
+ "request_id": "req_011CfUa43J4UbAnfZUKNEyd4",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"certificados_extractos\",\"secondary_reasons\":[],\"confidence\":0.96,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"neutral\",\"language\":\"es\",\"summary\":\"El cliente solicita el certificado de intereses pagados en 2025 y el extracto de su crédito enviados a su correo.\",\"reasoning_brief\":\"Pide documentos (certificado de intereses y extracto), lo que corresponde a certificados_extractos; no hay señales de urgencia, fraude ni petición de asesor.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 7426,
+   "input_tokens": 92,
+   "output_tokens": 353
+  }
+ }
+}

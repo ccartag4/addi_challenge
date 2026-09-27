@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.012528,
+ "effort": "medium",
+ "fingerprint": "450be8f957958afd",
+ "item_id": "MSG-340",
+ "label": "classify",
+ "latency_ms": 7275,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:27:21Z",
+ "request_id": "req_011CfUaETF14Lz4YNRGqWq3f",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"metodos_de_pago\",\"secondary_reasons\":[],\"confidence\":0.94,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":\"transferencia\",\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"neutral\",\"language\":\"es\",\"summary\":\"El cliente pide el número de cuenta para transferencia o un link de pago.\",\"reasoning_brief\":\"Pregunta por dónde y cómo pagar (transferencia o link), lo que corresponde a métodos de pago; no hay señales de urgencia ni otros temas.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 7426,
+   "input_tokens": 68,
+   "output_tokens": 339
+  }
+ }
+}

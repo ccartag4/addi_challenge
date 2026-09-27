@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.015163,
+ "effort": "medium",
+ "fingerprint": "27b02ed4b90c8e84",
+ "item_id": "MSG-220",
+ "label": "classify",
+ "latency_ms": 6555,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:24:43Z",
+ "request_id": "req_011CfUa2qjGBGJUBzrewjLMA",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"intereses_y_cargos\",\"secondary_reasons\":[\"mora_intereses\"],\"confidence\":0.6,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"negative\",\"language\":\"es\",\"summary\":\"El cliente no entiende un cobro adicional que le llegó y pregunta si corresponde a intereses de mora.\",\"reasoning_brief\":\"Pregunta por un cargo adicional no explicado, lo que corresponde a intereses_y_cargos; menciona posible mora como segunda lectura, de ahí la confianza media.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 7426,
+   "input_tokens": 75,
+   "output_tokens": 443
+  }
+ }
+}

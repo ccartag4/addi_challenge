@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.013863,
+ "effort": "medium",
+ "fingerprint": "149cbdca588ed1f0",
+ "item_id": "MSG-156",
+ "label": "classify",
+ "latency_ms": 5769,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:23:19Z",
+ "request_id": "req_011CfUZvfEZdkFWUBhmU7XpT",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"refinanciacion_acuerdo\",\"secondary_reasons\":[\"no_puede_pagar\"],\"confidence\":0.8,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":true,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":\"9000000456\",\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"negative\",\"language\":\"es\",\"summary\":\"Cliente con dificultad económica no podrá pagar en la fecha acordada y solicita un acuerdo de pago o refinanciación.\",\"reasoning_brief\":\"Pide explícitamente acuerdo o refinanciación (motivo principal) tras indicar que no podrá pagar (secundario). Dificultad económica activa vulnerable_customer.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 7426,
+   "input_tokens": 140,
+   "output_tokens": 378
+  }
+ }
+}

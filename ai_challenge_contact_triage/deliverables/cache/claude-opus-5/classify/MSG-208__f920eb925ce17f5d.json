@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.013508,
+ "effort": "medium",
+ "fingerprint": "f920eb925ce17f5d",
+ "item_id": "MSG-208",
+ "label": "classify",
+ "latency_ms": 5771,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:24:24Z",
+ "request_id": "req_011CfUa1WTrv4zoW89v4Xk5C",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"no_puede_pagar\",\"secondary_reasons\":[\"refinanciacion_acuerdo\"],\"confidence\":0.92,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"negative\",\"language\":\"es\",\"summary\":\"El cliente dice que por dificultad económica no puede pagar la cuota completa este mes y pregunta qué opciones tiene.\",\"reasoning_brief\":\"Manifiesta dificultad económica y posible pago parcial, lo que corresponde a no_puede_pagar; pregunta por opciones, lo que abre la vía de acuerdo de pago.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 7426,
+   "input_tokens": 84,
+   "output_tokens": 375
+  }
+ }
+}

@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.015888,
+ "effort": "medium",
+ "fingerprint": "7de438980a1f6a64",
+ "item_id": "MSG-298",
+ "label": "classify",
+ "latency_ms": 6397,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:26:28Z",
+ "request_id": "req_011CfUaAYNxQifdsMdGL9mzR",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"consulta_saldo_cuotas\",\"secondary_reasons\":[\"no_puede_pagar\",\"fecha_de_pago\"],\"confidence\":0.68,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"neutral\",\"language\":\"es\",\"summary\":\"El cliente pide conocer su saldo, avisa que no puede pagar la totalidad este mes y quiere cambiar la fecha de pago.\",\"reasoning_brief\":\"Mensaje con tres solicitudes: saldo (principal, mencionada primero), imposibilidad de pago completo y cambio de fecha como secundarias. Sin señales de urgencia ni vulnerabilidad explícitas.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 7426,
+   "input_tokens": 90,
+   "output_tokens": 469
+  }
+ }
+}

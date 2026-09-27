@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.013473,
+ "effort": "medium",
+ "fingerprint": "52389d428b38ba47",
+ "item_id": "MSG-006",
+ "label": "classify",
+ "latency_ms": 6133,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:15:37Z",
+ "request_id": "req_011CfUZLbNCYFATYjXPd1Mp5",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"pago_anticipado\",\"secondary_reasons\":[],\"confidence\":0.96,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"neutral\",\"language\":\"es\",\"summary\":\"El cliente quiere adelantar varias cuotas para terminar antes el crédito y pregunta cómo hacerlo y si hay descuento por pago anticipado.\",\"reasoning_brief\":\"Pide adelantar cuotas y consultar descuento por pago anticipado, lo que corresponde exactamente a pago_anticipado; no hay señales de urgencia ni otras banderas.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 7426,
+   "input_tokens": 87,
+   "output_tokens": 373
+  }
+ }
+}

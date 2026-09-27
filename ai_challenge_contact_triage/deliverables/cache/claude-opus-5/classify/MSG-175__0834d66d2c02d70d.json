@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.012973,
+ "effort": "medium",
+ "fingerprint": "0834d66d2c02d70d",
+ "item_id": "MSG-175",
+ "label": "classify",
+ "latency_ms": 5178,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:23:43Z",
+ "request_id": "req_011CfUZxXcUu8nUc5CnsXyPc",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"queja_reclamo\",\"secondary_reasons\":[],\"confidence\":0.93,\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":true,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"negative\",\"language\":\"es\",\"summary\":\"El cliente quiere poner una queja formal porque lleva 3 días llamando sin que le resuelvan y califica el servicio como pésimo.\",\"reasoning_brief\":\"Pide explícitamente poner una queja por mal servicio (queja_reclamo); indica contactos repetidos durante 3 días, por lo que repeat_contact = true y sentimiento negativo.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 7426,
+   "input_tokens": 82,
+   "output_tokens": 354
+  }
+ }
+}

@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.015533,
+ "effort": "medium",
+ "fingerprint": "1c1cd7ed97fcc36b",
+ "item_id": "MSG-040",
+ "label": "classify",
+ "latency_ms": 5825,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:21:59Z",
+ "request_id": "req_011CfUZpmNjpZEM7jasToRM5",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"hablar_con_humano\",\"secondary_reasons\":[],\"confidence\":0.62,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":true,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"negative\",\"language\":\"es\",\"summary\":\"El cliente lleva 20 minutos esperando y pregunta si hay alguien que lo atienda.\",\"reasoning_brief\":\"No plantea ninguna consulta concreta, solo reclama atención por la espera, lo que equivale a pedir una persona; por eso hablar_con_humano y requests_human, con sentimiento negativo.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 7426,
+   "input_tokens": 64,
+   "output_tokens": 460
+  }
+ }
+}

@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.012583,
+ "effort": "medium",
+ "fingerprint": "84dbdec4d35c2622",
+ "item_id": "MSG-326",
+ "label": "classify",
+ "latency_ms": 4432,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:27:03Z",
+ "request_id": "req_011CfUaDH5XnVu7chsLy3nXy",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"cuenta_y_app\",\"secondary_reasons\":[],\"confidence\":0.95,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"negative\",\"language\":\"es\",\"summary\":\"El cliente reporta que la app se cierra sola al abrirla y ya intentó reinstalarla sin éxito.\",\"reasoning_brief\":\"Es una falla técnica de la aplicación, que corresponde a cuenta_y_app; no hay otras solicitudes ni señales especiales.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 7426,
+   "input_tokens": 69,
+   "output_tokens": 341
+  }
+ }
+}

@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.013858,
+ "effort": "medium",
+ "fingerprint": "73caf7b8cc998372",
+ "item_id": "MSG-122",
+ "label": "classify",
+ "latency_ms": 5726,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:22:29Z",
+ "request_id": "req_011CfUZryPMkBnrH71RTBwmj",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"no_puede_pagar\",\"secondary_reasons\":[\"refinanciacion_acuerdo\",\"reporte_centrales\"],\"confidence\":0.9,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"negative\",\"language\":\"es\",\"summary\":\"El cliente no puede pagar la cuota completa del mes, propone pagar la mitad ahora y el resto después, y teme ser reportado a centrales.\",\"reasoning_brief\":\"Dificultad económica con propuesta de pago parcial (no_puede_pagar), con matiz de acuerdo de pago y preocupación por reporte a centrales como motivos secundarios.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 7426,
+   "input_tokens": 84,
+   "output_tokens": 389
+  }
+ }
+}

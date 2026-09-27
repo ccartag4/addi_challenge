@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.013668,
+ "effort": "medium",
+ "fingerprint": "8352e80356ea716f",
+ "item_id": "MSG-249",
+ "label": "classify",
+ "latency_ms": 5682,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:25:22Z",
+ "request_id": "req_011CfUa5m4JvpD2NY6KhmRqL",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"certificados_extractos\",\"secondary_reasons\":[\"pago_no_aplicado\"],\"confidence\":0.68,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":\"la semana pasada\",\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"neutral\",\"language\":\"es\",\"summary\":\"El cliente pide su extracto del mes y consultar si ya se aplicó un pago hecho la semana pasada que la app aún muestra pendiente.\",\"reasoning_brief\":\"Solicita un extracto (certificados_extractos) y además reporta un pago no reflejado en la app, lo que corresponde a pago_no_aplicado como motivo secundario.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 7426,
+   "input_tokens": 101,
+   "output_tokens": 378
+  }
+ }
+}

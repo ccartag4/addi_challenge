@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.012193,
+ "effort": "medium",
+ "fingerprint": "3a73ee1f1649f71a",
+ "item_id": "MSG-132",
+ "label": "classify",
+ "latency_ms": 5517,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:22:47Z",
+ "request_id": "req_011CfUZtMjYovhskMJQjUjoB",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"certificados_extractos\",\"secondary_reasons\":[],\"confidence\":0.9,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"neutral\",\"language\":\"es\",\"summary\":\"El cliente solicita el certificado de retención en la fuente del año pasado.\",\"reasoning_brief\":\"Pide un documento tributario, lo que corresponde a certificados_extractos; retención en la fuente es un caso parcial que requiere asesor.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 7426,
+   "input_tokens": 61,
+   "output_tokens": 327
+  }
+ }
+}

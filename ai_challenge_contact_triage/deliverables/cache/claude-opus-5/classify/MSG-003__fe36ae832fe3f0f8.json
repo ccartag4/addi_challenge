@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.056048,
+ "effort": "medium",
+ "fingerprint": "fe36ae832fe3f0f8",
+ "item_id": "MSG-003",
+ "label": "classify",
+ "latency_ms": 6237,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:21:15Z",
+ "request_id": "req_011CfUZmYXVcw6t7pUJGcacM",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"pago_no_aplicado\",\"secondary_reasons\":[],\"confidence\":0.96,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":\"4471\",\"document_number\":null,\"amount\":null,\"payment_date\":\"ayer\",\"transaction_reference\":null,\"payment_method_or_bank\":\"PSE\",\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"neutral\",\"language\":\"es\",\"summary\":\"El cliente pagó su cuota ayer por PSE pero la app aún la muestra como pendiente y adjunta el comprobante.\",\"reasoning_brief\":\"Pago realizado que no se refleja en la app, con comprobante adjunto: corresponde a pago_no_aplicado. No hay señales de fraude ni solicitud de asesor.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 7426,
+   "cache_read_input_tokens": 0,
+   "input_tokens": 97,
+   "output_tokens": 366
+  }
+ }
+}

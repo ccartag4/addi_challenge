@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.010798,
+ "effort": "medium",
+ "fingerprint": "a02bf92115f38771",
+ "item_id": "MSG-279",
+ "label": "classify",
+ "latency_ms": 4872,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:26:00Z",
+ "request_id": "req_011CfUa8es5U9nyx2xKMRgdY",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"felicitacion_feedback\",\"secondary_reasons\":[],\"confidence\":0.97,\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"named_agent\":\"Camilo\",\"masked_values\":[]},\"sentiment\":\"positive\",\"language\":\"es\",\"summary\":\"El cliente felicita al asesor Camilo y al equipo por la atención recibida.\",\"reasoning_brief\":\"Elogio explícito que nombra a un asesor, sin ninguna solicitud adicional; corresponde a felicitacion_feedback.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 7426,
+   "input_tokens": 82,
+   "output_tokens": 267
+  }
+ }
+}

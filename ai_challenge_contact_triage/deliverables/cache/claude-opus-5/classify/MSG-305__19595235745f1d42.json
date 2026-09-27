@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.012798,
+ "effort": "medium",
+ "fingerprint": "19595235745f1d42",
+ "item_id": "MSG-305",
+ "label": "classify",
+ "latency_ms": 5433,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:26:37Z",
+ "request_id": "req_011CfUaBHpdCVpNKLSDDkiPa",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"pago_no_aplicado\",\"secondary_reasons\":[],\"confidence\":0.95,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":\"$150.000\",\"payment_date\":\"ayer\",\"transaction_reference\":null,\"payment_method_or_bank\":\"pse\",\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"negative\",\"language\":\"es\",\"summary\":\"El cliente pagó ayer $150.000 por PSE y el pago no se refleja en la app.\",\"reasoning_brief\":\"Reporta un pago realizado que no aparece aplicado, lo que corresponde a pago_no_aplicado; se extraen monto, fecha y medio de pago.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 7426,
+   "input_tokens": 77,
+   "output_tokens": 348
+  }
+ }
+}

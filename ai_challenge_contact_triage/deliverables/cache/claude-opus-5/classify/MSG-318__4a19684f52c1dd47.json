@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.013878,
+ "effort": "medium",
+ "fingerprint": "4a19684f52c1dd47",
+ "item_id": "MSG-318",
+ "label": "classify",
+ "latency_ms": 5559,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:26:53Z",
+ "request_id": "req_011CfUaCUHCcogbWzQv2wrrP",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"consulta_saldo_cuotas\",\"secondary_reasons\":[],\"confidence\":0.96,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[\"1.020.XXX.XXX\"]},\"sentiment\":\"neutral\",\"language\":\"es\",\"summary\":\"El cliente solicita el saldo pendiente de su crédito y el valor de la próxima cuota.\",\"reasoning_brief\":\"Pide saldo y valor de próxima cuota, lo que corresponde a consulta_saldo_cuotas. El documento viene enmascarado, por lo que se registra en masked_values y no se marca pii_present.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 7426,
+   "input_tokens": 98,
+   "output_tokens": 387
+  }
+ }
+}

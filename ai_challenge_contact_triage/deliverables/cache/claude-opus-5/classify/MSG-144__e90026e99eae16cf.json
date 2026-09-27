@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.015158,
+ "effort": "medium",
+ "fingerprint": "e90026e99eae16cf",
+ "item_id": "MSG-144",
+ "label": "classify",
+ "latency_ms": 4949,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:23:03Z",
+ "request_id": "req_011CfUZuZGrxjUinGweh8fzF",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"refinanciacion_acuerdo\",\"secondary_reasons\":[\"no_puede_pagar\",\"queja_reclamo\"],\"confidence\":0.83,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":true,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"negative\",\"language\":\"es\",\"summary\":\"Cliente con dos meses de mora pide un acuerdo de pago y se queja de las llamadas de cobranza constantes.\",\"reasoning_brief\":\"Solicita explícitamente un acuerdo de pago (refinanciacion_acuerdo); menciona imposibilidad de pago y molestia por la frecuencia de llamadas, lo que activa collections_harassment.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 7426,
+   "input_tokens": 94,
+   "output_tokens": 439
+  }
+ }
+}

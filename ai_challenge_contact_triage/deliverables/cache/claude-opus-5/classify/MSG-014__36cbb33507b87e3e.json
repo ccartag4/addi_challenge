@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.013043,
+ "effort": "medium",
+ "fingerprint": "36cbb33507b87e3e",
+ "item_id": "MSG-014",
+ "label": "classify",
+ "latency_ms": 6164,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:21:27Z",
+ "request_id": "req_011CfUZnQu8jAPX1WWghDTPo",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"estado_solicitud\",\"secondary_reasons\":[],\"confidence\":0.95,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"neutral\",\"language\":\"es\",\"summary\":\"El cliente pregunta por el estado de una solicitud de crédito enviada hace 4 días sin respuesta.\",\"reasoning_brief\":\"Consulta explícita sobre una solicitud de crédito pendiente de respuesta, corresponde a estado_solicitud; no hay señales de urgencia, fraude ni petición de asesor.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 7426,
+   "input_tokens": 81,
+   "output_tokens": 357
+  }
+ }
+}

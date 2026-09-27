@@ -1,0 +1,27 @@
+{
+ "cost_usd": 0.013063,
+ "effort": "medium",
+ "fingerprint": "1b424d6aa5132678",
+ "item_id": "MSG-260",
+ "label": "classify",
+ "latency_ms": 5123,
+ "model_requested": "claude-opus-5",
+ "recorded_at": "2026-09-27T20:25:36Z",
+ "request_id": "req_011CfUa6qaSrjzWq7isaKBfH",
+ "response": {
+  "content": [
+   {
+    "text": "{\"primary_reason\":\"cuenta_y_app\",\"secondary_reasons\":[],\"confidence\":0.93,\"out_of_scope_kind\":null,\"flags\":{\"requests_human\":false,\"fraud_or_security\":false,\"legal_threat\":false,\"collections_harassment\":false,\"vulnerable_customer\":false,\"imminent_deadline\":false,\"repeat_contact\":false,\"prompt_injection_suspected\":false,\"pii_present\":false},\"entities\":{\"credit_number\":null,\"document_number\":null,\"amount\":null,\"payment_date\":null,\"transaction_reference\":null,\"payment_method_or_bank\":null,\"named_agent\":null,\"masked_values\":[]},\"sentiment\":\"negative\",\"language\":\"es\",\"summary\":\"El cliente no puede iniciar sesión en la app porque le indica contraseña incorrecta pese a haberla cambiado varias veces.\",\"reasoning_brief\":\"Problema de acceso a la app y login, tema de cuenta_y_app; la contraseña no está cubierta por la política (policy_gap). No pide asesor explícitamente.\"}",
+    "type": "text"
+   }
+  ],
+  "model": "claude-opus-5",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 7426,
+   "input_tokens": 80,
+   "output_tokens": 358
+  }
+ }
+}
