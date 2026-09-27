@@ -62,8 +62,9 @@ the shape of the work. Answers were given by David on 2026-09-26.
 
 Additional environment decisions taken at the same time:
 
-- **Python 3.12 in an isolated `uv` virtual environment.** The machine's default Python is 3.14 and
-  dbt support for it is uncertain.
+- **Python 3.13 in an isolated standard-library `venv`.** The machine's default Python is 3.14 and
+  dbt support for it is uncertain. *Revised in WORKLOG step 00:* the original plan said `uv` with
+  Python 3.12, but `uv` is not installed and 3.13 already is, so no extra tool is needed.
 - **Layer naming.** `models/bronze/` (raw copies, all columns as text), `models/silver/staging/`
   (typed, parsed, exact-deduplicated), `models/silver/intermediate/` (business logic),
   `models/silver/core/` (`dim_*`, `fct_*`), `models/gold/` (`agg_*`, `dm_*`).
@@ -138,7 +139,7 @@ Definitions the README leaves open, to be fixed and documented in `ASSUMPTIONS.m
 ### Phase 0 — Preparation
 1. Copy the inner challenge folder to `C:\dev\addi_ai_amplifier_tech_challenge`. `git init`, add a `.gitignore` (`target/`, `dbt_packages/`, `logs/`, `*.duckdb`, `.venv/`, `.DS_Store`, `__MACOSX/`). Initial commit with the untouched challenge files.
 2. Create `WORKLOG.md` and the skeletons of `AI_LOG.md` and `ASSUMPTIONS.md`.
-3. Create the environment: `uv venv --python 3.12`, install `dbt-core`, `dbt-duckdb`, `duckdb`, `pandas`; freeze versions to `requirements.txt`.
+3. Create the environment: `py -3.13 -m venv .venv`, install `dbt-core`, `dbt-duckdb`, `duckdb`, `pandas`; freeze versions to `requirements.txt`.
 4. Verify with `dbt --version`.
 
 ### Phase 1 — dbt project and Bronze
