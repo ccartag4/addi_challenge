@@ -171,6 +171,7 @@ class LLMClient:
         self.calls = 0                       # live API calls made by this client
         self.replays = 0                     # responses served from the on-disk cache
         self.spent_usd = 0.0                 # cost incurred by this process
+        self.touched: set[Path] = set()      # cache files read or written by this client (for pruning)
 
     # ------------------------------------------------------------------ mode and SDK
     @property
@@ -235,6 +236,7 @@ class LLMClient:
                 parsed = output_type.model_validate_json(result.text)   # was valid when stored
                 with self._lock:
                     self.replays += 1
+                    self.touched.add(path)
                 return parsed, result
 
         if not self.live_allowed():
@@ -260,8 +262,23 @@ class LLMClient:
                 last_error = f"output did not validate: {first.get('loc')} {first.get('msg')}"
                 continue
             self._write_cache(path, key, label, item_id, result, request)
+            with self._lock:
+                self.touched.add(path)
             return parsed, result
         raise LLMOutputInvalid(f"{item_id}: {last_error} (2 attempts).")
+
+    def prune_untouched(self) -> list[Path]:
+        """Delete cache files of this model that this client neither read nor wrote: responses
+        to prompts that no longer exist (an earlier prompt version). Returns what was removed."""
+        model_dir = self.cfg.cache_dir / _safe(self.cfg.model)
+        removed: list[Path] = []
+        if not model_dir.exists():
+            return removed
+        for path in sorted(model_dir.rglob("*.json")):
+            if path not in self.touched:
+                path.unlink()
+                removed.append(path)
+        return removed
 
     # ------------------------------------------------------------------ live call
     def _call(self, request: dict[str, Any], max_tokens: int, label: str, item_id: str, attempt: int) -> LLMResult:

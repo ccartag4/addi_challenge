@@ -19,6 +19,7 @@ from .classify import PROMPT_VERSION, ClassifiedMessage, classify_messages
 from .llm import ROOT, LLMClient, LLMConfig
 from .pipeline import PIPELINE_VERSION, run
 from .schema import TriageRecord
+from .summary import build_summary, render_markdown
 
 DATA_DEFAULT = ROOT.parent / "data" / "messages.jsonl"
 
@@ -124,6 +125,38 @@ def cmd_run(args: argparse.Namespace) -> int:
     print(f"messages={len(records)} actions={actions} replies={drafts} rejected_by_verifier={rejected} policy_gaps={gaps} unclassified={unclassified}")
     _print_llm_totals(llm, sum(r.processing.cost_usd for r in records))
     print(f"wrote {out}")
+
+    summary = build_summary(records, pipeline_version=PIPELINE_VERSION, model=cfg.model,
+                            live_calls=llm.calls, replays=llm.replays, spent_usd=llm.spent_usd)
+    _write_summary(summary, records, out.parent)
+
+    if args.prune_cache:
+        removed = llm.prune_untouched()
+        print(f"pruned {len(removed)} cache files not used by this run")
+    return 0
+
+
+def _write_summary(summary, records, out_dir: Path) -> None:
+    json_path = out_dir / "batch_summary.json"
+    md_path = out_dir / "batch_summary.md"
+    json_path.write_text(json.dumps(summary.model_dump(mode="json"), ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    md_path.write_text(render_markdown(summary, records), encoding="utf-8")
+    print(f"wrote {json_path}")
+    print(f"wrote {md_path}")
+    print(f"summary: auto-answerable {summary.auto_answerable_share:.1%}, cases {summary.cases_opened}, "
+          f"gaps {sum(summary.policy_gaps.values())}, rejected drafts {summary.drafts_failed_verifier}")
+
+
+def cmd_summarize(args: argparse.Namespace) -> int:
+    """Regenerate batch_summary.json/.md from an existing triage_results.jsonl (no model calls)."""
+    src = Path(args.results)
+    records = [TriageRecord.model_validate_json(line) for line in src.read_text(encoding="utf-8").splitlines() if line.strip()]
+    version = records[0].processing.pipeline_version if records else PIPELINE_VERSION
+    model = next((r.processing.model for r in records if r.processing.model), None)
+    summary = build_summary(records, pipeline_version=version, model=model,
+                            live_calls=sum(r.processing.llm_calls for r in records),
+                            replays=sum(r.processing.response_cache_hits for r in records), spent_usd=None)
+    _write_summary(summary, records, src.parent)
     return 0
 
 
@@ -146,13 +179,18 @@ def main(argv=None) -> int:
     parser = argparse.ArgumentParser(prog="python -m lumo_triage")
     sub = parser.add_subparsers(dest="command", required=True)
 
-    p_run = sub.add_parser("run", help="full pipeline -> output/triage_results.jsonl")
+    p_run = sub.add_parser("run", help="full pipeline -> output/triage_results.jsonl + batch_summary.json/.md")
     _common(p_run, ROOT / "output" / "triage_results.jsonl")
+    p_run.add_argument("--prune-cache", action="store_true", help="delete cached responses this run did not use (old prompt versions)")
     p_run.set_defaults(func=cmd_run)
 
     p_cls = sub.add_parser("classify", help="classification only -> output/classifications.jsonl")
     _common(p_cls, ROOT / "output" / "classifications.jsonl")
     p_cls.set_defaults(func=cmd_classify)
+
+    p_sum = sub.add_parser("summarize", help="regenerate batch_summary.json/.md from triage_results.jsonl")
+    p_sum.add_argument("--results", default=str(ROOT / "output" / "triage_results.jsonl"))
+    p_sum.set_defaults(func=cmd_summarize)
 
     args = parser.parse_args(argv)
     return args.func(args)

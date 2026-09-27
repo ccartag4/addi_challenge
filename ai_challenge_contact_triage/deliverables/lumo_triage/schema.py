@@ -182,18 +182,21 @@ class BatchSummary(BaseModel):
     by_primary_reason: dict[str, int]
     by_priority: dict[str, int]
     by_action: dict[str, int]
-    by_queue: dict[str, int]
-    auto_answerable_share: float
-    drafts_generated: int
+    by_queue: dict[str, int] = Field(description="Cases per queue (messages with a person involved).")
+    auto_answerable_share: float = Field(description="Share of messages that leave with a reply ready to send.")
+    replies_ready: int = Field(description="Messages with a sendable reply (model draft that passed the verifier, or a fixed template).")
+    cases_opened: int = Field(description="Messages that need a person (auto_reply_and_route + route_to_human).")
+    drafts_generated: int = Field(description="Model drafts that passed the verifier.")
     drafts_failed_verifier: int
-    policy_gaps: dict[str, int] = Field(description="policy_gap text -> count")
+    policy_gaps: dict[str, int] = Field(description="'<reason>: no policy' or '<reason>: partially covered' -> count")
+    policy_gap_details: dict[str, list[str]] = Field(default_factory=dict, description="reason -> what the knowledge base did not cover, in the customer's terms")
     flags: dict[str, int]
     duplicates: dict[str, int] = Field(description="exact and near-duplicate counts")
-    low_confidence: int
+    low_confidence: int = Field(description="Model classifications below the routing threshold (sent to a person).")
     unclassified: int = Field(0, description="Messages the model could not classify; routed to a person.")
-    llm_calls: int
-    response_cache_hits: int
+    llm_calls: int = Field(description="Live model calls made by this run.")
+    response_cache_hits: int = Field(description="Model responses replayed from the on-disk cache by this run.")
     tokens: dict[str, int]
     cost_usd: float = Field(description="Cost of the LLM calls behind this output when they were made.")
-    spent_this_run_usd: float = Field(0.0, description="Cost actually incurred by this run (0 when fully replayed from cache).")
+    spent_this_run_usd: Optional[float] = Field(0.0, description="Cost actually incurred by this run (0 when fully replayed; null when the summary was regenerated from the file).")
     notable: list[str] = Field(default_factory=list, description="Anything a CX lead should look at.")

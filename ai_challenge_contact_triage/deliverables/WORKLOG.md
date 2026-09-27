@@ -302,4 +302,45 @@ the customer ("dos veces", "tercera vez") were not credited to the message side 
 after adding ordinals, "el primer día" was read as the figure 1 (1 draft). Fixed with tests for
 each phrase and replayed at no cost: 11 → 4 rejections, all four deliberate. HOW_I_WORKED 3.7.
 
+**Commit:** `ecf360a` feat(ai): add routing engine, grounded drafting with verifier and end-to-end
+run over the 340 messages
+
+---
+
+## Step 05 — Batch summary, single command, reproducibility  (2026-09-27)
+
+**Goal:** the batch summary the assessment asks for, computed from the records and never from the
+model; one command that sets up and runs; proof that the committed output is reproducible
+without a key.
+
+**Files:** `lumo_triage/summary.py` (`build_summary`, `render_markdown`), `lumo_triage/__main__.py`
+(`run` now writes `batch_summary.json/.md`; new `summarize`; `--prune-cache`), `lumo_triage/llm.py`
+(tracks the cache files a run used; `prune_untouched`), `schema.py` (`BatchSummary` gains
+`replies_ready`, `cases_opened`, `policy_gap_details`), `run.ps1`, `run.sh`, `README.md`,
+`tests/test_summary.py` (3 tests, including the reproducibility check). 154 tests, 1 skipped.
+
+**Command(s):**
+```powershell
+python -m pytest -q
+python -m lumo_triage run --workers 4 --prune-cache
+.\run.ps1 --mode offline --limit 5 --out <scratch>\triage_results.jsonl
+```
+
+**Result:**
+
+| Check | Evidence |
+|---|---|
+| Summary | `output/batch_summary.md`: 278 of 340 messages (81.8 %) leave with a reply ready; 195 open a case (145 also answered automatically, 50 need a person's answer); 12 closed; 54 touch a knowledge-base gap, listed in the customers' own words; 4 verifier rejections shown with their failed check; queue workload by priority; 7 low-confidence classifications listed |
+| Reproducibility | `tests/test_summary.py::test_offline_replay_reproduces_the_committed_records` replays 40 messages offline from the committed cache and compares every field with the committed output; a full offline run makes 0 live calls, spends USD 0.00 and rewrites `triage_results.jsonl` identically (the summary differs only in its timestamp) |
+| Single command | `run.ps1` exercised offline on 5 messages; `run.sh` mirrors it (syntax-checked with `bash -n`; a macOS/Linux execution is pending on David's machine or a reviewer's) |
+| Cache hygiene | `--prune-cache` removed the 13 responses of the draft-v1 prompt that no request can reach any more; 568 files remain (325 classifications + 243 drafts), exactly the 568 responses a full replay uses |
+
+**Key decisions:**
+- The summary's figures come from the records only, so they are auditable line by line and a
+  reviewer can regenerate them with `summarize` without a model.
+- `cases_opened` counts both routed actions; the headline separates "answered and routed" from
+  "needs a person's answer" because the CX team's workload is different in each case.
+- `spent_this_run_usd` is null when the summary is regenerated from the file: the run that
+  produced the records is the only one that knows what it spent.
+
 **Commit:** *(filled after commit)*
