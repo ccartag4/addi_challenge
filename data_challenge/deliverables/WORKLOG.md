@@ -736,4 +736,32 @@ Full project: 24 models, 1 seed, 164 tests → 188 pass, 1 warn (known A4 residu
 **DMBOK dimension:** accuracy (reversal exclusion, legacy scale), consistency (count
 reconciliation), timeliness (cutover), integrity (loan link).
 
+**Commit:** `a81377a` feat(silver): add fct_payment with reversal classification, cutover and
+reconciliation tests
+
+---
+
+## Step 13b — DATA_JOURNEY.md: row-level accounting and step ledger  (2026-09-27)
+
+**Goal:** a single document answering "how many rows went in and out of each layer, and why",
+"what happened at each step" and "why did each error happen", so the explanation is not spread
+across WORKLOG, ASSUMPTIONS and AI_LOG.
+
+**Files:** `DATA_JOURNEY.md` (sections A funnel, B step ledger, C error ledger, D revised
+conclusions), `analyses/profiling/dq_15_row_count_funnel.sql` (produces the funnel numbers so
+section A is verifiable, not typed), `IMPLEMENTATION_PLAN.md` working-method table updated.
+
+**Command(s):**
+```powershell
+dbt compile --select dq_15_row_count_funnel
+python scripts/run_analyses.py --pattern "dq_15*" --out evidence/row_count_funnel.md --title "Row-count funnel per extract and layer"
+```
+
+**Result:** 30 funnel rows across the 7 extracts; every delta maps to a numbered finding or
+assumption. Notable: the FX calendar has 1,200 rows (600 days × 2 currencies) of which 848 are
+published; the 120 excluded loans have no installments, so all 130,297 installments belong to
+valid loans.
+
+**Decision:** maintained at the end of every step from here on, together with the worklog.
+
 **Commit:** *(filled after commit)*

@@ -32,6 +32,7 @@ Time budget for this challenge: roughly 6 to 6.5 hours of hands-on work.
 | **One step, one worklog entry, one commit** | `WORKLOG.md` gets one entry per step (template below). Each step closes with a conventional commit (`feat(bronze): …`, `test(silver): …`, `docs: …`). |
 | **AI log fed in real time** | When the AI produces something wrong or incomplete, it is recorded in `AI_LOG.md` at that moment, with how it was caught and fixed. |
 | **Data quality framed with DAMA-DMBOK** | See section 4. Each dbt test carries a `meta.dq_dimension`; each finding in `ASSUMPTIONS.md` is classified by dimension; a `DATA_QUALITY.md` matrix is generated at the end. |
+| **Row-level accounting in `DATA_JOURNEY.md`** *(added at step 13)* | Row-count funnel per extract with the reason for every delta (verified by `dq_15_row_count_funnel`), one table row per step with what the data showed, its root cause and the decision, an error ledger, and the list of conclusions revised along the way. Updated at the end of every step. |
 | **Reproducibility first** | Local DuckDB, pinned Python and package versions, a three-command README, and the final `dbt build` output committed to the repo. |
 
 ### Worklog entry template
