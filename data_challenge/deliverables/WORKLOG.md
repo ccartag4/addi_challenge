@@ -208,7 +208,7 @@ been silent rather than loud.
 **DMBOK dimension:** n/a (configuration / data handling).
 
 **Commits:** `eb5f0d0` chore(data): ignore dbt .user.yml and disable anonymous telemetry ·
-*(second commit hash filled after run)*
+`2c982f0` chore(data): untrack dbt .user.yml
 
 ---
 
@@ -254,5 +254,72 @@ dbt show --inline "<row counts per bronze view>"
 
 **DMBOK dimension:** completeness (tests); the layer itself is the baseline for every other
 dimension.
+
+**Commit:** `2c72ff5` feat(bronze): declare raw CSV sources and 1:1 bronze views with grain and
+completeness tests
+
+---
+
+## Step 05b — Fix deprecated test syntax  (2026-09-27)
+
+**Goal:** remove the `PropertyMovedToConfigDeprecation` warning (10 occurrences) raised by the
+bronze run.
+
+**Finding / decision:** `dbt parse --no-partial-parse` shows the cause: since dbt 1.10, `meta`
+on a data test is no longer a top-level property and must live under `config:`. The AI drafted
+the pre-1.10 form. Fixed in `bronze.yml`:
+
+```yaml
+- not_null:
+    config:
+      meta: {dq_dimension: completeness}
+```
+
+This matters beyond the warning: `DATA_QUALITY.md` will be generated from the manifest, and in
+the new form the dimension lands in `config.meta`, which is where the generator will read it.
+Logged as AI error 3.3.
+
+**Command(s):**
+```powershell
+dbt parse --no-partial-parse      # zero deprecation warnings expected
+dbt test --select bronze          # still PASS=10
+```
+
+**DMBOK dimension:** n/a (tooling).
+
+**Commit:** *(filled after commit)*
+
+---
+
+## Step 06 — SQL profiling of the raw extracts  (2026-09-27)
+
+**Goal:** measure, in SQL over bronze, every anomaly the staging layer will have to handle, and
+leave the measurements as committed evidence that `ASSUMPTIONS.md` can cite by number.
+
+**Files:** eight analyses under `analyses/profiling/` (`dq_01` … `dq_08`), one per DMBOK
+question; `scripts/run_analyses.py`, which executes compiled analyses against the warehouse
+read-only and writes full Markdown tables (`dbt show` truncates cells to 20 characters, so it
+is not usable as evidence).
+
+| Analysis | Question it answers | DMBOK dimension |
+|---|---|---|
+| dq_01_timestamp_formats | Which date/time shapes does each column contain? | Validity |
+| dq_02_duplicates | Exact duplicate rows and duplicate keys per extract | Uniqueness |
+| dq_03_cdc_applications | CDC operations, statuses, deletes, same-instant events | Timeliness, Validity |
+| dq_04_loans_integrity | Loans vs applications vs installments | Integrity, Consistency |
+| dq_05_payments | Two sources, reference formats, amount scale, reversals | Accuracy, Uniqueness |
+| dq_06_fx_gaps | Missing days in the FX calendar, weekend vs weekday | Completeness |
+| dq_07_customers | Person vs customer_id, free-text hygiene, missing references | Uniqueness, Integrity |
+| dq_08_merchants | Versions per merchant, what changes, name hygiene | Consistency |
+
+**Command(s):**
+```powershell
+dbt compile --select "dq_*"
+python scripts/run_analyses.py --pattern "dq_*" --out evidence/bronze_profiling.md --title "Bronze profiling — raw extract data quality"
+```
+
+**Result:** *(filled after run; see `evidence/bronze_profiling.md`)*
+
+**Finding / decision:** *(filled after run)*
 
 **Commit:** *(filled after commit)*

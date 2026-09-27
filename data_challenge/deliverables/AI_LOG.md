@@ -51,7 +51,21 @@
 - **Lesson:** verify tool side effects with `git status --short --ignored` before trusting a
   predicted file list.
 
-### 3.3 *(to be completed)*
+### 3.3 Deprecated dbt syntax for test metadata
+
+- **What it produced:** every bronze test was written with `meta:` as a direct property of the
+  test (`- not_null: {meta: {...}}`), the syntax valid up to dbt 1.9.
+- **How I caught it:** the first `dbt run` printed a deprecation summary with exactly 10
+  occurrences of `PropertyMovedToConfigDeprecation`, the same number as tests. Running
+  `dbt parse --no-partial-parse --show-all-deprecations` gave the exact message: `meta` must be
+  moved into `config`.
+- **What I did:** rewrote the ten tests as `config: {meta: {...}}` and re-parsed until the
+  warning count was zero. Adopted that form as the convention for every later layer.
+- **Lesson:** the assistant's knowledge of a tool lags its latest release. A version pinned in
+  `requirements.txt` plus reading the tool's own warnings is the check, not the assistant's
+  memory.
+
+### 3.4 *(to be completed)*
 
 ---
 
