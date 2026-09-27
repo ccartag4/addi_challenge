@@ -267,6 +267,56 @@ models:
           arguments: {expression: "first_due_date > disbursed_date"}
           config: {meta: {dq_dimension: timeliness}}
 
+  - name: fct_payment
+    description: >
+      Grain: one row per effective payment (A9): SETTLED, not voided by any reversal, on a
+      valid loan. amount is in major units for both source systems (A8); amount_usd uses the
+      FX rate of the Bogotá payment date (A7). loan_payment_seq / loan_cumulative_paid order
+      payments within the loan for the FIFO allocation. Payments after the snapshot date are
+      present; gold models filter by paid_date.
+    columns:
+      - name: payment_id
+        data_tests:
+          - unique: {config: {meta: {dq_dimension: uniqueness}}}
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+      - name: loan_id
+        data_tests:
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+          - relationships:
+              arguments: {to: ref('fct_loan'), field: loan_id}
+              config: {meta: {dq_dimension: integrity}}
+      - name: amount
+        description: Positive by construction; reversal rows never reach this model.
+        data_tests:
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+          - dbt_utils.accepted_range:
+              arguments: {min_value: 0, inclusive: false}
+              config: {meta: {dq_dimension: validity}}
+      - name: amount_usd
+        data_tests:
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+      - name: paid_date
+        data_tests:
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+      - name: source_system
+        data_tests:
+          - accepted_values:
+              arguments: {values: ['legacy_v1', 'core_v2']}
+              config: {meta: {dq_dimension: validity}}
+      - name: currency
+        data_tests:
+          - accepted_values:
+              arguments: {values: ['COP', 'BRL']}
+              config: {meta: {dq_dimension: validity}}
+    data_tests:
+      # the running total is consistent with the sequence
+      - dbt_utils.expression_is_true:
+          arguments: {expression: "loan_cumulative_paid >= amount"}
+          config: {meta: {dq_dimension: consistency}}
+      - dbt_utils.unique_combination_of_columns:
+          arguments: {combination_of_columns: [loan_id, loan_payment_seq]}
+          config: {meta: {dq_dimension: uniqueness}}
+
   - name: bridge_customer_person
     description: >
       Grain: one row per customer_id, mapped to its person_sk. Facts keep the source

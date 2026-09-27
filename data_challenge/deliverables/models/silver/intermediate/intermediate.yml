@@ -75,3 +75,33 @@ models:
       - dbt_utils.expression_is_true:
           arguments: {expression: "is_valid = (exclusion_reason is null)"}
           config: {meta: {dq_dimension: consistency}}
+
+  - name: int_payment_classified
+    description: >
+      Grain: one row per payment_id from staging (110,136), with payment_class
+      (EFFECTIVE / REVERSED_OUT / REVERSAL_ROW, A9), the number of reversal rows pointing at
+      it (F11) and the validity of its loan (A5). Nothing is dropped.
+    columns:
+      - name: payment_id
+        data_tests:
+          - unique: {config: {meta: {dq_dimension: uniqueness}}}
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+      - name: payment_class
+        data_tests:
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+          - accepted_values:
+              arguments: {values: ['EFFECTIVE', 'REVERSED_OUT', 'REVERSAL_ROW']}
+              config: {meta: {dq_dimension: validity}}
+    data_tests:
+      # a voided payment is voided by at least one row; an effective one by none
+      - dbt_utils.expression_is_true:
+          arguments: {expression: "(payment_class = 'REVERSED_OUT') = (n_reversal_rows >= 1)"}
+          config: {meta: {dq_dimension: consistency}}
+      # every payment references a loan we know (F10 normalisation worked)
+      - dbt_utils.expression_is_true:
+          arguments: {expression: "not loan_missing"}
+          config: {meta: {dq_dimension: integrity}}
+      # a reversal voids a payment of the same absolute amount (F11)
+      - dbt_utils.expression_is_true:
+          arguments: {expression: "payment_class <> 'REVERSED_OUT' or abs(reversal_amount_total) >= amount"}
+          config: {meta: {dq_dimension: accuracy}}

@@ -677,4 +677,63 @@ total matches the independent pandas pass from 2026-09-26 to the cent.
 approved amount), consistency (loan vs application), integrity (application, customer,
 merchant version links), timeliness (dates ordering, staleness bound).
 
+**Commit:** `c483994` feat(silver): add forward-filled FX calendar, loan validation and
+fct_loan with USD
+
+---
+
+## Step 13 — fct_payment: effective payments net of reversals  (2026-09-27)
+
+**Goal:** one row per effective payment (A9) on a valid loan, normalized across the two
+processors (A8, F10), with the ordering columns the FIFO allocation will need.
+
+**Files:** `models/silver/intermediate/int_payment_classified.sql` (+ `intermediate.yml`),
+`models/silver/core/fct_payment.sql` (+ `core.yml`), singular tests
+`assert_no_reversed_payment_in_fct_payment`, `assert_payment_counts_reconcile`,
+`assert_payment_sources_respect_cutover`, `analyses/profiling/dq_14_payments_effective.sql`.
+
+**Command(s):**
+```powershell
+dbt build
+dbt compile --select dq_14_payments_effective
+python scripts/run_analyses.py --pattern "dq_14*" --out evidence/payments_effective.md --title "Payments - from delivered rows to effective payments"
+```
+
+**Incident:** first scratch build failed with `Binder Error: Referenced column
+"reversal_amount_total" not found`: the AI wrote a test against a column it had computed in a
+CTE but forgotten to project. One-line fix; noted here rather than in the AI log because the
+tool caught it immediately and no wrong number was ever produced.
+
+**Result (validated from a clean `target` in a scratch copy, then reproduced here):**
+
+| Measure | Value |
+|---|---|
+| Payment rows: delivered / after dedup | 112,339 / 110,136 |
+| By class | EFFECTIVE 107,554 · REVERSED_OUT 1,291 · REVERSAL_ROW 1,291 |
+| Effective payments in `fct_payment` | 107,554 (0 on invalid loans) |
+| By source | core_v2 87,129 · legacy_v1 20,425 |
+| Amount received (local) | COP 20,096,349,720.00 · BRL 17,216,166.82 |
+| Amount received (USD at payment-date rate) | 7,839,742.28 |
+| Cutover boundary (F18) | legacy last: 2025-06-30 Bogotá (03:03 UTC 1 Jul) · core first: 00:04 UTC 1 Jul (30 Jun Bogotá) |
+| Payments dated after the snapshot | 1 |
+| Payments per valid loan | 0 to 18, median 4 · 2,240 loans with none yet · 18,890 at or above plan total · 0 overpaid |
+| Legacy scale check after ÷100 | median payment / median installment = 1.0 |
+
+Full project: 24 models, 1 seed, 164 tests → 188 pass, 1 warn (known A4 residue).
+
+**Finding / decision:**
+- **A profiling conclusion was refined.** Raw profiling reported 5 payments "reversed twice".
+  After typed deduplication (F3) those are the same reversal row in two timestamp formats:
+  1,291 reversal rows void exactly 1,291 payments. F11 and A9 were reworded. The design does
+  not change because A9 was implemented as set membership, not as signed netting, so it is
+  correct either way; the reconciliation test counts *distinct* voided payments for the same
+  reason.
+- Legacy and core closed on different clocks (F18). Not a defect to fix, but a fact that the
+  cutover test now guards.
+- `loan_payment_seq` and `loan_cumulative_paid` are computed once here; the FIFO step
+  consumes them instead of re-deriving the order.
+
+**DMBOK dimension:** accuracy (reversal exclusion, legacy scale), consistency (count
+reconciliation), timeliness (cutover), integrity (loan link).
+
 **Commit:** *(filled after commit)*
