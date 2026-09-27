@@ -136,3 +136,40 @@ models:
       - dbt_utils.expression_is_true:
           arguments: {expression: "cum_paid_start < cum_due_end and cum_paid_end > cum_due_start"}
           config: {meta: {dq_dimension: consistency}}
+
+  - name: int_loan_month_end_status
+    description: >
+      Grain: one row per valid loan x month end, from the disbursement month to the snapshot
+      month (A13). Outstanding balance (A11), DPD (A24), PAR30 flag and USD at the month-end FX
+      rate (A12), derived from settled_date_any without re-running the FIFO. At the snapshot
+      month end it reproduces dm_loan_delinquency_snapshot loan by loan.
+    columns:
+      - name: loan_id
+        data_tests:
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+          - relationships:
+              arguments: {to: ref('fct_loan'), field: loan_id}
+              config: {meta: {dq_dimension: integrity}}
+      - name: outstanding_local
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments: {min_value: 0}
+              config: {meta: {dq_dimension: validity}}
+      - name: outstanding_usd
+        data_tests:
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+      - name: dpd
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments: {min_value: 0}
+              config: {meta: {dq_dimension: validity}}
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments: {combination_of_columns: [loan_id, month_end]}
+          config: {meta: {dq_dimension: uniqueness}}
+      - dbt_utils.expression_is_true:
+          arguments: {expression: "month_end >= disbursed_date"}
+          config: {meta: {dq_dimension: timeliness}}
+      - dbt_utils.expression_is_true:
+          arguments: {expression: "(dpd > 0) = (n_overdue > 0) and is_par30 = (dpd > 30)"}
+          config: {meta: {dq_dimension: consistency}}

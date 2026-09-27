@@ -899,4 +899,84 @@ now has the four intended schemas: bronze (7), silver (20), gold (1), dq_audit.
 **DMBOK dimension:** consistency (bucket/status/DPD invariants), accuracy (gold recomputed from
 silver), completeness (every valid loan present).
 
+**Commit:** `c487dd6` feat(gold): add loan delinquency snapshot with PAR30 sensitivities; fix
+overdue boundary (A24)
+
+---
+
+## Step 16 — Gold: agg_merchant_monthly and the month-end series  (2026-09-27)
+
+**Goal:** the last required model (README 4.1 gold 1): merchant × month with applications,
+approval rate, GMV in USD, disbursed loans, FPD30 and PAR30, under the category in effect at
+the time. Decide A13 (how PAR30 is measured per month) and A25 (which category names a month).
+
+**Files:** `models/silver/intermediate/int_loan_month_end_status.sql` (+ `intermediate.yml`),
+`models/gold/agg_merchant_monthly.sql` (+ `gold.yml`), singular tests
+`assert_month_end_series_matches_snapshot`, `assert_agg_merchant_monthly_reconciles`,
+`analyses/profiling/dq_18_merchant_monthly.sql`.
+
+**Design:**
+- **A13, PAR30 as a stock.** A new intermediate states every valid loan at every month end from
+  its disbursement month to the snapshot month, using `settled_date_any` (FIFO settlement dates
+  do not depend on the reporting date, so no re-allocation). The aggregate takes the merchant's
+  outstanding and PAR30 balance at each month end from it. FPD30 stays a cohort metric by
+  disbursement month. A cohort view of PAR30 as of the snapshot is kept as
+  `par30_cohort_rate_at_snapshot`.
+- **A25, category at month end.** Grain merchant × month means one category per row; the
+  SCD2 version in effect on the last day of the month is used, and rows where the category
+  changed inside the month are flagged with the earlier category.
+- **Dense grid.** Every merchant × month from 2024-12 to 2026-06 in which the merchant existed:
+  13,299 rows, 11,327 with activity, so monthly series have no gaps. Rates are NULL when the
+  denominator is 0.
+
+**Command(s):**
+```powershell
+dbt build
+dbt compile --select dq_18_merchant_monthly
+python scripts/run_analyses.py --pattern "dq_18*" --out evidence/merchant_monthly.md --title "agg_merchant_monthly - reconciliation and merchant concentration (Q6)"
+```
+
+**Incident:** `category_changed_in_month` first flagged 171 rows against 157 known category
+changes. The extra 14 were merchants whose first version starts inside the month
+(NULL at month start compared with `is distinct from`). Fixed to require a non-NULL earlier
+category; 153 rows remain flagged, the 4 missing changes being effective on the 1st of a month,
+which is correctly "not inside the month".
+
+**Result (validated from a clean `target` in a scratch copy, then reproduced here):**
+
+| Measure | Value |
+|---|---|
+| `int_loan_month_end_status` | 264,143 loan-months (125,521 with a balance) |
+| `agg_merchant_monthly` | 13,299 rows · 700 merchants · 19 months (2024-12 … 2026-06) · 153 category changes inside a month · 209 rows under UNKNOWN |
+| Reconciliation Q1 from the aggregate | 59,059 / 33,007 / 55.8882 % |
+| Reconciliation Q2 · Q3 | 27,955 / 8,780,942.16 USD · 1,540 / 473,272.15 USD |
+| Reconciliation Q4 · Q5 | 8.8796 % / 7.7922 % · 2,069,175.39 USD / 20.5008 % |
+| Month-end series at 2026-06-30 vs snapshot | identical loan by loan (singular test, 0 rows) |
+| Portfolio PAR30 by month end | 0.0 % (2025-01) rising every month to 20.5 % (2026-06) |
+| Portfolio FPD30 by cohort | stable band 7.8 %–9.6 % across 16 cohorts |
+| **Q6 top 5 by GMV** | 1607 BR 23.49 % · 1397 CO 7.78 % · 1664 CO 4.32 % · 1030 CO 2.36 % · 1286 CO 1.69 % = 39.63 % |
+| Q6 concentration | top 20 = 53.86 %; 15 merchants make 50 % of GMV, 141 make 80 %; BR = 40.02 % of GMV |
+| Q6 risk of the top 5 vs the rest | FPD30 9.20 % vs 8.67 % · PAR30 20.53 % vs 20.48 % |
+| Q6 portfolio without merchant 1607 | FPD30 8.6432 % (vs 8.8796 %) · PAR30 20.2075 % (vs 20.5008 %) |
+
+Full project: 29 models, 1 seed, 244 tests → 273 pass, 1 warn (known A4 residue).
+
+**Finding / decision:**
+- **Every business question is now reproducible from gold alone**, and the reconciliation test
+  ties the aggregate back to the facts on eight totals. This is the "layer that settles the
+  argument" the README asks for: Risk and Merchant teams read the same numbers.
+- **PAR30 climbs monotonically because nothing is ever written off:** loans in the 90+ bucket
+  stay in the denominator and numerator forever, so a young, growing book shows a rising PAR30
+  by construction. That is an interpretation to state in RESULTS Q5/Q6, not a data error.
+- **Concentration:** one Brazilian education merchant is 23.49 % of GMV and 22.47 % of the
+  outstanding balance; removing it moves FPD30 by 0.24 pp and PAR30 by 0.29 pp. The portfolio
+  metrics are not hostage to it today, but a change in its book (or its category, since it has
+  a single SCD2 version) would move every headline number. The month-end vs cohort PAR30 for
+  1607 (21.51 % vs 0.0 % for the 2026-06 cohort) shows why A13 matters: the cohort view of a
+  fresh month says nothing about the merchant's risk.
+
+**DMBOK dimension:** consistency (series vs snapshot, aggregate vs facts), accuracy (rates
+bounded, numerators ≤ denominators), integrity (SCD2 version per month), completeness (dense
+grid).
+
 **Commit:** *(filled after commit)*

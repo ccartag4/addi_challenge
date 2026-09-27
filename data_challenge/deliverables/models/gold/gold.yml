@@ -89,3 +89,76 @@ models:
       - dbt_utils.expression_is_true:
           arguments: {expression: "abs((outstanding_net_of_partial_local + paid_amount) - total_amount_due) < 0.01"}
           config: {meta: {dq_dimension: accuracy}}
+
+  - name: agg_merchant_monthly
+    description: >
+      Grain: merchant x month, dense from the first month with activity to the snapshot month
+      for every month in which the merchant existed. Flows are counted by Bogotá event date:
+      applications by creation month (A14), loans and GMV in USD by disbursement month (A6, A7),
+      FPD30 as the cohort of loans disbursed in the month measured as of the snapshot (A23).
+      PAR30 is a stock measured at the month end (A13): par30_usd_month_end /
+      outstanding_usd_month_end from int_loan_month_end_status; a cohort variant as of the
+      snapshot is provided as par30_cohort_rate_at_snapshot. merchant_category is the SCD2
+      category in effect at the month end (A25), never the current one; rows where the
+      category changed inside the month are flagged. Rates are NULL when the denominator is 0.
+    columns:
+      - name: merchant_id
+        data_tests:
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+          - relationships:
+              arguments: {to: ref('dim_merchant'), field: merchant_id}
+              config: {meta: {dq_dimension: integrity}}
+      - name: merchant_sk
+        description: SCD2 version in effect at the month end.
+        data_tests:
+          - not_null: {config: {meta: {dq_dimension: integrity}}}
+          - relationships:
+              arguments: {to: ref('dim_merchant'), field: merchant_sk}
+              config: {meta: {dq_dimension: integrity}}
+      - name: merchant_category
+        data_tests:
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+          - accepted_values:
+              arguments: {values: ['HOME', 'HEALTH', 'FASHION', 'ELECTRONICS', 'MOTORCYCLES', 'EDUCATION', 'TRAVEL', 'UNKNOWN']}
+              config: {meta: {dq_dimension: validity}}
+      - name: approval_rate
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments: {min_value: 0, max_value: 1}
+              config: {meta: {dq_dimension: validity}}
+      - name: fpd30_rate
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments: {min_value: 0, max_value: 1}
+              config: {meta: {dq_dimension: validity}}
+      - name: par30_rate
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments: {min_value: 0, max_value: 1}
+              config: {meta: {dq_dimension: validity}}
+      - name: gmv_usd
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments: {min_value: 0}
+              config: {meta: {dq_dimension: validity}}
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments: {combination_of_columns: [merchant_id, month]}
+          config: {meta: {dq_dimension: uniqueness}}
+      # numerators never exceed denominators
+      - dbt_utils.expression_is_true:
+          arguments: {expression: "applications_approved <= applications"}
+          config: {meta: {dq_dimension: consistency}}
+      - dbt_utils.expression_is_true:
+          arguments: {expression: "fpd30_loans <= fpd30_eligible_loans and fpd30_eligible_loans <= disbursed_loans"}
+          config: {meta: {dq_dimension: consistency}}
+      - dbt_utils.expression_is_true:
+          arguments: {expression: "par30_usd_month_end <= outstanding_usd_month_end + 0.000001"}
+          config: {meta: {dq_dimension: consistency}}
+      - dbt_utils.expression_is_true:
+          arguments: {expression: "loans_par30_month_end <= loans_with_balance_month_end"}
+          config: {meta: {dq_dimension: consistency}}
+      # GMV exists only where loans were disbursed
+      - dbt_utils.expression_is_true:
+          arguments: {expression: "(disbursed_loans > 0) = (gmv_usd > 0)"}
+          config: {meta: {dq_dimension: consistency}}

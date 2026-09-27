@@ -33,6 +33,7 @@ Updated at the end of every step.
 | silver.stg_loans | 28,075 | 0 | no duplicates in this extract |
 | silver.int_loan_validated | 28,075 | 0 | verdict and `exclusion_reason` added |
 | silver.fct_loan | 27,955 | −120 | `NO_APPLICATION`: application id absent from the CDC (F7, A5). None deleted, none unapproved. |
+| silver.int_loan_month_end_status | 264,143 | grain change | loan × month end from disbursement to the snapshot month (A13); 125,521 loan-months carry a balance; at 2026-06-30 identical to the snapshot loan by loan |
 
 Inside `fct_loan`: 8,223 loans (29.42 %) take a forward-filled FX rate (F12, A7); 325 loans get
 their customer from the application because their latest CDC event carried the placeholder
@@ -79,6 +80,7 @@ normalized (F10); 1 payment is dated after the snapshot and is kept for gold to 
 | silver.stg_merchants_history | 862 | 0 | names keyed (72 casing variants, F15) |
 | silver.dim_merchant | 862 | 0 | one row per version; 16 missing categories imputed: 5 carried forward, 11 `UNKNOWN` (F17, A17) |
 | … where is_current | 700 | −162 | second versions closed with `valid_to` (157 category changes, 5 name-only) |
+| gold.agg_merchant_monthly | 13,299 | grain change | 700 merchants × 19 months (dense grid, A13/A25): 11,327 rows with activity, 153 with a category change inside the month, 209 under UNKNOWN; totals reconcile to the facts on 8 measures |
 
 ### fx_rates
 
@@ -111,7 +113,8 @@ normalized (F10); 1 payment is dated after the snapshot and is kept for gold to 
 | 13 (`a81377a`) | `int_payment_classified`, `fct_payment`, 3 singular tests | 107,554 effective payments; 1,291 reversal rows void exactly 1,291 payments; legacy closed on Bogotá time, core opened on UTC midnight (F18); 1 payment after the snapshot | the "5 double reversals" of raw profiling were reversal rows delivered in two formats (F3) | A9 by set membership, unaffected; F11 reworded; cutover test | binder error: a test referenced a CTE column that was not projected; one-line fix | evidence/payments_effective.md |
 | 13b (`f8e26ee`) | `DATA_JOURNEY.md`, `dq_15_row_count_funnel` | 30 funnel rows; every delta maps to a finding or assumption; FX calendar 1,200 rows of which 848 published | — | row-level accounting maintained at every step | none | evidence/row_count_funnel.md |
 | 14 (`04c92bb`) | `int_payment_allocation`, `fct_installment_status`, 4 singular tests | 114,347 allocation pairs, 0 unallocated money; 99,542 / 245 / 30,510 installments settled / partial / unpaid as of the snapshot; FPD30 8.8796 % global and 7.7922 % for 2026-01; preview PAR30 20.5008 % on 2,069,175.39 USD outstanding | payments arrive at loan level; FIFO by interval overlap reproduces the README rule without recursion | A11, A12, A20–A23; full-history allocation, as-of cut in the fact | a leftover placeholder line in the fact's select list was removed before the first build | evidence/fifo_and_delinquency.md |
-| 15 (*pending*) | `dm_loan_delinquency_snapshot` (first gold model), 2 singular tests | 27,955 loans: 18,890 settled, 6,208 current, 2,857 delinquent; outstanding 2,069,175.39 USD; PAR30 20.5008 %; sensitivities move PAR30 by < 0.1 pp; PAR30 77.88 % on 2025 loans vs 6.43 % on 2026 loans | a gold consistency test failed on 164 loans whose only unpaid installment was due exactly on the snapshot date: "overdue" had been written with ≤ while DPD counts days after the due date | A24 overdue = strictly past due; A11 gross balance, A12 snapshot rate, alternatives published as columns | AI 3.7: definitional boundary caught by a cross-model test | evidence/delinquency_snapshot.md |
+| 15 (`c487dd6`) | `dm_loan_delinquency_snapshot` (first gold model), 2 singular tests | 27,955 loans: 18,890 settled, 6,208 current, 2,857 delinquent; outstanding 2,069,175.39 USD; PAR30 20.5008 %; sensitivities move PAR30 by < 0.1 pp; PAR30 77.88 % on 2025 loans vs 6.43 % on 2026 loans | a gold consistency test failed on 164 loans whose only unpaid installment was due exactly on the snapshot date: "overdue" had been written with ≤ while DPD counts days after the due date | A24 overdue = strictly past due; A11 gross balance, A12 snapshot rate, alternatives published as columns | AI 3.7: definitional boundary caught by a cross-model test | evidence/delinquency_snapshot.md |
+| 16 (*pending*) | `int_loan_month_end_status`, `agg_merchant_monthly`, 2 singular tests | 264,143 loan-months; 13,299 merchant-months; every business question reproduced from the aggregate; PAR30 rises monotonically 0 % → 20.5 % (no write-offs); FPD30 stable 7.8–9.6 % by cohort; top 5 merchants = 39.63 % of GMV, 1607 alone 23.49 %; without 1607 FPD30 8.64 % and PAR30 20.21 % | PAR30 is a stock, FPD30 a cohort; grain merchant × month needs one category per row | A13 month-end PAR30 with cohort variant as secondary column; A25 category at month end with change flag | category-change flag over-counted 14 first-month rows (NULL compared with `is distinct from`); fixed, 153 remain | evidence/merchant_monthly.md |
 
 ---
 
