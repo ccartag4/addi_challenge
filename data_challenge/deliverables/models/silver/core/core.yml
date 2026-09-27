@@ -135,3 +135,69 @@ models:
       - dbt_utils.expression_is_true:
           arguments: {expression: "is_current = (version_number = n_versions)"}
           config: {meta: {dq_dimension: consistency}}
+
+  - name: dim_customer
+    description: >
+      Grain: one row per real person, identified by document_number (A1). Attributes come from
+      the person's most recently created customer record (A18). n_customer_ids and the
+      has_* flags describe the collapse from customer_ids to people (F13): 907 redundant ids,
+      346 people with ids in two countries, 886 with conflicting birth years. city is the
+      canonical name from the city_canonical seed.
+    columns:
+      - name: person_sk
+        description: Surrogate key of the person (hash of document_number).
+        data_tests:
+          - unique: {config: {meta: {dq_dimension: uniqueness}}}
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+      - name: document_number
+        data_tests:
+          - unique: {config: {meta: {dq_dimension: uniqueness}}}
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+      - name: latest_customer_id
+        data_tests:
+          - unique: {config: {meta: {dq_dimension: uniqueness}}}
+          - relationships:
+              arguments: {to: ref('stg_customers'), field: customer_id}
+              config: {meta: {dq_dimension: integrity}}
+      - name: country
+        data_tests:
+          - accepted_values:
+              arguments: {values: ['CO', 'BR']}
+              config: {meta: {dq_dimension: validity}}
+      - name: city_key
+        description: Every key must exist in the seed; a new spelling fails this test.
+        data_tests:
+          - relationships:
+              arguments: {to: ref('city_canonical'), field: city_key}
+              config: {meta: {dq_dimension: integrity}}
+      - name: n_customer_ids
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments: {min_value: 1}
+              config: {meta: {dq_dimension: validity}}
+    data_tests:
+      - dbt_utils.expression_is_true:
+          arguments: {expression: "has_duplicate_ids = (n_customer_ids > 1)"}
+          config: {meta: {dq_dimension: consistency}}
+      - dbt_utils.expression_is_true:
+          arguments: {expression: "first_created_date <= last_created_date"}
+          config: {meta: {dq_dimension: timeliness}}
+
+  - name: bridge_customer_person
+    description: >
+      Grain: one row per customer_id, mapped to its person_sk. Facts keep the source
+      customer_id; person-level analysis joins through this bridge.
+    columns:
+      - name: customer_id
+        data_tests:
+          - unique: {config: {meta: {dq_dimension: uniqueness}}}
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+          - relationships:
+              arguments: {to: ref('stg_customers'), field: customer_id}
+              config: {meta: {dq_dimension: integrity}}
+      - name: person_sk
+        data_tests:
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+          - relationships:
+              arguments: {to: ref('dim_customer'), field: person_sk}
+              config: {meta: {dq_dimension: integrity}}

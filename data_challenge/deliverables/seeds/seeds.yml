@@ -1,0 +1,23 @@
+version: 2
+
+seeds:
+  - name: city_canonical
+    description: >
+      Reference mapping from the alphanumeric city key produced by normalize_key() to a
+      canonical display name (F14). 14 raw spellings collapse to 10 keys and 9 cities
+      (BOGOTA and BOGOTADC are both Bogotá D.C.). Maintained by hand; new keys surface through
+      the relationships test on dim_customer.city_key.
+    config:
+      schema: silver
+      column_types:
+        city_key: varchar
+        city_name: varchar
+        city_country: varchar
+    columns:
+      - name: city_key
+        data_tests:
+          - unique: {config: {meta: {dq_dimension: uniqueness}}}
+          - not_null: {config: {meta: {dq_dimension: completeness}}}
+      - name: city_name
+        data_tests:
+          - not_null: {config: {meta: {dq_dimension: completeness}}}

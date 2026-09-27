@@ -572,4 +572,55 @@ dimension. Logged as AI error 3.6 and finding F17; `dq_08` now reports NULLs per
 **DMBOK dimension:** consistency (SCD2 integrity tests), completeness (F17), integrity
 (point-in-time coverage test).
 
+**Commit:** `fc3eb49` feat(silver): add SCD2 dim_merchant with category gap handling and
+point-in-time tests
+
+---
+
+## Step 11 — dim_customer (person grain) and bridge_customer_person  (2026-09-27)
+
+**Goal:** one row per real person (A1) with the collapse from customer_ids fully auditable,
+plus a bridge so facts keep their source customer_id and still roll up to people.
+
+**Files:** `models/silver/core/dim_customer.sql`, `models/silver/core/bridge_customer_person.sql`,
+`core.yml` (two new blocks), `seeds/city_canonical.csv` + `seeds/seeds.yml`, singular tests
+`assert_bridge_covers_every_customer_id` and `assert_person_counts_reconcile`,
+`analyses/profiling/dq_12_customer_identity.sql`.
+
+**Command(s):**
+```powershell
+dbt build                                   # seeds + models + tests, whole project
+dbt compile --select dq_12_customer_identity
+python scripts/run_analyses.py --pattern "dq_12*" --out evidence/customer_identity.md --title "Customer identity — customer_ids vs real people"
+```
+
+**Result (validated from a clean `target` in a scratch copy, then reproduced here):**
+
+| Measure | Value |
+|---|---|
+| customer_ids / real people / redundant ids (Q7) | 30,000 / 29,093 / 907 |
+| Max customer_ids per person | 2 |
+| People whose ids span two countries | 346 |
+| People whose ids carry different birth years | 884 |
+| Alternative identity document + country: people / redundant | 29,439 / 561 |
+| People by canonical city | 9 cities, Bogotá D.C. largest with 7,760 |
+| City keys outside the seed | 0 |
+
+Full project build: 19 models, 1 seed, 106 tests → 125 pass, 1 warn (known A4 residue).
+Both reconciliation tests pass with 0 rows.
+
+**Key decisions:**
+- Golden record = most recently created customer record (A18); everything older stays
+  reachable via the bridge and the `customer_ids` list, so the collapse destroys nothing.
+- Cross-country and birth-year conflicts are *flags*, not filters. The dictionary's identity
+  rule is followed, and the alternative count is published next to it in Q7 rather than
+  silently chosen.
+- Canonical city names live in a seed, not in a CASE expression: reviewable as data, and a new
+  spelling fails the `relationships` test instead of leaking through.
+- Facts will keep `customer_id`; `bridge_customer_person` provides the person roll-up. This
+  avoids rewriting keys inside facts and keeps every fact row traceable to its source record.
+
+**DMBOK dimension:** uniqueness (person grain), integrity (bridge coverage), consistency
+(count reconciliation), validity (city seed).
+
 **Commit:** *(filled after commit)*
