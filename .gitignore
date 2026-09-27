@@ -1,0 +1,17 @@
+﻿# Python
+.venv/
+__pycache__/
+*.pyc
+
+# dbt
+target/
+dbt_packages/
+logs/
+*.duckdb
+*.duckdb.wal
+
+# OS / editors
+.DS_Store
+__MACOSX/
+Thumbs.db
+.vscode/
