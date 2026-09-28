@@ -1,6 +1,6 @@
 # Evaluation report — Lumo contact triage
 
-Generated 2026-09-28T00:41:25Z by `python -m lumo_triage eval`. Gold set: 90 messages (90 reviewed by a person, 0 still on the assistant's pre-label). Predictions are the committed `output/triage_results.jsonl`.
+Generated 2026-09-28T01:14:21Z by `python -m lumo_triage eval`. Gold set: 90 messages (90 reviewed by a person, 0 still on the assistant's pre-label). Predictions are the committed `output/triage_results.jsonl`.
 
 ## Headline
 

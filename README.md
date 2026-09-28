@@ -5,10 +5,30 @@ Submission for the two challenges described in `AI_amplifier_Technical_Assessmen
 | Challenge | Folder | Status | Start here |
 |---|---|---|---|
 | Data challenge — lending warehouse (dbt on DuckDB) | `data_challenge/deliverables/` | complete | [`README.md`](data_challenge/deliverables/README.md) → run in three commands · [`RESULTS.md`](data_challenge/deliverables/RESULTS.md) → the seven answers · [`ARCHITECTURE.md`](data_challenge/deliverables/ARCHITECTURE.md) → diagrams and requirement map |
-| AI challenge — contact triage and reply drafting | `ai_challenge_contact_triage/deliverables/` | in progress | — |
+| AI challenge — contact triage and reply drafting | `ai_challenge_contact_triage/deliverables/` | complete | [`README.md`](ai_challenge_contact_triage/deliverables/README.md) → one command (`run.ps1` / `run.sh`, no key needed) · [`output/batch_summary.md`](ai_challenge_contact_triage/deliverables/output/batch_summary.md) → what the batch contains · [`HOW_I_WORKED.md`](ai_challenge_contact_triage/deliverables/HOW_I_WORKED.md) → required write-up · [`EVALUATION.md`](ai_challenge_contact_triage/deliverables/EVALUATION.md) → human-reviewed measurements |
 
 The original challenge materials (data, READMEs, taxonomy, knowledge base) are unchanged; all
 work lives under each challenge's `deliverables/` folder, as requested.
+
+## AI challenge in one screen
+
+- **What:** one message in, a verifiable record out: contact reason (taxonomy v2, 25 reasons),
+  priority P0–P4 with SLA, verbatim-verified entities, action and queue, and a Spanish reply
+  only when the policy allows it, grounded in cited knowledge-base sections and checked by
+  code. Claude Opus 5 classifies and drafts; rules, a YAML routing policy and an eight-check
+  verifier decide and guard; a batch summary is computed from the records.
+- **Submitted run:** 340 messages, 278 with a reply ready to send (81.8 %), 195 cases opened
+  for a person, 54 messages touching a named knowledge-base gap, 4 drafts rejected by the
+  verifier, 0 unclassified; USD 7.73 of model calls, all committed under `cache/` so the output
+  reproduces byte for byte without a key.
+- **Measured:** on a 90-message gold set reviewed by hand, primary reason 85/90 exact (89/90
+  within the primary+secondary set), priority 100 % within one level, action 76/90 with one
+  unsafe case; rubric judge 54/57 drafts and 19/20 agreement with the human review; 10/10
+  adversarial fixtures; 30/30 stable on a live re-run; Claude Haiku 4.5 compared at one seventh
+  of the cost with its misses listed.
+- **Write-ups:** `HOW_I_WORKED.md` (tools, validation, ten cases where the AI was wrong, what
+  to improve), `DESIGN.md`, `TAXONOMY.md`, `EVALUATION.md`, `IMPLEMENTATION_PLAN.md` (decision
+  log D1–D13), `WORKLOG.md` (steps 00–07 with commands, incidents and commits).
 
 ## Data challenge in one screen
 

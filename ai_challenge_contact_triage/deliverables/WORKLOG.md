@@ -446,4 +446,36 @@ recorded as a follow-up rather than applied after seeing the gold set. Judge-hum
 the reviewer accepted all 20 drafts, the judge rejected one of them (MSG-130) for naming an app
 section that no cited policy section mentions. Full reading in `EVALUATION.md`.
 
+**Incident:** after the review, `tests/test_eval.py` failed: it asserted at least two `ruido`
+messages in the gold set, a property of the pre-labels that the reviewer's correction of
+MSG-119 removed. The test now checks what a correction cannot change (90 unique ids, valid
+labels, at least 20 reasons present, fraud present, the set either fully reviewed or untouched).
+A test must not encode the labeller's opinion.
+
+**Commits:** `0ecfa34`, `9ce4c86` (harness, gold scaffolding, fixtures, known gaps),
+`f2dfd98` docs(ai): human-reviewed gold set, final evaluation report and labelling guide; the
+test fix ships with step 7.
+
+---
+
+## Step 07 — Design document, HOW_I_WORKED, final checks  (2026-09-28)
+
+**Goal:** close the documentation set and prove once more that the committed output is what the
+single command produces.
+
+**Files:** `DESIGN.md` (pipeline, record, policy-as-data, routing semantics, grounding and
+verification, prompt versions, caching and replay, failure handling, scale and cost at 10,000
+messages a day, security notes), `HOW_I_WORKED.md` §1, §2 and §4 completed (§3 has ten cases),
+`IMPLEMENTATION_PLAN.md` D12 updated with measured costs and D13 added (evaluation choices),
+`tests/test_eval.py` (the gold-set test no longer encodes the labeller's opinion).
+
+**Command(s):**
+```powershell
+python -m pytest -q                     # 161 passed, 1 skipped (live, opt-in)
+.\run.ps1 --mode offline                # full reproduction without a key: 0 live calls, USD 0.00
+python -m lumo_triage eval --compare-model claude-haiku-4-5
+```
+
+**Result:** *(filled after David's final run)*
+
 **Commit:** *(filled after commit)*

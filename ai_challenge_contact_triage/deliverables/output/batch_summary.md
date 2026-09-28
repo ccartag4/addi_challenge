@@ -1,6 +1,6 @@
 # Batch summary — Lumo contact triage
 
-Generated 2026-09-27T21:46:53Z by pipeline `0.4.0 (classify-v1, draft-v2)`, model `claude-opus-5`. Computed from `triage_results.jsonl` (340 messages); nothing in this file was written by the model.
+Generated 2026-09-28T01:14:19Z by pipeline `0.4.0 (classify-v1, draft-v2)`, model `claude-opus-5`. Computed from `triage_results.jsonl` (340 messages); nothing in this file was written by the model.
 
 ## Headline
 

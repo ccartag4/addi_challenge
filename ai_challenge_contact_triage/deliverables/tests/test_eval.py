@@ -38,7 +38,10 @@ def test_gold_set_loads_and_uses_only_known_labels():
     gold = ev.load_gold()
     assert len(gold) == 90 and len({g.id for g in gold}) == 90
     assert all(g.reason in REASON_IDS and g.priority in {"P0", "P1", "P2", "P3", "P4"} for g in gold)
-    assert sum(1 for g in gold if g.reason == "fraude_seguridad") >= 2 and sum(1 for g in gold if g.reason == "ruido") >= 2
+    # properties of the selection, not of the labels: a human correction may move a message
+    # between reasons, so only the breadth of the set is asserted here
+    assert len({g.reason for g in gold}) >= 20 and sum(1 for g in gold if g.reason == "fraude_seguridad") >= 2
+    assert all(g.reviewed for g in gold) or sum(1 for g in gold if g.reviewed) == 0   # either fully reviewed or untouched
 
 
 def test_adversarial_fixtures_are_well_formed():
