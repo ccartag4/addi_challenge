@@ -17,10 +17,10 @@ work lives under each challenge's `deliverables/` folder, as requested.
   only when the policy allows it, grounded in cited knowledge-base sections and checked by
   code. Claude Opus 5 classifies and drafts; rules, a YAML routing policy and an eight-check
   verifier decide and guard; a batch summary is computed from the records.
-- **Submitted run:** 340 messages, 278 with a reply ready to send (81.8 %), 195 cases opened
-  for a person, 54 messages touching a named knowledge-base gap, 4 drafts rejected by the
-  verifier, 0 unclassified; USD 7.73 of model calls, all committed under `cache/` so the output
-  reproduces byte for byte without a key.
+- **Submitted run:** 340 messages, 278 with a reply ready to send (81.8 %), 202 cases opened
+  for a person (152 of them also answered automatically), 61 messages touching a named
+  knowledge-base gap, 4 drafts rejected by the verifier, 0 unclassified; USD 7.73 of model
+  calls, all committed under `cache/` so the output reproduces byte for byte without a key.
 - **Measured:** on a 90-message gold set reviewed by hand, primary reason 85/90 exact (89/90
   within the primary+secondary set), priority 100 % within one level, action 76/90 with one
   unsafe case; rubric judge 54/57 drafts and 19/20 agreement with the human review; 10/10

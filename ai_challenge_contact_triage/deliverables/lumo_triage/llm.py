@@ -267,14 +267,19 @@ class LLMClient:
             return parsed, result
         raise LLMOutputInvalid(f"{item_id}: {last_error} (2 attempts).")
 
-    def prune_untouched(self) -> list[Path]:
-        """Delete cache files of this model that this client neither read nor wrote: responses
-        to prompts that no longer exist (an earlier prompt version). Returns what was removed."""
+    def prune_untouched(self, item_ids: Optional[set[str]] = None) -> list[Path]:
+        """Delete stale cache files of this model: responses this client neither read nor
+        wrote, for the items it processed (an earlier prompt version of the same message).
+        Files of items outside `item_ids` are never touched, so the evaluation's fixtures
+        and any other batch keep their responses. Returns what was removed."""
         model_dir = self.cfg.cache_dir / _safe(self.cfg.model)
         removed: list[Path] = []
         if not model_dir.exists():
             return removed
         for path in sorted(model_dir.rglob("*.json")):
+            item = path.name.split("__", 1)[0]
+            if item_ids is not None and item not in item_ids:
+                continue
             if path not in self.touched:
                 path.unlink()
                 removed.append(path)

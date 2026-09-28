@@ -18,8 +18,9 @@ From this folder (`ai_challenge_contact_triage/deliverables/`):
 ./run.sh             # macOS / Linux
 ```
 
-The script creates `.venv` if missing, installs the pinned dependencies and processes
-`../data/messages.jsonl`. It writes:
+If PowerShell refuses to run scripts on your machine, use
+`powershell -ExecutionPolicy Bypass -File run.ps1`. The script creates `.venv` if missing,
+installs the pinned dependencies and processes `../data/messages.jsonl`. It writes:
 
 | File | Content |
 |---|---|

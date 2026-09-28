@@ -231,6 +231,19 @@ def test_live_mode_ignores_the_cache_for_reads_but_still_writes(tmp_path):
     assert len(fake.calls) == 2 and len(list((tmp_path / "cache").rglob("*.json"))) == 1
 
 
+def test_prune_removes_only_stale_files_of_the_items_in_the_run(tmp_path):
+    text = sample_classification().model_dump_json()
+    client, _ = make_client(tmp_path, [body(text), body(text), body(text)])
+    client.structured_call(label="classify", item_id="MSG-003", system="OLD", user="U", output_type=Classification)
+    client.structured_call(label="classify", item_id="ADV-01", system="S", user="U", output_type=Classification)
+    fresh = LLMClient(client.cfg, client=FakeClient([body(text)]))                 # a new run with a new prompt
+    fresh.structured_call(label="classify", item_id="MSG-003", system="NEW", user="U", output_type=Classification)
+    removed = fresh.prune_untouched({"MSG-003"})
+    names = sorted(p.name.split("__")[0] for p in (tmp_path / "cache").rglob("*.json"))
+    assert len(removed) == 1 and removed[0].name.startswith("MSG-003__")           # the old prompt's response
+    assert names == ["ADV-01", "MSG-003"]                                          # the fixture's response survives
+
+
 def test_trace_records_usage_but_never_the_text(tmp_path):
     client, _ = make_client(tmp_path, [body(sample_classification().model_dump_json())])
     client.structured_call(label="classify", item_id="MSG-003", system="S", user="SECRET-CUSTOMER-TEXT", output_type=Classification)

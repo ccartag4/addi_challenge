@@ -476,6 +476,26 @@ python -m pytest -q                     # 161 passed, 1 skipped (live, opt-in)
 python -m lumo_triage eval --compare-model claude-haiku-4-5
 ```
 
-**Result:** *(filled after David's final run)*
+**Result (final state of the repository, verified on the committed files):**
 
-**Commit:** *(filled after commit)*
+| Check | Evidence |
+|---|---|
+| Tests | 162 passed, 1 skipped (the opt-in live smoke test) |
+| Offline reproduction | `output/batch_summary.json`: 0 live calls, 568 responses replayed, USD 0.00 spent, USD 7.73 recorded |
+| Final figures | 340 messages; 278 replies ready (81.8 %: 234 verified model drafts + 44 templates); 202 cases for a person (152 also answered automatically, 50 need a person's answer); 12 closed; 61 messages with a named knowledge-base gap; 4 drafts rejected by the verifier; 0 unclassified |
+| Evaluation | 90/90 gold rows and 20/20 drafts reviewed by a person; figures in `EVALUATION.md` §3 |
+| Repository hygiene | working tree clean, nothing unpushed, `.env` and the personal study notes are not tracked |
+
+The figures of steps 04 and 05 above (195 cases, 54 gaps) are the state before the known-gap
+detector of step 06; the final ones are in this table and in `output/batch_summary.md`.
+
+**Late fix:** `run --prune-cache` deleted every cached response the run had not used, which
+would also have removed the evaluation's fixture responses; it now only removes stale responses
+of the messages in the run (test added).
+
+**Open items, none blocking:** `run.sh` has been syntax-checked but not executed on macOS or
+Linux (no such machine at hand; Docker was not running); a clean-clone run on Windows is the
+author's last manual check before sharing the link.
+
+**Commit:** `a990b6f` docs(ai): add design document, complete HOW_I_WORKED, final
+reproducibility run; the prune fix and this entry ship in a follow-up commit.

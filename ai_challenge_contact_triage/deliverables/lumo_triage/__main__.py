@@ -131,8 +131,8 @@ def cmd_run(args: argparse.Namespace) -> int:
     _write_summary(summary, records, out.parent)
 
     if args.prune_cache:
-        removed = llm.prune_untouched()
-        print(f"pruned {len(removed)} cache files not used by this run")
+        removed = llm.prune_untouched({m.id for m in messages})
+        print(f"pruned {len(removed)} stale cache files of the messages in this run")
     return 0
 
 
