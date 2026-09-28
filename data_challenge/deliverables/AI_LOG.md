@@ -191,8 +191,6 @@ final reading of every evidence file before each commit.
   clone" must be qualified by OS and Python version, and a claim about other platforms needs a
   check that targets those platforms.
 
-### 3.9 *(to be completed)*
-
 ---
 
 ## 4. How I verified the final numbers in `RESULTS.md`
@@ -209,7 +207,7 @@ Five layers, from cheapest to strongest. Every figure in `RESULTS.md` passed all
    → 60,000 applications → 59,059 valid; 28,075 loans → 27,955; 112,339 payment rows → 107,554
    effective; 30,000 customer ids → 29,093 people. No row disappears without a finding or
    assumption number attached.
-3. **Contract tests between layers.** 244 tests, 16 of them singular business tests, run on
+3. **Contract tests between layers.** 244 tests, 19 of them singular business tests, run on
    every build. The ones that guard the published figures directly:
    `assert_payment_counts_reconcile` (A9 arithmetic), the four FIFO conservation tests
    (money in = money allocated, per payment, per installment, per loan, in FIFO order),

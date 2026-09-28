@@ -364,7 +364,8 @@ integrity, timeliness.
 pending) and findings (F1–F16) with DMBOK dimension, treatment and the test that will enforce
 each one.
 
-**Commit:** *(filled after commit)*
+**Commit:** `b0f71eb` docs(data): write assumptions A1-A10 and findings F1-F16 from profiling
+evidence
 
 ---
 
@@ -1165,4 +1166,33 @@ Logged as AI error 3.8 (the freeze was presented as a portability guarantee) and
 `DATA_JOURNEY.md`. The README now states exactly which combinations were executed and which
 were only resolved. The check folder `C:\dev\_addi_py311_check` can be deleted.
 
-**Commit:** *(filled after commit)*
+**Commit:** `f52f524` docs(data): add architecture diagrams and root README; split requirements into
+portable pins and a py3.13 lock; log cross-platform validation
+
+---
+
+## Step 19c — Documentation consistency check before submission  (2026-09-28)
+
+**Goal:** every count quoted in the documents must match the project that produces it.
+
+**Method:** the documents were read end to end while writing a study guide, and every figure
+was compared with its source: the dbt manifest (`evidence/dbt_artifacts/manifest.json`), the
+generated `DATA_QUALITY.md`, the `tests/` folder and `AI_LOG.md` itself.
+
+**Result:**
+
+| Found | Source of truth | Fixed in |
+|---|---|---|
+| "16 singular / business tests" | 19 singular tests: manifest, `DATA_QUALITY.md` §3 and the 19 files in `tests/` all agree | `README.md` (data and repository root), `ARCHITECTURE.md` (twice), `AI_LOG.md` §4, `IMPLEMENTATION_PLAN.md` §7 |
+| "seven cases where the AI was wrong" | 8 cases in `AI_LOG.md` §3 (3.8 was added at step 19b, after those sentences were written) | repository-root `README.md`, `RESULTS.md`, `ARCHITECTURE.md` |
+| an empty placeholder heading for a case 3.9 in `AI_LOG.md` | not a case | removed |
+| two worklog entries and one journey row still waiting for their commit hash | `git log` | steps 06b (`b0f71eb`) and 19b (`f52f524`) here; step 19b in `DATA_JOURNEY.md` |
+
+No model, test or figure changed; `DATA_QUALITY.md`, being generated, was already right.
+
+**Lesson:** a count typed by hand in several documents drifts as the project grows; the generated
+matrix never did. Counts in prose should be checked against the generated artefacts before
+submission. Logged as E12 in `DATA_JOURNEY.md`.
+
+**Commit:** this entry ships in the commit `docs(data): fix singular-test and AI-case counts, remove
+empty AI log heading, fill missing commit hashes`.

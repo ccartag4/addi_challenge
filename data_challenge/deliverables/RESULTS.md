@@ -193,6 +193,6 @@ over people) is enforced by `assert_person_counts_reconcile`.
 | `ASSUMPTIONS.md` | A1–A25 business definitions with rationale and alternatives; F1–F18 data quality findings with DMBOK dimension, treatment and test |
 | `DATA_JOURNEY.md` | Row-count funnel per extract with the reason for every delta; one row per build step; error ledger; conclusions revised along the way |
 | `DATA_QUALITY.md` | DMBOK matrix generated from the manifest and the run results: 244 tests across 7 dimensions, 30 of 30 models covered |
-| `AI_LOG.md` | What was delegated to the AI assistant and what was not, decisive prompts, seven cases where it was wrong, and how the numbers were verified |
+| `AI_LOG.md` | What was delegated to the AI assistant and what was not, decisive prompts, eight cases where it was wrong, and how the numbers were verified |
 | `WORKLOG.md` | Step-by-step trace with commands, results and commits |
 | `evidence/` | Outputs of every profiling and result query, the cross-check, the dbt artefacts and the build log |

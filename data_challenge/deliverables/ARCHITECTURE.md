@@ -167,7 +167,7 @@ the assistant was the cause, in `AI_LOG.md` section 3.
 ```mermaid
 flowchart TD
     L1["1. Day-one pandas anchors,<br/>written before any model existed"] --> L2["2. Row-count funnel (dq_15):<br/>every delta between layers has a finding or assumption number"]
-    L2 --> L3["3. 244 dbt tests, 16 of them business tests:<br/>reconciliations across layers on every build"]
+    L2 --> L3["3. 244 dbt tests, 19 of them business tests:<br/>reconciliations across layers on every build"]
     L3 --> L4["4. Open definitions published with their alternative<br/>(A11, A12, A13, Q3 UTC, Q7 document+country)"]
     L4 --> L5["5. Independent pandas recomputation from the raw CSVs:<br/>own parser, own CDC resolution, FIFO as a loop in cents<br/>24 of 24 checks, DPD and balance equal on all 27,955 loans"]
     L5 --> R["RESULTS.md"]
@@ -184,9 +184,9 @@ flowchart TD
 | 4.2 Approval rate, FPD30, PAR30, loan DPD | `fct_application`, `fct_installment_status`, `dm_loan_delinquency_snapshot`, A23, A24 |
 | 4.2 FIFO payment allocation | `int_payment_allocation`, A21, four conservation tests |
 | 4.3 Seven questions with figures and the producing model or query | `RESULTS.md`, `analyses/results/`, `evidence/results.md` |
-| 4.4 Tests: grain keys, referential integrity, ranges, accepted values, at least two business tests | 244 tests, 16 singular, `DATA_QUALITY.md` |
+| 4.4 Tests: grain keys, referential integrity, ranges, accepted values, at least two business tests | 244 tests, 19 singular, `DATA_QUALITY.md` |
 | 4.4 Documentation of gold models and non-trivial columns; grain in every description | `models/*/*.yml`, `dbt docs generate` |
 | 4.5 Nice to have | exposures done; incremental, late arrivals, snapshot, contracts described in `ASSUMPTIONS.md` §C |
 | 5 Deliverables layout | this folder |
-| 6 AI log | `AI_LOG.md` (4 sections, 7 error cases) |
+| 6 AI log | `AI_LOG.md` (4 sections, 8 error cases) |
 | Top-level: reproducible commands, verifiable without re-running | `README.md`, `evidence/` (queries, cross-check, dbt artefacts, build log) |

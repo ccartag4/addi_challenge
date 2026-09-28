@@ -64,7 +64,7 @@ models/
                           fct_application, fct_loan, fct_payment, fct_installment_status
   gold/                   dm_loan_delinquency_snapshot, agg_merchant_monthly (+ 2 exposures)
 macros/                   parse_utc_ts, business time (Bogotá), text helpers, schema naming
-tests/                    16 singular business tests (reconciliations, FIFO conservation, SCD2)
+tests/                    19 singular business tests (reconciliations, FIFO conservation, SCD2)
 seeds/                    canonical city names
 analyses/profiling/       dq_01 … dq_18: the profiling and verification queries, in build order
 analyses/results/         q01 … q07: the official result queries

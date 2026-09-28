@@ -191,7 +191,7 @@ Written after step 19. The plan above is left as it was on 2026-09-26 so deviati
 | Phase 5 results, cross-check, write-ups | ✅ steps 18–19 | cross-check compares loan by loan, not only totals |
 | Phase 6 optionals | partly | exposures done; incremental, snapshot, contracts and unit tests described in `ASSUMPTIONS.md` §C |
 
-Final state: 29 models, 1 seed, 244 tests (16 singular), 2 exposures; 273 pass, 1 expected warn;
+Final state: 29 models, 1 seed, 244 tests (19 singular), 2 exposures; 273 pass, 1 expected warn;
 7 answers cross-checked 24/24 against an independent pandas recomputation.
 
 ## 8. Definition of done
