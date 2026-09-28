@@ -1,24 +1,25 @@
 # Evaluation report — Lumo contact triage
 
-Generated 2026-09-27T23:23:06Z by `python -m lumo_triage eval`. Gold set: 90 messages (0 reviewed by a person, 90 still on the assistant's pre-label). Predictions are the committed `output/triage_results.jsonl`.
+Generated 2026-09-28T00:41:25Z by `python -m lumo_triage eval`. Gold set: 90 messages (90 reviewed by a person, 0 still on the assistant's pre-label). Predictions are the committed `output/triage_results.jsonl`.
 
 ## Headline
 
 | Metric | Value |
 |---|---:|
-| Primary reason, exact | 86/90 (95.6 %) |
-| Primary reason, within the gold primary+secondary set | 90/90 (100.0 %) |
-| Primary reason, macro-F1 over classes present | 0.949 |
+| Primary reason, exact | 85/90 (94.4 %) |
+| Primary reason, within the gold primary+secondary set | 89/90 (98.9 %) |
+| Primary reason, macro-F1 over classes present | 0.928 |
 | Priority, exact / within ±1 | 91.1 % / 100.0 % (mean distance 0.09 levels) |
 | Priority direction when different | more urgent than gold 4, less urgent 4 |
-| Action, exact | 77/90 (85.6 %) |
+| Action, exact | 76/90 (84.4 %) |
 | Action, unsafe (gold wants a person, pipeline answers alone) | 1 |
-| Action, conservative (gold allows an answer, pipeline routes) | 4 |
+| Action, conservative (gold allows an answer, pipeline routes) | 5 |
 | Drafts in the gold set: verifier pass rate | 57/61 |
 | Judge (claude-sonnet-5): overall ok | 54/57 (94.7 %) |
+| Judge vs human on the same drafts | agree 19/20; human ok rate 100.0 % |
 | Adversarial fixtures passed | 10/10 |
 | Classification stability (live re-run) | 30/30 same primary reason |
-| Comparison `claude-haiku-4-5`: primary reason exact / lenient | 96.7 % / 97.8 % (USD 0.0020 per message, p50 3,484 ms) |
+| Comparison `claude-haiku-4-5`: primary reason exact / lenient | 95.6 % / 96.7 % (USD 0.0020 per message, p50 3,484 ms) |
 
 ## Where the pipeline and the gold labels differ
 
@@ -29,6 +30,7 @@ Generated 2026-09-27T23:23:06Z by `python -m lumo_triage eval`. Gold set: 90 mes
 | MSG-020 | refinanciacion_acuerdo → refinanciacion_acuerdo | P2 → P2 | auto_reply_and_route → route_to_human | holaaa quiero refinanciar, debo 3 cuotas y no puedo pagarlas todas juntas, se puede armar un acuerdo? |
 | MSG-038 | datos_personales → datos_personales | P3 → P2 | auto_reply_and_route → auto_reply | actualice mis datos en la app pero el correo viejo me sigue llegando todo, no me cambio el correo |
 | MSG-039 | certificados_extractos → certificados_extractos | P3 → P3 | auto_reply → route_to_human | Necesito el detalle de los intereses pagados en el 2025 para un tramite. Pueden enviarmelo? |
+| MSG-119 | saludo_incompleto → ruido | P4 → P4 | auto_reply → close_no_reply | asdkjas hola |
 | MSG-130 | queja_reclamo → mora_intereses ✓sec | P2 → P2 | auto_reply_and_route → auto_reply | Buen dia. Tengo una cuota vencida y me estan cobrando intereses que me parecen muy altos, quiero una explicaci… |
 | MSG-176 | pago_no_aplicado → pago_no_aplicado | P1 → P2 | auto_reply_and_route → auto_reply_and_route | estoy super molesto me cobraron dos veces la misma cuota y nadie me devuelve la plata, quiero un reclamo forma… |
 | MSG-217 | metodos_de_pago → metodos_de_pago | P3 → P3 | auto_reply → auto_reply_and_route | buenas donde puedo pagar mi cuota? puedo en efecty o baloto? |
@@ -64,29 +66,31 @@ Generated 2026-09-27T23:23:06Z by `python -m lumo_triage eval`. Gold set: 90 mes
 | `cancelacion` | 3 | 3 | 100.0 % | 100.0 % | 1.00 |
 | `felicitacion_feedback` | 3 | 3 | 100.0 % | 100.0 % | 1.00 |
 | `fuera_de_alcance` | 3 | 3 | 100.0 % | 100.0 % | 1.00 |
+| `saludo_incompleto` | 3 | 2 | 100.0 % | 66.7 % | 0.80 |
 | `intereses_y_cargos` | 2 | 2 | 100.0 % | 100.0 % | 1.00 |
 | `pago_anticipado` | 2 | 2 | 100.0 % | 100.0 % | 1.00 |
-| `ruido` | 2 | 2 | 100.0 % | 100.0 % | 1.00 |
-| `saludo_incompleto` | 2 | 2 | 100.0 % | 100.0 % | 1.00 |
 | `sin_accion` | 2 | 2 | 100.0 % | 100.0 % | 1.00 |
 | `estado_solicitud` | 1 | 1 | 100.0 % | 100.0 % | 1.00 |
 | `informacion_general` | 1 | 2 | 50.0 % | 100.0 % | 0.67 |
 | `mora_intereses` | 1 | 2 | 50.0 % | 100.0 % | 0.67 |
 | `privacidad_habeas_data` | 1 | 1 | 100.0 % | 100.0 % | 1.00 |
+| `ruido` | 1 | 2 | 50.0 % | 100.0 % | 0.67 |
 
-Confusions (gold → pipeline): `queja_reclamo`→`mora_intereses` ×1; `hablar_con_humano`→`informacion_general` ×1; `pago_no_aplicado`→`certificados_extractos` ×1; `no_puede_pagar`→`consulta_saldo_cuotas` ×1.
+Confusions (gold → pipeline): `saludo_incompleto`→`ruido` ×1; `queja_reclamo`→`mora_intereses` ×1; `hablar_con_humano`→`informacion_general` ×1; `pago_no_aplicado`→`certificados_extractos` ×1; `no_puede_pagar`→`consulta_saldo_cuotas` ×1.
 
 ## Priority and action confusions
 
 Priority (gold → pipeline): P1→P2 ×4; P3→P2 ×3; P1→P0 ×1.
 
-Action (gold → pipeline): auto_reply_and_route→auto_reply ×6; auto_reply_and_route→route_to_human ×3; auto_reply→auto_reply_and_route ×2; auto_reply→route_to_human ×1; route_to_human→auto_reply_and_route ×1.
+Action (gold → pipeline): auto_reply_and_route→auto_reply ×6; auto_reply_and_route→route_to_human ×3; auto_reply→auto_reply_and_route ×2; auto_reply→route_to_human ×1; auto_reply→close_no_reply ×1; route_to_human→auto_reply_and_route ×1.
 
 ## Drafts
 
 Gold-set messages with a model draft: 61; passed the verifier: 57; rejected: 4; templates: 12.
 
 Judge `claude-sonnet-5` over 57 drafts (USD 0.1861): grounded 54, answers the request 57, no forbidden promise 57, tone ok 57, overall ok 54.
+
+Calibration against the human review of 20 drafts: agreement 19/20; human ok 20, judge ok on the same 19.
 
 | id | judge issues |
 |---|---|
@@ -117,14 +121,14 @@ Judge `claude-sonnet-5` over 57 drafts (USD 0.1861): grounded 54, answers the re
 
 | Metric | main run | comparison |
 |---|---:|---:|
-| Primary reason exact | 95.6 % | 96.7 % |
-| Primary reason lenient | 100.0 % | 97.8 % |
-| Macro-F1 | 0.949 | 0.953 |
+| Primary reason exact | 94.4 % | 95.6 % |
+| Primary reason lenient | 98.9 % | 96.7 % |
+| Macro-F1 | 0.928 | 0.932 |
 | Cost per classification (USD) | 0.0140 | 0.0020 |
 | Latency p50 (ms) | 5,497 | 3,484 |
 | Cache-read share of prompt tokens | 97.8 % | 97.8 % |
 
-Comparison-model errors against gold: MSG-015 `certificados_extractos`→`pago_anticipado`; MSG-389 `queja_reclamo`→`sin_accion`.
+Comparison-model errors against gold: MSG-015 `certificados_extractos`→`pago_anticipado`; MSG-119 `saludo_incompleto`→`ruido`; MSG-389 `queja_reclamo`→`sin_accion`.
 
 ## Side metrics (gold subset, from the committed run)
 

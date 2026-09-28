@@ -415,7 +415,35 @@ by truncation and clamping in `schema.py` (validators do not change the JSON sch
 committed cache keys are untouched; a new test pins a real cache key to the current prompt and
 schema). The retry-on-invalid-output path stays for genuinely malformed answers.
 
-**Pending:** David's review of the 90 labels and 20 drafts (`gold_note = ok` or corrections),
-then `python -m lumo_triage eval` again (free: all calls cached) and the commit.
+**Reviewer:** `scripts/review_gold.py` shows one message (or draft) at a time in the terminal
+and writes the CSV after every answer: Enter agrees with the pre-label, `r=` / `p=` / `a=` / `s=` /
+`n=` correct it, `x=<issue>` rejects a draft. It avoids spreadsheet encodings and is resumable.
+
+**Intermediate commits (work in progress, before the human review):** `0ecfa34`, `9ce4c86`
+feat(ai): add evaluation harness, gold-set scaffolding, adversarial fixtures and known-gap detection.
+
+**Human review (David, 2026-09-28):** 90 of 90 labels reviewed with the terminal reviewer,
+89 confirmed and 1 corrected (MSG-119 "asdkjas hola" → `saludo_incompleto` / `auto_reply`:
+a greeting deserves the "how can we help" template rather than a silent close); 20 of 20 drafts
+judged sendable. Guide: `evidence/gold/LABELLING_GUIDE.md`.
+
+**Final evaluation (`python -m lumo_triage eval --compare-model claude-haiku-4-5`, everything
+from cache, USD 0):**
+
+```text
+gold=90 reviewed=90
+reason exact=85/90 lenient=89/90 macro_f1=0.928
+priority exact=82/90 within1=90/90  action exact=76/90 unsafe=1 conservative=5
+judge claude-sonnet-5: overall_ok=54/57 cost=$0.1861 human_agree=19/20
+adversarial passed=10/10
+stability: 30/30 same primary reason
+comparison claude-haiku-4-5: exact=95.6% cost/msg=$0.0020
+```
+
+The single correction moved reason exact from 86 to 85, lenient from 90 to 89 and action exact
+from 77 to 76; the tier-0 change it suggests (gibberish plus a greeting → greeting template) is
+recorded as a follow-up rather than applied after seeing the gold set. Judge-human calibration:
+the reviewer accepted all 20 drafts, the judge rejected one of them (MSG-130) for naming an app
+section that no cited policy section mentions. Full reading in `EVALUATION.md`.
 
 **Commit:** *(filled after commit)*

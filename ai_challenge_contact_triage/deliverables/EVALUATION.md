@@ -33,11 +33,15 @@ appears at least twice and the rest follows volume.
 The reference labels are **not** the pipeline's output. The assistant read the 90 messages and
 the policy and wrote reason, secondary reasons, priority, action and a note per message
 (`evidence/gold/prelabels_assistant.json`), without looking at the pipeline's predictions for
-those rows. The human reviewer then confirms (`gold_note = ok`) or corrects the `gold_*` cells;
-`reviewed` in the report counts rows with a confirmation or a correction. Until that column is
-filled the metrics measure agreement between two independent readings of the policy (the
-assistant's and the pipeline's), which is informative but is not human validation; the report
-states the number of reviewed rows on its first line for that reason.
+those rows. The human reviewer (the author) then went through every row with
+`scripts/review_gold.py`, a terminal reviewer that shows one message with its pre-label and
+records `ok` or a correction (`evidence/gold/LABELLING_GUIDE.md` is the protocol). Result:
+90 of 90 rows reviewed, 89 confirmed, 1 corrected (MSG-119, "asdkjas hola": the reviewer
+prefers `saludo_incompleto` with the greeting template over `ruido`, because a recognisable
+greeting deserves a "how can we help" rather than a silent close). The 20 drafts in
+`draft_review.csv` were all judged sendable as they are. One correction in 90 says the two
+readings of the policy agree closely; it also says the review was a confirmation pass rather
+than a blind re-labelling, which is stated in the limitations.
 
 Labelling policy: the primary reason is the request that decides who handles the message; when
 there are two, the one that opens a case or the one the customer wrote first, the other goes to
@@ -48,35 +52,41 @@ follows the policy: `auto_reply` when the knowledge base answers and nobody need
 `auto_reply_and_route` when a case must be opened, `route_to_human` when a person must answer,
 `close_no_reply` for noise and closures.
 
-## 3. Results (2026-09-27, reference = assistant pre-labels, 0 rows reviewed)
+## 3. Results (2026-09-28, human-reviewed gold set, 90 of 90 rows)
 
 | Metric | Value |
 |---|---|
-| Primary reason, exact | 86/90 (95.6 %) |
-| Primary reason, within the gold primary+secondary set | 90/90 |
-| Macro-F1 over the 25 classes present | 0.949 |
-| Priority exact / within ±1 | 82/90 / 90/90; when different: 4 more urgent than gold, 4 less urgent |
-| Action exact | 77/90; unsafe 1; conservative 4; `auto_reply` vs `auto_reply_and_route` 8 |
+| Primary reason, exact | 85/90 (94.4 %) |
+| Primary reason, within the gold primary+secondary set | 89/90 (98.9 %) |
+| Macro-F1 over the 25 classes present | 0.928 |
+| Priority exact / within ±1 | 82/90 / 90/90 (mean distance 0.09 levels); when different: 4 more urgent than gold, 4 less urgent |
+| Action exact | 76/90 (84.4 %); unsafe 1; conservative 5 |
 | Drafts in the gold set | 61 model drafts: 57 passed the verifier, 4 rejected; 12 templates |
 | Judge (`claude-sonnet-5`, 57 drafts, USD 0.19) | grounded 54, answers the request 57, no forbidden promise 57, tone ok 57, overall ok 54 |
+| Judge vs human on the same 20 drafts | agree 19/20; the human accepted all 20, the judge rejected one (MSG-130, see §4) |
 | Adversarial fixtures | 10/10 |
 | Stability (30 messages re-classified live, USD 0.43) | 30/30 same primary reason; mean confidence change 0.005 |
 | `claude-haiku-4-5` as classifier | exact 86/90, lenient 87/90, macro-F1 0.940; USD 0.0020 per message vs 0.0140; p50 3.5 s vs 5.5 s |
 
+Before the review (reference = pre-labels only) the figures were 86/90 exact, 90/90 lenient,
+macro-F1 0.949 and 77/90 actions; the single correction (MSG-119) moved each by one message.
 The per-class table, the confusion pairs, every disagreement with its text and the fixture
-checks are in `evidence/eval_report.md`. The section is regenerated after the human review;
-the numbers above will be replaced by the reviewed ones and the differences noted here.
+checks are in `evidence/eval_report.md`.
 
 ## 4. Error analysis
 
-**Reason (4 exact disagreements, 0 lenient).** All four are two-intent messages where the
+**Reason (5 exact disagreements, 1 lenient).** Four are two-intent messages where the
 pipeline put the other request first: a formal complaint about late interest classified as
 `mora_intereses` (MSG-130), a customer who wants an agent *and* asks for the phone line
 classified as `informacion_general` (MSG-186), a statement request with a pending payment
 classified as `certificados_extractos` (MSG-249), and a hardship message that opens with a
 balance question classified as `consulta_saldo_cuotas` (MSG-298). In every case the gold primary
 appears among the pipeline's secondary reasons. The cost of the wrong order is routing: two of
-the four ended as `auto_reply` where the gold opens a case (Cartera, Pagos).
+the four ended as `auto_reply` where the gold opens a case (Cartera, Pagos). The fifth is the
+reviewer's correction, MSG-119 "asdkjas hola": the tier-0 rule closes gibberish without a
+reply, the reviewer wants the greeting template. It is a one-line change to the rule
+(gibberish plus a greeting token → `saludo_incompleto`); it was left as a follow-up rather
+than applied after seeing the gold set.
 
 **Priority (8 differences, all within one level).** Four are one level *below* the gold on
 "money wrongly taken" cases: two double charges (MSG-012, MSG-176) and two bureau disputes with
@@ -103,8 +113,10 @@ which is true per the knowledge base but was not in the sections cited for those
 name comes from the drafting instructions), and one says a radicado "quedó registrado" without
 giving one. Both are provenance problems rather than false statements; both are cheap to fix in
 a next prompt version (cite the app-navigation section whenever it is used; never claim a case
-number was issued). The human review of 20 drafts calibrates the judge; its agreement rate is
-reported in `evidence/eval_report.md` once the review is in.
+number was issued). Calibration: the human reviewer accepted all 20 drafts of the review set;
+the judge agreed on 19 and rejected MSG-130 for the uncited "Mi crédito" mention. The
+disagreement is the judge being stricter about provenance than a person who knows the app;
+for a production gate that strictness is the right default, and the fix is on the prompt side.
 
 **Adversarial.** Three prompt-injection attempts were flagged and routed to a person with no
 reply; the empty message closed without a model call; English and Portuguese messages were
@@ -143,9 +155,10 @@ classifying and Opus drafting.
 - 90 gold messages: a single flaky case moves a rate by 1.1 points; the noise floor of a
   pass-rate on 90 cases is about ±10 points, so differences of a few points between models are
   not conclusive.
-- One human reviewer, who is also the author; the pre-labels were written by the same assistant
-  that helped design the taxonomy. Independence from the *pipeline* is real; independence from
-  the *design* is not.
+- One human reviewer, who is also the author, working as a confirmation pass over pre-labels
+  (89 confirmed, 1 corrected) rather than labelling blind; the pre-labels were written by the
+  same assistant that helped design the taxonomy. Independence from the *pipeline* is real;
+  independence from the *design* is not, and anchoring on the pre-label is possible.
 - No gold for entities; entity extraction is covered by unit tests on real messages and by the
   verbatim guarantee, not by precision/recall on a labelled set.
 - The judge is a Claude model grading a Claude model; the 20 human verdicts are the only

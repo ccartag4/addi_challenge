@@ -1,91 +1,91 @@
 ﻿id,channel,text,prelabel_primary_reason,prelabel_secondary_reasons,prelabel_priority,prelabel_action,prelabel_note,gold_primary_reason,gold_secondary_reasons,gold_priority,gold_action,gold_note
-MSG-001,whatsapp,"hola, este mes no voy a poder pagar la cuota completa, me quede sin trabajo. hay alguna opcion?",no_puede_pagar,,P1,auto_reply_and_route,"job loss: vulnerable customer, Cartera case",,,,,
-MSG-002,chat,cuanto debo este mes y cuando se vence?,consulta_saldo_cuotas,fecha_de_pago,P3,auto_reply,secondary fecha_de_pago,,,,,
-MSG-008,whatsapp,"necesito cambiar el numero de celular asociado a mi cuenta, ya no uso este",datos_personales,,P3,auto_reply,phone change in the app,,,,,
-MSG-009,email,"Hola, necesito un certificado de que estoy al dia con mi credito, me lo piden para un tramite. A donde lo solicito?",certificados_extractos,,P3,auto_reply,,,,,,
-MSG-012,email,"Me cobraron dos veces la misma cuota este mes, me descontaron doble de la tarjeta. Necesito que me devuelvan el dinero urgente.",pago_no_aplicado,,P1,auto_reply_and_route,double charge = money wrongly taken; Pagos case; no refund promised,,,,,
-MSG-013,chat,"se puede cambiar la fecha de pago? yo cobro el 30 y la cuota me cae el 5, siempre llego justo",fecha_de_pago,,P3,auto_reply,,,,,,
-MSG-014,whatsapp,"buenas quiero saber el estado de mi solicitud de credito que mande hace 4 dias, no me han dicho nada",estado_solicitud,,P3,route_to_human,no policy; onboarding,,,,,
-MSG-015,email,Acabo de pagar la totalidad de mi credito. Cuando me llega el paz y salvo y cuando actualizan mi reporte en las centrales?,certificados_extractos,reporte_centrales,P3,auto_reply,"two questions, both covered; reporte_centrales as secondary is equally acceptable",,,,,
-MSG-019,chat,que pasa si me atraso unos dias en la cuota? cuanto es el interes de mora?,mora_intereses,,P3,auto_reply,,,,,,
-MSG-020,whatsapp,"holaaa quiero refinanciar, debo 3 cuotas y no puedo pagarlas todas juntas, se puede armar un acuerdo?",refinanciacion_acuerdo,,P2,auto_reply_and_route,Cartera case,,,,,
-MSG-021,email,"me llego un correo de ustedes avisando que estoy por ser reportado. ya pague, que hago para que no me reporten?",reporte_centrales,pago_no_aplicado,P1,auto_reply_and_route,"imminent reporting, says already paid",,,,,
-MSG-028,chat,"me robaron el celular, necesito bloquear el acceso a mi cuenta ya mismo por seguridad",fraude_seguridad,,P0,auto_reply_and_route,stolen phone,,,,,
-MSG-038,whatsapp,"actualice mis datos en la app pero el correo viejo me sigue llegando todo, no me cambio el correo",datos_personales,,P3,auto_reply_and_route,policy: old e-mail still receiving -> escalate to support,,,,,
-MSG-039,email,Necesito el detalle de los intereses pagados en el 2025 para un tramite. Pueden enviarmelo?,certificados_extractos,,P3,auto_reply,interest certificate for 2025,,,,,
-MSG-040,chat,"llevo 20 minutos esperando respuesta, hay alguien ahi??",hablar_con_humano,,P2,route_to_human,,,,,,
-MSG-105,chat,"pague ayer por pse y no se ve reflejado en la app, sigue apareciendo q debo. adjunto comprobante",pago_no_aplicado,,P2,auto_reply_and_route,,,,,,
-MSG-106,email,"Hola, por cuales medios puedo pagar mi cuota? puedo pagar en efecty o solo tarjeta?",metodos_de_pago,,P3,auto_reply,,,,,,
-MSG-110,whatsapp,"cambie de numero quiero actualizar mi telefono en la cuenta, el viejo ya no lo tengo",datos_personales,,P3,auto_reply,old phone lost; app path still applies,,,,,
-MSG-113,whatsapp,"veo un cobro en mi cuenta que yo no hice, no reconozco esa compra de 250000",fraude_seguridad,,P0,auto_reply_and_route,unrecognised charge,,,,,
-MSG-114,chat,"quiero poner una queja, llevo 3 dias llamando y nadie me resuelve nada, pesimo servicio",queja_reclamo,,P1,auto_reply_and_route,formal complaint after 3 days of calls (repeat contact),,,,,
-MSG-115,email,"Solo queria felicitarlos, la app es muy facil de usar y me aprobaron rapidisimo. excelente",felicitacion_feedback,,P4,auto_reply,template,,,,,
-MSG-116,whatsapp,"quiero cancelar mi cuenta y mi producto con lumo, ya no lo quiero usar como hago",cancelacion,,P3,auto_reply_and_route,an agent handles cancellation,,,,,
-MSG-119,whatsapp,asdkjas hola,ruido,,P4,close_no_reply,,,,,,
-MSG-121,email,"Buenas, mi credito numero 4471, queria el extracto de los ultimos 6 meses para mi declaracion de renta",certificados_extractos,,P3,auto_reply,,,,,,
-MSG-125,whatsapp,"perdi mi celular ayer y tengo la app de lumo ahi, como la bloqueo para q no entren a mi cuenta?",fraude_seguridad,,P0,auto_reply_and_route,lost phone,,,,,
-MSG-130,email,"Buen dia. Tengo una cuota vencida y me estan cobrando intereses que me parecen muy altos, quiero una explicacion de como los calculan y poner un reclamo formal.",queja_reclamo,mora_intereses,P2,auto_reply_and_route,explicit formal complaint; mora_intereses secondary; PQR case,,,,,
-MSG-138,chat,cual es el numero de atencion de claro? me equivoque de chat creo jaja,fuera_de_alcance,,P4,auto_reply,unrelated (another company); courtesy template,,,,,
-MSG-149,whatsapp,"buenas, cuanto me sale pagar todo el credito de una vez? quiero saldar y q me digan si hay descuento por pago anticipado",pago_anticipado,,P3,auto_reply,,,,,,
-MSG-150,chat,hola buenas el clima hoy esta horrible jaja. ah y queria saber mi fecha de pago tambien,fecha_de_pago,,P3,auto_reply,weather chit-chat plus a real request,,,,,
-MSG-152,chat,hola necesito saber mi saldo actual y el valor de la proxima cuota gracias,consulta_saldo_cuotas,,P3,auto_reply,,,,,,
-MSG-154,whatsapp,cuando me toca pagar este mes?? no me acuerdo de la fecha,fecha_de_pago,,P3,auto_reply,,,,,,
-MSG-155,chat,"este mes no voy a poder pagar la cuota me quede sin trabajo, q puedo hacer",no_puede_pagar,,P1,auto_reply_and_route,job loss,,,,,
-MSG-157,whatsapp,"necesito refinanciar mi deuda, las cuotas estan muy altas y no me alcanza. se puede bajar el valor?",refinanciacion_acuerdo,,P2,auto_reply_and_route,,,,,,
-MSG-158,chat,"pague ayer por pse y todavia no me aparece como pagado en la app, sale q debo todavia. ayuda",pago_no_aplicado,,P2,auto_reply_and_route,,,,,,
-MSG-160,whatsapp,hola q medios de pago tienen? puedo pagar en efecty o solo por la app?,metodos_de_pago,,P3,auto_reply,,,,,,
-MSG-166,whatsapp,no puedo entrar a la app me dice contraseña incorrecta y ya intente recuperarla pero no me llega el correo,cuenta_y_app,,P2,auto_reply_and_route,password flow not in policy; support case,,,,,
-MSG-175,whatsapp,"quiero poner una queja, llevo 3 dias llamando y nadie me resuelve nada esto es pesimo servicio",queja_reclamo,,P1,auto_reply_and_route,repeat contact,,,,,
-MSG-176,chat,"estoy super molesto me cobraron dos veces la misma cuota y nadie me devuelve la plata, quiero un reclamo formal",pago_no_aplicado,queja_reclamo,P1,auto_reply_and_route,double charge; formal complaint as secondary; Pagos + PQR,,,,,
-MSG-178,whatsapp,"solo queria decir q el asesor camilo me atendio super bien hoy, muy amable, gracias :)",felicitacion_feedback,,P4,auto_reply,,,,,,
-MSG-182,chat,como hago para cerrar mi cuenta y q borren mis datos? ya no voy a usar el servicio,cancelacion,privacidad_habeas_data,P2,auto_reply_and_route,secondary privacidad_habeas_data; privacy owner must get the case,,,,,
-MSG-186,email,"Buenas, llevo rato intentando que el chatbot me ayude pero no resuelve mi caso. Necesito hablar directamente con un agente por telefono. Hay alguna linea de atencion?",hablar_con_humano,informacion_general,P2,route_to_human,wants an agent by phone; informacion_general (phone line) secondary; either primary defensible,,,,,
-MSG-192,whatsapp,hola,saludo_incompleto,,P4,auto_reply,template,,,,,
-MSG-193,email,Buenas. Tengo dos preguntas: primero cuanto es mi saldo total del credito 8830 y segundo si puedo adelantar cuotas para pagar menos intereses. Como funciona el abono a capital? Gracias.,consulta_saldo_cuotas,pago_anticipado,P3,auto_reply,two questions; pago_anticipado secondary (equally acceptable as primary),,,,,
-MSG-194,chat,"no puedo pagar este mes pero quiero saber cuanto seria la mora si pago la otra semana, y de paso si me reportan",no_puede_pagar,"mora_intereses, reporte_centrales",P2,auto_reply_and_route,mora and reporting as secondary,,,,,
-MSG-195,whatsapp,"pague pero no me aplico el pago y ahora me cobran mora, eso no es justo, quiero hablar con alguien ya",pago_no_aplicado,,P2,route_to_human,asks for a person,,,,,
-MSG-206,email,Cordial saludo. Quisiera confirmar la fecha limite de pago de mi cuota de mayo para evitar inconvenientes. Quedo atento.,fecha_de_pago,,P3,auto_reply,,,,,,
-MSG-210,chat,"quiero hacer un acuerdo de pago para refinanciar lo q debo, se puede dividir en mas cuotas?",refinanciacion_acuerdo,,P2,auto_reply_and_route,,,,,,
-MSG-217,whatsapp,buenas donde puedo pagar mi cuota? puedo en efecty o baloto?,metodos_de_pago,,P3,auto_reply,Baloto not in policy; a follow-up case is acceptable,,,,,
-MSG-220,whatsapp,porque me llego un cobro extra? eso son intereses de mora? no entiendo el cobro adicional,intereses_y_cargos,,P2,route_to_human,ambiguous charge; needs account access,,,,,
-MSG-221,email,"Buenos dias, ya cancele la totalidad de mi deuda. Solicito la actualizacion de mi reporte ante las centrales de riesgo y el paz y salvo.",reporte_centrales,certificados_extractos,P3,auto_reply,"fully answerable (next cycle, paz y salvo in app); a Cartera case is not strictly needed",,,,,
-MSG-243,chat,"necesito hablar con una persona de verdad no con el bot, me pasan un asesor humano porfa",hablar_con_humano,,P2,route_to_human,,,,,,
-MSG-244,whatsapp,"quiero hablar con un agente real, este chat automatico no me entiende, comuniquenme con alguien ya",hablar_con_humano,,P2,route_to_human,,,,,,
-MSG-245,chat,ustedes venden celulares o solo dan creditos? queria un iphone a cuotas,fuera_de_alcance,,P3,route_to_human,other_business_inquiry -> comercial,,,,,
-MSG-246,email,"Buenas, queria saber si Lumo ofrece seguros de vehiculo o cuentas de ahorro, porque un amigo me comento algo asi. Gracias.",fuera_de_alcance,,P3,route_to_human,other_business_inquiry -> comercial,,,,,
-MSG-249,email,"Cordial saludo. Solicito mi extracto del mes y confirmar si ya quedo aplicado el pago realizado la semana pasada, pues la app aun lo muestra pendiente.",pago_no_aplicado,certificados_extractos,P2,auto_reply_and_route,the pending payment matters more than the statement; certificados secondary,,,,,
-MSG-259,chat,"me reportaron en datacredito por una cuota q ya pague, necesito q me quiten ese reporte urgente",reporte_centrales,,P1,auto_reply_and_route,"bureau dispute, says already paid, urgent",,,,,
-MSG-263,whatsapp,"alguien hizo una compra con mi cuenta que yo no reconozco, creo q me hackearon!! q hago",fraude_seguridad,,P0,auto_reply_and_route,,,,,,
-MSG-274,chat,"estoy atrasado en 2 cuotas y me llaman todos los dias, podemos hacer un acuerdo de pago porfis",refinanciacion_acuerdo,queja_reclamo,P1,auto_reply_and_route,collections harassment flag; queue could be Cartera or PQR,,,,,
-MSG-275,whatsapp,puedo pagar con tarjeta de credito de otro banco? o tiene q ser debito,metodos_de_pago,,P3,auto_reply,,,,,,
-MSG-278,whatsapp,"ya pague todo desde el mes pasado y todavia me sigue apareciendo q debo, arreglen eso por favor q molestia",pago_no_aplicado,,P2,auto_reply_and_route,,,,,,
-MSG-284,whatsapp,"la app se me cierra sola cada vez q abro la seccion de pagos, en android, me toca pagar desde la web",cuenta_y_app,,P2,auto_reply_and_route,app crash with details -> support per policy,,,,,
-MSG-295,chat,"me robaron el celular y tengo la app instalada, como bloqueo mi cuenta para q no entren?",fraude_seguridad,,P0,auto_reply_and_route,,,,,,
-MSG-297,email,"Estoy muy molesto, me reportaron a las centrales sin avisarme y eso me daño la solicitud de un prestamo. Quiero una explicacion y que lo corrijan ya.",reporte_centrales,queja_reclamo,P1,auto_reply_and_route,dispute with stated impact; complaint secondary,,,,,
-MSG-298,chat,"hola necesito saber el saldo, no puedo pagar completo este mes y tambien quiero cambiar la fecha, varias cosas a la vez jeje",no_puede_pagar,"consulta_saldo_cuotas, fecha_de_pago",P2,auto_reply_and_route,three requests; the hardship drives the case; saldo and fecha secondary,,,,,
-MSG-301,chat,hola buenas cuanto es lo que debo en total? y cuantas cuotas me faltan x pagar con lumo,consulta_saldo_cuotas,,P3,auto_reply,,,,,,
-MSG-310,email,"Buenas, necesito actualizar mi numero de celular y mi correo en el sistema, cambie de numero hace poco. Como hago?",datos_personales,,P3,auto_reply,,,,,,
-MSG-318,email,"Buenos dias, podrian indicarme el saldo pendiente de mi credito y el valor de la proxima cuota? Documento 1.020.XXX.XXX. Gracias.",consulta_saldo_cuotas,,P3,auto_reply,masked document must stay masked,,,,,
-MSG-319,chat,puedo pagar antes de la fecha de corte sin problema? o tengo q esperar,pago_anticipado,,P3,auto_reply,,,,,,
-MSG-320,whatsapp,"se me cruzo con otros gastos este mes, puedo pagar la mitad ahora y la otra mitad la otra semana?",no_puede_pagar,,P2,auto_reply_and_route,partial payment request,,,,,
-MSG-329,whatsapp,"me llego un mensaje raro pidiendome la clave dinamica diciendo q era de lumo, eso es verdad o es estafa?",fraude_seguridad,,P1,auto_reply_and_route,"phishing report, account not yet compromised: P1 defensible, policy says P0",,,,,
-MSG-331,whatsapp,gracias por la atencion la niña q me atendio fue super amable :),felicitacion_feedback,,P4,auto_reply,,,,,,
-MSG-341,chat,porq me sigue subiendo la deuda si yo no he comprado nada mas? son los intereses?,intereses_y_cargos,,P2,route_to_human,,,,,,
-MSG-344,chat,quiero saber q datos mios tienen guardados y para q los usan,privacidad_habeas_data,,P2,route_to_human,,,,,,
-MSG-346,chat,ggg asdkjf no se q paso aqui jajaja,ruido,,P4,close_no_reply,,,,,,
-MSG-348,whatsapp,todo bien gracias 👍,sin_accion,,P4,close_no_reply,,,,,,
-MSG-356,whatsapp,q valor tiene la cuota de este mes? es q me confundi con los numeros,consulta_saldo_cuotas,,P3,auto_reply,,,,,,
-MSG-360,whatsapp,trabajan los festivos? a q hora abren las oficinas fisicas,informacion_general,,P3,route_to_human,no hours in the policy,,,,,
-MSG-361,email,"solicito paz y salvo, ya termine de pagar todo el credito",certificados_extractos,,P3,auto_reply,,,,,,
-MSG-367,email,quiero cancelar mi cuenta y q no me sigan llegando ofertas,cancelacion,privacidad_habeas_data,P2,auto_reply_and_route,marketing opt-out = habeas data secondary; privacy owner,,,,,
-MSG-368,whatsapp,hola no puedo entrar a la app me dice contraseña incorrecta y ya la cambie 3 veces,cuenta_y_app,,P2,auto_reply_and_route,password not in policy; support,,,,,
-MSG-374,chat,buenas,saludo_incompleto,,P4,auto_reply,,,,,,
-MSG-377,chat,me reportaron en datacredito por una cuota?? eso no se vale apenas me atrase,reporte_centrales,,P2,auto_reply_and_route,,,,,,
-MSG-379,whatsapp,hola por donde puedo pagar? puedo pagar en un banco o solo por la app,metodos_de_pago,,P3,auto_reply,,,,,,
-MSG-381,chat,"se me cerro la sesion y ahora no reconoce mi correo, ayuda porfa",cuenta_y_app,,P2,auto_reply_and_route,e-mail not recognised -> support,,,,,
-MSG-385,whatsapp,"transferi el dinero ayer y no aparece aplicado, aca les mando el soporte",pago_no_aplicado,,P2,auto_reply_and_route,,,,,,
-MSG-386,email,cual es mi fecha limite de pago sin q me cobren mora,fecha_de_pago,mora_intereses,P3,auto_reply,mora secondary,,,,,
-MSG-389,chat,esta es la tercera vez q escribo por el mismo problema y nada q solucionan,queja_reclamo,,P1,route_to_human,"third contact, no details: a person should take it",,,,,
-MSG-392,chat,"me cobraron intereses de mora pero yo ya habia pagado, quiero hablar con un humano",pago_no_aplicado,,P2,route_to_human,asks for a person,,,,,
-MSG-394,chat,"buenas, este mes se me complico todo y no puedo pagar, no me vayan a reportar porfa",no_puede_pagar,,P2,auto_reply_and_route,fear of reporting; Cartera,,,,,
-MSG-399,whatsapp,ok gracias,sin_accion,,P4,close_no_reply,,,,,,
+MSG-001,whatsapp,"hola, este mes no voy a poder pagar la cuota completa, me quede sin trabajo. hay alguna opcion?",no_puede_pagar,,P1,auto_reply_and_route,"job loss: vulnerable customer, Cartera case",,,,,ok
+MSG-002,chat,cuanto debo este mes y cuando se vence?,consulta_saldo_cuotas,fecha_de_pago,P3,auto_reply,secondary fecha_de_pago,,,,,ok
+MSG-008,whatsapp,"necesito cambiar el numero de celular asociado a mi cuenta, ya no uso este",datos_personales,,P3,auto_reply,phone change in the app,,,,,ok
+MSG-009,email,"Hola, necesito un certificado de que estoy al dia con mi credito, me lo piden para un tramite. A donde lo solicito?",certificados_extractos,,P3,auto_reply,,,,,,ok
+MSG-012,email,"Me cobraron dos veces la misma cuota este mes, me descontaron doble de la tarjeta. Necesito que me devuelvan el dinero urgente.",pago_no_aplicado,,P1,auto_reply_and_route,double charge = money wrongly taken; Pagos case; no refund promised,,,,,ok
+MSG-013,chat,"se puede cambiar la fecha de pago? yo cobro el 30 y la cuota me cae el 5, siempre llego justo",fecha_de_pago,,P3,auto_reply,,,,,,ok
+MSG-014,whatsapp,"buenas quiero saber el estado de mi solicitud de credito que mande hace 4 dias, no me han dicho nada",estado_solicitud,,P3,route_to_human,no policy; onboarding,,,,,ok
+MSG-015,email,Acabo de pagar la totalidad de mi credito. Cuando me llega el paz y salvo y cuando actualizan mi reporte en las centrales?,certificados_extractos,reporte_centrales,P3,auto_reply,"two questions, both covered; reporte_centrales as secondary is equally acceptable",,,,,ok
+MSG-019,chat,que pasa si me atraso unos dias en la cuota? cuanto es el interes de mora?,mora_intereses,,P3,auto_reply,,,,,,ok
+MSG-020,whatsapp,"holaaa quiero refinanciar, debo 3 cuotas y no puedo pagarlas todas juntas, se puede armar un acuerdo?",refinanciacion_acuerdo,,P2,auto_reply_and_route,Cartera case,,,,,ok
+MSG-021,email,"me llego un correo de ustedes avisando que estoy por ser reportado. ya pague, que hago para que no me reporten?",reporte_centrales,pago_no_aplicado,P1,auto_reply_and_route,"imminent reporting, says already paid",,,,,ok
+MSG-028,chat,"me robaron el celular, necesito bloquear el acceso a mi cuenta ya mismo por seguridad",fraude_seguridad,,P0,auto_reply_and_route,stolen phone,,,,,ok
+MSG-038,whatsapp,"actualice mis datos en la app pero el correo viejo me sigue llegando todo, no me cambio el correo",datos_personales,,P3,auto_reply_and_route,policy: old e-mail still receiving -> escalate to support,,,,,ok
+MSG-039,email,Necesito el detalle de los intereses pagados en el 2025 para un tramite. Pueden enviarmelo?,certificados_extractos,,P3,auto_reply,interest certificate for 2025,,,,,ok
+MSG-040,chat,"llevo 20 minutos esperando respuesta, hay alguien ahi??",hablar_con_humano,,P2,route_to_human,,,,,,ok
+MSG-105,chat,"pague ayer por pse y no se ve reflejado en la app, sigue apareciendo q debo. adjunto comprobante",pago_no_aplicado,,P2,auto_reply_and_route,,,,,,ok
+MSG-106,email,"Hola, por cuales medios puedo pagar mi cuota? puedo pagar en efecty o solo tarjeta?",metodos_de_pago,,P3,auto_reply,,,,,,ok
+MSG-110,whatsapp,"cambie de numero quiero actualizar mi telefono en la cuenta, el viejo ya no lo tengo",datos_personales,,P3,auto_reply,old phone lost; app path still applies,,,,,ok
+MSG-113,whatsapp,"veo un cobro en mi cuenta que yo no hice, no reconozco esa compra de 250000",fraude_seguridad,,P0,auto_reply_and_route,unrecognised charge,,,,,ok
+MSG-114,chat,"quiero poner una queja, llevo 3 dias llamando y nadie me resuelve nada, pesimo servicio",queja_reclamo,,P1,auto_reply_and_route,formal complaint after 3 days of calls (repeat contact),,,,,ok
+MSG-115,email,"Solo queria felicitarlos, la app es muy facil de usar y me aprobaron rapidisimo. excelente",felicitacion_feedback,,P4,auto_reply,template,,,,,ok
+MSG-116,whatsapp,"quiero cancelar mi cuenta y mi producto con lumo, ya no lo quiero usar como hago",cancelacion,,P3,auto_reply_and_route,an agent handles cancellation,,,,,ok
+MSG-119,whatsapp,asdkjas hola,ruido,,P4,close_no_reply,,saludo_incompleto,,,auto_reply,galimatias mas saludo
+MSG-121,email,"Buenas, mi credito numero 4471, queria el extracto de los ultimos 6 meses para mi declaracion de renta",certificados_extractos,,P3,auto_reply,,,,,,ok
+MSG-125,whatsapp,"perdi mi celular ayer y tengo la app de lumo ahi, como la bloqueo para q no entren a mi cuenta?",fraude_seguridad,,P0,auto_reply_and_route,lost phone,,,,,ok
+MSG-130,email,"Buen dia. Tengo una cuota vencida y me estan cobrando intereses que me parecen muy altos, quiero una explicacion de como los calculan y poner un reclamo formal.",queja_reclamo,mora_intereses,P2,auto_reply_and_route,explicit formal complaint; mora_intereses secondary; PQR case,,,,,ok
+MSG-138,chat,cual es el numero de atencion de claro? me equivoque de chat creo jaja,fuera_de_alcance,,P4,auto_reply,unrelated (another company); courtesy template,,,,,ok
+MSG-149,whatsapp,"buenas, cuanto me sale pagar todo el credito de una vez? quiero saldar y q me digan si hay descuento por pago anticipado",pago_anticipado,,P3,auto_reply,,,,,,ok
+MSG-150,chat,hola buenas el clima hoy esta horrible jaja. ah y queria saber mi fecha de pago tambien,fecha_de_pago,,P3,auto_reply,weather chit-chat plus a real request,,,,,ok
+MSG-152,chat,hola necesito saber mi saldo actual y el valor de la proxima cuota gracias,consulta_saldo_cuotas,,P3,auto_reply,,,,,,ok
+MSG-154,whatsapp,cuando me toca pagar este mes?? no me acuerdo de la fecha,fecha_de_pago,,P3,auto_reply,,,,,,ok
+MSG-155,chat,"este mes no voy a poder pagar la cuota me quede sin trabajo, q puedo hacer",no_puede_pagar,,P1,auto_reply_and_route,job loss,,,,,ok
+MSG-157,whatsapp,"necesito refinanciar mi deuda, las cuotas estan muy altas y no me alcanza. se puede bajar el valor?",refinanciacion_acuerdo,,P2,auto_reply_and_route,,,,,,ok
+MSG-158,chat,"pague ayer por pse y todavia no me aparece como pagado en la app, sale q debo todavia. ayuda",pago_no_aplicado,,P2,auto_reply_and_route,,,,,,ok
+MSG-160,whatsapp,hola q medios de pago tienen? puedo pagar en efecty o solo por la app?,metodos_de_pago,,P3,auto_reply,,,,,,ok
+MSG-166,whatsapp,no puedo entrar a la app me dice contraseña incorrecta y ya intente recuperarla pero no me llega el correo,cuenta_y_app,,P2,auto_reply_and_route,password flow not in policy; support case,,,,,ok
+MSG-175,whatsapp,"quiero poner una queja, llevo 3 dias llamando y nadie me resuelve nada esto es pesimo servicio",queja_reclamo,,P1,auto_reply_and_route,repeat contact,,,,,ok
+MSG-176,chat,"estoy super molesto me cobraron dos veces la misma cuota y nadie me devuelve la plata, quiero un reclamo formal",pago_no_aplicado,queja_reclamo,P1,auto_reply_and_route,double charge; formal complaint as secondary; Pagos + PQR,,,,,ok
+MSG-178,whatsapp,"solo queria decir q el asesor camilo me atendio super bien hoy, muy amable, gracias :)",felicitacion_feedback,,P4,auto_reply,,,,,,ok
+MSG-182,chat,como hago para cerrar mi cuenta y q borren mis datos? ya no voy a usar el servicio,cancelacion,privacidad_habeas_data,P2,auto_reply_and_route,secondary privacidad_habeas_data; privacy owner must get the case,,,,,ok
+MSG-186,email,"Buenas, llevo rato intentando que el chatbot me ayude pero no resuelve mi caso. Necesito hablar directamente con un agente por telefono. Hay alguna linea de atencion?",hablar_con_humano,informacion_general,P2,route_to_human,wants an agent by phone; informacion_general (phone line) secondary; either primary defensible,,,,,ok
+MSG-192,whatsapp,hola,saludo_incompleto,,P4,auto_reply,template,,,,,ok
+MSG-193,email,Buenas. Tengo dos preguntas: primero cuanto es mi saldo total del credito 8830 y segundo si puedo adelantar cuotas para pagar menos intereses. Como funciona el abono a capital? Gracias.,consulta_saldo_cuotas,pago_anticipado,P3,auto_reply,two questions; pago_anticipado secondary (equally acceptable as primary),,,,,ok
+MSG-194,chat,"no puedo pagar este mes pero quiero saber cuanto seria la mora si pago la otra semana, y de paso si me reportan",no_puede_pagar,"mora_intereses, reporte_centrales",P2,auto_reply_and_route,mora and reporting as secondary,,,,,ok
+MSG-195,whatsapp,"pague pero no me aplico el pago y ahora me cobran mora, eso no es justo, quiero hablar con alguien ya",pago_no_aplicado,,P2,route_to_human,asks for a person,,,,,ok
+MSG-206,email,Cordial saludo. Quisiera confirmar la fecha limite de pago de mi cuota de mayo para evitar inconvenientes. Quedo atento.,fecha_de_pago,,P3,auto_reply,,,,,,ok
+MSG-210,chat,"quiero hacer un acuerdo de pago para refinanciar lo q debo, se puede dividir en mas cuotas?",refinanciacion_acuerdo,,P2,auto_reply_and_route,,,,,,ok
+MSG-217,whatsapp,buenas donde puedo pagar mi cuota? puedo en efecty o baloto?,metodos_de_pago,,P3,auto_reply,Baloto not in policy; a follow-up case is acceptable,,,,,ok
+MSG-220,whatsapp,porque me llego un cobro extra? eso son intereses de mora? no entiendo el cobro adicional,intereses_y_cargos,,P2,route_to_human,ambiguous charge; needs account access,,,,,ok
+MSG-221,email,"Buenos dias, ya cancele la totalidad de mi deuda. Solicito la actualizacion de mi reporte ante las centrales de riesgo y el paz y salvo.",reporte_centrales,certificados_extractos,P3,auto_reply,"fully answerable (next cycle, paz y salvo in app); a Cartera case is not strictly needed",,,,,ok
+MSG-243,chat,"necesito hablar con una persona de verdad no con el bot, me pasan un asesor humano porfa",hablar_con_humano,,P2,route_to_human,,,,,,ok
+MSG-244,whatsapp,"quiero hablar con un agente real, este chat automatico no me entiende, comuniquenme con alguien ya",hablar_con_humano,,P2,route_to_human,,,,,,ok
+MSG-245,chat,ustedes venden celulares o solo dan creditos? queria un iphone a cuotas,fuera_de_alcance,,P3,route_to_human,other_business_inquiry -> comercial,,,,,ok
+MSG-246,email,"Buenas, queria saber si Lumo ofrece seguros de vehiculo o cuentas de ahorro, porque un amigo me comento algo asi. Gracias.",fuera_de_alcance,,P3,route_to_human,other_business_inquiry -> comercial,,,,,ok
+MSG-249,email,"Cordial saludo. Solicito mi extracto del mes y confirmar si ya quedo aplicado el pago realizado la semana pasada, pues la app aun lo muestra pendiente.",pago_no_aplicado,certificados_extractos,P2,auto_reply_and_route,the pending payment matters more than the statement; certificados secondary,,,,,ok
+MSG-259,chat,"me reportaron en datacredito por una cuota q ya pague, necesito q me quiten ese reporte urgente",reporte_centrales,,P1,auto_reply_and_route,"bureau dispute, says already paid, urgent",,,,,ok
+MSG-263,whatsapp,"alguien hizo una compra con mi cuenta que yo no reconozco, creo q me hackearon!! q hago",fraude_seguridad,,P0,auto_reply_and_route,,,,,,ok
+MSG-274,chat,"estoy atrasado en 2 cuotas y me llaman todos los dias, podemos hacer un acuerdo de pago porfis",refinanciacion_acuerdo,queja_reclamo,P1,auto_reply_and_route,collections harassment flag; queue could be Cartera or PQR,,,,,ok
+MSG-275,whatsapp,puedo pagar con tarjeta de credito de otro banco? o tiene q ser debito,metodos_de_pago,,P3,auto_reply,,,,,,ok
+MSG-278,whatsapp,"ya pague todo desde el mes pasado y todavia me sigue apareciendo q debo, arreglen eso por favor q molestia",pago_no_aplicado,,P2,auto_reply_and_route,,,,,,ok
+MSG-284,whatsapp,"la app se me cierra sola cada vez q abro la seccion de pagos, en android, me toca pagar desde la web",cuenta_y_app,,P2,auto_reply_and_route,app crash with details -> support per policy,,,,,ok
+MSG-295,chat,"me robaron el celular y tengo la app instalada, como bloqueo mi cuenta para q no entren?",fraude_seguridad,,P0,auto_reply_and_route,,,,,,ok
+MSG-297,email,"Estoy muy molesto, me reportaron a las centrales sin avisarme y eso me daño la solicitud de un prestamo. Quiero una explicacion y que lo corrijan ya.",reporte_centrales,queja_reclamo,P1,auto_reply_and_route,dispute with stated impact; complaint secondary,,,,,ok
+MSG-298,chat,"hola necesito saber el saldo, no puedo pagar completo este mes y tambien quiero cambiar la fecha, varias cosas a la vez jeje",no_puede_pagar,"consulta_saldo_cuotas, fecha_de_pago",P2,auto_reply_and_route,three requests; the hardship drives the case; saldo and fecha secondary,,,,,ok
+MSG-301,chat,hola buenas cuanto es lo que debo en total? y cuantas cuotas me faltan x pagar con lumo,consulta_saldo_cuotas,,P3,auto_reply,,,,,,ok
+MSG-310,email,"Buenas, necesito actualizar mi numero de celular y mi correo en el sistema, cambie de numero hace poco. Como hago?",datos_personales,,P3,auto_reply,,,,,,ok
+MSG-318,email,"Buenos dias, podrian indicarme el saldo pendiente de mi credito y el valor de la proxima cuota? Documento 1.020.XXX.XXX. Gracias.",consulta_saldo_cuotas,,P3,auto_reply,masked document must stay masked,,,,,ok
+MSG-319,chat,puedo pagar antes de la fecha de corte sin problema? o tengo q esperar,pago_anticipado,,P3,auto_reply,,,,,,ok
+MSG-320,whatsapp,"se me cruzo con otros gastos este mes, puedo pagar la mitad ahora y la otra mitad la otra semana?",no_puede_pagar,,P2,auto_reply_and_route,partial payment request,,,,,ok
+MSG-329,whatsapp,"me llego un mensaje raro pidiendome la clave dinamica diciendo q era de lumo, eso es verdad o es estafa?",fraude_seguridad,,P1,auto_reply_and_route,"phishing report, account not yet compromised: P1 defensible, policy says P0",,,,,ok
+MSG-331,whatsapp,gracias por la atencion la niña q me atendio fue super amable :),felicitacion_feedback,,P4,auto_reply,,,,,,ok
+MSG-341,chat,porq me sigue subiendo la deuda si yo no he comprado nada mas? son los intereses?,intereses_y_cargos,,P2,route_to_human,,,,,,ok
+MSG-344,chat,quiero saber q datos mios tienen guardados y para q los usan,privacidad_habeas_data,,P2,route_to_human,,,,,,ok
+MSG-346,chat,ggg asdkjf no se q paso aqui jajaja,ruido,,P4,close_no_reply,,,,,,ok
+MSG-348,whatsapp,todo bien gracias 👍,sin_accion,,P4,close_no_reply,,,,,,ok
+MSG-356,whatsapp,q valor tiene la cuota de este mes? es q me confundi con los numeros,consulta_saldo_cuotas,,P3,auto_reply,,,,,,ok
+MSG-360,whatsapp,trabajan los festivos? a q hora abren las oficinas fisicas,informacion_general,,P3,route_to_human,no hours in the policy,,,,,ok
+MSG-361,email,"solicito paz y salvo, ya termine de pagar todo el credito",certificados_extractos,,P3,auto_reply,,,,,,ok
+MSG-367,email,quiero cancelar mi cuenta y q no me sigan llegando ofertas,cancelacion,privacidad_habeas_data,P2,auto_reply_and_route,marketing opt-out = habeas data secondary; privacy owner,,,,,ok
+MSG-368,whatsapp,hola no puedo entrar a la app me dice contraseña incorrecta y ya la cambie 3 veces,cuenta_y_app,,P2,auto_reply_and_route,password not in policy; support,,,,,ok
+MSG-374,chat,buenas,saludo_incompleto,,P4,auto_reply,,,,,,ok
+MSG-377,chat,me reportaron en datacredito por una cuota?? eso no se vale apenas me atrase,reporte_centrales,,P2,auto_reply_and_route,,,,,,ok
+MSG-379,whatsapp,hola por donde puedo pagar? puedo pagar en un banco o solo por la app,metodos_de_pago,,P3,auto_reply,,,,,,ok
+MSG-381,chat,"se me cerro la sesion y ahora no reconoce mi correo, ayuda porfa",cuenta_y_app,,P2,auto_reply_and_route,e-mail not recognised -> support,,,,,ok
+MSG-385,whatsapp,"transferi el dinero ayer y no aparece aplicado, aca les mando el soporte",pago_no_aplicado,,P2,auto_reply_and_route,,,,,,ok
+MSG-386,email,cual es mi fecha limite de pago sin q me cobren mora,fecha_de_pago,mora_intereses,P3,auto_reply,mora secondary,,,,,ok
+MSG-389,chat,esta es la tercera vez q escribo por el mismo problema y nada q solucionan,queja_reclamo,,P1,route_to_human,"third contact, no details: a person should take it",,,,,ok
+MSG-392,chat,"me cobraron intereses de mora pero yo ya habia pagado, quiero hablar con un humano",pago_no_aplicado,,P2,route_to_human,asks for a person,,,,,ok
+MSG-394,chat,"buenas, este mes se me complico todo y no puedo pagar, no me vayan a reportar porfa",no_puede_pagar,,P2,auto_reply_and_route,fear of reporting; Cartera,,,,,ok
+MSG-399,whatsapp,ok gracias,sin_accion,,P4,close_no_reply,,,,,,ok

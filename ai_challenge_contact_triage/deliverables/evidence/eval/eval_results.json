@@ -1,14 +1,14 @@
 {
-  "generated_at_utc": "2026-09-27T23:23:06Z",
+  "generated_at_utc": "2026-09-28T00:41:25Z",
   "gold_n": 90,
-  "reviewed_n": 0,
+  "reviewed_n": 90,
   "reason": {
     "n": 90,
-    "exact": 86,
-    "exact_rate": 0.9555555555555556,
-    "lenient": 90,
-    "lenient_rate": 1.0,
-    "macro_f1": 0.949202170378641,
+    "exact": 85,
+    "exact_rate": 0.9444444444444444,
+    "lenient": 89,
+    "lenient_rate": 0.9888888888888889,
+    "macro_f1": 0.9278688370453076,
     "per_class": {
       "cancelacion": {
         "support": 3,
@@ -165,18 +165,18 @@
         "f1": 1.0
       },
       "ruido": {
-        "support": 2,
+        "support": 1,
         "predicted": 2,
-        "precision": 1.0,
+        "precision": 0.5,
         "recall": 1.0,
-        "f1": 1.0
+        "f1": 0.6666666666666666
       },
       "saludo_incompleto": {
-        "support": 2,
+        "support": 3,
         "predicted": 2,
         "precision": 1.0,
-        "recall": 1.0,
-        "f1": 1.0
+        "recall": 0.6666666666666666,
+        "f1": 0.8
       },
       "sin_accion": {
         "support": 2,
@@ -187,6 +187,11 @@
       }
     },
     "confusion": [
+      {
+        "gold": "saludo_incompleto",
+        "pred": "ruido",
+        "n": 1
+      },
       {
         "gold": "queja_reclamo",
         "pred": "mora_intereses",
@@ -238,10 +243,10 @@
   },
   "action": {
     "n": 90,
-    "exact": 77,
-    "exact_rate": 0.8555555555555555,
+    "exact": 76,
+    "exact_rate": 0.8444444444444444,
     "unsafe": 1,
-    "conservative": 4,
+    "conservative": 5,
     "auto_vs_auto_and_route": 8,
     "confusion": [
       {
@@ -265,6 +270,11 @@
         "n": 1
       },
       {
+        "gold": "auto_reply",
+        "pred": "close_no_reply",
+        "n": 1
+      },
+      {
         "gold": "route_to_human",
         "pred": "auto_reply_and_route",
         "n": 1
@@ -282,8 +292,8 @@
       "pred_priority": "P2",
       "gold_action": "auto_reply_and_route",
       "pred_action": "auto_reply_and_route",
-      "reviewed": false,
-      "note": ""
+      "reviewed": true,
+      "note": "ok"
     },
     {
       "id": "MSG-015",
@@ -295,8 +305,8 @@
       "pred_priority": "P2",
       "gold_action": "auto_reply",
       "pred_action": "auto_reply",
-      "reviewed": false,
-      "note": ""
+      "reviewed": true,
+      "note": "ok"
     },
     {
       "id": "MSG-020",
@@ -308,8 +318,8 @@
       "pred_priority": "P2",
       "gold_action": "auto_reply_and_route",
       "pred_action": "route_to_human",
-      "reviewed": false,
-      "note": ""
+      "reviewed": true,
+      "note": "ok"
     },
     {
       "id": "MSG-038",
@@ -321,8 +331,8 @@
       "pred_priority": "P2",
       "gold_action": "auto_reply_and_route",
       "pred_action": "auto_reply",
-      "reviewed": false,
-      "note": ""
+      "reviewed": true,
+      "note": "ok"
     },
     {
       "id": "MSG-039",
@@ -334,8 +344,21 @@
       "pred_priority": "P3",
       "gold_action": "auto_reply",
       "pred_action": "route_to_human",
-      "reviewed": false,
-      "note": ""
+      "reviewed": true,
+      "note": "ok"
+    },
+    {
+      "id": "MSG-119",
+      "text": "asdkjas hola",
+      "gold_reason": "saludo_incompleto",
+      "pred_reason": "ruido",
+      "lenient_ok": false,
+      "gold_priority": "P4",
+      "pred_priority": "P4",
+      "gold_action": "auto_reply",
+      "pred_action": "close_no_reply",
+      "reviewed": true,
+      "note": "galimatias mas saludo"
     },
     {
       "id": "MSG-130",
@@ -347,8 +370,8 @@
       "pred_priority": "P2",
       "gold_action": "auto_reply_and_route",
       "pred_action": "auto_reply",
-      "reviewed": false,
-      "note": ""
+      "reviewed": true,
+      "note": "ok"
     },
     {
       "id": "MSG-176",
@@ -360,8 +383,8 @@
       "pred_priority": "P2",
       "gold_action": "auto_reply_and_route",
       "pred_action": "auto_reply_and_route",
-      "reviewed": false,
-      "note": ""
+      "reviewed": true,
+      "note": "ok"
     },
     {
       "id": "MSG-217",
@@ -373,8 +396,8 @@
       "pred_priority": "P3",
       "gold_action": "auto_reply",
       "pred_action": "auto_reply_and_route",
-      "reviewed": false,
-      "note": ""
+      "reviewed": true,
+      "note": "ok"
     },
     {
       "id": "MSG-221",
@@ -386,8 +409,8 @@
       "pred_priority": "P2",
       "gold_action": "auto_reply",
       "pred_action": "auto_reply_and_route",
-      "reviewed": false,
-      "note": ""
+      "reviewed": true,
+      "note": "ok"
     },
     {
       "id": "MSG-249",
@@ -399,8 +422,8 @@
       "pred_priority": "P2",
       "gold_action": "auto_reply_and_route",
       "pred_action": "auto_reply",
-      "reviewed": false,
-      "note": ""
+      "reviewed": true,
+      "note": "ok"
     },
     {
       "id": "MSG-259",
@@ -412,8 +435,8 @@
       "pred_priority": "P2",
       "gold_action": "auto_reply_and_route",
       "pred_action": "auto_reply_and_route",
-      "reviewed": false,
-      "note": ""
+      "reviewed": true,
+      "note": "ok"
     },
     {
       "id": "MSG-274",
@@ -425,8 +448,8 @@
       "pred_priority": "P1",
       "gold_action": "auto_reply_and_route",
       "pred_action": "route_to_human",
-      "reviewed": false,
-      "note": ""
+      "reviewed": true,
+      "note": "ok"
     },
     {
       "id": "MSG-284",
@@ -438,8 +461,8 @@
       "pred_priority": "P2",
       "gold_action": "auto_reply_and_route",
       "pred_action": "auto_reply",
-      "reviewed": false,
-      "note": ""
+      "reviewed": true,
+      "note": "ok"
     },
     {
       "id": "MSG-297",
@@ -451,8 +474,8 @@
       "pred_priority": "P2",
       "gold_action": "auto_reply_and_route",
       "pred_action": "auto_reply_and_route",
-      "reviewed": false,
-      "note": ""
+      "reviewed": true,
+      "note": "ok"
     },
     {
       "id": "MSG-298",
@@ -464,8 +487,8 @@
       "pred_priority": "P2",
       "gold_action": "auto_reply_and_route",
       "pred_action": "auto_reply",
-      "reviewed": false,
-      "note": ""
+      "reviewed": true,
+      "note": "ok"
     },
     {
       "id": "MSG-329",
@@ -477,8 +500,8 @@
       "pred_priority": "P0",
       "gold_action": "auto_reply_and_route",
       "pred_action": "auto_reply_and_route",
-      "reviewed": false,
-      "note": ""
+      "reviewed": true,
+      "note": "ok"
     },
     {
       "id": "MSG-381",
@@ -490,8 +513,8 @@
       "pred_priority": "P2",
       "gold_action": "auto_reply_and_route",
       "pred_action": "auto_reply",
-      "reviewed": false,
-      "note": ""
+      "reviewed": true,
+      "note": "ok"
     },
     {
       "id": "MSG-389",
@@ -503,8 +526,8 @@
       "pred_priority": "P1",
       "gold_action": "route_to_human",
       "pred_action": "auto_reply_and_route",
-      "reviewed": false,
-      "note": ""
+      "reviewed": true,
+      "note": "ok"
     },
     {
       "id": "MSG-394",
@@ -516,8 +539,8 @@
       "pred_priority": "P2",
       "gold_action": "auto_reply_and_route",
       "pred_action": "route_to_human",
-      "reviewed": false,
-      "note": ""
+      "reviewed": true,
+      "note": "ok"
     }
   ],
   "drafts": {
@@ -701,18 +724,6 @@
         "cost_usd": 0.002915,
         "from_cache": true
       },
-      "MSG-110": {
-        "grounded": true,
-        "answers_request": true,
-        "no_forbidden_promise": true,
-        "tone_ok": true,
-        "overall_ok": true,
-        "issues": [],
-        "reasoning_brief": "El draft indica correctamente cómo actualizar el celular desde la app, coincide con la sección citada, no promete nada indebido y mantiene tono cálido en español informal.",
-        "judge_model": "claude-sonnet-5",
-        "cost_usd": 0.002475,
-        "from_cache": true
-      },
       "MSG-114": {
         "grounded": true,
         "answers_request": true,
@@ -735,18 +746,6 @@
         "reasoning_brief": "Draft accurately reflects cited sections on cancellation requiring paz y salvo and advisor handling, plus prepayment info. It routes to an advisor, uses warm tú tone, no forbidden promises or invented facts.",
         "judge_model": "claude-sonnet-5",
         "cost_usd": 0.002949,
-        "from_cache": true
-      },
-      "MSG-121": {
-        "grounded": true,
-        "answers_request": true,
-        "no_forbidden_promise": true,
-        "tone_ok": true,
-        "overall_ok": true,
-        "issues": [],
-        "reasoning_brief": "El draft usa correctamente la sección citada, distingue entre extracto de pagos y certificado de intereses, ofrece los canales y el plazo de 2 días hábiles sin inventar datos ni prometer nada indebido. Tono cálido y en tú.",
-        "judge_model": "claude-sonnet-5",
-        "cost_usd": 0.002851,
         "from_cache": true
       },
       "MSG-130": {
@@ -799,18 +798,6 @@
         "cost_usd": 0.002549,
         "from_cache": true
       },
-      "MSG-154": {
-        "grounded": true,
-        "answers_request": true,
-        "no_forbidden_promise": true,
-        "tone_ok": true,
-        "overall_ok": true,
-        "issues": [],
-        "reasoning_brief": "El draft no inventa datos, remite a la app/asesor para la fecha específica, cita correctamente la política de cambio de fecha, tono cálido en tú, sin promesas prohibidas.",
-        "judge_model": "claude-sonnet-5",
-        "cost_usd": 0.002497,
-        "from_cache": true
-      },
       "MSG-155": {
         "grounded": true,
         "answers_request": true,
@@ -833,6 +820,42 @@
         "reasoning_brief": "El draft ofrece opción de refinanciación, escala a Cartera sin prometer montos ni condonación, incluye info de mora correctamente citada, tono cálido en español.",
         "judge_model": "claude-sonnet-5",
         "cost_usd": 0.002997,
+        "from_cache": true
+      },
+      "MSG-110": {
+        "grounded": true,
+        "answers_request": true,
+        "no_forbidden_promise": true,
+        "tone_ok": true,
+        "overall_ok": true,
+        "issues": [],
+        "reasoning_brief": "El draft indica correctamente cómo actualizar el celular desde la app, coincide con la sección citada, no promete nada indebido y mantiene tono cálido en español informal.",
+        "judge_model": "claude-sonnet-5",
+        "cost_usd": 0.002475,
+        "from_cache": true
+      },
+      "MSG-121": {
+        "grounded": true,
+        "answers_request": true,
+        "no_forbidden_promise": true,
+        "tone_ok": true,
+        "overall_ok": true,
+        "issues": [],
+        "reasoning_brief": "El draft usa correctamente la sección citada, distingue entre extracto de pagos y certificado de intereses, ofrece los canales y el plazo de 2 días hábiles sin inventar datos ni prometer nada indebido. Tono cálido y en tú.",
+        "judge_model": "claude-sonnet-5",
+        "cost_usd": 0.002851,
+        "from_cache": true
+      },
+      "MSG-154": {
+        "grounded": true,
+        "answers_request": true,
+        "no_forbidden_promise": true,
+        "tone_ok": true,
+        "overall_ok": true,
+        "issues": [],
+        "reasoning_brief": "El draft no inventa datos, remite a la app/asesor para la fecha específica, cita correctamente la política de cambio de fecha, tono cálido en tú, sin promesas prohibidas.",
+        "judge_model": "claude-sonnet-5",
+        "cost_usd": 0.002497,
         "from_cache": true
       },
       "MSG-158": {
@@ -1247,6 +1270,112 @@
         "cost_usd": 0.003623,
         "from_cache": true
       }
+    },
+    "human_n": 20,
+    "human_ok": 20,
+    "judge_ok_on_human": 19,
+    "human_agree": 19,
+    "human_verdicts": {
+      "MSG-001": {
+        "ok": true,
+        "issue": "",
+        "note": ""
+      },
+      "MSG-002": {
+        "ok": true,
+        "issue": "",
+        "note": ""
+      },
+      "MSG-008": {
+        "ok": true,
+        "issue": "",
+        "note": ""
+      },
+      "MSG-009": {
+        "ok": true,
+        "issue": "",
+        "note": ""
+      },
+      "MSG-012": {
+        "ok": true,
+        "issue": "",
+        "note": ""
+      },
+      "MSG-013": {
+        "ok": true,
+        "issue": "",
+        "note": ""
+      },
+      "MSG-015": {
+        "ok": true,
+        "issue": "",
+        "note": ""
+      },
+      "MSG-019": {
+        "ok": true,
+        "issue": "",
+        "note": ""
+      },
+      "MSG-021": {
+        "ok": true,
+        "issue": "",
+        "note": ""
+      },
+      "MSG-038": {
+        "ok": true,
+        "issue": "",
+        "note": ""
+      },
+      "MSG-105": {
+        "ok": true,
+        "issue": "",
+        "note": ""
+      },
+      "MSG-106": {
+        "ok": true,
+        "issue": "",
+        "note": ""
+      },
+      "MSG-114": {
+        "ok": true,
+        "issue": "",
+        "note": ""
+      },
+      "MSG-116": {
+        "ok": true,
+        "issue": "",
+        "note": ""
+      },
+      "MSG-130": {
+        "ok": true,
+        "issue": "",
+        "note": ""
+      },
+      "MSG-149": {
+        "ok": true,
+        "issue": "",
+        "note": ""
+      },
+      "MSG-150": {
+        "ok": true,
+        "issue": "",
+        "note": ""
+      },
+      "MSG-152": {
+        "ok": true,
+        "issue": "",
+        "note": ""
+      },
+      "MSG-155": {
+        "ok": true,
+        "issue": "",
+        "note": ""
+      },
+      "MSG-157": {
+        "ok": true,
+        "issue": "",
+        "note": ""
+      }
     }
   },
   "adversarial": [
@@ -1520,15 +1649,20 @@
     "model": "claude-haiku-4-5",
     "reason": {
       "n": 90,
-      "exact": 87,
-      "exact_rate": 0.9666666666666667,
-      "lenient": 88,
-      "lenient_rate": 0.9777777777777777,
-      "macro_f1": 0.9528888888888889,
+      "exact": 86,
+      "exact_rate": 0.9555555555555556,
+      "lenient": 87,
+      "lenient_rate": 0.9666666666666667,
+      "macro_f1": 0.9315555555555556,
       "confusion": [
         {
           "gold": "certificados_extractos",
           "pred": "pago_anticipado",
+          "n": 1
+        },
+        {
+          "gold": "saludo_incompleto",
+          "pred": "ruido",
           "n": 1
         },
         {
@@ -1551,6 +1685,11 @@
         "id": "MSG-015",
         "gold": "certificados_extractos",
         "pred": "pago_anticipado"
+      },
+      {
+        "id": "MSG-119",
+        "gold": "saludo_incompleto",
+        "pred": "ruido"
       },
       {
         "id": "MSG-389",
